@@ -10,5 +10,7 @@ package MODEL;
  * @author haunv
  */
 public class USER {
-    
+    public static void main(String[] args) {
+        
+    }
 }
