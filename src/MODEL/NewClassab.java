@@ -5,8 +5,8 @@
 package MODEL;
 
 /**
- *
- * @author NguyenHoan
+ * 
+ * @author NguyenHoanaâa  2 
  */
 public class NewClassab {
     
