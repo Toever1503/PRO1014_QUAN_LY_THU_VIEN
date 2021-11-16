@@ -22,7 +22,6 @@ public class main_frame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(main_frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
-
     }
 
     //Đồng hồ
@@ -205,7 +204,7 @@ public class main_frame extends javax.swing.JFrame {
         lblClock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblClock.setForeground(new java.awt.Color(255, 0, 0));
         lblClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblClock.setIcon(new javax.swing.ImageIcon("D:\\GitHub\\PRO1014_QUAN_LY_THU_VIEN\\Upload\\clock.png")); // NOI18N
+        lblClock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/clock.png"))); // NOI18N
         lblClock.setText("00:00");
         lblClock.setPreferredSize(new java.awt.Dimension(150, 14));
         jPanel1.add(lblClock, java.awt.BorderLayout.LINE_END);
