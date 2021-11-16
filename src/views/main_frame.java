@@ -17,11 +17,13 @@ public class main_frame extends javax.swing.JFrame {
         initComponents();
         this.init();
     }
-void init(){
-    this.setLocationRelativeTo(null);
-    this.startClock();
-    
-}
+
+    void init() {
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(main_frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
+        this.startClock();
+
+    }
 
     //Đồng hồ
     void startClock() {
@@ -31,6 +33,7 @@ void init(){
             this.lblClock.setText(s.format(now));
         }).start();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,6 +84,7 @@ void init(){
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
         setPreferredSize(new java.awt.Dimension(900, 650));
+        setResizable(false);
 
         pnlMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlMain.setLayout(new java.awt.BorderLayout());
@@ -201,7 +205,7 @@ void init(){
         lblClock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblClock.setForeground(new java.awt.Color(255, 0, 0));
         lblClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblClock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_icon/clock.png"))); // NOI18N
+        lblClock.setIcon(new javax.swing.ImageIcon("D:\\GitHub\\PRO1014_QUAN_LY_THU_VIEN\\Upload\\clock.png")); // NOI18N
         lblClock.setText("00:00");
         lblClock.setPreferredSize(new java.awt.Dimension(150, 14));
         jPanel1.add(lblClock, java.awt.BorderLayout.LINE_END);
