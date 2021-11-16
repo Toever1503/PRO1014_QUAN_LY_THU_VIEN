@@ -19,7 +19,18 @@ public class main_frame extends javax.swing.JFrame {
     }
 void init(){
     this.setLocationRelativeTo(null);
+    this.startClock();
+    
 }
+
+    //Đồng hồ
+    void startClock() {
+        new javax.swing.Timer(0, (java.awt.event.ActionEvent e) -> {
+            java.util.Date now = new java.util.Date();
+            java.text.SimpleDateFormat s = new java.text.SimpleDateFormat("hh:mm:ss aa");
+            this.lblClock.setText(s.format(now));
+        }).start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +55,7 @@ void init(){
         jLabel6 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
+        lblClock = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -184,17 +196,15 @@ void init(){
         pnlMain.add(pnlWest, java.awt.BorderLayout.WEST);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(826, 30));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 826, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
+        lblClock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblClock.setForeground(new java.awt.Color(255, 0, 0));
+        lblClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_icon/clock.png"))); // NOI18N
+        lblClock.setText("00:00");
+        lblClock.setPreferredSize(new java.awt.Dimension(150, 14));
+        jPanel1.add(lblClock, java.awt.BorderLayout.LINE_END);
 
         pnlMain.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
@@ -371,6 +381,7 @@ void init(){
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lblClock;
     private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenu mnQuanLy;
     private javax.swing.JMenu mnThongKe;
