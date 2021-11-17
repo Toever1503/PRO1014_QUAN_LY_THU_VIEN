@@ -9,12 +9,12 @@ package views;
  *
  * @author Admin
  */
-public class QuanLySach extends javax.swing.JInternalFrame {
+public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form QuanLySach
+     * Creates new form QuanLyNguoiDung
      */
-    public QuanLySach() {
+    public QuanLyNguoiDung() {
         initComponents();
     }
 
@@ -29,45 +29,45 @@ public class QuanLySach extends javax.swing.JInternalFrame {
 
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnNhapMoi = new javax.swing.JButton();
-        btnChiTiet = new javax.swing.JButton();
+        btnHuyKichHoat = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         btnTim = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblQuanLySach = new javax.swing.JTable();
+        tblQuanLyNguoiDung = new javax.swing.JTable();
 
         btnThem.setText("Thêm mới");
 
         btnSua.setText("Sửa");
 
-        btnDelete.setText("xóa");
-
-        btnNhapMoi.setText("Nhập mới");
-
-        btnChiTiet.setText("Chi Tiết");
+        btnHuyKichHoat.setBackground(new java.awt.Color(255, 51, 51));
+        btnHuyKichHoat.setText("Hủy Kích Hoạt");
+        btnHuyKichHoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyKichHoatActionPerformed(evt);
+            }
+        });
 
         btnTim.setText("Tìm");
 
-        tblQuanLySach.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuanLyNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Vị Trí ", "Số Lượng", "Tác Giả", "Thể Loại", "Nhà Xuất Bản", "Người Thêm"
+                "Mã ND", "Tên Người Dùng", "Số điện thoại", "Email", "Địa Chỉ", "Trạng Thái"
             }
         ));
-        jScrollPane1.setViewportView(tblQuanLySach);
+        jScrollPane1.setViewportView(tblQuanLyNguoiDung);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
@@ -75,16 +75,12 @@ public class QuanLySach extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNhapMoi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnChiTiet)
-                        .addGap(64, 64, 64)
+                        .addComponent(btnHuyKichHoat)
+                        .addGap(206, 206, 206)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTim)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,29 +89,29 @@ public class QuanLySach extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnSua)
-                    .addComponent(btnDelete)
-                    .addComponent(btnNhapMoi)
-                    .addComponent(btnChiTiet)
+                    .addComponent(btnHuyKichHoat)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTim))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnHuyKichHoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyKichHoatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHuyKichHoatActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChiTiet;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnNhapMoi;
+    private javax.swing.JButton btnHuyKichHoat;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblQuanLySach;
+    private javax.swing.JTable tblQuanLyNguoiDung;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
