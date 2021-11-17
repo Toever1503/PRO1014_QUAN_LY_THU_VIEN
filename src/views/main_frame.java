@@ -20,7 +20,7 @@ public class main_frame extends javax.swing.JFrame {
 void init(){
     this.setLocationRelativeTo(null);
     this.startClock();
-    
+    int i;
 }
 
     //Đồng hồ
