@@ -4,23 +4,29 @@
  */
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
 /**
  *
  * @author NguyenHoan
  */
 public class main_frame extends javax.swing.JFrame {
-
+    private CardLayout cardLayoutMain_right;
     /**
      * Creates new form main_frame
      */
     public main_frame() {
         initComponents();
+        cardLayoutMain_right = (CardLayout)jplMain_right.getLayout();
         this.init();
     }
+    
 void init(){
     this.setLocationRelativeTo(null);
     this.startClock();
     int i;
+    
 }
 
     //Đồng hồ
@@ -49,13 +55,19 @@ void init(){
         pnl3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pnl4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        txtQLHoaDonDenBu = new javax.swing.JLabel();
         pnl5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
+        jplMain_right = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jplQLSach = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jpQLHoaDonDenBu = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -149,19 +161,22 @@ void init(){
         pnl4.setBackground(new java.awt.Color(3, 120, 170));
         pnl4.setLayout(new java.awt.BorderLayout());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Quản lý phiếu phạt");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtQLHoaDonDenBu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtQLHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
+        txtQLHoaDonDenBu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtQLHoaDonDenBu.setText("Quản lý Hóa Đơn Đền Bù");
+        txtQLHoaDonDenBu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQLHoaDonDenBuMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                txtQLHoaDonDenBuMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                txtQLHoaDonDenBuMouseExited(evt);
             }
         });
-        pnl4.add(jLabel4, java.awt.BorderLayout.CENTER);
+        pnl4.add(txtQLHoaDonDenBu, java.awt.BorderLayout.CENTER);
 
         pnlWest.add(pnl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, 45));
 
@@ -207,6 +222,17 @@ void init(){
         jPanel1.add(lblClock, java.awt.BorderLayout.LINE_END);
 
         pnlMain.add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        jplMain_right.setLayout(new java.awt.CardLayout());
+        jplMain_right.add(jPanel3, "card2");
+        jplMain_right.add(jplQLSach, "card3");
+        jplMain_right.add(jPanel5, "card4");
+        jplMain_right.add(jPanel6, "card5");
+
+        jpQLHoaDonDenBu.setLayout(new java.awt.BorderLayout());
+        jplMain_right.add(jpQLHoaDonDenBu, "card6");
+
+        pnlMain.add(jplMain_right, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
 
@@ -305,9 +331,9 @@ void init(){
         this.pnl3.setBackground(new java.awt.Color(105, 184, 218));
     }//GEN-LAST:event_jLabel3MouseEntered
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+    private void txtQLHoaDonDenBuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQLHoaDonDenBuMouseEntered
         this.pnl4.setBackground(new java.awt.Color(105, 184, 218));
-    }//GEN-LAST:event_jLabel4MouseEntered
+    }//GEN-LAST:event_txtQLHoaDonDenBuMouseEntered
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
         this.pnl5.setBackground(new java.awt.Color(105, 184, 218));
@@ -325,13 +351,19 @@ void init(){
         this.pnl3.setBackground(new java.awt.Color(3, 120, 170));
     }//GEN-LAST:event_jLabel3MouseExited
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void txtQLHoaDonDenBuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQLHoaDonDenBuMouseExited
         this.pnl4.setBackground(new java.awt.Color(3, 120, 170));
-    }//GEN-LAST:event_jLabel4MouseExited
+    }//GEN-LAST:event_txtQLHoaDonDenBuMouseExited
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         this.pnl5.setBackground(new java.awt.Color(3, 120, 170));
     }//GEN-LAST:event_jLabel5MouseExited
+
+    private void txtQLHoaDonDenBuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQLHoaDonDenBuMouseClicked
+        // TODO add your handling code here:
+        jpQLHoaDonDenBu.add(new QLHoaDonDenBu(),BorderLayout.CENTER);
+       cardLayoutMain_right.show(jplMain_right, "card6");
+    }//GEN-LAST:event_txtQLHoaDonDenBuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -372,15 +404,20 @@ void init(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JPanel jpQLHoaDonDenBu;
+    private javax.swing.JPanel jplMain_right;
+    private javax.swing.JPanel jplQLSach;
     private javax.swing.JLabel lblClock;
     private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenu mnQuanLy;
@@ -406,5 +443,6 @@ void init(){
     private javax.swing.JPanel pnl5;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlWest;
+    private javax.swing.JLabel txtQLHoaDonDenBu;
     // End of variables declaration//GEN-END:variables
 }
