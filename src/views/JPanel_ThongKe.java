@@ -77,7 +77,6 @@ public class JPanel_ThongKe extends javax.swing.JPanel {
         tblSachDaMuon.setSelectionBackground(new java.awt.Color(6, 143, 202));
         jScrollPane1.setViewportView(tblSachDaMuon);
         if (tblSachDaMuon.getColumnModel().getColumnCount() > 0) {
-            tblSachDaMuon.getColumnModel().getColumn(0).setResizable(false);
             tblSachDaMuon.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
@@ -130,7 +129,6 @@ public class JPanel_ThongKe extends javax.swing.JPanel {
         tblSachBiLoai.setSelectionBackground(new java.awt.Color(6, 143, 202));
         jScrollPane4.setViewportView(tblSachBiLoai);
         if (tblSachBiLoai.getColumnModel().getColumnCount() > 0) {
-            tblSachBiLoai.getColumnModel().getColumn(0).setResizable(false);
             tblSachBiLoai.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
@@ -172,7 +170,6 @@ public class JPanel_ThongKe extends javax.swing.JPanel {
         tblSachTreHan.setSelectionBackground(new java.awt.Color(6, 143, 202));
         jScrollPane2.setViewportView(tblSachTreHan);
         if (tblSachTreHan.getColumnModel().getColumnCount() > 0) {
-            tblSachTreHan.getColumnModel().getColumn(0).setResizable(false);
             tblSachTreHan.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
@@ -222,14 +219,8 @@ public class JPanel_ThongKe extends javax.swing.JPanel {
         tblSachConLai.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblSachConLai.setRowHeight(25);
         tblSachConLai.setSelectionBackground(new java.awt.Color(6, 143, 202));
-        tblSachConLai.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblSachConLaiKeyPressed(evt);
-            }
-        });
         jScrollPane3.setViewportView(tblSachConLai);
         if (tblSachConLai.getColumnModel().getColumnCount() > 0) {
-            tblSachConLai.getColumnModel().getColumn(0).setResizable(false);
             tblSachConLai.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
@@ -261,10 +252,6 @@ public class JPanel_ThongKe extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(95, 100));
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tblSachConLaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSachConLaiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblSachConLaiKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
