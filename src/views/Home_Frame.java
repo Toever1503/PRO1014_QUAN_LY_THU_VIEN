@@ -24,7 +24,7 @@ public class Home_Frame extends javax.swing.JFrame {
         this.startClock();
     }
 
-    //Đồng hồ
+    //�?ồng hồ
     void startClock() {
         new javax.swing.Timer(0, (java.awt.event.ActionEvent e) -> {
             java.util.Date now = new java.util.Date();
@@ -171,7 +171,7 @@ public class Home_Frame extends javax.swing.JFrame {
         btnHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
         btnHoaDonDenBu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHoaDonDenBu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/receipt.png"))); // NOI18N
-        btnHoaDonDenBu.setText("Hóa đơn đền bù");
+        btnHoaDonDenBu.setText("Hóa đơn đ�?n bù");
         btnHoaDonDenBu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHoaDonDenBuMouseClicked(evt);
@@ -288,7 +288,7 @@ public class Home_Frame extends javax.swing.JFrame {
         mnHeThong.add(jSeparator3);
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/logout.png"))); // NOI18N
-        mniDangXuat.setText("Đăng xuất");
+        mniDangXuat.setText("�?ăng xuất");
         mnHeThong.add(mniDangXuat);
 
         jMenuBar1.add(mnHeThong);
@@ -312,7 +312,7 @@ public class Home_Frame extends javax.swing.JFrame {
 
         mniQLHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/receipt.png"))); // NOI18N
-        mniQLHoaDon.setText("Hóa đơn đề bù");
+        mniQLHoaDon.setText("Hóa đơn đ�? bù");
         mnQuanLy.add(mniQLHoaDon);
         mnQuanLy.add(jSeparator1);
 
