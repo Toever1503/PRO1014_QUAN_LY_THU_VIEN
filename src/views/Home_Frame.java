@@ -217,6 +217,11 @@ public class Home_Frame extends javax.swing.JFrame {
         btnScanQR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnScanQR.setForeground(new java.awt.Color(255, 255, 255));
         btnScanQR.setText("Scan QR");
+        btnScanQR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnScanQRMouseClicked(evt);
+            }
+        });
         btnScanQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnScanQRActionPerformed(evt);
@@ -444,6 +449,10 @@ public class Home_Frame extends javax.swing.JFrame {
     private void btnScanQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScanQRActionPerformed
        
     }//GEN-LAST:event_btnScanQRActionPerformed
+
+    private void btnScanQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScanQRMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnScanQRMouseClicked
 
     /**
      * @param args the command line arguments
