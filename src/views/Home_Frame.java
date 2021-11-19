@@ -88,6 +88,7 @@ public class Home_Frame extends javax.swing.JFrame {
         setTitle("Quản lý thư viện");
         setPreferredSize(new java.awt.Dimension(900, 800));
         setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlMain.setLayout(new java.awt.BorderLayout());
 
@@ -269,7 +270,7 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlCenter.setLayout(new java.awt.CardLayout());
 
         lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library (1).png"))); // NOI18N
+        lblHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library_1.png"))); // NOI18N
         pnlCenter.add(lblHome, "card2");
 
         pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
