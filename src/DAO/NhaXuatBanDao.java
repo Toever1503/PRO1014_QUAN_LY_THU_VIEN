@@ -4,28 +4,28 @@
  */
 package DAO;
 
-import Models.Sach;
+import Models.NhaXuatBan;
 import java.math.BigInteger;
 import java.util.List;
 
 /**
  *
- * @author NguyenHoan
+ * @author haunv
  */
-public class SachDAO implements DAO<Sach, BigInteger>{
+public class NhaXuatBanDao implements DAO<NhaXuatBan, BigInteger>{
 
     @Override
-    public Sach getById(BigInteger id) {
+    public NhaXuatBan getById(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Sach> getALL() {
+    public List<NhaXuatBan> getALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(Sach obj) {
+    public int save(NhaXuatBan obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

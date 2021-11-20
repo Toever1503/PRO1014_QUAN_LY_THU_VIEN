@@ -4,28 +4,28 @@
  */
 package DAO;
 
-import Models.Sach;
+import Models.DeXuat;
 import java.math.BigInteger;
 import java.util.List;
 
 /**
  *
- * @author NguyenHoan
+ * @author haunv
  */
-public class SachDAO implements DAO<Sach, BigInteger>{
+public class DeXuatDao implements DAO<DeXuat, BigInteger>{
 
     @Override
-    public Sach getById(BigInteger id) {
+    public DeXuat getById(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Sach> getALL() {
+    public List<DeXuat> getALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(Sach obj) {
+    public int save(DeXuat obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
