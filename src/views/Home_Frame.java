@@ -87,8 +87,6 @@ public class Home_Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
         setPreferredSize(new java.awt.Dimension(900, 800));
-        setResizable(false);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlMain.setLayout(new java.awt.BorderLayout());
 
@@ -295,6 +293,11 @@ public class Home_Frame extends javax.swing.JFrame {
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/logout.png"))); // NOI18N
         mniDangXuat.setText("Đăng xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
         mnHeThong.add(mniDangXuat);
 
         jMenuBar1.add(mnHeThong);
@@ -454,6 +457,12 @@ public class Home_Frame extends javax.swing.JFrame {
     private void btnScanQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScanQRMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnScanQRMouseClicked
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new JFrame_Login().setVisible(true);
+    }//GEN-LAST:event_mniDangXuatActionPerformed
 
     /**
      * @param args the command line arguments

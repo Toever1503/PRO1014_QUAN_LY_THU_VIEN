@@ -5,13 +5,17 @@
 package views;
 
 import Helper.PasswordEncoder;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author haunv
  */
 public class JFrame_Login extends javax.swing.JFrame {
+
     /**
      * Creates new form JFrame_Login
      */
@@ -20,9 +24,10 @@ public class JFrame_Login extends javax.swing.JFrame {
         this.init();
     }
 
-    public void init(){
+    public void init() {
         setLocationRelativeTo(null);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,6 +206,7 @@ public class JFrame_Login extends javax.swing.JFrame {
 
     private void lblLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseClicked
         login();
+
     }//GEN-LAST:event_lblLoginMouseClicked
 
     /**
@@ -255,23 +261,32 @@ public class JFrame_Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-     private void login() {
-       String username = txtUsername.getText();
+    private void login() {
+        String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             lblMess.setText("Tài khoản không được bỏ trống!");
-        }
-        else if(password.isEmpty()){
+        } else if (password.isEmpty()) {
             lblMess.setText("Mật không được bỏ trống!");
-        }
-        else{
+        } else {
             password = PasswordEncoder.getInstance().encode(password);
-            
-            
-            if(password == ""){
-                
+
+            Object obj = null;
+//            if(obj == null){
+//                lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
+//                return;
+//            }
+
+            if (password.equals("81dc9bdb52d04dc20036dbd8313ed055")) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
+                new Home_Frame().setVisible(true);
+                this.dispose();
+            } else {
+                lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
+                return;
             }
         }
         return;
     }
+
 }
