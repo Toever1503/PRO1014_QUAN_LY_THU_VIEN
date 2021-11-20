@@ -5,10 +5,6 @@
  */
 package views;
 
-import DAO.NhanVienDAO;
-import Helper.MsgBox;
-import Helper.Validate;
-
 /**
  *
  * @author Sieu Nhan Bay
@@ -31,8 +27,7 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
     void init() {
         initComponents();
         setLocationRelativeTo(null);
-        this.txtEmail.setEnabled(false);
-        this.txtEmail.setText(Helper.Auth.user.getEmail());
+        this.txtMaQL.setEnabled(false);
     }
 
     /**
@@ -46,7 +41,7 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtMaQL = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnXacNhan = new javax.swing.JButton();
@@ -68,9 +63,9 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
 
         jLabel2.setText("Mã quản lý:");
 
-        txtEmail.setEditable(false);
-        txtEmail.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(204, 0, 0));
+        txtMaQL.setEditable(false);
+        txtMaQL.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtMaQL.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel3.setText("Mật khẩu hiện tại");
 
@@ -147,7 +142,7 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
                     .addComponent(txtXacNhanMKM, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMaQL, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +166,7 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaQL, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -263,43 +258,8 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtXacNhanMKMKeyPressed
 
-    NhanVienDAO dAO = new NhanVienDAO();
-
     public void doiMatKhau() {
-        String pass = this.txtMatKhau.getText().trim();
-        String newPass = this.txtMatKhauMoi.getText().trim();
-        String XacNhanPass = this.txtXacNhanMKM.getText().trim();
-        if (!pass.equals(Helper.Auth.user.getMatKhau())) {
-            this.txtMatKhau.requestFocus();
-            MsgBox.alert_ERROR(this, "Mật khâu cũ ko chính xác!");
-            return;
-        }
-        if (!Validate.paswordFormat(newPass)) {
-            this.txtMatKhauMoi.requestFocus();
-            MsgBox.alert_ERROR(this, "Mật khẩu mới dài ít nhất 5 ký tự và có ít nhất 1 chữ cái viết thường, viết hoa và 1 số nguyên!");
-            return;
-        }
-        if (pass.equals(newPass)) {
-            this.txtMatKhauMoi.requestFocus();
-            MsgBox.alert_ERROR(this, "Mật khẩu mới không được trùng với mật khẩu cũ!");
-            return;
-        }
-        if (!newPass.equals(XacNhanPass)) {
-            this.txtXacNhanMKM.requestFocus();
-            MsgBox.alert_ERROR(this, "Mật khẩu nhập lại không khớp!");
-            return;
-        }
-        String OTP = String.valueOf(Helper.Ramdon.ramdonOTP());
-        MsgBox.alert_INFORMATION(this, "Mã OTP đã được gửi đến: \n\t  " + this.txtEmail.getText());
-        String inputOTP = MsgBox.prompt(this, "Nhập mã OTP: ");
-        if (!OTP.equals(inputOTP)) {
-            MsgBox.alert_ERROR(this, "Mã OTP không hợp lệ!");
-            return;
-        }
-        Helper.Auth.user.setMatKhau(newPass);
-        this.dAO.update(Helper.Auth.user);
-        MsgBox.alert_INFORMATION(this, "Đổi mật khẩu thành công!");
-        this.dispose();
+      
     }
 
     /**
@@ -355,7 +315,7 @@ public class JDialog_DoiMatKhau extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMaQL;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JPasswordField txtMatKhauMoi;
     private javax.swing.JPasswordField txtXacNhanMKM;

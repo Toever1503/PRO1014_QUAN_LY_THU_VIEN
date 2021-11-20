@@ -51,6 +51,8 @@ public class JFrame_Login extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(700, 369));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library_1.png"))); // NOI18N
 
@@ -111,7 +113,7 @@ public class JFrame_Login extends javax.swing.JFrame {
         jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 220, 10));
 
         jPanel5.setBackground(new java.awt.Color(6, 143, 202));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
         lblLogin.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -142,7 +144,7 @@ public class JFrame_Login extends javax.swing.JFrame {
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 150, 40));
 
         btnForgotPassword.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnForgotPassword.setForeground(new java.awt.Color(255, 0, 0));
+        btnForgotPassword.setForeground(new java.awt.Color(255, 255, 51));
         btnForgotPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnForgotPassword.setText("Forget your password?");
         btnForgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,7 +172,7 @@ public class JFrame_Login extends javax.swing.JFrame {
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 70, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/user.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/user_1.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 80, 70));
 
         jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -181,7 +183,7 @@ public class JFrame_Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

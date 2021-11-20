@@ -18,8 +18,6 @@ public class XImages {
 
     static {
         // Tải biểu tượng ứng dụng 
-        //CÁCH TẢI ẢNH TỪ TRONG PROJECT
-        //icon là thư mục con của src
         String file = "/Images_Icon/library0.png";      //icon là thư mục con của src
         APP_ICON = new ImageIcon(XImages.class.getResource(file)).getImage();
         APP_ICON_1 = new ImageIcon(XImages.class.getResource(file));

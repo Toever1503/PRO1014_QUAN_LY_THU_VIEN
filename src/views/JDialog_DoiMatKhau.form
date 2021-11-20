@@ -33,7 +33,7 @@
                   <Component id="txtXacNhanMKM" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtMatKhauMoi" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtMatKhau" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtMaQL" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtEmail" min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="txtMaQL" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
         <Property name="text" type="java.lang.String" value="M&#xe3; qu&#x1ea3;n l&#xfd;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail">
+    <Component class="javax.swing.JTextField" name="txtMaQL">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
