@@ -4,12 +4,14 @@
  */
 package views;
 
+import Helper.PasswordEncoder;
+
+
 /**
  *
  * @author haunv
  */
 public class JFrame_Login extends javax.swing.JFrame {
-
     /**
      * Creates new form JFrame_Login
      */
@@ -40,7 +42,6 @@ public class JFrame_Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         lblLogin = new javax.swing.JLabel();
-        btnForgotPassword = new javax.swing.JLabel();
         lblMess = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -141,17 +142,6 @@ public class JFrame_Login extends javax.swing.JFrame {
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 150, 40));
 
-        btnForgotPassword.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnForgotPassword.setForeground(new java.awt.Color(255, 0, 0));
-        btnForgotPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnForgotPassword.setText("Forget your password?");
-        btnForgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnForgotPasswordMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnForgotPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 190, 30));
-
         lblMess.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         lblMess.setForeground(new java.awt.Color(255, 255, 0));
         lblMess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,12 +200,8 @@ public class JFrame_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void lblLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseClicked
-
+        login();
     }//GEN-LAST:event_lblLoginMouseClicked
-
-    private void btnForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnForgotPasswordMouseClicked
-
-    }//GEN-LAST:event_btnForgotPasswordMouseClicked
 
     /**
      * @param args the command line arguments
@@ -253,7 +239,6 @@ public class JFrame_Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnForgotPassword;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -269,4 +254,24 @@ public class JFrame_Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+     private void login() {
+       String username = txtUsername.getText();
+        String password = String.valueOf(txtPassword.getPassword());
+        if(username.isEmpty()){
+            lblMess.setText("Tài khoản không được bỏ trống!");
+        }
+        else if(password.isEmpty()){
+            lblMess.setText("Mật không được bỏ trống!");
+        }
+        else{
+            password = PasswordEncoder.getInstance().encode(password);
+            
+            
+            if(password == ""){
+                
+            }
+        }
+        return;
+    }
 }
