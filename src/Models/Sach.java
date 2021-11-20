@@ -4,10 +4,98 @@
  */
 package Models;
 
+import java.math.BigInteger;
+import java.sql.Date;
+
 /**
  *
  * @author NguyenHoan
  */
 public class Sach {
+
+    private BigInteger id;
+    private String tenSach;
+    private String viTri;
+    private Date ngayTao;
+    private String qr_code;
+    private BigInteger nhaXuatBan;
+    private BigInteger nguoiTao;
+    private boolean trangThai;
+
+    public Sach(BigInteger id, String tenSach, String viTri, Date ngayTao, String qr_code, BigInteger nhaXuatBan, BigInteger nguoiTao, boolean trangThai) {
+        this.id = id;
+        this.tenSach = tenSach;
+        this.viTri = viTri;
+        this.ngayTao = ngayTao;
+        this.qr_code = qr_code;
+        this.nhaXuatBan = nhaXuatBan;
+        this.nguoiTao = nguoiTao;
+        this.trangThai = trangThai;
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
+    }
+
+    public String getViTri() {
+        return viTri;
+    }
+
+    public void setViTri(String viTri) {
+        this.viTri = viTri;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getQr_code() {
+        return qr_code;
+    }
+
+    public void setQr_code(String qr_code) {
+        this.qr_code = qr_code;
+    }
+
+    public BigInteger getNhaXuatBan() {
+        return nhaXuatBan;
+    }
+
+    public void setNhaXuatBan(BigInteger nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+    }
+
+    public BigInteger getNguoiTao() {
+        return nguoiTao;
+    }
+
+    public void setNguoiTao(BigInteger nguoiTao) {
+        this.nguoiTao = nguoiTao;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+    
     
 }

@@ -4,28 +4,28 @@
  */
 package DAO;
 
-import Models.Sach;
+import Models.TheLoai;
 import java.math.BigInteger;
 import java.util.List;
 
 /**
  *
- * @author NguyenHoan
+ * @author haunv
  */
-public class SachDAO implements DAO<Sach, BigInteger>{
+public class TheLoaiDao implements DAO<TheLoai, BigInteger>{
 
     @Override
-    public Sach getById(BigInteger id) {
+    public TheLoai getById(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Sach> getALL() {
+    public List<TheLoai> getALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(Sach obj) {
+    public int save(TheLoai obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -33,5 +33,5 @@ public class SachDAO implements DAO<Sach, BigInteger>{
     public int deleteById(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
