@@ -19,6 +19,8 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     void init() {
+        this.setIconImage(Helper.XImages.APP_ICON); //đặt icon góc trên trái
+        this.
         this.setLocationRelativeTo(null);
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
@@ -88,7 +90,6 @@ public class Home_Frame extends javax.swing.JFrame {
         setTitle("Quản lý thư viện");
         setPreferredSize(new java.awt.Dimension(900, 800));
         setResizable(false);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlMain.setLayout(new java.awt.BorderLayout());
 
