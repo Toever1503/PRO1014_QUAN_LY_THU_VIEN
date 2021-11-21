@@ -1,20 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package views;
 
 /**
  *
- * @author Admin
+ * @author haunv
  */
-public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
+public class QlPhieuMuon_JPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form QuanLyNguoiDung
+     * Creates new form QlPhieuMuon_JPanel
      */
-    public QuanLyNguoiDung() {
+    public QlPhieuMuon_JPanel() {
         initComponents();
     }
 
@@ -29,27 +28,26 @@ public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
 
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
-        btnHuyKichHoat = new javax.swing.JButton();
+        btnChiTiet = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         btnTim = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblQuanLyNguoiDung = new javax.swing.JTable();
+        tblQuanLyPhieuMuon = new javax.swing.JTable();
 
         btnThem.setText("Thêm mới");
 
         btnSua.setText("Sửa");
 
-        btnHuyKichHoat.setBackground(new java.awt.Color(255, 51, 51));
-        btnHuyKichHoat.setText("Hủy Kích Hoạt");
-        btnHuyKichHoat.addActionListener(new java.awt.event.ActionListener() {
+        btnChiTiet.setText("Chi Tiết");
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyKichHoatActionPerformed(evt);
+                btnChiTietActionPerformed(evt);
             }
         });
 
         btnTim.setText("Tìm");
 
-        tblQuanLyNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuanLyPhieuMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -57,13 +55,13 @@ public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã ND", "Tên Người Dùng", "Số điện thoại", "Email", "Địa Chỉ", "Trạng Thái"
+                "Mã Phiếu", "Người Mượn", "Ngày Mượn", "Thời Hạn Trả", "Người Xử Lý", "Trạng Thái"
             }
         ));
-        jScrollPane1.setViewportView(tblQuanLyNguoiDung);
+        jScrollPane1.setViewportView(tblQuanLyPhieuMuon);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -75,12 +73,12 @@ public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnHuyKichHoat)
+                        .addComponent(btnChiTiet)
                         .addGap(206, 206, 206)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTim)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,29 +87,27 @@ public class QuanLyNguoiDung extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnSua)
-                    .addComponent(btnHuyKichHoat)
+                    .addComponent(btnChiTiet)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTim))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHuyKichHoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyKichHoatActionPerformed
+    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnHuyKichHoatActionPerformed
-    
+    }//GEN-LAST:event_btnChiTietActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHuyKichHoat;
+    private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblQuanLyNguoiDung;
+    private javax.swing.JTable tblQuanLyPhieuMuon;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
