@@ -17,5 +17,4 @@ public class DOTENV {
         if(dotenv == null) return null;
         return dotenv;
     }
-
 }
