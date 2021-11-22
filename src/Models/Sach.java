@@ -19,10 +19,10 @@ public class Sach {
     private Date ngayTao;
     private String qr_code;
     private BigInteger nhaXuatBan;
-    private BigInteger nguoiTao;
+    private String nguoiTao;
     private boolean trangThai;
 
-    public Sach(BigInteger id, String tenSach, String viTri, Date ngayTao, String qr_code, BigInteger nhaXuatBan, BigInteger nguoiTao, boolean trangThai) {
+    public Sach(BigInteger id, String tenSach, String viTri, Date ngayTao, String qr_code, BigInteger nhaXuatBan, String nguoiTao, boolean trangThai) {
         this.id = id;
         this.tenSach = tenSach;
         this.viTri = viTri;
@@ -81,11 +81,11 @@ public class Sach {
         this.nhaXuatBan = nhaXuatBan;
     }
 
-    public BigInteger getNguoiTao() {
+    public String getNguoiTao() {
         return nguoiTao;
     }
 
-    public void setNguoiTao(BigInteger nguoiTao) {
+    public void setNguoiTao(String nguoiTao) {
         this.nguoiTao = nguoiTao;
     }
 
@@ -95,6 +95,11 @@ public class Sach {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "Sach{" + "id=" + id + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", nguoiTao=" + nguoiTao + ", trangThai=" + trangThai + '}';
     }
     
     
