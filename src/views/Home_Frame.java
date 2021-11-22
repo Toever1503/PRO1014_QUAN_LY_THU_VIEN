@@ -26,12 +26,6 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();
-        jPanel_QlSach.add(new QuanLySach_JPanel(), BorderLayout.CENTER);
-        jPanel_QlPhieuMuon.add(new QlPhieuMuon_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoiVien.add(new QlNguoiDung_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoaDonDenBu.add(new QLHoaDonDenBu(), BorderLayout.CENTER);
-        jPanel_QlThuThu.add(new QlThuThu(), BorderLayout.CENTER);
-        jPanel_ThongKe.add(new JPanel_ThongKe(), BorderLayout.CENTER);
         
     }
 
@@ -72,13 +66,19 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
-        jPanel_QlSach = new javax.swing.JPanel();
-        jPanel_QlPhieuMuon = new javax.swing.JPanel();
-        jPanel_QlHoiVien = new javax.swing.JPanel();
-        jPanel_QlThuThu = new javax.swing.JPanel();
-        jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
-        jPanel_ThongKe = new javax.swing.JPanel();
         jPanel_home = new javax.swing.JPanel();
+        jPanel_QlSach = new javax.swing.JPanel();
+        quanLySach_JPanel2 = new views.QuanLySach_JPanel();
+        jPanel_QlPhieuMuon = new javax.swing.JPanel();
+        qlPhieuMuon_JPanel2 = new views.QlPhieuMuon_JPanel();
+        jPanel_QlHoiVien = new javax.swing.JPanel();
+        qlNguoiDung_JPanel2 = new views.QlNguoiDung_JPanel();
+        jPanel_QlThuThu = new javax.swing.JPanel();
+        qlThuThu1 = new views.QlThuThu();
+        jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
+        qLHoaDonDenBu2 = new views.QLHoaDonDenBu();
+        jPanel_ThongKe = new javax.swing.JPanel();
+        jPanel_ThongKe1 = new views.JPanel_ThongKe();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -284,26 +284,38 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainRight.setLayout(new java.awt.CardLayout());
 
+        jPanel_home.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_home, "card9");
+
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
+        jPanel_QlSach.add(quanLySach_JPanel2, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlSach, "card3");
 
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
+        jPanel_QlPhieuMuon.add(qlPhieuMuon_JPanel2, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
+        jPanel_QlHoiVien.add(qlNguoiDung_JPanel2, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlHoiVien, "card5");
 
         jPanel_QlThuThu.setLayout(new java.awt.BorderLayout());
+        jPanel_QlThuThu.add(qlThuThu1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlThuThu, "card6");
 
         jPanel_QlHoaDonDenBu.setLayout(new java.awt.BorderLayout());
+        jPanel_QlHoaDonDenBu.add(qLHoaDonDenBu2, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlHoaDonDenBu, "card7");
 
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
-        pnlMainRight.add(jPanel_ThongKe, "card8");
+        jPanel_ThongKe.add(jPanel_ThongKe1, java.awt.BorderLayout.CENTER);
 
-        jPanel_home.setLayout(new java.awt.BorderLayout());
-        pnlMainRight.add(jPanel_home, "card9");
+        pnlMainRight.add(jPanel_ThongKe, "card8");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -550,6 +562,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_QlSach;
     private javax.swing.JPanel jPanel_QlThuThu;
     private javax.swing.JPanel jPanel_ThongKe;
+    private views.JPanel_ThongKe jPanel_ThongKe1;
     private javax.swing.JPanel jPanel_home;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
@@ -583,5 +596,10 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainRight;
     private javax.swing.JPanel pnlWest;
+    private views.QLHoaDonDenBu qLHoaDonDenBu2;
+    private views.QlNguoiDung_JPanel qlNguoiDung_JPanel2;
+    private views.QlPhieuMuon_JPanel qlPhieuMuon_JPanel2;
+    private views.QlThuThu qlThuThu1;
+    private views.QuanLySach_JPanel quanLySach_JPanel2;
     // End of variables declaration//GEN-END:variables
 }
