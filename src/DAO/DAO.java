@@ -15,4 +15,5 @@ public interface DAO<T, ID> {
     public List<T> getALL();
     public int save(T obj);
     public int deleteById(ID id);
+    public List<T> getListByPage(ID page);
 }

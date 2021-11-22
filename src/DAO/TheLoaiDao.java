@@ -34,4 +34,9 @@ public class TheLoaiDao implements DAO<TheLoai, BigInteger>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<TheLoai> getListByPage(BigInteger page) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

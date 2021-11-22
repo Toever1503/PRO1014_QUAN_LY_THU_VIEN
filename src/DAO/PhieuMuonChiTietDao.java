@@ -33,5 +33,10 @@ public class PhieuMuonChiTietDao implements DAO<PhieuMuonChiTiet, BigInteger>{
     public int deleteById(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<PhieuMuonChiTiet> getListByPage(BigInteger page) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
