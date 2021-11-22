@@ -4,12 +4,15 @@
  */
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
 /**
  *
  * @author NguyenHoan
  */
 public class Home_Frame extends javax.swing.JFrame {
-
+    private CardLayout cardLayoutMainRight;
     /**
      * Creates new form main_frame
      */
@@ -23,6 +26,14 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
+        cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();
+        jPanel_QlSach.add(new QuanLySach_JPanel(), BorderLayout.CENTER);
+        jPanel_QlPhieuMuon.add(new QlPhieuMuon_JPanel(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(new QlNguoiDung_JPanel(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(new QLHoaDonDenBu(), BorderLayout.CENTER);
+        jPanel_QlThuThu.add(new QlThuThu(), BorderLayout.CENTER);
+        jPanel_ThongKe.add(new JPanel_ThongKe(), BorderLayout.CENTER);
+        
     }
 
     //Đồng hồ
@@ -61,8 +72,14 @@ public class Home_Frame extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
-        pnlCenter = new javax.swing.JPanel();
-        lblHome = new javax.swing.JLabel();
+        pnlMainRight = new javax.swing.JPanel();
+        jPanel_QlSach = new javax.swing.JPanel();
+        jPanel_QlPhieuMuon = new javax.swing.JPanel();
+        jPanel_QlHoiVien = new javax.swing.JPanel();
+        jPanel_QlThuThu = new javax.swing.JPanel();
+        jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
+        jPanel_ThongKe = new javax.swing.JPanel();
+        jPanel_home = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -89,7 +106,6 @@ public class Home_Frame extends javax.swing.JFrame {
         setTitle("Quản lý thư viện");
         setPreferredSize(new java.awt.Dimension(900, 800));
         setResizable(false);
-
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlWest.setBackground(new java.awt.Color(6, 143, 202));
@@ -266,14 +282,31 @@ public class Home_Frame extends javax.swing.JFrame {
 
         pnlMain.add(pnlLast, java.awt.BorderLayout.PAGE_END);
 
-        pnlCenter.setBackground(new java.awt.Color(255, 255, 255));
-        pnlCenter.setLayout(new java.awt.CardLayout());
+        pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainRight.setLayout(new java.awt.CardLayout());
 
-        lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library_1.png"))); // NOI18N
-        pnlCenter.add(lblHome, "card2");
+        jPanel_QlSach.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_QlSach, "card3");
 
-        pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
+        jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
+
+        jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_QlHoiVien, "card5");
+
+        jPanel_QlThuThu.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_QlThuThu, "card6");
+
+        jPanel_QlHoaDonDenBu.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_QlHoaDonDenBu, "card7");
+
+        jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_ThongKe, "card8");
+
+        jPanel_home.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_home, "card9");
+
+        pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
 
@@ -295,6 +328,11 @@ public class Home_Frame extends javax.swing.JFrame {
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/logout.png"))); // NOI18N
         mniDangXuat.setText("Đăng xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
         mnHeThong.add(mniDangXuat);
 
         jMenuBar1.add(mnHeThong);
@@ -424,27 +462,28 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeMouseExited
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
-      this.pnlCenter.add(this.lblHome);
+
+      cardLayoutMainRight.show(pnlMainRight, "card9");
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseClicked
-      
+    cardLayoutMainRight.show(pnlMainRight, "card3");
     }//GEN-LAST:event_btnQLSachMouseClicked
 
     private void btnQLPhieuMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseClicked
-       
+        cardLayoutMainRight.show(pnlMainRight, "card4");
     }//GEN-LAST:event_btnQLPhieuMuonMouseClicked
 
     private void btnQLHoiVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseClicked
-       
+       cardLayoutMainRight.show(pnlMainRight, "card5");
     }//GEN-LAST:event_btnQLHoiVienMouseClicked
 
     private void btnHoaDonDenBuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseClicked
-     
+        cardLayoutMainRight.show(pnlMainRight, "card7");
     }//GEN-LAST:event_btnHoaDonDenBuMouseClicked
 
     private void btnThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseClicked
-        
+        cardLayoutMainRight.show(pnlMainRight, "card8");
     }//GEN-LAST:event_btnThongKeMouseClicked
 
     private void btnScanQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScanQRActionPerformed
@@ -454,6 +493,12 @@ public class Home_Frame extends javax.swing.JFrame {
     private void btnScanQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScanQRMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnScanQRMouseClicked
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new JFrame_Login().setVisible(true);
+    }//GEN-LAST:event_mniDangXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -500,13 +545,19 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btnScanQR;
     private javax.swing.JLabel btnThongKe;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel_QlHoaDonDenBu;
+    private javax.swing.JPanel jPanel_QlHoiVien;
+    private javax.swing.JPanel jPanel_QlPhieuMuon;
+    private javax.swing.JPanel jPanel_QlSach;
+    private javax.swing.JPanel jPanel_QlThuThu;
+    private javax.swing.JPanel jPanel_ThongKe;
+    private javax.swing.JPanel jPanel_home;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lblClock;
-    private javax.swing.JLabel lblHome;
     private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenu mnQuanLy;
     private javax.swing.JMenu mnThongKe;
@@ -529,9 +580,9 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnl3;
     private javax.swing.JPanel pnl4;
     private javax.swing.JPanel pnl5;
-    private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlLast;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel pnlMainRight;
     private javax.swing.JPanel pnlWest;
     // End of variables declaration//GEN-END:variables
 }
