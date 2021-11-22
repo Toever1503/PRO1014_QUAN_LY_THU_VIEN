@@ -363,6 +363,11 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
         mniQLThuThu.setText("Quản lý thủ thư");
+        mniQLThuThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLThuThuActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLThuThu);
 
         jMenuBar1.add(mnQuanLy);
@@ -499,6 +504,11 @@ public class Home_Frame extends javax.swing.JFrame {
         this.dispose();
         new JFrame_Login().setVisible(true);
     }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
+        // TODO add your handling code here:
+        cardLayoutMainRight.show(pnlMainRight, "card6");
+    }//GEN-LAST:event_mniQLThuThuActionPerformed
 
     /**
      * @param args the command line arguments
