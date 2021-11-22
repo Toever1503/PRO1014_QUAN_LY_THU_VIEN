@@ -26,12 +26,12 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();
-        jPanel_QlSach.add(new QuanLySach_JPanel(), BorderLayout.CENTER);
-        jPanel_QlPhieuMuon.add(new QlPhieuMuon_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoiVien.add(new QlNguoiDung_JPanel(), BorderLayout.CENTER);
+        jPanel_QlSach.add(new QLSach_JPanel(), BorderLayout.CENTER);
+        jPanel_QlPhieuMuon.add(new QLPhieuMuon_JPanel(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(new QLHoiVien_JPanel(), BorderLayout.CENTER);
         jPanel_QlHoaDonDenBu.add(new QLHoaDonDenBu(), BorderLayout.CENTER);
-        jPanel_QlThuThu.add(new QlThuThu(), BorderLayout.CENTER);
-        jPanel_ThongKe.add(new JPanel_ThongKe(), BorderLayout.CENTER);
+        jPanel_QlThuThu.add(new QLThuThu_JPanel(), BorderLayout.CENTER);
+        jPanel_ThongKe.add(new ThongKe_JPanel(), BorderLayout.CENTER);
         
     }
 
@@ -362,6 +362,11 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
         mniQLThuThu.setText("Quản lý thủ thư");
+        mniQLThuThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLThuThuActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLThuThu);
 
         jMenuBar1.add(mnQuanLy);
@@ -496,8 +501,12 @@ public class Home_Frame extends javax.swing.JFrame {
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new JFrame_Login().setVisible(true);
+        new Login_JFrame().setVisible(true);
     }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
+        
+    }//GEN-LAST:event_mniQLThuThuActionPerformed
 
     /**
      * @param args the command line arguments
