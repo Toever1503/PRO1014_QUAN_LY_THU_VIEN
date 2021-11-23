@@ -10,10 +10,17 @@ import java.util.List;
  *
  * @author haunv
  */
-public interface DAO<T, ID> {
-    public T getById(ID id);
-    public List<T> getALL();
-    public int save(T obj);
-    public int deleteById(ID id);
-    public List<T> getListByPage(ID page);
+abstract public class DAO<EntityType, KeyType> {
+
+    abstract public int insert(EntityType entity);
+
+    abstract public int update(EntityType entity);
+
+    abstract public int delete(KeyType id);
+
+    abstract public EntityType selectByID(KeyType id);
+
+    abstract public List<EntityType> selectALL();
+
+    abstract protected List<EntityType> selectBySql(String sql, Object... args);
 }

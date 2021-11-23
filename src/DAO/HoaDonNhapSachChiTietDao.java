@@ -12,31 +12,36 @@ import java.util.List;
  *
  * @author haunv
  */
-public class HoaDonNhapSachChiTietDao implements DAO<HoaDonNhapSachChiTiet, BigInteger>{
+public class HoaDonNhapSachChiTietDao extends DAO<HoaDonNhapSachChiTiet, BigInteger>{
 
     @Override
-    public HoaDonNhapSachChiTiet getById(BigInteger id) {
+    public int insert(HoaDonNhapSachChiTiet entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<HoaDonNhapSachChiTiet> getALL() {
+    public int update(HoaDonNhapSachChiTiet entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(HoaDonNhapSachChiTiet obj) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteById(BigInteger id) {
+    public HoaDonNhapSachChiTiet selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<HoaDonNhapSachChiTiet> getListByPage(BigInteger page) {
+    public List<HoaDonNhapSachChiTiet> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    protected List<HoaDonNhapSachChiTiet> selectBySql(String sql, Object... args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+  
 }
