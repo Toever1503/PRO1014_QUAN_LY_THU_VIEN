@@ -12,31 +12,36 @@ import java.util.List;
  *
  * @author haunv
  */
-public class PhieuMuonChiTietDao implements DAO<PhieuMuonChiTiet, BigInteger>{
+public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, BigInteger>{
 
     @Override
-    public PhieuMuonChiTiet getById(BigInteger id) {
+    public int insert(PhieuMuonChiTiet entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PhieuMuonChiTiet> getALL() {
+    public int update(PhieuMuonChiTiet entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(PhieuMuonChiTiet obj) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteById(BigInteger id) {
+    public PhieuMuonChiTiet selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PhieuMuonChiTiet> getListByPage(BigInteger page) {
+    public List<PhieuMuonChiTiet> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    protected List<PhieuMuonChiTiet> selectBySql(String sql, Object... args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

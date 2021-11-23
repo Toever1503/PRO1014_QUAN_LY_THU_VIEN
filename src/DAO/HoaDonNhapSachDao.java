@@ -12,31 +12,36 @@ import java.util.List;
  *
  * @author haunv
  */
-public class HoaDonNhapSachDao implements DAO<HoaDonNhapSach, BigInteger>{
+public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger>{
 
     @Override
-    public HoaDonNhapSach getById(BigInteger id) {
+    public int insert(HoaDonNhapSach entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<HoaDonNhapSach> getALL() {
+    public int update(HoaDonNhapSach entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(HoaDonNhapSach obj) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteById(BigInteger id) {
+    public HoaDonNhapSach selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<HoaDonNhapSach> getListByPage(BigInteger page) {
+    public List<HoaDonNhapSach> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    protected List<HoaDonNhapSach> selectBySql(String sql, Object... args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

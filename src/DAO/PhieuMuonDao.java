@@ -12,31 +12,36 @@ import java.util.List;
  *
  * @author haunv
  */
-public class PhieuMuonDao implements DAO<PhieuMuon, BigInteger>{
+public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, BigInteger>{
 
     @Override
-    public PhieuMuon getById(BigInteger id) {
+    public int insert(PhieuMuon entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PhieuMuon> getALL() {
+    public int update(PhieuMuon entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(PhieuMuon obj) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteById(BigInteger id) {
+    public PhieuMuon selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PhieuMuon> getListByPage(BigInteger page) {
+    public List<PhieuMuon> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    protected List<PhieuMuon> selectBySql(String sql, Object... args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
 }

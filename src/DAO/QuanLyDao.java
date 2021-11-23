@@ -1,51 +1,3 @@
-<<<<<<< Updated upstream
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package DAO;
-
-import Models.QuanLy;
-import java.math.BigInteger;
-import java.util.List;
-
-/**
- *
- * @author haunv
- */
-public class QuanLyDao implements DAO<QuanLy, BigInteger>{
-
-    @Override
-    public QuanLy getById(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<QuanLy> getALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int save(QuanLy obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int deleteById(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<QuanLy> getListByPage(BigInteger page) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
-=======
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import Models.QuanLy;
@@ -57,7 +9,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class QuanLyDao extends DAO<QuanLy, String> {
+public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
 
     private final String SELECT_ALL_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
     private final String SELECT_BY_ID_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly WHERE MaQL = ?";
@@ -158,4 +110,3 @@ public class QuanLyDao extends DAO<QuanLy, String> {
         return list;
     }
 }
->>>>>>> Stashed changes

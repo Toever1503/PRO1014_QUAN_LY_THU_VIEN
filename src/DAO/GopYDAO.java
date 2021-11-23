@@ -1,51 +1,3 @@
-<<<<<<< Updated upstream:src/DAO/DeXuatDao.java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package DAO;
-
-import Models.DeXuat;
-import java.math.BigInteger;
-import java.util.List;
-
-/**
- *
- * @author haunv
- */
-public class DeXuatDao implements DAO<DeXuat, BigInteger>{
-
-    @Override
-    public DeXuat getById(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<DeXuat> getALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int save(DeXuat obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int deleteById(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<DeXuat> getListByPage(BigInteger page) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
-=======
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import Models.GopY;
@@ -58,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class GopYDAO extends DAO<GopY, BigInteger> {
+public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y";
     private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y WHERE ID = ?";
@@ -145,4 +97,3 @@ public class GopYDAO extends DAO<GopY, BigInteger> {
     }
 
 }
->>>>>>> Stashed changes:src/DAO/GopYDAO.java
