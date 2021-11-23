@@ -159,10 +159,4 @@ public class NhaXuatBanDao implements DAO<NhaXuatBan, BigInteger> {
         }
         return listNhaXuatBan.size() == 0 ? null : listNhaXuatBan;
     }
-
-    @Override
-    public List<NhaXuatBan> getListByPage(BigInteger page) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
