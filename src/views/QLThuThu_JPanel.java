@@ -4,6 +4,17 @@
  */
 package views;
 
+import DAO.QuanLyDao;
+import Helper.Auth;
+import Models.QuanLy;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Nguyen Hoan
@@ -17,7 +28,28 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         initComponents();
         tabs.remove(tabCapNhat);
     }
-
+QuanLyDao dao = new QuanLyDao();
+    void fillTable(){
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyThuThu.getModel();
+        model.setRowCount(0);
+        try {
+            List<QuanLy> list = dao.getALL();
+            for(QuanLy ql : list) {
+                Object[] row = {
+                    ql.getId(),
+                    ql.getFullName(),
+                    ql.getDiaChi(),
+                    ql.getNgaySinh(),
+                    ql.getSoDienThoai(),
+                    ql.getEmail(),
+                    ql.getVaiTro() ? "Admin" : "Thủ thư"
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +65,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblSachDaMuon = new javax.swing.JTable();
+        tblQuanLyThuThu = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -87,29 +119,29 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setColumnHeaderView(null);
 
-        tblSachDaMuon.setAutoCreateRowSorter(true);
-        tblSachDaMuon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        tblSachDaMuon.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuanLyThuThu.setAutoCreateRowSorter(true);
+        tblQuanLyThuThu.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblQuanLyThuThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã thủ thư", "Họ tên", "Địa chỉ", "Ngày sinh", "Số điện thoại", "Email", "Vai Trò", "Trạng thái"
+                "Mã thủ thư", "Họ tên", "Địa chỉ", "Ngày sinh", "Số điện thoại", "Email", "Vai Trò"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblSachDaMuon.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSachDaMuon.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblSachDaMuon.setRowHeight(25);
-        tblSachDaMuon.setSelectionBackground(new java.awt.Color(6, 143, 202));
-        jScrollPane1.setViewportView(tblSachDaMuon);
+        tblQuanLyThuThu.setGridColor(new java.awt.Color(255, 255, 255));
+        tblQuanLyThuThu.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblQuanLyThuThu.setRowHeight(25);
+        tblQuanLyThuThu.setSelectionBackground(new java.awt.Color(6, 143, 202));
+        jScrollPane1.setViewportView(tblQuanLyThuThu);
 
         tabDanhSach.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -438,11 +470,21 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
+        if (Auth.user.getVaiTro()) {
+            if (checkNullText(txtMaTT)&&checkNullText(txtMatKhau)&&
+                checkNullText(txtCCCD)&&checkNullText(txtHoTen)&&
+                checkNullText(txtSoDienThoai)&&checkNullText(txtEmail)&&checkNullText(txtDiaChi)){
+        }
+        }else {
+            JOptionPane.showMessageDialog(this, "chỉ Admin mới được cập nhật");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
- 
+        if (checkNullText(txtMaTT)&&checkNullText(txtMatKhau)&&
+                checkNullText(txtCCCD)&&checkNullText(txtHoTen)&&
+                checkNullText(txtSoDienThoai)&&checkNullText(txtEmail)&&checkNullText(txtDiaChi)){
+        }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
@@ -474,7 +516,32 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
-
+//    public static void main(String[] args) {//chạy thử
+//        JFrame jframe = new JFrame();
+//        jframe.setSize(900,800);
+//        jframe.add(new QLThuThu_JPanel());
+//        jframe.setVisible(true);
+//    }
+    public static boolean checkNullText(JTextField txt) {// check null 
+        txt.setBackground(white);
+        if (txt.getText().trim().length() > 0) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            JOptionPane.showMessageDialog(txt.getRootPane(), "Không được để trống " + txt.getName());
+            return false;
+        }
+    }
+//    public boolean checkTrungMa(JTextField txt) {//check trùng mã Quản lý
+//        txt.setBackground(white);
+//        if (dao.getById (txt.getText()) == null) {
+//            return true;
+//        } else {
+//            txt.setBackground(pink);
+//            MsgBox.alert(this, txt.getName() + " đã bị tồn tại.");
+//            return false;
+//        }
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFirst;
@@ -517,7 +584,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tabCapNhat;
     private javax.swing.JPanel tabDanhSach;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblSachDaMuon;
+    private javax.swing.JTable tblQuanLyThuThu;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
