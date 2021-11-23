@@ -9,5 +9,18 @@ package Helper;
  * @author NguyenHoan
  */
 public class Auth {
-    
+
+    public static Models.QuanLy user = null;
+
+    public static void clear() {
+        Auth.user = null;
+    }
+
+    public static boolean isLogin() {
+        return Auth.user != null;
+    }
+
+    public static boolean isManager() {
+        return Auth.isLogin() && user.getVaiTro();
+    }
 }

@@ -21,9 +21,9 @@ public class QuanLy {
     private Date ngayTao;
     private Date ngayHan;
     private String qr_code;
-    private String vaiTro;
+    private Boolean vaiTro;
 
-    public QuanLy(BigInteger id, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code, String vaiTro) {
+    public QuanLy(BigInteger id, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code, Boolean vaiTro) {
         this.id = id;
         this.cccd = cccd;
         this.fullName = fullName;
@@ -117,11 +117,11 @@ public class QuanLy {
         this.qr_code = qr_code;
     }
 
-    public String getVaiTro() {
+    public boolean getVaiTro() {
         return vaiTro;
     }
 
-    public void setVaiTro(String vaiTro) {
+    public void setVaiTro(boolean vaiTro) {
         this.vaiTro = vaiTro;
     }
     
