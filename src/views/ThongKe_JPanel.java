@@ -8,12 +8,12 @@ package views;
  *
  * @author NguyenHoan
  */
-public class JPanel_ThongKe extends javax.swing.JPanel {
+public class ThongKe_JPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ThongKe_JPanel
      */
-    public JPanel_ThongKe() {
+    public ThongKe_JPanel() {
         initComponents();
     }
 

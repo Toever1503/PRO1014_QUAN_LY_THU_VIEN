@@ -26,12 +26,12 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();
-        jPanel_QlSach.add(new QuanLySach_JPanel(), BorderLayout.CENTER);
-        jPanel_QlPhieuMuon.add(new QlPhieuMuon_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoiVien.add(new QlNguoiDung_JPanel(), BorderLayout.CENTER);
+        jPanel_QlSach.add(new QLSach_JPanel(), BorderLayout.CENTER);
+        jPanel_QlPhieuMuon.add(new QLPhieuMuon_JPanel(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(new QLHoiVien_JPanel(), BorderLayout.CENTER);
         jPanel_QlHoaDonDenBu.add(new QLHoaDonDenBu(), BorderLayout.CENTER);
-        jPanel_QlThuThu.add(new QlThuThu(), BorderLayout.CENTER);
-        jPanel_ThongKe.add(new JPanel_ThongKe(), BorderLayout.CENTER);
+        jPanel_QlThuThu.add(new QLThuThu_JPanel(), BorderLayout.CENTER);
+        jPanel_ThongKe.add(new ThongKe_JPanel(), BorderLayout.CENTER);
         
     }
 
@@ -72,16 +72,18 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
+        jPanel_home = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
         jPanel_QlThuThu = new javax.swing.JPanel();
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
         jPanel_ThongKe = new javax.swing.JPanel();
-        jPanel_home = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mniDangXuat = new javax.swing.JMenuItem();
         mnQuanLy = new javax.swing.JMenu();
@@ -284,6 +286,13 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainRight.setLayout(new java.awt.CardLayout());
 
+        jPanel_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Home");
+        jPanel_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
+
+        pnlMainRight.add(jPanel_home, "card9");
+
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlSach, "card3");
 
@@ -301,9 +310,6 @@ public class Home_Frame extends javax.swing.JFrame {
 
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_ThongKe, "card8");
-
-        jPanel_home.setLayout(new java.awt.BorderLayout());
-        pnlMainRight.add(jPanel_home, "card9");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -323,6 +329,14 @@ public class Home_Frame extends javax.swing.JFrame {
         mniTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/user.png"))); // NOI18N
         mniTaiKhoan.setText("Tài khoản");
         mnHeThong.add(mniTaiKhoan);
+
+        jMenuItem1.setText("Đổi Mật Khẩu");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnHeThong.add(jMenuItem1);
         mnHeThong.add(jSeparator3);
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/logout.png"))); // NOI18N
@@ -362,6 +376,11 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
         mniQLThuThu.setText("Quản lý thủ thư");
+        mniQLThuThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLThuThuActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLThuThu);
 
         jMenuBar1.add(mnQuanLy);
@@ -496,8 +515,17 @@ public class Home_Frame extends javax.swing.JFrame {
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new JFrame_Login().setVisible(true);
+        new Login_JFrame().setVisible(true);
     }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
+        
+    }//GEN-LAST:event_mniQLThuThuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new DoiMatKhau_JDialog(this,true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -543,7 +571,9 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel btnQLSach;
     private javax.swing.JButton btnScanQR;
     private javax.swing.JLabel btnThongKe;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
