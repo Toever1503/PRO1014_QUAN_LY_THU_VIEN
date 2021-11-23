@@ -12,31 +12,36 @@ import java.util.List;
  *
  * @author haunv
  */
-public class DeXuatDao implements DAO<DeXuat, BigInteger>{
+public class GopYDAO extends DAO<DeXuat, BigInteger>{
 
     @Override
-    public DeXuat getById(BigInteger id) {
+    public int insert(DeXuat entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<DeXuat> getALL() {
+    public int update(DeXuat entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int save(DeXuat obj) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteById(BigInteger id) {
+    public DeXuat selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<DeXuat> getListByPage(BigInteger page) {
+    public List<DeXuat> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    protected List<DeXuat> selectBySql(String sql, Object... args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

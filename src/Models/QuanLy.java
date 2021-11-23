@@ -4,45 +4,55 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class QuanLy {
-    private BigInteger id;
+
+    private String maQL;
+    private String matKhau;
     private String cccd;
     private String fullName;
     private String diaChi;
+    private Date ngaySinh;
     private String soDienThoai;
     private String email;
-    private Date ngaySinh;
-    private Date ngayTao;
-    private Date ngayHan;
-    private String qr_code;
     private Boolean vaiTro;
+    private Boolean trangThai;
 
-    public QuanLy(BigInteger id, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code, Boolean vaiTro) {
-        this.id = id;
+    public QuanLy() {
+    }
+
+    public QuanLy(String maQL, String matKhau, String cccd, String fullName, String diaChi, Date ngaySinh, String soDienThoai, String email, Boolean vaiTro, Boolean trangThai) {
+        this.maQL = maQL;
+        this.matKhau = matKhau;
         this.cccd = cccd;
         this.fullName = fullName;
         this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
         this.soDienThoai = soDienThoai;
         this.email = email;
-        this.ngaySinh = ngaySinh;
-        this.ngayTao = ngayTao;
-        this.ngayHan = ngayHan;
-        this.qr_code = qr_code;
         this.vaiTro = vaiTro;
+        this.trangThai = trangThai;
     }
 
-    public BigInteger getId() {
-        return id;
+    public String getMaQL() {
+        return maQL;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
+    public void setMaQL(String maQL) {
+        this.maQL = maQL;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public String getCccd() {
@@ -69,6 +79,14 @@ public class QuanLy {
         this.diaChi = diaChi;
     }
 
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
     public String getSoDienThoai() {
         return soDienThoai;
     }
@@ -85,44 +103,25 @@ public class QuanLy {
         this.email = email;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Date getNgayHan() {
-        return ngayHan;
-    }
-
-    public void setNgayHan(Date ngayHan) {
-        this.ngayHan = ngayHan;
-    }
-
-    public String getQr_code() {
-        return qr_code;
-    }
-
-    public void setQr_code(String qr_code) {
-        this.qr_code = qr_code;
-    }
-
-    public boolean getVaiTro() {
+    public Boolean getVaiTro() {
         return vaiTro;
     }
 
-    public void setVaiTro(boolean vaiTro) {
+    public void setVaiTro(Boolean vaiTro) {
         this.vaiTro = vaiTro;
     }
-    
+
+    public Boolean getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "QuanLy{" + "maQL=" + maQL + ", matKhau=" + matKhau + ", cccd=" + cccd + ", fullName=" + fullName + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", soDienThoai=" + soDienThoai + ", email=" + email + ", vaiTro=" + vaiTro + ", trangThai=" + trangThai + '}';
+    }
+
 }
