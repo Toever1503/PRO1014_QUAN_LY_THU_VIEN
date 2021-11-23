@@ -25,14 +25,7 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
-        cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();
-        jPanel_QlSach.add(new QLSach_JPanel(), BorderLayout.CENTER);
-        jPanel_QlPhieuMuon.add(new QLPhieuMuon_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoiVien.add(new QLHoiVien_JPanel(), BorderLayout.CENTER);
-        jPanel_QlHoaDonDenBu.add(new QLHoaDonDenBu(), BorderLayout.CENTER);
-        jPanel_QlThuThu.add(new QLThuThu_JPanel(), BorderLayout.CENTER);
-        jPanel_ThongKe.add(new ThongKe_JPanel(), BorderLayout.CENTER);
-        
+        cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();        
     }
 
     //Đồng hồ
@@ -75,11 +68,17 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_home = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
+        qLSach_JPanel1 = new views.QLSach_JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
+        qLPhieuMuon_JPanel1 = new views.QLPhieuMuon_JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
+        qLHoiVien_JPanel1 = new views.QLHoiVien_JPanel();
         jPanel_QlThuThu = new javax.swing.JPanel();
+        qLThuThu_JPanel1 = new views.QLThuThu_JPanel();
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
+        qLHoaDonDenBu1 = new views.QLHoaDonDenBu();
         jPanel_ThongKe = new javax.swing.JPanel();
+        thongKe_JPanel1 = new views.ThongKe_JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -294,21 +293,33 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.add(jPanel_home, "card9");
 
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
+        jPanel_QlSach.add(qLSach_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlSach, "card3");
 
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
+        jPanel_QlPhieuMuon.add(qLPhieuMuon_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
+        jPanel_QlHoiVien.add(qLHoiVien_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlHoiVien, "card5");
 
         jPanel_QlThuThu.setLayout(new java.awt.BorderLayout());
+        jPanel_QlThuThu.add(qLThuThu_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlThuThu, "card6");
 
         jPanel_QlHoaDonDenBu.setLayout(new java.awt.BorderLayout());
+        jPanel_QlHoaDonDenBu.add(qLHoaDonDenBu1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlHoaDonDenBu, "card7");
 
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
+        jPanel_ThongKe.add(thongKe_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_ThongKe, "card8");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
@@ -613,5 +624,11 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainRight;
     private javax.swing.JPanel pnlWest;
+    private views.QLHoaDonDenBu qLHoaDonDenBu1;
+    private views.QLHoiVien_JPanel qLHoiVien_JPanel1;
+    private views.QLPhieuMuon_JPanel qLPhieuMuon_JPanel1;
+    private views.QLSach_JPanel qLSach_JPanel1;
+    private views.QLThuThu_JPanel qLThuThu_JPanel1;
+    private views.ThongKe_JPanel thongKe_JPanel1;
     // End of variables declaration//GEN-END:variables
 }
