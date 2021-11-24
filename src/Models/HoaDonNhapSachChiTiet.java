@@ -4,14 +4,16 @@
  */
 package Models;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author haunv
  */
 public class HoaDonNhapSachChiTiet {
 
-    private long hoaDonNhap;
-    private long sach;
+    private BigInteger hoaDonNhap;
+    private BigInteger sach;
     private float gia;
     private int soLuong;
     private boolean loaiSach;
@@ -19,7 +21,7 @@ public class HoaDonNhapSachChiTiet {
     public HoaDonNhapSachChiTiet() {
     }
 
-    public HoaDonNhapSachChiTiet(long hoaDonNhap, long sach, float gia, int soLuong, boolean loaiSach) {
+    public HoaDonNhapSachChiTiet(BigInteger hoaDonNhap, BigInteger sach, float gia, int soLuong, boolean loaiSach) {
         this.hoaDonNhap = hoaDonNhap;
         this.sach = sach;
         this.gia = gia;
@@ -27,19 +29,19 @@ public class HoaDonNhapSachChiTiet {
         this.loaiSach = loaiSach;
     }
 
-    public long getHoaDonNhap() {
+    public BigInteger getHoaDonNhap() {
         return hoaDonNhap;
     }
 
-    public void setHoaDonNhap(long hoaDonNhap) {
+    public void setHoaDonNhap(BigInteger hoaDonNhap) {
         this.hoaDonNhap = hoaDonNhap;
     }
 
-    public long getSach() {
+    public BigInteger getSach() {
         return sach;
     }
 
-    public void setSach(long sach) {
+    public void setSach(BigInteger sach) {
         this.sach = sach;
     }
 

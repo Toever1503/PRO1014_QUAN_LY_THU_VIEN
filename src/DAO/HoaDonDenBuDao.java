@@ -5,6 +5,7 @@
 package DAO;
 
 import Models.HoaDonDenBu;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
+public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach";
     private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach WHERE ID = ?";
@@ -76,7 +77,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -87,7 +88,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
     }
 
     @Override
-    public HoaDonDenBu selectByID(Long id) {
+    public HoaDonDenBu selectByID(BigInteger id) {
         List<HoaDonDenBu> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -96,7 +97,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
     }
 
     @Override
-    public List<HoaDonDenBu> selectByPage(Long id) {
+    public List<HoaDonDenBu> selectByPage(BigInteger id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -112,9 +113,9 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 HoaDonDenBu hddb = new HoaDonDenBu();
-                hddb.setId(rs.getLong("ID"));
-                hddb.setNguoiMuon(rs.getLong("HoiVien"));
-                hddb.setNguoiXuLy(rs.getString("MaQL"));
+                hddb.setId(rs.getObject("ID", BigInteger.class));
+                hddb.setNguoiMuon(rs.getObject("HoiVien", BigInteger.class));
+                hddb.setNguoiXuLy(rs.getObject("MaQL", BigInteger.class));
                 hddb.setTongTien(rs.getFloat("TongTien"));
                 hddb.setNgayTao(rs.getDate("NgayTao"));
                 hddb.setQr_code("QR_FILE");

@@ -5,6 +5,7 @@
 package DAO;
 
 import Models.TacGia;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
+public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTacGia FROM tac_gia";
     private final String SELECT_BY_ID_SQL = "SELECT ID, TenTacGia FROM tac_gia WHERE ID = ?";
@@ -63,7 +64,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -74,7 +75,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
     }
 
     @Override
-    public TacGia selectByID(Long id) {
+    public TacGia selectByID(BigInteger id) {
         List<TacGia> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -83,7 +84,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
     }
 
     @Override
-    public List<TacGia> selectByPage(Long id) {
+    public List<TacGia> selectByPage(BigInteger id) {
         return this.selectBySql(this.SELECT_ALL_SQL, id);
     }
 
@@ -99,7 +100,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 TacGia tg = new TacGia();
-                tg.setId(rs.getLong("ID"));
+                tg.setId(rs.getObject("ID", BigInteger.class));
                 tg.setTenTacGia(rs.getString("TenTacGia"));
                 list.add(tg);
             }
@@ -109,4 +110,5 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
         }
         return list;
     }
+
 }

@@ -4,6 +4,7 @@
  */
 package Models;
 
+import java.math.BigInteger;
 import java.sql.Date;
 
 /**
@@ -12,43 +13,32 @@ import java.sql.Date;
  */
 public class Sach {
 
-    private long id;
-    private String nguoiTao;
+    private BigInteger id;
     private String tenSach;
     private String viTri;
     private Date ngayTao;
     private String qr_code;
-    private long nhaXuatBan;
+    private BigInteger nhaXuatBan;
+    private String nguoiTao;
     private boolean trangThai;
 
-    public Sach() {
-    }
-
-    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai) {
+    public Sach(BigInteger id, String tenSach, String viTri, Date ngayTao, String qr_code, BigInteger nhaXuatBan, String nguoiTao, boolean trangThai) {
         this.id = id;
-        this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
         this.viTri = viTri;
         this.ngayTao = ngayTao;
         this.qr_code = qr_code;
         this.nhaXuatBan = nhaXuatBan;
+        this.nguoiTao = nguoiTao;
         this.trangThai = trangThai;
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
-    }
-
-    public String getNguoiTao() {
-        return nguoiTao;
-    }
-
-    public void setNguoiTao(String nguoiTao) {
-        this.nguoiTao = nguoiTao;
     }
 
     public String getTenSach() {
@@ -83,12 +73,20 @@ public class Sach {
         this.qr_code = qr_code;
     }
 
-    public long getNhaXuatBan() {
+    public BigInteger getNhaXuatBan() {
         return nhaXuatBan;
     }
 
-    public void setNhaXuatBan(long nhaXuatBan) {
+    public void setNhaXuatBan(BigInteger nhaXuatBan) {
         this.nhaXuatBan = nhaXuatBan;
+    }
+
+    public String getNguoiTao() {
+        return nguoiTao;
+    }
+
+    public void setNguoiTao(String nguoiTao) {
+        this.nguoiTao = nguoiTao;
     }
 
     public boolean isTrangThai() {
@@ -101,7 +99,8 @@ public class Sach {
 
     @Override
     public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + '}';
+        return "Sach{" + "id=" + id + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", nguoiTao=" + nguoiTao + ", trangThai=" + trangThai + '}';
     }
-
+    
+    
 }

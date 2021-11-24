@@ -5,6 +5,7 @@
 package DAO;
 
 import Models.HoaDonNhapSachChiTiet;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,10 +14,10 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet, Long> {
+public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet";
-    private final String SELECT_BY_SACH_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
+    private final String SELECT_BY_HD_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE HD_Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet(HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?,?,?,?,?)";
     private final String UPDATE_BY_HD_AND_SACH_SQL = "UPDATE hoa_don_nhap_sach_chi_tiet SET GiaSach=?,SoLuong=?,LoaiSach=?  WHERE HD_Sach=? AND Sach=?";
     private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
@@ -73,7 +74,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_BY_SACH_SQL, id);
@@ -84,8 +85,8 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     }
 
     @Override
-    public HoaDonNhapSachChiTiet selectByID(Long id) {
-        List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_SACH_SQL, id);
+    public HoaDonNhapSachChiTiet selectByID(BigInteger id) {
+        List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_HD_SQL, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -93,7 +94,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     }
 
     @Override
-    public List<HoaDonNhapSachChiTiet> selectByPage(Long id) {
+    public List<HoaDonNhapSachChiTiet> selectByPage(BigInteger id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -110,11 +111,11 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
             //HD_Sach, Sach, GiaSach, SoLuong, LoaiSach
             while (rs.next()) {
                 HoaDonNhapSachChiTiet hdnsct = new HoaDonNhapSachChiTiet();
-                hdnsct.setHoaDonNhap(rs.getLong("HD_Sach"));
-                hdnsct.setSach(rs.getLong("Sach"));
+                hdnsct.setHoaDonNhap(rs.getObject("HD_Sach", BigInteger.class));
+                hdnsct.setSach(rs.getObject("Sach", BigInteger.class));
                 hdnsct.setGia(rs.getFloat("GiaSach"));
                 hdnsct.setSoLuong(rs.getInt("SoLuong"));
-                hdnsct.setLoaiSach(rs.getBoolean("LoaiSach"));
+                hdnsct.setLoaiSach(rs.getObject("LoaiSach", boolean.class));
                 list.add(hdnsct);
             }
             rs.getStatement().getConnection();

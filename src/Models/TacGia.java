@@ -4,28 +4,30 @@
  */
 package Models;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author haunv
  */
 public class TacGia {
 
-    private long id;
+    private BigInteger id;
     private String tenTacGia;
 
     public TacGia() {
     }
 
-    public TacGia(long id, String tenTacGia) {
+    public TacGia(BigInteger id, String tenTacGia) {
         this.id = id;
         this.tenTacGia = tenTacGia;
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 

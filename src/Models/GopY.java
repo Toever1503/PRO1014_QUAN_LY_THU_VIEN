@@ -4,16 +4,15 @@
  */
 package Models;
 
+import java.math.BigInteger;
 import java.sql.Date;
-
 /**
  *
  * @author haunv
  */
 public class GopY {
-
-    private long id;
-    private long hoiVien;
+    private BigInteger id;
+    private BigInteger hoiVien;
     private Date ngayTao;
     private String noiDung;
     private boolean trangThai;
@@ -21,7 +20,7 @@ public class GopY {
     public GopY() {
     }
 
-    public GopY(long id, long hoiVien, Date ngayTao, String noiDung, boolean trangThai) {
+    public GopY(BigInteger id, BigInteger hoiVien, Date ngayTao, String noiDung, boolean trangThai) {
         this.id = id;
         this.hoiVien = hoiVien;
         this.ngayTao = ngayTao;
@@ -29,19 +28,19 @@ public class GopY {
         this.trangThai = trangThai;
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
-    public long getHoiVien() {
+    public BigInteger getHoiVien() {
         return hoiVien;
     }
 
-    public void setHoiVien(long hoiVien) {
+    public void setHoiVien(BigInteger hoiVien) {
         this.hoiVien = hoiVien;
     }
 

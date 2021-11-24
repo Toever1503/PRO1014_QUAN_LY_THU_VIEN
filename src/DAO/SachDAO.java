@@ -5,13 +5,14 @@
 package DAO;
 
 import Models.Sach;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
  *
  * @author NguyenHoan
  */
-public class SachDAO extends LibrarianDAO<Sach, Long> {
+public class SachDAO extends LibrarianDAO<Sach, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
     private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
@@ -38,17 +39,17 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Sach selectByID(Long id) {
+    public Sach selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Sach> selectByPage(Long id) {
+    public List<Sach> selectByPage(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

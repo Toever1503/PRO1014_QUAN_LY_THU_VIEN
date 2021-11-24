@@ -5,13 +5,14 @@
 package DAO;
 
 import Models.PhieuMuonChiTiet;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
  *
  * @author haunv
  */
-public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long>{
+public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, BigInteger>{
 
     @Override
     public int insert(PhieuMuonChiTiet entity) {
@@ -29,17 +30,17 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long>{
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PhieuMuonChiTiet selectByID(Long id) {
+    public PhieuMuonChiTiet selectByID(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PhieuMuonChiTiet> selectByPage(Long id) {
+    public List<PhieuMuonChiTiet> selectByPage(BigInteger id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
