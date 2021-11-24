@@ -7,29 +7,34 @@ package DAO;
 import Models.TacGia;
 import java.math.BigInteger;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author haunv
  */
-public class TacGiaDao extends DAO<TacGia, BigInteger> {
+public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
 
-    private final String SELECT_ALL_BY_PAGE_SQL = "";
-    private final String SELECT_BY_ID_SQL = "";
-    private final String INSERT_ON_UPDATE_SQL = "";
-    private final String DELETE_SQL = "";
-    
-    private static TacGiaDao instance;
+    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
+    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
+    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
 
     @Override
-    public int save(TacGia entity) {
+    public int insert(TacGia entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(TacGia entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int insertOnUpdate(TacGia entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -44,7 +49,12 @@ public class TacGiaDao extends DAO<TacGia, BigInteger> {
     }
 
     @Override
-    public List<TacGia> selectAllByPage(int page) {
+    public List<TacGia> selectByPage(BigInteger id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<TacGia> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

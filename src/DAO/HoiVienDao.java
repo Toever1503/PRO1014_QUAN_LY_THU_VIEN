@@ -12,17 +12,29 @@ import java.util.List;
  *
  * @author haunv
  */
-public class HoiVienDao extends DAO<HoiVien, BigInteger> {
+public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
 
-    private final String SELECT_ALL_BY_PAGE_SQL = "";
-    private final String SELECT_BY_ID_SQL = "";
-    private final String INSERT_ON_UPDATE_SQL = "";
-    private final String DELETE_SQL = "";
-
-    private static HoaDonDenBuDao instance;
+    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
+    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
+    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
 
     @Override
-    public int save(HoiVien entity) {
+    public int insert(HoiVien entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(HoiVien entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int insertOnUpdate(HoiVien entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -37,7 +49,12 @@ public class HoiVienDao extends DAO<HoiVien, BigInteger> {
     }
 
     @Override
-    public List<HoiVien> selectAllByPage(int page) {
+    public List<HoiVien> selectByPage(BigInteger id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<HoiVien> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
