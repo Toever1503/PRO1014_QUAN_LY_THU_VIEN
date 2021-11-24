@@ -4,7 +4,6 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 /**
@@ -13,7 +12,7 @@ import java.sql.Date;
  */
 public class HoaDonNhapSach {
 
-    private BigInteger id;
+    private long id;
     private String nguoiXuLy;
     private float tongTien;
     private Date ngayTao;
@@ -22,7 +21,7 @@ public class HoaDonNhapSach {
     public HoaDonNhapSach() {
     }
 
-    public HoaDonNhapSach(BigInteger id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
+    public HoaDonNhapSach(long id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
@@ -30,11 +29,11 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 

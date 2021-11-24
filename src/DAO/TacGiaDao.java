@@ -5,7 +5,6 @@
 package DAO;
 
 import Models.TacGia;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
+public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTacGia FROM tac_gia";
     private final String SELECT_BY_ID_SQL = "SELECT ID, TenTacGia FROM tac_gia WHERE ID = ?";
@@ -64,7 +63,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
     }
 
     @Override
-    public int delete(BigInteger id) {
+    public int delete(Long id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -75,7 +74,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
     }
 
     @Override
-    public TacGia selectByID(BigInteger id) {
+    public TacGia selectByID(Long id) {
         List<TacGia> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -84,7 +83,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
     }
 
     @Override
-    public List<TacGia> selectByPage(BigInteger id) {
+    public List<TacGia> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_ALL_SQL, id);
     }
 
@@ -100,7 +99,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 TacGia tg = new TacGia();
-                tg.setId(rs.getObject("ID", BigInteger.class));
+                tg.setId(rs.getLong("ID"));
                 tg.setTenTacGia(rs.getString("TenTacGia"));
                 list.add(tg);
             }
@@ -110,5 +109,4 @@ public class TacGiaDao extends LibrarianDAO<TacGia, BigInteger> {
         }
         return list;
     }
-
 }

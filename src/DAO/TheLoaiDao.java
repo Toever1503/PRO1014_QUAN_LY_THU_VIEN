@@ -5,7 +5,6 @@
 package DAO;
 
 import Models.TheLoai;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class TheLoaiDao extends LibrarianDAO<TheLoai, BigInteger> {
+public class TheLoaiDao extends LibrarianDAO<TheLoai, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
     private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
@@ -65,7 +64,7 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, BigInteger> {
     }
 
     @Override
-    public int delete(BigInteger id) {
+    public int delete(Long id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -76,7 +75,7 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, BigInteger> {
     }
 
     @Override
-    public TheLoai selectByID(BigInteger id) {
+    public TheLoai selectByID(Long id) {
         List<TheLoai> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -85,7 +84,7 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, BigInteger> {
     }
 
     @Override
-    public List<TheLoai> selectByPage(BigInteger id) {
+    public List<TheLoai> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -101,7 +100,7 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, BigInteger> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 TheLoai tl = new TheLoai();
-                tl.setId(rs.getObject("ID", BigInteger.class));
+                tl.setId(rs.getLong("ID"));
                 tl.setTenTheLoai(rs.getString("TenTheLoai"));
                 list.add(tl);
             }

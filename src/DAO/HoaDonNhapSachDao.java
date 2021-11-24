@@ -5,7 +5,6 @@
 package DAO;
 
 import Models.HoaDonNhapSach;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> {
+public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach";
     private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach WHERE ID = ?";
@@ -74,7 +73,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> 
     }
 
     @Override
-    public int delete(BigInteger id) {
+    public int delete(Long id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -85,7 +84,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> 
     }
 
     @Override
-    public HoaDonNhapSach selectByID(BigInteger id) {
+    public HoaDonNhapSach selectByID(Long id) {
         List<HoaDonNhapSach> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -94,7 +93,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> 
     }
 
     @Override
-    public List<HoaDonNhapSach> selectByPage(BigInteger id) {
+    public List<HoaDonNhapSach> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -110,7 +109,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> 
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 HoaDonNhapSach hdns = new HoaDonNhapSach();
-                hdns.setId(rs.getObject("ID", BigInteger.class));
+                hdns.setId(rs.getLong("ID"));
                 hdns.setNguoiXuLy(rs.getString("MaQL"));
                 hdns.setTongTien(rs.getFloat("TongTien"));
                 hdns.setNgayTao(rs.getDate("NgayThem"));
