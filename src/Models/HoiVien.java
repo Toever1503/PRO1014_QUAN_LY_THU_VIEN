@@ -6,11 +6,13 @@ package Models;
 
 import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class HoiVien {
+
     private BigInteger id;
     private BigInteger nguoiTao;
     private String cccd;
@@ -22,6 +24,9 @@ public class HoiVien {
     private Date ngayTao;
     private Date ngayHan;
     private String qr_code;
+
+    public HoiVien() {
+    }
 
     public HoiVien(BigInteger id, BigInteger nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
         this.id = id;
@@ -124,4 +129,10 @@ public class HoiVien {
     public void setQr_code(String qr_code) {
         this.qr_code = qr_code;
     }
+
+    @Override
+    public String toString() {
+        return "HoiVien{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", cccd=" + cccd + ", fullName=" + fullName + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + ", ngaySinh=" + ngaySinh + ", ngayTao=" + ngayTao + ", ngayHan=" + ngayHan + ", qr_code=" + qr_code + '}';
+    }
+
 }
