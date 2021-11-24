@@ -5,7 +5,6 @@
 package DAO;
 
 import Models.HoiVien;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
+public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien";
     private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien WHERE ID = ?";
@@ -92,7 +91,7 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
     }
 
     @Override
-    public int delete(BigInteger id) {
+    public int delete(Long id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -103,7 +102,7 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
     }
 
     @Override
-    public HoiVien selectByID(BigInteger id) {
+    public HoiVien selectByID(Long id) {
         List<HoiVien> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -112,7 +111,7 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
     }
 
     @Override
-    public List<HoiVien> selectByPage(BigInteger id) {
+    public List<HoiVien> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -128,8 +127,8 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, BigInteger> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 HoiVien hv = new HoiVien();
-                hv.setId(rs.getObject("ID", BigInteger.class));
-                hv.setNguoiTao(rs.getObject("MaQL", BigInteger.class));
+                hv.setId(rs.getLong("ID"));
+                hv.setNguoiTao(rs.getString("MaQL"));
                 hv.setCccd(rs.getString("CCCD"));
                 hv.setFullName(rs.getString("HoTen"));
                 hv.setDiaChi(rs.getString("DiaChi"));
