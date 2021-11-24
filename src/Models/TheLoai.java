@@ -4,23 +4,24 @@
  */
 package Models;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author haunv
  */
 public class TheLoai {
-
-    private long id;
+    private BigInteger id;
     private String tenTheLoai;
 
     public TheLoai() {
     }
 
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -32,7 +33,7 @@ public class TheLoai {
         this.tenTheLoai = tenTheLoai;
     }
 
-    public TheLoai(long id, String tenTheLoai) {
+    public TheLoai(BigInteger id, String tenTheLoai) {
         this.id = id;
         this.tenTheLoai = tenTheLoai;
     }
@@ -41,5 +42,5 @@ public class TheLoai {
     public String toString() {
         return "TheLoai{" + "id=" + id + ", tenTheLoai=" + tenTheLoai + '}';
     }
-
+    
 }

@@ -1,6 +1,7 @@
 package DAO;
 
 import Models.GopY;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class GopYDAO extends LibrarianDAO<GopY, Long> {
+public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y";
     private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y WHERE ID = ?";
@@ -19,7 +20,7 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai = VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM the_loai LIMIT ?, 30";
-
+  
     @Override
     public int insert(GopY entity) {
         int row = 0;
@@ -69,7 +70,7 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(BigInteger id) {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_SQL, id);
@@ -80,7 +81,7 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
     }
 
     @Override
-    public GopY selectByID(Long id) {
+    public GopY selectByID(BigInteger id) {
         List<GopY> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -89,7 +90,7 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
     }
 
     @Override
-    public List<GopY> selectByPage(Long id) {
+    public List<GopY> selectByPage(BigInteger id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -105,11 +106,11 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 GopY gy = new GopY();
-                gy.setId(rs.getLong("ID"));
-                gy.setHoiVien(rs.getLong("HoiVien"));
+                gy.setId(rs.getObject("ID", BigInteger.class));
+                gy.setHoiVien(rs.getObject("HoiVien", BigInteger.class));
                 gy.setNgayTao(rs.getDate("NgayTao"));
                 gy.setNoiDung(rs.getString("NoiDung"));
-                gy.setTrangThai(rs.getBoolean("TrangThai"));
+                gy.setTrangThai(rs.getObject("TrangThai", boolean.class));
                 list.add(gy);
             }
             rs.getStatement().getConnection().close();

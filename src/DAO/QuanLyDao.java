@@ -105,7 +105,7 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
 
     @Override
     public List<QuanLy> selectByPage(String id) {
-        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
+      return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
@@ -128,8 +128,8 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
                 ql.setNgaySinh(rs.getDate("NgaySinh"));
                 ql.setSoDienThoai(rs.getString("SoDienThoai"));
                 ql.setEmail(rs.getString("Email"));
-                ql.setVaiTro(rs.getBoolean("VaiTro"));
-                ql.setTrangThai(rs.getBoolean("TrangThai"));
+                ql.setVaiTro(rs.getObject("VaiTro", Boolean.class));
+                ql.setTrangThai(rs.getObject("TrangThai", Boolean.class));
                 list.add(ql);
             }
             rs.getStatement().getConnection().close();
