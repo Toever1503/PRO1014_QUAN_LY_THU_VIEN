@@ -11,8 +11,12 @@ import java.math.BigInteger;
  * @author haunv
  */
 public class TacGia {
+
     private BigInteger id;
     private String tenTacGia;
+
+    public TacGia() {
+    }
 
     public TacGia(BigInteger id, String tenTacGia) {
         this.id = id;
