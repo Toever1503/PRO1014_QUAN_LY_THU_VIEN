@@ -4,15 +4,16 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class HoiVien {
-    private BigInteger id;
-    private BigInteger nguoiTao;
+
+    private long id;
+    private String nguoiTao;
     private String cccd;
     private String fullName;
     private String diaChi;
@@ -23,7 +24,10 @@ public class HoiVien {
     private Date ngayHan;
     private String qr_code;
 
-    public HoiVien(BigInteger id, BigInteger nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
+    public HoiVien() {
+    }
+
+    public HoiVien(long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.cccd = cccd;
@@ -37,19 +41,19 @@ public class HoiVien {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiTao() {
+    public String getNguoiTao() {
         return nguoiTao;
     }
 
-    public void setNguoiTao(BigInteger nguoiTao) {
+    public void setNguoiTao(String nguoiTao) {
         this.nguoiTao = nguoiTao;
     }
 
@@ -124,4 +128,10 @@ public class HoiVien {
     public void setQr_code(String qr_code) {
         this.qr_code = qr_code;
     }
+
+    @Override
+    public String toString() {
+        return "HoiVien{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", cccd=" + cccd + ", fullName=" + fullName + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + ", ngaySinh=" + ngaySinh + ", ngayTao=" + ngayTao + ", ngayHan=" + ngayHan + ", qr_code=" + qr_code + '}';
+    }
+
 }

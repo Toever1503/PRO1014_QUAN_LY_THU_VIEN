@@ -4,20 +4,24 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class HoaDonNhapSach {
-    private BigInteger id;
-    private BigInteger nguoiXuLy;
-    private BigInteger tongTien;
+
+    private long id;
+    private String nguoiXuLy;
+    private float tongTien;
     private Date ngayTao;
     private String qr_code;
 
-    public HoaDonNhapSach(BigInteger id, BigInteger nguoiXuLy, BigInteger tongTien, Date ngayTao, String qr_code) {
+    public HoaDonNhapSach() {
+    }
+
+    public HoaDonNhapSach(long id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
@@ -25,27 +29,27 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(BigInteger nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public BigInteger getTongTien() {
+    public float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(BigInteger tongTien) {
+    public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -63,5 +67,10 @@ public class HoaDonNhapSach {
 
     public void setQr_code(String qr_code) {
         this.qr_code = qr_code;
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + '}';
     }
 }

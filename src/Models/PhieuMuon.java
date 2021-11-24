@@ -4,21 +4,25 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class PhieuMuon {
-    private BigInteger id;
-    private BigInteger nguoiMuon;
+
+    private long id;
+    private long nguoiMuon;
     private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
 
-    public PhieuMuon(BigInteger id, BigInteger nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
+    public PhieuMuon() {
+    }
+
+    public PhieuMuon(long id, long nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -27,19 +31,19 @@ public class PhieuMuon {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiMuon() {
+    public long getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(BigInteger nguoiMuon) {
+    public void setNguoiMuon(long nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
@@ -79,6 +83,4 @@ public class PhieuMuon {
     public String toString() {
         return "PhieuMuon{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", ngayMuon=" + ngayMuon + ", hanTra=" + hanTra + ", qr_code=" + qr_code + '}';
     }
-    
-    
 }

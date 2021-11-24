@@ -16,9 +16,9 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     private final String INSERT_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
     private final String UPDATE_SQL = "UPDATE quan_ly SET MatKhau = ?,CCCD = ?,HoTen = ?,DiaChi = ?,NgaySinh = ?,SoDienThoai = ?,Email = ?,VaiTro = ?,TrangThai = ? WHERE MaQL = ?";
     private final String DELETE_SQL = "DELETE FROM quan_ly WHERE MaQL = ?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO quan_ly (MaQL, MatKhau, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, VaiTro, TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE MatKhau=VALUES(MatKhau), CCCD=VALUES(CCCD), HoTen=VALUES(HoTen), DiaChi=VALUES(DiaChi), NgaySinh=VALUES(NgaySinh), SoDienThoai=VALUES(SoDienThoai), Email=VALUES(Email), VaiTro=VALUES(VaiTro), TrangThai=VALUES(TrangThai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly LIMIT ?, 30";
 
     @Override
     public int insert(QuanLy entity) {
@@ -63,6 +63,27 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     }
 
     @Override
+    public int insertOnUpdate(QuanLy entity) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getMaQL(),
+                    entity.getMatKhau(),
+                    entity.getCccd(),
+                    entity.getFullName(),
+                    entity.getDiaChi(),
+                    entity.getNgaySinh(),
+                    entity.getSoDienThoai(),
+                    entity.getEmail(),
+                    entity.isVaiTro(),
+                    entity.isTrangThai());
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+
+    @Override
     public int delete(String id) {
         int row = 0;
         try {
@@ -80,6 +101,11 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public List<QuanLy> selectByPage(String id) {
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
@@ -102,8 +128,8 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
                 ql.setNgaySinh(rs.getDate("NgaySinh"));
                 ql.setSoDienThoai(rs.getString("SoDienThoai"));
                 ql.setEmail(rs.getString("Email"));
-                ql.setVaiTro(rs.getObject("VaiTro", Boolean.class));
-                ql.setTrangThai(rs.getObject("TrangThai", Boolean.class));
+                ql.setVaiTro(rs.getBoolean("VaiTro"));
+                ql.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(ql);
             }
             rs.getStatement().getConnection().close();
@@ -112,15 +138,4 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
         }
         return list;
     }
-
-    @Override
-    public int insertOnUpdate(QuanLy entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<QuanLy> selectByPage(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -4,45 +4,52 @@
  */
 package Models;
 
-import java.math.BigInteger;
-
 /**
  *
  * @author haunv
  */
 public class HoaDonDenBuChiTiet {
-    private BigInteger hoaDonDenBu;
-    private BigInteger sach;
-    private BigInteger gia;
 
-    public HoaDonDenBuChiTiet(BigInteger hoaDonDenBu, BigInteger sach, BigInteger gia) {
+    private long hoaDonDenBu;
+    private long sach;
+    private float gia;
+
+    public HoaDonDenBuChiTiet() {
+    }
+
+    public HoaDonDenBuChiTiet(long hoaDonDenBu, long sach, float gia) {
         this.hoaDonDenBu = hoaDonDenBu;
         this.sach = sach;
         this.gia = gia;
     }
 
-    public BigInteger getHoaDonDenBu() {
+    public long getHoaDonDenBu() {
         return hoaDonDenBu;
     }
 
-    public void setHoaDonDenBu(BigInteger hoaDonDenBu) {
+    public void setHoaDonDenBu(long hoaDonDenBu) {
         this.hoaDonDenBu = hoaDonDenBu;
     }
 
-    public BigInteger getSach() {
+    public long getSach() {
         return sach;
     }
 
-    public void setSach(BigInteger sach) {
+    public void setSach(long sach) {
         this.sach = sach;
     }
 
-    public BigInteger getGia() {
+    public float getGia() {
         return gia;
     }
 
-    public void setGia(BigInteger gia) {
+    public void setGia(float gia) {
         this.gia = gia;
     }
-    
+
+    @Override
+    public String toString() {
+        return "HoaDonDenBuChiTiet{" + "hoaDonDenBu=" + hoaDonDenBu + ", sach=" + sach + ", gia=" + gia + '}';
+    }
+
 }
