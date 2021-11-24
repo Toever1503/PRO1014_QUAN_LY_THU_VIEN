@@ -83,5 +83,4 @@ public class PhieuMuon {
     public String toString() {
         return "PhieuMuon{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", ngayMuon=" + ngayMuon + ", hanTra=" + hanTra + ", qr_code=" + qr_code + '}';
     }
-
 }
