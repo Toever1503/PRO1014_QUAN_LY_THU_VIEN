@@ -12,15 +12,13 @@ import java.util.List;
  */
 abstract public class DAO<EntityType, KeyType> {
 
-    abstract public int insert(EntityType entity);
-
-    abstract public int update(EntityType entity);
-
+    abstract public int save(EntityType entity);
+    
     abstract public int delete(KeyType id);
 
     abstract public EntityType selectByID(KeyType id);
 
-    abstract public List<EntityType> selectALL();
+    abstract public List<EntityType> selectAllByPage();
 
     abstract protected List<EntityType> selectBySql(String sql, Object... args);
 }

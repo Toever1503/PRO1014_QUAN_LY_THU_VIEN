@@ -21,22 +21,17 @@ import java.util.logging.Logger;
  * @author haunv
  */
 public class TheLoaiDao extends DAO<TheLoai, BigInteger> {
-    
-    private String sqlGetByID = "SELECT * FROM the_loai WHERE ID =?";
-    private String sqlSaveOnUpdate = "INSERT INTO `the_loai` (`ID`, `TenTheLoai`) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai=VALUES(TenTheLoai)";
-    private String sqlGetAll = "SELECT * FROM the_loai";
-    private String sqlGetByPage = "SELECT * FROM the_loai LIMIT ?, 15";
-    private String sqlDeleteByID = "DELETE FROM the_loai WHERE ID = ?";
+
+    private final String SELECT_ALL_BY_PAGE_SQL = "";
+    private final String SELECT_BY_ID_SQL = "";
+    private final String INSERT_ON_UPDATE_SQL = "";
+    private final String DELETE_SQL = "";
     private static TheLoaiDao theLoaiDao;
 
-    @Override
-    public int insert(TheLoai entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private static TheLoaiDao instance;
 
     @Override
-    public int update(TheLoai entity) {
+    public int save(TheLoai entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,7 +46,7 @@ public class TheLoaiDao extends DAO<TheLoai, BigInteger> {
     }
 
     @Override
-    public List<TheLoai> selectALL() {
+    public List<TheLoai> selectAllByPage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -59,5 +54,5 @@ public class TheLoaiDao extends DAO<TheLoai, BigInteger> {
     protected List<TheLoai> selectBySql(String sql, Object... args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
