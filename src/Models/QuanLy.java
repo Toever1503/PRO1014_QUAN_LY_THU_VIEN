@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
 import java.sql.Date;
@@ -20,13 +16,13 @@ public class QuanLy {
     private Date ngaySinh;
     private String soDienThoai;
     private String email;
-    private Boolean vaiTro;
-    private Boolean trangThai;
+    private boolean vaiTro;
+    private boolean trangThai;
 
     public QuanLy() {
     }
 
-    public QuanLy(String maQL, String matKhau, String cccd, String fullName, String diaChi, Date ngaySinh, String soDienThoai, String email, Boolean vaiTro, Boolean trangThai) {
+    public QuanLy(String maQL, String matKhau, String cccd, String fullName, String diaChi, Date ngaySinh, String soDienThoai, String email, boolean vaiTro, boolean trangThai) {
         this.maQL = maQL;
         this.matKhau = matKhau;
         this.cccd = cccd;
@@ -103,19 +99,19 @@ public class QuanLy {
         this.email = email;
     }
 
-    public Boolean getVaiTro() {
+    public boolean isVaiTro() {
         return vaiTro;
     }
 
-    public void setVaiTro(Boolean vaiTro) {
+    public void setVaiTro(boolean vaiTro) {
         this.vaiTro = vaiTro;
     }
 
-    public Boolean getTrangThai() {
+    public boolean isTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Boolean trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -123,4 +119,5 @@ public class QuanLy {
     public String toString() {
         return "QuanLy{" + "maQL=" + maQL + ", matKhau=" + matKhau + ", cccd=" + cccd + ", fullName=" + fullName + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", soDienThoai=" + soDienThoai + ", email=" + email + ", vaiTro=" + vaiTro + ", trangThai=" + trangThai + '}';
     }
+
 }

@@ -13,12 +13,12 @@ import java.sql.Date;
 public class PhieuMuon {
     private BigInteger id;
     private BigInteger nguoiMuon;
-    private String nguoiXuLy;
+    private BigInteger nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
 
-    public PhieuMuon(BigInteger id, BigInteger nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
+    public PhieuMuon(BigInteger id, BigInteger nguoiMuon, BigInteger nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -43,11 +43,11 @@ public class PhieuMuon {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public String getNguoiXuLy() {
+    public BigInteger getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(String nguoiXuLy) {
+    public void setNguoiXuLy(BigInteger nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 

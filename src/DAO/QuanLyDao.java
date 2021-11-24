@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import Models.QuanLy;
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,20 +9,22 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class QuanLyDao extends DAO<QuanLy, String> {
+public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
 
-    private final String SELECT_ALL_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
-    private final String SELECT_BY_ID_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly WHERE MaQL = ?;";
-    private final String INSERT_ON_SAVE_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
+    private final String SELECT_ALL_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
+    private final String SELECT_BY_ID_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly WHERE MaQL = ?";
+    private final String INSERT_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
+    private final String UPDATE_SQL = "UPDATE quan_ly SET MatKhau = ?,CCCD = ?,HoTen = ?,DiaChi = ?,NgaySinh = ?,SoDienThoai = ?,Email = ?,VaiTro = ?,TrangThai = ? WHERE MaQL = ?";
     private final String DELETE_SQL = "DELETE FROM quan_ly WHERE MaQL = ?";
-
-    private static QuanLyDao instance;
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
 
     @Override
-    public int save(QuanLy entity) {
+    public int insert(QuanLy entity) {
         int row = 0;
         try {
-            Helper.Utility.update(this.INSERT_ON_SAVE_SQL,
+            row = Helper.Utility.update(this.INSERT_SQL,
                     entity.getMaQL(),
                     entity.getMatKhau(),
                     entity.getCccd(),
@@ -37,8 +33,29 @@ public class QuanLyDao extends DAO<QuanLy, String> {
                     entity.getNgaySinh(),
                     entity.getSoDienThoai(),
                     entity.getEmail(),
-                    entity.getVaiTro(),
-                    entity.getTrangThai());
+                    entity.isVaiTro(),
+                    entity.isTrangThai());
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+
+    @Override
+    public int update(QuanLy entity) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.UPDATE_SQL,
+                    entity.getMatKhau(),
+                    entity.getCccd(),
+                    entity.getFullName(),
+                    entity.getDiaChi(),
+                    entity.getNgaySinh(),
+                    entity.getSoDienThoai(),
+                    entity.getEmail(),
+                    entity.isVaiTro(),
+                    entity.isTrangThai(),
+                    entity.getMaQL());
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +66,7 @@ public class QuanLyDao extends DAO<QuanLy, String> {
     public int delete(String id) {
         int row = 0;
         try {
-            Helper.Utility.update(this.DELETE_SQL, id);
+            row = Helper.Utility.update(this.DELETE_SQL, id);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,15 +83,15 @@ public class QuanLyDao extends DAO<QuanLy, String> {
     }
 
     @Override
-    public List<QuanLy> selectAllByPage(int page) {
-        return this.selectBySql(this.SELECT_ALL_BY_PAGE_SQL);
+    public List<QuanLy> selectALL() {
+        return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
     @Override
     protected List<QuanLy> selectBySql(String sql, Object... args) {
-        List<QuanLy> list = new ArrayList<QuanLy>();
+        List<QuanLy> list = new java.util.ArrayList<>();
         try {
-            ResultSet rs = Helper.Utility.query(sql, args);
+            java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 QuanLy ql = new QuanLy();
                 ql.setMaQL(rs.getString("MaQL"));
@@ -95,4 +112,15 @@ public class QuanLyDao extends DAO<QuanLy, String> {
         }
         return list;
     }
+
+    @Override
+    public int insertOnUpdate(QuanLy entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<QuanLy> selectByPage(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -4,8 +4,6 @@
  */
 package Helper;
 
-import DAO.*;
-import Helper.DOTENV;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -21,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class Utility {
 
-    public static Connection getConnection() {
+    private static Connection getConnection() {
         Dotenv sqlConfig = DOTENV.getEnv("config.env"); // get sqlConfig from .env file
         if (sqlConfig == null) { // return null if config null
             return null;

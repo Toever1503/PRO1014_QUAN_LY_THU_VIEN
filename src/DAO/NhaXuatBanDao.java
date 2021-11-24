@@ -7,30 +7,34 @@ package DAO;
 import Models.NhaXuatBan;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author haunv
  */
-public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
+public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, BigInteger> {
 
-    private final String SELECT_ALL_BY_PAGE_SQL = "";
-    private final String SELECT_BY_ID_SQL = "";
-    private final String INSERT_ON_UPDATE_SQL = "";
-    private final String DELETE_SQL = "";
-    
-    private static NhaXuatBanDao instance;
+    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
+    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
+    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
 
     @Override
-    public int save(NhaXuatBan entity) {
+    public int insert(NhaXuatBan entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(NhaXuatBan entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int insertOnUpdate(NhaXuatBan entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -45,7 +49,12 @@ public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
     }
 
     @Override
-    public List<NhaXuatBan> selectAllByPage(int page) {
+    public List<NhaXuatBan> selectByPage(BigInteger id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<NhaXuatBan> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -53,5 +62,4 @@ public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
     protected List<NhaXuatBan> selectBySql(String sql, Object... args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

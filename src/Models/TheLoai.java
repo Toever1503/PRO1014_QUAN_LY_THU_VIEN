@@ -14,6 +14,9 @@ public class TheLoai {
     private BigInteger id;
     private String tenTheLoai;
 
+    public TheLoai() {
+    }
+
     public BigInteger getId() {
         return id;
     }

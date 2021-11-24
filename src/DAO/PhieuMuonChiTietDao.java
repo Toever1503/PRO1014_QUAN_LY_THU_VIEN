@@ -12,17 +12,20 @@ import java.util.List;
  *
  * @author haunv
  */
-public class PhieuMuonChiTietDao extends DAO<PhieuMuonChiTiet, BigInteger> {
-
-    private final String SELECT_ALL_BY_PAGE_SQL = "";
-    private final String SELECT_BY_ID_SQL = "";
-    private final String INSERT_ON_UPDATE_SQL = "";
-    private final String DELETE_SQL = "";
-    
-    private static HoaDonDenBuDao instance;
+public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, BigInteger>{
 
     @Override
-    public int save(PhieuMuonChiTiet entity) {
+    public int insert(PhieuMuonChiTiet entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(PhieuMuonChiTiet entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int insertOnUpdate(PhieuMuonChiTiet entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -37,7 +40,12 @@ public class PhieuMuonChiTietDao extends DAO<PhieuMuonChiTiet, BigInteger> {
     }
 
     @Override
-    public List<PhieuMuonChiTiet> selectAllByPage(int page) {
+    public List<PhieuMuonChiTiet> selectByPage(BigInteger id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<PhieuMuonChiTiet> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

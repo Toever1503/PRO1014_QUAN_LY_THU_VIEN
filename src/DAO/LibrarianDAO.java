@@ -10,15 +10,21 @@ import java.util.List;
  *
  * @author haunv
  */
-abstract public class DAO<EntityType, KeyType> {
+abstract public class LibrarianDAO<EntityType, KeyType> {
 
-    abstract public int save(EntityType entity);
-    
+    abstract public int insert(EntityType entity);
+
+    abstract public int update(EntityType entity);
+
+    abstract public int insertOnUpdate(EntityType entity);
+
     abstract public int delete(KeyType id);
 
     abstract public EntityType selectByID(KeyType id);
 
-    abstract public List<EntityType> selectAllByPage(int page);
+    abstract public List<EntityType> selectByPage(KeyType id);
+
+    abstract public List<EntityType> selectALL();
 
     abstract protected List<EntityType> selectBySql(String sql, Object... args);
 }
