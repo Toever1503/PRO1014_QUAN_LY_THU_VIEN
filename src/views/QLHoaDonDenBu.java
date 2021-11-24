@@ -49,21 +49,21 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         btnThemMoi = new javax.swing.JButton();
         btnChiTiet = new javax.swing.JButton();
-        cmb = new javax.swing.JComboBox<>();
+        cmbTheLoai = new javax.swing.JComboBox<>();
         tabCapNhat = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         btnSaveQR = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        pnlQRCode = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblHoiVien = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         txtHoiVien = new javax.swing.JTextField();
         txtNgayTao = new javax.swing.JTextField();
         txtTongTien = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblNgayTao = new javax.swing.JLabel();
+        lblTongTien = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnChonSach = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
@@ -178,7 +178,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             }
         });
 
-        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -190,7 +190,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChiTiet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -206,7 +206,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChiTiet)
                     .addComponent(btnThemMoi)
-                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -223,16 +223,16 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
+        pnlQRCode.setBackground(new java.awt.Color(255, 102, 102));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlQRCodeLayout = new javax.swing.GroupLayout(pnlQRCode);
+        pnlQRCode.setLayout(pnlQRCodeLayout);
+        pnlQRCodeLayout.setHorizontalGroup(
+            pnlQRCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 141, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlQRCodeLayout.setVerticalGroup(
+            pnlQRCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 132, Short.MAX_VALUE)
         );
 
@@ -242,7 +242,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlQRCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
@@ -253,7 +253,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlQRCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(btnSaveQR)
                 .addContainerGap(56, Short.MAX_VALUE))
@@ -266,11 +266,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("ID");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 14, -1, -1));
+        lblID.setText("ID");
+        jPanel4.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 14, -1, -1));
 
-        jLabel2.setText("Hội viên");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 52, -1, -1));
+        lblHoiVien.setText("Hội viên");
+        jPanel4.add(lblHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 52, -1, -1));
 
         txtID.setText(" ");
         txtID.setEnabled(false);
@@ -285,11 +285,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         txtTongTien.setText(" ");
         jPanel4.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 49, 154, -1));
 
-        jLabel4.setText("Ngày tạo");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 14, -1, -1));
+        lblNgayTao.setText("Ngày tạo");
+        jPanel4.add(lblNgayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 14, -1, -1));
 
-        jLabel3.setText("Tổng tiền");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 52, -1, -1));
+        lblTongTien.setText("Tổng tiền");
+        jPanel4.add(lblTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 52, -1, -1));
 
         jPanel7.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
@@ -446,14 +446,9 @@ public static void main(String[] args) {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JComboBox<String> cmb;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> cmbTheLoai;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -461,6 +456,11 @@ public static void main(String[] args) {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblHoiVien;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblNgayTao;
+    private javax.swing.JLabel lblTongTien;
+    private javax.swing.JPanel pnlQRCode;
     private javax.swing.JPanel tabCapNhat;
     private javax.swing.JPanel tabDanhSach;
     private javax.swing.JTabbedPane tabs;
