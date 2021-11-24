@@ -15,7 +15,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
      */
     public QLSach_JPanel() {
         initComponents();
-        jTabbedPane1.remove(jPanelCapNhat);
+        tbP_QLSach.remove(jPanelCapNhat);
     }
 
     /**
@@ -27,7 +27,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tbP_QLSach = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSachDaMuon = new javax.swing.JTable();
@@ -224,7 +224,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel2.add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
-        jTabbedPane1.addTab("Danh sách", jPanel2);
+        tbP_QLSach.addTab("Danh sách", jPanel2);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Mã sách:");
@@ -371,9 +371,9 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Cập nhật", jPanelCapNhat);
+        tbP_QLSach.addTab("Cập nhật", jPanelCapNhat);
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        add(tbP_QLSach, java.awt.BorderLayout.CENTER);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 153, 0));
@@ -383,44 +383,59 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         add(jLabel9, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
     }//GEN-LAST:event_btnAddActionPerformed
+=======
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+
+    }//GEN-LAST:event_btnClearActionPerformed
+>>>>>>> Stashed changes
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void btnInsert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsert2ActionPerformed
 
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLastActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPrevActionPerformed
+    }//GEN-LAST:event_btnInsert2ActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFirstActionPerformed
 
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNextActionPerformed
+
+<<<<<<< Updated upstream
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
     }//GEN-LAST:event_btnThemMoiActionPerformed
+=======
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        tbP_QLSach.add(NhapSach_JPanel.getInstance(), "Nhập Sách");
+        tbP_QLSach.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton12ActionPerformed
+>>>>>>> Stashed changes
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
     }//GEN-LAST:event_btnChiTietActionPerformed
 
+<<<<<<< Updated upstream
     private void btnNhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapSachActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.add(NhapSach_JPanel.getInstance(), "Nhập Sách");
@@ -430,9 +445,15 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
+=======
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        activeTabCapNhat();
+    }//GEN-LAST:event_jButton9ActionPerformed
+>>>>>>> Stashed changes
     public void activeTabCapNhat() {
-        jTabbedPane1.add(jPanelCapNhat, "Cập Nhật");
-        jTabbedPane1.setSelectedIndex(1);
+        tbP_QLSach.add(jPanelCapNhat, "Cập Nhật");
+        tbP_QLSach.setSelectedIndex(1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -462,7 +483,17 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelCapNhat;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< Updated upstream
     private javax.swing.JTabbedPane jTabbedPane1;
+=======
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTabbedPane tbP_QLSach;
+>>>>>>> Stashed changes
     private javax.swing.JTable tblSachDaMuon;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtNXB;
