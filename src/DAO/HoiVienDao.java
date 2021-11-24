@@ -12,15 +12,17 @@ import java.util.List;
  *
  * @author haunv
  */
-public class HoiVienDao extends DAO<HoiVien, BigInteger>{
+public class HoiVienDao extends DAO<HoiVien, BigInteger> {
+
+    private final String SELECT_ALL_BY_PAGE_SQL = "";
+    private final String SELECT_BY_ID_SQL = "";
+    private final String INSERT_ON_UPDATE_SQL = "";
+    private final String DELETE_SQL = "";
+
+    private static HoaDonDenBuDao instance;
 
     @Override
-    public int insert(HoiVien entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int update(HoiVien entity) {
+    public int save(HoiVien entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -35,7 +37,7 @@ public class HoiVienDao extends DAO<HoiVien, BigInteger>{
     }
 
     @Override
-    public List<HoiVien> selectALL() {
+    public List<HoiVien> selectAllByPage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -43,5 +45,5 @@ public class HoiVienDao extends DAO<HoiVien, BigInteger>{
     protected List<HoiVien> selectBySql(String sql, Object... args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
- 
+
 }

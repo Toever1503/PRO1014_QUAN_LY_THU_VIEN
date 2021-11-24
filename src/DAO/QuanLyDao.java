@@ -17,17 +17,18 @@ import java.util.logging.Logger;
  */
 public class QuanLyDao extends DAO<QuanLy, String> {
 
-    private final String SELECT_ALL_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
+    private final String SELECT_ALL_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
     private final String SELECT_BY_ID_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly WHERE MaQL = ?;";
-    private final String INSERT_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
-    private final String UPDATE_SQL = "UPDATE quan_ly SET MatKhau = ?,CCCD = ?,HoTen = ?,DiaChi = ?,NgaySinh = ?,SoDienThoai = ?,Email = ?,VaiTro = ?,TrangThai = ? WHERE MaQL = ?";
+    private final String INSERT_ON_SAVE_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
     private final String DELETE_SQL = "DELETE FROM quan_ly WHERE MaQL = ?";
 
+    private static QuanLyDao instance;
+
     @Override
-    public int insert(QuanLy entity) {
+    public int save(QuanLy entity) {
         int row = 0;
         try {
-            Helper.Utility.update(this.INSERT_SQL,
+            Helper.Utility.update(this.INSERT_ON_SAVE_SQL,
                     entity.getMaQL(),
                     entity.getMatKhau(),
                     entity.getCccd(),
@@ -38,27 +39,6 @@ public class QuanLyDao extends DAO<QuanLy, String> {
                     entity.getEmail(),
                     entity.getVaiTro(),
                     entity.getTrangThai());
-        } catch (Exception ex) {
-            Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return row;
-    }
-
-    @Override
-    public int update(QuanLy entity) {
-        int row = 0;
-        try {
-            Helper.Utility.update(this.UPDATE_SQL,
-                    entity.getMatKhau(),
-                    entity.getCccd(),
-                    entity.getFullName(),
-                    entity.getDiaChi(),
-                    entity.getNgaySinh(),
-                    entity.getSoDienThoai(),
-                    entity.getEmail(),
-                    entity.getVaiTro(),
-                    entity.getTrangThai(),
-                    entity.getMaQL());
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,8 +66,8 @@ public class QuanLyDao extends DAO<QuanLy, String> {
     }
 
     @Override
-    public List<QuanLy> selectALL() {
-        return this.selectBySql(this.SELECT_ALL_SQL);
+    public List<QuanLy> selectAllByPage() {
+        return this.selectBySql(this.SELECT_ALL_BY_PAGE_SQL);
     }
 
     @Override

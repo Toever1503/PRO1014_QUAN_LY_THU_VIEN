@@ -22,22 +22,16 @@ import java.util.logging.Logger;
  */
 public class SachDAO extends DAO<Sach, BigInteger> {
 
-    private String sqlGetByID = "SELECT * FROM sach WHERE ID =?";
-    private String sqlSaveOnUpdate = "INSERT INTO `sach` (`ID`, `MaQL`, `TenSach`, `ViTri`, `NgayTao`, `NhaXuatBan`, `TrangThai`, `QR_FILE`) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
-    private String sqlGetAll = "SELECT * FROM sach";
-    private String sqlGetByPage = "SELECT * FROM sach LIMIT ?, 15";
-    private String sqlDeleteByID = "DELETE FROM sach WHERE ID = ?";
+    private final String SELECT_ALL_BY_PAGE_SQL = "";
+    private final String SELECT_BY_ID_SQL = "";
+    private final String INSERT_ON_UPDATE_SQL = "";
+    private final String DELETE_SQL = "";
     private static SachDAO sachDAO;
 
-    @Override
-    public int insert(Sach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private static SachDAO instance;
 
     @Override
-    public int update(Sach entity) {
+    public int save(Sach entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -52,7 +46,7 @@ public class SachDAO extends DAO<Sach, BigInteger> {
     }
 
     @Override
-    public List<Sach> selectALL() {
+    public List<Sach> selectAllByPage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

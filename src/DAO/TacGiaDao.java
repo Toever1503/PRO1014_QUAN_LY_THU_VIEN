@@ -21,21 +21,15 @@ import java.util.logging.Logger;
  */
 public class TacGiaDao extends DAO<TacGia, BigInteger> {
 
-    private String sqlGetByID = "SELECT * FROM tac_gia WHERE ID =?";
-    private String sqlSaveOnUpdate = "INSERT INTO `tac_gia` (`ID`, `TenTacGia`) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTacGia=VALUES(TenTacGia)";
-    private String sqlGetAll = "SELECT * FROM tac_gia";
-    private String sqlGetByPage = "SELECT * FROM tac_gia LIMIT ?, 15";
-    private String sqlDeleteByID = "DELETE FROM tac_gia WHERE ID = ?";
-    private static TacGiaDao tacGiaDao;
+    private final String SELECT_ALL_BY_PAGE_SQL = "";
+    private final String SELECT_BY_ID_SQL = "";
+    private final String INSERT_ON_UPDATE_SQL = "";
+    private final String DELETE_SQL = "";
+    
+    private static TacGiaDao instance;
 
     @Override
-    public int insert(TacGia entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int update(TacGia entity) {
+    public int save(TacGia entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -50,7 +44,7 @@ public class TacGiaDao extends DAO<TacGia, BigInteger> {
     }
 
     @Override
-    public List<TacGia> selectALL() {
+    public List<TacGia> selectAllByPage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

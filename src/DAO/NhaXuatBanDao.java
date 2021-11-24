@@ -22,21 +22,15 @@ import java.util.logging.Logger;
  */
 public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
 
-    private String sqlGetByID = "SELECT * FROM nha_xuat_ban WHERE ID =?";
-    private String sqlSaveOnUpdate = "INSERT INTO `nha_xuat_ban` (`ID`, `TenNhaXuatBan`) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
-    private String sqlGetAll = "SELECT * FROM nha_xuat_ban";
-    private String sqlGetByPage = "SELECT * FROM nha_xuat_ban LIMIT ?, 15";
-    private String sqlDeleteByID = "DELETE FROM nha_xuat_ban WHERE ID = ?";
-    private static NhaXuatBanDao nhaXuatBanDao;
+    private final String SELECT_ALL_BY_PAGE_SQL = "";
+    private final String SELECT_BY_ID_SQL = "";
+    private final String INSERT_ON_UPDATE_SQL = "";
+    private final String DELETE_SQL = "";
+    
+    private static NhaXuatBanDao instance;
 
     @Override
-    public int insert(NhaXuatBan entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int update(NhaXuatBan entity) {
+    public int save(NhaXuatBan entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,7 +45,7 @@ public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
     }
 
     @Override
-    public List<NhaXuatBan> selectALL() {
+    public List<NhaXuatBan> selectAllByPage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
