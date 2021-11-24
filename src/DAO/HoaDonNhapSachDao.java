@@ -7,58 +7,120 @@ package DAO;
 import Models.HoaDonNhapSach;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author haunv
  */
-public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger>{
-    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
-    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
-    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, BigInteger> {
+
+    private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach(ID, MaQL, TongTien, NgayThem, QR_FILE) VALUES (?,?,?,?,?)";
+    private final String UPDATE_SQL = "UPDATE hoa_don_nhap_sach SET MaQL=?,TongTien=?,NgayThem=?,QR_FILE=? WHERE ID=?";
+    private final String DELETE_SQL = "DELETE FROM hoa_don_nhap_sach WHERE ID = ?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_nhap_sach (ID, MaQL, TongTien, NgayThem, QR_FILE) VALUES (?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TongTien=VALUES(TongTien), NgayThem=VALUES(NgayThem), QR_FILE=VALUES(QR_FILE)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach LIMIT ?, 30";
 
     @Override
     public int insert(HoaDonNhapSach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_SQL,
+                    entity.getId(),
+                    entity.getNguoiXuLy(),
+                    entity.getTongTien(),
+                    entity.getNgayTao(),
+                    entity.getQr_code());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int update(HoaDonNhapSach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.UPDATE_SQL,
+                    entity.getNguoiXuLy(),
+                    entity.getTongTien(),
+                    entity.getNgayTao(),
+                    entity.getQr_code(),
+                    entity.getId());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int insertOnUpdate(HoaDonNhapSach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getId(),
+                    entity.getNguoiXuLy(),
+                    entity.getTongTien(),
+                    entity.getNgayTao(),
+                    entity.getQr_code());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int delete(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.DELETE_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public HoaDonNhapSach selectByID(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<HoaDonNhapSach> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     public List<HoaDonNhapSach> selectByPage(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
     public List<HoaDonNhapSach> selectALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
     @Override
     protected List<HoaDonNhapSach> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<HoaDonNhapSach> list = new java.util.ArrayList<>();
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query(sql, args);
+            while (rs.next()) {
+                HoaDonNhapSach hdns = new HoaDonNhapSach();
+                hdns.setId(rs.getObject("ID", BigInteger.class));
+                hdns.setNguoiXuLy(rs.getString("MaQL"));
+                hdns.setTongTien(rs.getFloat("TongTien"));
+                hdns.setNgayTao(rs.getDate("NgayThem"));
+                hdns.setQr_code(rs.getString("QR_FILE"));
+                list.add(hdns);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }
