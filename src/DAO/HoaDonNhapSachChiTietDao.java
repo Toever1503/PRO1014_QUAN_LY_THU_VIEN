@@ -7,6 +7,8 @@ package DAO;
 import Models.HoaDonNhapSachChiTiet;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,53 +16,113 @@ import java.util.List;
  */
 public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet, BigInteger> {
 
-    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
-    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
-    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private final String SELECT_ALL_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet";
+    private final String SELECT_BY_HD_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE HD_Sach = ?";
+    private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet(HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?,?,?,?,?)";
+    private final String UPDATE_BY_HD_AND_SACH_SQL = "UPDATE hoa_don_nhap_sach_chi_tiet SET GiaSach=?,SoLuong=?,LoaiSach=?  WHERE HD_Sach=? AND Sach=?";
+    private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet (HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE GiaSach=VALUES(GiaSach), SoLuong=VALUES(SoLuong), LoaiSach=VALUES(LoaiSach)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet LIMIT ?, 30";
 
     @Override
     public int insert(HoaDonNhapSachChiTiet entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_SQL,
+                    entity.getHoaDonNhap(),
+                    entity.getSach(),
+                    entity.getGia(),
+                    entity.getSoLuong(),
+                    entity.isLoaiSach());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int update(HoaDonNhapSachChiTiet entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.UPDATE_BY_HD_AND_SACH_SQL,
+                    entity.getGia(),
+                    entity.getSoLuong(),
+                    entity.isLoaiSach(),
+                    entity.getHoaDonNhap(),
+                    entity.getSach());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int insertOnUpdate(HoaDonNhapSachChiTiet entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getHoaDonNhap(),
+                    entity.getSach(),
+                    entity.getGia(),
+                    entity.getSoLuong(),
+                    entity.isLoaiSach());
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int delete(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.DELETE_BY_SACH_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public HoaDonNhapSachChiTiet selectByID(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_HD_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     public List<HoaDonNhapSachChiTiet> selectByPage(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
     public List<HoaDonNhapSachChiTiet> selectALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
     @Override
     protected List<HoaDonNhapSachChiTiet> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<HoaDonNhapSachChiTiet> list = new java.util.ArrayList<>();
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query(sql, args);
+            //HD_Sach, Sach, GiaSach, SoLuong, LoaiSach
+            while (rs.next()) {
+                HoaDonNhapSachChiTiet hdnsct = new HoaDonNhapSachChiTiet();
+                hdnsct.setHoaDonNhap(rs.getObject("HD_Sach", BigInteger.class));
+                hdnsct.setSach(rs.getObject("Sach", BigInteger.class));
+                hdnsct.setGia(rs.getFloat("GiaSach"));
+                hdnsct.setSoLuong(rs.getInt("SoLuong"));
+                hdnsct.setLoaiSach(rs.getObject("LoaiSach", boolean.class));
+                list.add(hdnsct);
+            }
+            rs.getStatement().getConnection();
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }
