@@ -18,6 +18,9 @@ public class PhieuMuonChiTiet {
     private Date ngayTra;
     private boolean trangThai;
 
+    public PhieuMuonChiTiet() {
+    }
+
     public PhieuMuonChiTiet(long phieuMuon, long sach, String nguoiXuLy, Date ngayTra, boolean trangThai) {
         this.phieuMuon = phieuMuon;
         this.sach = sach;
@@ -65,4 +68,10 @@ public class PhieuMuonChiTiet {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "PhieuMuonChiTiet{" + "phieuMuon=" + phieuMuon + ", sach=" + sach + ", nguoiXuLy=" + nguoiXuLy + ", ngayTra=" + ngayTra + ", trangThai=" + trangThai + '}';
+    }
+
 }

@@ -18,7 +18,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
     private final String SELECT_ALL_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet";
     private final String SELECT_BY_SACH_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet(HoaDonDenBu, Sach, GiaSach) VALUES (?,?,?)";
-    private final String UPDATE_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
+    private final String UPDATE_BY_HD_SACH_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
     private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet (HoaDonDenBu, Sach, GiaSach) VALUES (?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoaDonDenBu=VALUES(HoaDonDenBu), Sach=VALUES(Sach), GiaSach=VALUES(GiaSach)";
@@ -42,7 +42,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
     public int update(HoaDonDenBuChiTiet entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.UPDATE_SQL,
+            row = Helper.Utility.update(this.UPDATE_BY_HD_SACH_SQL,
                     entity.getGia(),
                     entity.getHoaDonDenBu(),
                     entity.getSach());
