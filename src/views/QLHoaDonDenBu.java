@@ -5,6 +5,12 @@
  */
 package views;
 
+import Helper.Auth;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Admin
@@ -32,39 +38,39 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblDSQuanLyHoaDon = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         btnLast = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnFirst = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        btnTimKiem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        btnThemMoi = new javax.swing.JButton();
+        btnChiTiet = new javax.swing.JButton();
+        cmb = new javax.swing.JComboBox<>();
         tabCapNhat = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnSaveQR = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        txtHoiVien = new javax.swing.JTextField();
+        txtNgayTao = new javax.swing.JTextField();
+        txtTongTien = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnChonSach = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnQuayLai = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCNQuanLyHoaDon = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -72,7 +78,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tabDanhSach.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSQuanLyHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -91,7 +97,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblDSQuanLyHoaDon);
 
         tabDanhSach.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -156,23 +162,23 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         jPanel9.setPreferredSize(new java.awt.Dimension(648, 50));
 
-        jButton7.setText("Tìm kiếm");
+        btnTimKiem.setText("Tìm kiếm");
 
-        jButton9.setText("Thêm Mới");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnThemMoi.setText("Thêm Mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnThemMoiActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Chi Tiết");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnChiTiet.setText("Chi Tiết");
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnChiTietActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -180,15 +186,15 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton9)
+                .addComponent(btnThemMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
+                .addComponent(btnChiTiet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(btnTimKiem)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -196,11 +202,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton9)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChiTiet)
+                    .addComponent(btnThemMoi)
+                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -210,10 +216,10 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tabCapNhat.setLayout(new java.awt.BorderLayout());
 
-        jButton4.setText("Save QR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveQR.setText("Save QR");
+        btnSaveQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSaveQRActionPerformed(evt);
             }
         });
 
@@ -240,7 +246,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
-                .addComponent(jButton4)
+                .addComponent(btnSaveQR)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -249,7 +255,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
-                .addComponent(jButton4)
+                .addComponent(btnSaveQR)
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -266,18 +272,18 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jLabel2.setText("Hội viên");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 52, -1, -1));
 
-        jTextField1.setText(" ");
-        jTextField1.setEnabled(false);
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 11, 154, -1));
+        txtID.setText(" ");
+        txtID.setEnabled(false);
+        jPanel4.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 11, 154, -1));
 
-        jTextField2.setText(" ");
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 49, 154, -1));
+        txtHoiVien.setText(" ");
+        jPanel4.add(txtHoiVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 49, 154, -1));
 
-        jTextField4.setText(" ");
-        jPanel4.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 11, 154, -1));
+        txtNgayTao.setText(" ");
+        jPanel4.add(txtNgayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 11, 154, -1));
 
-        jTextField3.setText(" ");
-        jPanel4.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 49, 154, -1));
+        txtTongTien.setText(" ");
+        jPanel4.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 49, 154, -1));
 
         jLabel4.setText("Ngày tạo");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 14, -1, -1));
@@ -290,35 +296,40 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jPanel5.setPreferredSize(new java.awt.Dimension(392, 60));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 15));
 
-        jButton5.setText("Chọn Sách");
-        jButton5.setPreferredSize(new java.awt.Dimension(100, 30));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnChonSach.setText("Chọn Sách");
+        btnChonSach.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnChonSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnChonSachActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton5);
+        jPanel5.add(btnChonSach);
 
-        jButton2.setText("Thêm");
-        jButton2.setPreferredSize(new java.awt.Dimension(100, 30));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Thêm");
+        btnThem.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2);
+        jPanel5.add(btnThem);
 
-        jButton1.setText("Sửa");
-        jButton1.setPreferredSize(new java.awt.Dimension(100, 30));
-        jPanel5.add(jButton1);
+        btnSua.setText("Sửa");
+        btnSua.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnSua);
 
-        jButton3.setText("Quay Lại");
-        jButton3.setPreferredSize(new java.awt.Dimension(100, 30));
-        jPanel5.add(jButton3);
+        btnQuayLai.setText("Quay Lại");
+        btnQuayLai.setPreferredSize(new java.awt.Dimension(100, 30));
+        jPanel5.add(btnQuayLai);
 
         jPanel7.add(jPanel5, java.awt.BorderLayout.PAGE_END);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCNQuanLyHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -329,7 +340,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 "Mã Sách", "Tên Sách", "Thể Loại", "Nhà Xuất Bản"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCNQuanLyHoaDon);
 
         jPanel7.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -347,17 +358,21 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         add(jLabel9, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnSaveQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveQRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnSaveQRActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (checkNullText(txtHoiVien)&&checkNullText(txtNgayTao)
+                &&checkNullText(txtTongTien)){
+            
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnChonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonSachActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnChonSachActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
@@ -375,19 +390,41 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFirstActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnChiTietActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        if (Auth.user.getVaiTro()) {
+            if (checkNullText(txtHoiVien)&&checkNullText(txtNgayTao)
+                &&checkNullText(txtTongTien)){
+            
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Chỉ admin mới được sửa");
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     public void activeTabCapNhat(){
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
+    }
+    public static boolean checkNullText(JTextField txt) {
+        txt.setBackground(white);
+        if (txt.getText().trim().length() > 0) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            JOptionPane.showMessageDialog(txt.getRootPane(), "Không được để trống " + txt.getName());
+            return false;
+        }
     }
 public static void main(String[] args) {
         javax.swing.JFrame frame = new javax.swing.JFrame();
@@ -397,19 +434,19 @@ public static void main(String[] args) {
         frame.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChiTiet;
+    private javax.swing.JButton btnChonSach;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnSaveQR;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JComboBox<String> cmb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -424,15 +461,15 @@ public static void main(String[] args) {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel tabCapNhat;
     private javax.swing.JPanel tabDanhSach;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblCNQuanLyHoaDon;
+    private javax.swing.JTable tblDSQuanLyHoaDon;
+    private javax.swing.JTextField txtHoiVien;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtNgayTao;
+    private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }
