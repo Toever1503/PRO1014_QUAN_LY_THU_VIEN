@@ -34,4 +34,10 @@ public class TacGia {
     public void setTenTacGia(String tenTacGia) {
         this.tenTacGia = tenTacGia;
     }
+
+    @Override
+    public String toString() {
+        return "TacGia{" + "id=" + id + ", tenTacGia=" + tenTacGia + '}';
+    }
+
 }
