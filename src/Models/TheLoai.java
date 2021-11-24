@@ -37,5 +37,10 @@ public class TheLoai {
         this.id = id;
         this.tenTheLoai = tenTheLoai;
     }
+
+    @Override
+    public String toString() {
+        return "TheLoai{" + "id=" + id + ", tenTheLoai=" + tenTheLoai + '}';
+    }
     
 }

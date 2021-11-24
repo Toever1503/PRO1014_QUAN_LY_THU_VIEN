@@ -74,16 +74,16 @@ public class Utility {
         }
     }
 
-    public static Object value(String sql, Object... args) {
-        try {
-            ResultSet rs = Utility.query(sql, args);
-            if (rs.next()) {
-                return rs.getObject(0);
-            }
-            rs.getStatement().getConnection().close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
+//    public static Object value(String sql, Object... args) {
+//        try {
+//            ResultSet rs = Utility.query(sql, args);
+//            if (rs.next()) {
+//                return rs.getObject(0);
+//            }
+//            rs.getStatement().getConnection().close();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return null;
+//    }
 }

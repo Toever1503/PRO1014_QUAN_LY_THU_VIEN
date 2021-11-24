@@ -18,9 +18,9 @@ public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
     private final String UPDATE_SQL = "UPDATE gop_y SET HoiVien = ?, NgayTao = ?, NoiDung = ?, TrangThai = ? WHERE ID = ?";
     private final String DELETE_SQL = "DELETE FROM gop_y WHERE ID = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai=VALUES(TrangThai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y LIMIT ?, 30";
-
+            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai = VALUES(TrangThai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM the_loai LIMIT ?, 30";
+  
     @Override
     public int insert(GopY entity) {
         int row = 0;
