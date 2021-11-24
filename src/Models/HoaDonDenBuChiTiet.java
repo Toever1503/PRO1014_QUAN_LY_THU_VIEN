@@ -11,11 +11,15 @@ import java.math.BigInteger;
  * @author haunv
  */
 public class HoaDonDenBuChiTiet {
+
     private BigInteger hoaDonDenBu;
     private BigInteger sach;
-    private BigInteger gia;
+    private float gia;
 
-    public HoaDonDenBuChiTiet(BigInteger hoaDonDenBu, BigInteger sach, BigInteger gia) {
+    public HoaDonDenBuChiTiet() {
+    }
+
+    public HoaDonDenBuChiTiet(BigInteger hoaDonDenBu, BigInteger sach, float gia) {
         this.hoaDonDenBu = hoaDonDenBu;
         this.sach = sach;
         this.gia = gia;
@@ -37,12 +41,17 @@ public class HoaDonDenBuChiTiet {
         this.sach = sach;
     }
 
-    public BigInteger getGia() {
+    public float getGia() {
         return gia;
     }
 
-    public void setGia(BigInteger gia) {
+    public void setGia(float gia) {
         this.gia = gia;
     }
-    
+
+    @Override
+    public String toString() {
+        return "HoaDonDenBuChiTiet{" + "hoaDonDenBu=" + hoaDonDenBu + ", sach=" + sach + ", gia=" + gia + '}';
+    }
+
 }
