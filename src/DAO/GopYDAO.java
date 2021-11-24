@@ -17,9 +17,9 @@ public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
     private final String INSERT_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE gop_y SET HoiVien = ?, NgayTao = ?, NoiDung = ?, TrangThai = ? WHERE ID = ?";
     private final String DELETE_SQL = "DELETE FROM gop_y WHERE ID = ?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai=VALUES(TrangThai)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y LIMIT ?, 30";
 
     @Override
     public int insert(GopY entity) {
@@ -55,7 +55,18 @@ public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
 
     @Override
     public int insertOnUpdate(GopY entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getId(),
+                    entity.getHoiVien(),
+                    entity.getNgayTao(),
+                    entity.getNoiDung(),
+                    entity.isTrangThai());
+        } catch (Exception ex) {
+            Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
@@ -80,7 +91,7 @@ public class GopYDAO extends LibrarianDAO<GopY, BigInteger> {
 
     @Override
     public List<GopY> selectByPage(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override

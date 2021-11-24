@@ -6,19 +6,24 @@ package Models;
 
 import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class HoaDonDenBu {
+
     private BigInteger id;
     private BigInteger nguoiMuon;
     private BigInteger nguoiXuLy;
-    private BigInteger tongTien;
+    private float tongTien;
     private String qr_code;
     private Date ngayTao;
 
-    public HoaDonDenBu(BigInteger id, BigInteger nguoiMuon, BigInteger nguoiXuLy, BigInteger tongTien, String qr_code, Date ngayTao) {
+    public HoaDonDenBu() {
+    }
+
+    public HoaDonDenBu(BigInteger id, BigInteger nguoiMuon, BigInteger nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -51,11 +56,11 @@ public class HoaDonDenBu {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public BigInteger getTongTien() {
+    public float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(BigInteger tongTien) {
+    public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -74,5 +79,10 @@ public class HoaDonDenBu {
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
+
+    @Override
+    public String toString() {
+        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + '}';
+    }
+
 }
