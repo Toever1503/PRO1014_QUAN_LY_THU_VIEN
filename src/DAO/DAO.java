@@ -18,7 +18,7 @@ abstract public class DAO<EntityType, KeyType> {
 
     abstract public EntityType selectByID(KeyType id);
 
-    abstract public List<EntityType> selectAllByPage();
+    abstract public List<EntityType> selectAllByPage(int page);
 
     abstract protected List<EntityType> selectBySql(String sql, Object... args);
 }

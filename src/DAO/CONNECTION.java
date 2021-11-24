@@ -8,6 +8,8 @@ import Helper.DOTENV;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +45,21 @@ public class CONNECTION {
         }
 
         return con; // return null if connecttion failed else connection object
+    }
+    public static void main(String[] args) {
+        Connection con = CONNECTION.getConnection();
+        
+        try {
+            PreparedStatement prepare = con.prepareStatement("INSERT INTO `tac_gia` (`ID`, `TenTacGia`) VALUES (?, ?)\n" +
+                    "ON DUPLICATE KEY UPDATE TenTacGia=VALUES(TenTacGia)");
+            prepare.setObject(1, null);
+            prepare.setObject(2, "shikis");
+            prepare.execute();
+            ResultSet rs = prepare.getResultSet();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CONNECTION.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

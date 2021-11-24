@@ -46,7 +46,7 @@ public class SachDAO extends DAO<Sach, BigInteger> {
     }
 
     @Override
-    public List<Sach> selectAllByPage() {
+    public List<Sach> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

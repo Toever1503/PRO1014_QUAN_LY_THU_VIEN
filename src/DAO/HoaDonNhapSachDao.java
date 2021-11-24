@@ -37,7 +37,7 @@ public class HoaDonNhapSachDao extends DAO<HoaDonNhapSach, BigInteger> {
     }
 
     @Override
-    public List<HoaDonNhapSach> selectAllByPage() {
+    public List<HoaDonNhapSach> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -44,7 +44,7 @@ public class TacGiaDao extends DAO<TacGia, BigInteger> {
     }
 
     @Override
-    public List<TacGia> selectAllByPage() {
+    public List<TacGia> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

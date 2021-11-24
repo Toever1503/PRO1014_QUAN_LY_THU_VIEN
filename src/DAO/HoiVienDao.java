@@ -37,7 +37,7 @@ public class HoiVienDao extends DAO<HoiVien, BigInteger> {
     }
 
     @Override
-    public List<HoiVien> selectAllByPage() {
+    public List<HoiVien> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

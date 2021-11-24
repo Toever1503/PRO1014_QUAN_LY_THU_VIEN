@@ -45,7 +45,7 @@ public class NhaXuatBanDao extends DAO<NhaXuatBan, BigInteger> {
     }
 
     @Override
-    public List<NhaXuatBan> selectAllByPage() {
+    public List<NhaXuatBan> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

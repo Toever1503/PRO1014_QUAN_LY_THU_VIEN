@@ -66,7 +66,7 @@ public class QuanLyDao extends DAO<QuanLy, String> {
     }
 
     @Override
-    public List<QuanLy> selectAllByPage() {
+    public List<QuanLy> selectAllByPage(int page) {
         return this.selectBySql(this.SELECT_ALL_BY_PAGE_SQL);
     }
 

@@ -37,7 +37,7 @@ public class PhieuMuonChiTietDao extends DAO<PhieuMuonChiTiet, BigInteger> {
     }
 
     @Override
-    public List<PhieuMuonChiTiet> selectAllByPage() {
+    public List<PhieuMuonChiTiet> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

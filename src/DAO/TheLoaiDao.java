@@ -46,7 +46,7 @@ public class TheLoaiDao extends DAO<TheLoai, BigInteger> {
     }
 
     @Override
-    public List<TheLoai> selectAllByPage() {
+    public List<TheLoai> selectAllByPage(int page) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
