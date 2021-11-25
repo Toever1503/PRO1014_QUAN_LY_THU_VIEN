@@ -5,8 +5,10 @@
  */
 package views;
 
+import DAO.HoaDonDenBuDao;
 import Models.HoaDonDenBu;
 import Models.HoaDonDenBuChiTiet;
+import Models.HoiVien;
 import Models.Sach;
 import java.awt.Image;
 import java.sql.Date;
@@ -30,6 +32,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private DefaultTableModel tableModelHoaDonDenBu;
     private DefaultTableModel tableModelHoaDonDenBuChiTiet;
     private int pageIndex = 0;
+    
+    private HoaDonDenBuDao hoaDonDenBuDao;
     private static QLHoaDonDenBu instance;
 
     /**
@@ -49,19 +53,13 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
     public void init() {
         tabs.remove(tabCapNhat);
-        listHoaDonDenBu = new ArrayList<HoaDonDenBu>();
+        hoaDonDenBuDao = HoaDonDenBuDao.getInstance();
+        listHoaDonDenBu = hoaDonDenBuDao.selectALL();
         listHoaDonChiTiet = new HashMap<Long, HoaDonDenBuChiTiet>();
         tableModelHoaDonDenBu = (DefaultTableModel) tblHoaDonDenBu.getModel();
         tableModelHoaDonDenBuChiTiet = (DefaultTableModel) tblHoaDonChiTiet.getModel();
 
-        listHoaDonDenBu.add(new HoaDonDenBu(1l, "akari", "chung999", 28407f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(2l, "akari1", "chung999", 141462f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(3l, "akari2", "chung999", 82587f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(4l, "akari3", "chung999", 19933f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(5l, "akari4", "chung999", 109951f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(6l, "akari5", "chung999", 19933f, "of", new Date(2021, 11, 25)));
-        listHoaDonDenBu.add(new HoaDonDenBu(7l, "akari6", "chung999", 19933f, "of", new Date(2021, 11, 25)));
-
+//        listHoaDonDenBu.add(new HoaDonDenBu(7l, "akari6", "chung999", 19933f, "of", new Date(2021, 11, 25)));
         fillTableHoaDonDenBu();
     }
 
@@ -464,9 +462,10 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         int row = tblHoaDonDenBu.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn 1 hóa đơn cần xem!");
+        } else {
+            activeTabCapNhat();
+            setForm(listHoaDonDenBu.get(row));
         }
-        activeTabCapNhat();
-        setForm(row);
     }//GEN-LAST:event_btnChiTietActionPerformed
 
     private void XóaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XóaActionPerformed
@@ -551,60 +550,67 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         System.out.println("123");
         tableModelHoaDonDenBu.setRowCount(0);
         listHoaDonDenBu.forEach((hoaDon) -> {
-            tableModelHoaDonDenBu.addRow(new Object[]{hoaDon.getId(), hoaDon.getNguoiMuon(), hoaDon.getNguoiXuLy(), hoaDon.getTongTien(), hoaDon.getNgayTao()});
+            tableModelHoaDonDenBu.addRow(new Object[]{hoaDon.getId(), hoaDon.getNguoiMuon().getFullName(), hoaDon.getNguoiXuLy().getFullName(), hoaDon.getTongTien(), hoaDon.getNgayTao()});
         });
     }
 
     public HoaDonDenBu getForm() {
         long maHoaDonDenBu = txtMaHoaDonDenBu.getText().isEmpty() ? 0 : Long.valueOf(txtMaHoaDonDenBu.getText());
         String nguoiMuon = cmbNguoiMuon.getSelectedItem() == null ? null : cmbNguoiMuon.getSelectedItem().toString();
-        float tongTien = txtTongTien.getText().isEmpty() ? 0 : Float.valueOf(txtTongTien.getText());
+        Double tongTien = txtTongTien.getText().isEmpty() ? 0 : Double.valueOf(txtTongTien.getText());
 
-        long timeNow = Calendar.getInstance().getTimeInMillis();
-        return new HoaDonDenBu(maHoaDonDenBu, nguoiMuon, Helper.Auth.user.getMaQL(), tongTien, "hoaDon-" + timeNow, new Date(timeNow));
+        Long timeNow = Calendar.getInstance().getTimeInMillis();
+
+        HoaDonDenBu hoaDonDenBu = new HoaDonDenBu();
+        hoaDonDenBu.setId(maHoaDonDenBu);
+        hoaDonDenBu.setNguoiMuon(new HoiVien(Long.valueOf(nguoiMuon)));
+        hoaDonDenBu.setNguoiXuLy(Helper.Auth.user);
+        hoaDonDenBu.setNgayTao(new Date(timeNow));
+        hoaDonDenBu.setTongTien(tongTien);
+        hoaDonDenBu.setQr_code(timeNow.toString());
+
+        return hoaDonDenBu;
     }
 
-    public void setForm(int row) {
-        HoaDonDenBu hoaDon = null;
-        txtMaHoaDonDenBu.setText(String.valueOf(hoaDon.getId()));
-        txtTongTien.setText(String.valueOf(hoaDon.getTongTien()));
-        cmbNguoiMuon.setSelectedItem(hoaDon.getNguoiMuon());
+    public void setForm(HoaDonDenBu hoaDonDenBu) {
+        txtMaHoaDonDenBu.setText(String.valueOf(hoaDonDenBu.getId()));
+        txtTongTien.setText(String.valueOf(hoaDonDenBu.getTongTien()));
+        cmbNguoiMuon.setSelectedItem(hoaDonDenBu.getNguoiMuon().getFullName());
 
         tableModelHoaDonDenBuChiTiet.setRowCount(0);
-        listHoaDonChiTiet = null;
-        if (listHoaDonChiTiet != null) {
+        if (hoaDonDenBu.getListHoaDonDenBuChiTiets() != null) {
 
-            listHoaDonChiTiet.forEach((id, hdct) -> {
+            hoaDonDenBu.getListHoaDonDenBuChiTiets().forEach((hdct) -> {
                 tableModelHoaDonDenBuChiTiet.addRow(
-                        new Object[]{hdct.getSach(),
-                            null,
-                            String.valueOf(hdct.getGia())
+                        new Object[]{hdct.getSach().getId(),
+                            hdct.getSach().getTenSach(),
+                            hdct.getSach().getHoaDonNhapSachChiTiet().getGia()
                         });
             });
         }
-        if (hoaDon.getQr_code() != null) {
-            lblQR_CODE.setIcon(new ImageIcon(
-                    new ImageIcon(Helper.XImage.HOADON_UPLOAD.concat("/" + hoaDon.getQr_code()))
-                            .getImage().getScaledInstance(lblQR_CODE.getWidth(), lblQR_CODE.getHeight(),
-                                    Image.SCALE_DEFAULT)));
-        }
+//        if (hoaDonDenBu.getQr_code() != null) {
+//            lblQR_CODE.setIcon(new ImageIcon(
+//                    new ImageIcon(Helper.XImage.HOADON_UPLOAD.concat("/" + hoaDonDenBu.getQr_code().strip("-")[1]))
+//                            .getImage().getScaledInstance(lblQR_CODE.getWidth(), lblQR_CODE.getHeight(),
+//                                    Image.SCALE_DEFAULT)));
+//        }
         btnDownloadQr.setVisible(true);
         tinhTongTien();
     }
 
     public boolean addSach(HoaDonDenBuChiTiet hdct) {
-        String[] sach = hdct.getSach().split("-");
-        long key = Long.valueOf(sach[0]);
-        if (!listHoaDonChiTiet.containsKey(key)) {
-            listHoaDonChiTiet.put(key, hdct);
-            tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
-                key,
-                sach[1],
-                hdct.getGia()
-            });
-            tinhTongTien();
-            return true;
-        }
+//        String[] sach = hdct.getSach().split("-");
+//        long key = Long.valueOf(sach[0]);
+//        if (!listHoaDonChiTiet.containsKey(key)) {
+//            listHoaDonChiTiet.put(key, hdct);
+//            tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
+//                key,
+//                sach[1],
+//                hdct.getGia()
+//            });
+//            tinhTongTien();
+//            return true;
+//        }
         return false;
     }
 

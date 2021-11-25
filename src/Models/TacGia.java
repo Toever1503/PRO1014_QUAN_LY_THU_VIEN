@@ -10,10 +10,14 @@ package Models;
  */
 public class TacGia {
 
-    private long id;
+    private Long id;
     private String tenTacGia;
 
     public TacGia() {
+    }
+
+    public TacGia(Long id) {
+        this.id=id;
     }
 
     public TacGia(long id, String tenTacGia) {

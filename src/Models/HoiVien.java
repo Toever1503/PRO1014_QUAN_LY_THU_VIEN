@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class HoiVien {
 
-    private long id;
+    private Long id;
     private String nguoiTao;
     private String cccd;
     private String fullName;
@@ -25,6 +25,10 @@ public class HoiVien {
     private String qr_code;
 
     public HoiVien() {
+    }
+    
+    public HoiVien(Long id) {
+        this.id = id;
     }
 
     public HoiVien(long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {

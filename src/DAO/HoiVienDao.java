@@ -23,6 +23,14 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoi_vien (ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), CCCD=VALUES(CCCD), HoTen=VALUES(HoTen), DiaChi=VALUES(DiaChi), NgaySinh=VALUES(NgaySinh), SoDienThoai=VALUES(SoDienThoai), Email=VALUES(Email), NgayTao=VALUES(NgayTao), NgayHan=VALUES(NgayHan), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien LIMIT ?, 30";
+    private static HoiVienDao insance;
+
+    public static HoiVienDao getInstance() {
+        if (insance == null) {
+            insance = new HoiVienDao();
+        }
+        return insance;
+    }
 
     @Override
     public int insert(HoiVien entity) {
@@ -147,4 +155,8 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
         return list;
     }
 
+//    @Override
+//    public List<HoiVien> selectALLHau() {
+//        return this.selectBySql(this.SELECT_ALL_SQL);
+//    }
 }

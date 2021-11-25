@@ -5,6 +5,7 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -12,44 +13,50 @@ import java.sql.Date;
  */
 public class HoaDonNhapSach {
 
-    private long id;
-    private String nguoiXuLy;
-    private float tongTien;
+    private Long id;
+    private QuanLy nguoiXuLy;
+    private Double tongTien;
     private Date ngayTao;
     private String qr_code;
+    private List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets;
 
     public HoaDonNhapSach() {
     }
 
-    public HoaDonNhapSach(long id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
+    public HoaDonNhapSach(Long id) {
+        this.id = id;
+    }
+
+    public HoaDonNhapSach(Long id, QuanLy nguoiXuLy, Double tongTien, Date ngayTao, String qr_code, List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
         this.ngayTao = ngayTao;
         this.qr_code = qr_code;
+        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNguoiXuLy() {
+    public QuanLy getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(String nguoiXuLy) {
+    public void setNguoiXuLy(QuanLy nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public float getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -69,8 +76,17 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
+    public List<HoaDonNhapSachChiTiet> getListHoaDonNhapSachChiTiets() {
+        return listHoaDonNhapSachChiTiets;
+    }
+
+    public void setListHoaDonNhapSachChiTiets(List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
+        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + '}';
+        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", listHoaDonNhapSachChiTiets=" + listHoaDonNhapSachChiTiets + '}';
     }
+
 }

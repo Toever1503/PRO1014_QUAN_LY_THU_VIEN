@@ -10,16 +10,16 @@ package Models;
  */
 public class HoaDonNhapSachChiTiet {
 
-    private long hoaDonNhap;
-    private long sach;
-    private float gia;
+    private Long hoaDonNhap;
+    private Sach sach;
+    private Double gia;
     private int soLuong;
     private boolean loaiSach;
 
     public HoaDonNhapSachChiTiet() {
     }
 
-    public HoaDonNhapSachChiTiet(long hoaDonNhap, long sach, float gia, int soLuong, boolean loaiSach) {
+    public HoaDonNhapSachChiTiet(Long hoaDonNhap, Sach sach, Double gia, int soLuong, boolean loaiSach) {
         this.hoaDonNhap = hoaDonNhap;
         this.sach = sach;
         this.gia = gia;
@@ -27,27 +27,27 @@ public class HoaDonNhapSachChiTiet {
         this.loaiSach = loaiSach;
     }
 
-    public long getHoaDonNhap() {
+    public Long getHoaDonNhap() {
         return hoaDonNhap;
     }
 
-    public void setHoaDonNhap(long hoaDonNhap) {
+    public void setHoaDonNhap(Long hoaDonNhap) {
         this.hoaDonNhap = hoaDonNhap;
     }
 
-    public long getSach() {
+    public Sach getSach() {
         return sach;
     }
 
-    public void setSach(long sach) {
+    public void setSach(Sach sach) {
         this.sach = sach;
     }
 
-    public float getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(float gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 

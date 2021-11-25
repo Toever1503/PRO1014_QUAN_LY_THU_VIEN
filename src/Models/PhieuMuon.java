@@ -5,6 +5,7 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -12,25 +13,28 @@ import java.sql.Date;
  */
 public class PhieuMuon {
 
-
-    private long id;
-    private String nguoiMuon;
-    private String nguoiXuLy;
+    private Long id;
+    private HoiVien nguoiMuon;
+    private QuanLy nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
-
+    private List<PhieuMuonChiTiet> listPhieuMuonChiTiet;
 
     public PhieuMuon() {
     }
+    public PhieuMuon(Long id) {
+        this.id = id;
+    }
 
-    public PhieuMuon(long id, String nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
+    public PhieuMuon(long id, HoiVien nguoiMuon, QuanLy nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code, List<PhieuMuonChiTiet> listPhieuMuonChiTiet) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
         this.ngayMuon = ngayMuon;
         this.hanTra = hanTra;
         this.qr_code = qr_code;
+        this.listPhieuMuonChiTiet = listPhieuMuonChiTiet;
     }
 
     public long getId() {
@@ -41,19 +45,19 @@ public class PhieuMuon {
         this.id = id;
     }
 
-    public String getNguoiMuon() {
+    public HoiVien getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(String nguoiMuon) {
+    public void setNguoiMuon(HoiVien nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public String getNguoiXuLy() {
+    public QuanLy getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(String nguoiXuLy) {
+    public void setNguoiXuLy(QuanLy nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
@@ -81,9 +85,12 @@ public class PhieuMuon {
         this.qr_code = qr_code;
     }
 
-    @Override
-    public String toString() {
-        return "PhieuMuon{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", ngayMuon=" + ngayMuon + ", hanTra=" + hanTra + ", qr_code=" + qr_code + '}';
+    public List<PhieuMuonChiTiet> getListPhieuMuonChiTiet() {
+        return listPhieuMuonChiTiet;
+    }
+
+    public void setListPhieuMuonChiTiet(List<PhieuMuonChiTiet> listPhieuMuonChiTiet) {
+        this.listPhieuMuonChiTiet = listPhieuMuonChiTiet;
     }
 
 }

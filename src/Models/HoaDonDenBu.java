@@ -5,6 +5,7 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -12,23 +13,29 @@ import java.sql.Date;
  */
 public class HoaDonDenBu {
 
-    private long id;
-    private String nguoiMuon;
-    private String nguoiXuLy;
-    private float tongTien;
+    private Long id;
+    private HoiVien nguoiMuon;
+    private QuanLy nguoiXuLy;
+    private Double tongTien;
     private String qr_code;
     private Date ngayTao;
+    private List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets;
 
     public HoaDonDenBu() {
     }
 
-    public HoaDonDenBu(long id, String nguoiMuon, String nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
+    public HoaDonDenBu(Long id) {
+        this.id = id;
+    }
+
+    public HoaDonDenBu(long id, HoiVien nguoiMuon, QuanLy nguoiXuLy, double tongTien, String qr_code, Date ngayTao, List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
         this.qr_code = qr_code;
         this.ngayTao = ngayTao;
+        this.listHoaDonDenBuChiTiets = listHoaDonDenBuChiTiets;
     }
 
     public long getId() {
@@ -39,27 +46,27 @@ public class HoaDonDenBu {
         this.id = id;
     }
 
-    public String getNguoiMuon() {
+    public HoiVien getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(String nguoiMuon) {
+    public void setNguoiMuon(HoiVien nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public String getNguoiXuLy() {
+    public QuanLy getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(String nguoiXuLy) {
+    public void setNguoiXuLy(QuanLy nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public float getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -79,9 +86,17 @@ public class HoaDonDenBu {
         this.ngayTao = ngayTao;
     }
 
+    public List<HoaDonDenBuChiTiet> getListHoaDonDenBuChiTiets() {
+        return listHoaDonDenBuChiTiets;
+    }
+
+    public void setListHoaDonDenBuChiTiets(List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets) {
+        this.listHoaDonDenBuChiTiets = listHoaDonDenBuChiTiets;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + '}';
+        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + ", listHoaDonDenBuChiTiets=" + listHoaDonDenBuChiTiets + '}';
     }
 
 }

@@ -16,6 +16,11 @@ public class NhaXuatBan {
     public NhaXuatBan() {
     }
 
+    public NhaXuatBan(Long id) {
+        this.id = id;
+    }
+    
+
     public NhaXuatBan(long id, String tenNhaXuatBan) {
         this.id = id;
         this.tenNhaXuatBan = tenNhaXuatBan;

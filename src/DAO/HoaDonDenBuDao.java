@@ -24,6 +24,24 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), MaQL=VALUES(MaQL), TongTien=VALUES(TongTien), NgayTao=VALUES(NgayTao),QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach LIMIT ?, 30";
 
+    private HoiVienDao hoiVienDao;
+    private QuanLyDao quanLyDao;
+    private HoaDonDenBuChiTietDao hoaDonDenBuChiTietDao;
+    private static HoaDonDenBuDao instance;
+
+    private HoaDonDenBuDao() {
+        hoiVienDao = HoiVienDao.getInstance();
+        quanLyDao = QuanLyDao.getInstance();
+        hoaDonDenBuChiTietDao = HoaDonDenBuChiTietDao.getInstance();
+    }
+
+    public static HoaDonDenBuDao getInstance() {
+        if (instance == null) {
+            instance = new HoaDonDenBuDao();
+        }
+        return instance;
+    }
+
     @Override
     public int insert(HoaDonDenBu entity) {
         int row = 0;
@@ -113,11 +131,12 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             while (rs.next()) {
                 HoaDonDenBu hddb = new HoaDonDenBu();
                 hddb.setId(rs.getLong("ID"));
-                hddb.setNguoiMuon(rs.getNString("HoiVien"));
-                hddb.setNguoiXuLy(rs.getString("MaQL"));
-                hddb.setTongTien(rs.getFloat("TongTien"));
+                hddb.setNguoiMuon(hoiVienDao.selectByID(rs.getLong("HoiVien")));
+                hddb.setNguoiXuLy(quanLyDao.selectByID(rs.getString("MaQL")));
+                hddb.setTongTien(rs.getDouble("TongTien"));
                 hddb.setNgayTao(rs.getDate("NgayTao"));
                 hddb.setQr_code("QR_FILE");
+                hddb.setListHoaDonDenBuChiTiets(hoaDonDenBuChiTietDao.selectALLByHoaDonDenBu(hddb.getId()));
                 list.add(hddb);
             }
             rs.getStatement().getConnection().close();

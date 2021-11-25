@@ -12,20 +12,23 @@ import java.sql.Date;
  */
 public class Sach {
 
-    private long id;
-    private String nguoiTao;
+    private Long id;
+    private QuanLy nguoiTao;
     private String tenSach;
     private String viTri;
     private Date ngayTao;
     private String qr_code;
-    private String nhaXuatBan;
+    private NhaXuatBan nhaXuatBan;
     private boolean trangThai;
-    private Double gia;
+    private HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet;
 
     public Sach() {
     }
+    public Sach(Long id) {
+        this.id=id;
+    }
 
-    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, String nhaXuatBan, boolean trangThai, double gia) {
+    public Sach(long id, QuanLy nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, NhaXuatBan nhaXuatBan, boolean trangThai, HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -34,7 +37,7 @@ public class Sach {
         this.qr_code = qr_code;
         this.nhaXuatBan = nhaXuatBan;
         this.trangThai = trangThai;
-        this.gia = gia;
+        this.hoaDonNhapSachChiTiet = hoaDonNhapSachChiTiet;
     }
 
     public long getId() {
@@ -45,11 +48,11 @@ public class Sach {
         this.id = id;
     }
 
-    public String getNguoiTao() {
+    public QuanLy getNguoiTao() {
         return nguoiTao;
     }
 
-    public void setNguoiTao(String nguoiTao) {
+    public void setNguoiTao(QuanLy nguoiTao) {
         this.nguoiTao = nguoiTao;
     }
 
@@ -85,11 +88,11 @@ public class Sach {
         this.qr_code = qr_code;
     }
 
-    public String getNhaXuatBan() {
+    public NhaXuatBan getNhaXuatBan() {
         return nhaXuatBan;
     }
 
-    public void setNhaXuatBan(String nhaXuatBan) {
+    public void setNhaXuatBan(NhaXuatBan nhaXuatBan) {
         this.nhaXuatBan = nhaXuatBan;
     }
 
@@ -101,17 +104,17 @@ public class Sach {
         this.trangThai = trangThai;
     }
 
-    public Double getGia() {
-        return gia;
+    public HoaDonNhapSachChiTiet getHoaDonNhapSachChiTiet() {
+        return hoaDonNhapSachChiTiet;
     }
 
-    public void setGia(Double gia) {
-        this.gia = gia;
+    public void setHoaDonNhapSachChiTiet(HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet) {
+        this.hoaDonNhapSachChiTiet = hoaDonNhapSachChiTiet;
     }
 
     @Override
     public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", gia=" + gia + '}';
+        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", hoaDonNhapSachChiTiet=" + hoaDonNhapSachChiTiet + '}';
     }
 
 }

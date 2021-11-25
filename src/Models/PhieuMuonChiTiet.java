@@ -12,16 +12,16 @@ import java.sql.Date;
  */
 public class PhieuMuonChiTiet {
 
-    private long phieuMuon;
-    private long sach;
-    private String nguoiXuLy;
+    private Long phieuMuon;
+    private Sach sach;
+    private QuanLy nguoiXuLy;
     private Date ngayTra;
     private boolean trangThai;
 
     public PhieuMuonChiTiet() {
     }
-
-    public PhieuMuonChiTiet(long phieuMuon, long sach, String nguoiXuLy, Date ngayTra, boolean trangThai) {
+    
+    public PhieuMuonChiTiet(long phieuMuon, Sach sach, QuanLy nguoiXuLy, Date ngayTra, boolean trangThai) {
         this.phieuMuon = phieuMuon;
         this.sach = sach;
         this.nguoiXuLy = nguoiXuLy;
@@ -37,19 +37,19 @@ public class PhieuMuonChiTiet {
         this.phieuMuon = phieuMuon;
     }
 
-    public long getSach() {
+    public Sach getSach() {
         return sach;
     }
 
-    public void setSach(long sach) {
+    public void setSach(Sach sach) {
         this.sach = sach;
     }
 
-    public String getNguoiXuLy() {
+    public QuanLy getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(String nguoiXuLy) {
+    public void setNguoiXuLy(QuanLy nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 

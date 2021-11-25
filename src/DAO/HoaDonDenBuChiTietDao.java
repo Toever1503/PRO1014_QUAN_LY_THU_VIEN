@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet";
+    private final String SELECT_ALL_SQL_BY_HOA_DON_DEN_BU = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet where HoaDonDenBu = ?";
     private final String SELECT_BY_SACH_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet(HoaDonDenBu, Sach, GiaSach) VALUES (?,?,?)";
     private final String UPDATE_BY_HD_SACH_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
@@ -23,6 +23,20 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet (HoaDonDenBu, Sach, GiaSach) VALUES (?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoaDonDenBu=VALUES(HoaDonDenBu), Sach=VALUES(Sach), GiaSach=VALUES(GiaSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet LIMIT ?, 30";
+
+    private SachDAO sachDAO;
+    private static HoaDonDenBuChiTietDao instance;
+
+    public HoaDonDenBuChiTietDao() {
+        sachDAO = SachDAO.getInstance();
+    }
+
+    public static HoaDonDenBuChiTietDao getInstance() {
+        if (instance == null) {
+            instance = new HoaDonDenBuChiTietDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(HoaDonDenBuChiTiet entity) {
@@ -93,7 +107,12 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
 
     @Override
     public List<HoaDonDenBuChiTiet> selectALL() {
-        return this.selectBySql(this.SELECT_ALL_SQL);
+//        return this.selectBySql(this.SELECT_ALL_SQL);
+        return null;
+    }
+
+    public List<HoaDonDenBuChiTiet> selectALLByHoaDonDenBu(Long hoaDonDenBu) {
+        return this.selectBySql(this.SELECT_ALL_SQL_BY_HOA_DON_DEN_BU, hoaDonDenBu);
     }
 
     @Override
@@ -104,7 +123,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
             while (rs.next()) {
                 HoaDonDenBuChiTiet hddbct = new HoaDonDenBuChiTiet();
                 hddbct.setHoaDonDenBu(rs.getLong("HoaDonDenBu"));
-                hddbct.setSach(rs.getNString("Sach"));
+                hddbct.setSach(sachDAO.selectByID(rs.getLong("Sach")));
                 hddbct.setGia(rs.getDouble("GiaSach"));
                 list.add(hddbct);
             }

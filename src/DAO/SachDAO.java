@@ -15,41 +15,8 @@ import java.util.logging.Logger;
  */
 public class SachDAO extends LibrarianDAO<Sach, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT\n"
-            + "    s.`ID`,\n"
-            + "    s.`MaQL`,\n"
-            + "    s.`TenSach`,\n"
-            + "    s.`ViTri`,\n"
-            + "    s.`NgayTao`,\n"
-            + "    s.`NhaXuatBan`,\n"
-            + "    s.`TrangThai`,\n"
-            + "    s.`QR_FILE`,\n"
-            + "    (\n"
-            + "    SELECT\n"
-            + "        giaSach\n"
-            + "    FROM\n"
-            + "        hoa_don_nhap_sach_chi_tiet\n"
-            + "    WHERE\n"
-            + "        sach = s.ID AND giaSach =(\n"
-            + "        SELECT\n"
-            + "            MAX(giaSach)\n"
-            + "        FROM\n"
-            + "            hoa_don_nhap_sach_chi_tiet\n"
-            + "        WHERE\n"
-            + "            sach = s.ID\n"
-            + "    )\n"
-            + ") AS gia,\n"
-            + "CONCAT(\n"
-            + "    COALESCE(nxb.ID, ''),\n"
-            + "    '-',\n"
-            + "    COALESCE(nxb.TenNhaXuatBan, '')\n"
-            + ") AS TenNhaXuatBan \n"
-            + "FROM\n"
-            + "    sach AS s\n"
-            + "JOIN nha_xuat_ban AS nxb\n"
-            + "ON\n"
-            + "    nxb.ID = s.ID";
-    private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE s.ID = ?";
+    private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE FROM sach";
+    private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
@@ -57,13 +24,19 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
     private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE s.ID like ? or s.TenSach like ? or nxb.TenNhaXuatBan like ? or s.ViTri like ?";
-    private final String SELECT_ALL_BY_TL = SELECT_ALL_SQL + " JOIN the_loai_va_sach AS tlvs\n" +
-                                                            "ON\n" +
-                                                            "    tlvs.Sach = s.ID\n" +
-                                                            "WHERE tlvs.TheLoai = ?";
-        private static SachDAO instance;
+    private final String SELECT_ALL_BY_TL = SELECT_ALL_SQL + " JOIN the_loai_va_sach AS tlvs\n"
+            + "ON\n"
+            + "    tlvs.Sach = s.ID\n"
+            + "WHERE tlvs.TheLoai = ?";
+    private static SachDAO instance;
+    private HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao;
+    private QuanLyDao quanLyDao;
+    private NhaXuatBanDao nhaXuatBanDao;
 
     private SachDAO() {
+        hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
+        quanLyDao = QuanLyDao.getInstance();
+        nhaXuatBanDao = NhaXuatBanDao.getInstance();
     }
 
     public static SachDAO getInstance() {
@@ -168,14 +141,14 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             while (rs.next()) {
                 Sach s = new Sach();
                 s.setId(rs.getLong("ID"));
-                s.setNguoiTao(rs.getString("MaQL"));
+                s.setNguoiTao(quanLyDao.selectByID(rs.getString("MaQL")));
                 s.setTenSach(rs.getString("TenSach"));
                 s.setViTri(rs.getString("ViTri"));
                 s.setNgayTao(rs.getDate("NgayTao"));
-                s.setNhaXuatBan(rs.getObject("TenNhaXuatBan", String.class));
+                s.setNhaXuatBan(nhaXuatBanDao.selectByID(rs.getLong("NhaXuatBan")));
                 s.setTrangThai(rs.getBoolean("TrangThai"));
                 s.setQr_code(rs.getString("QR_FILE"));
-                s.setGia(rs.getDouble("gia"));
+//                s.setHoaDonNhapSachChiTiet(hoaDonNhapSachChiTietDao.selectBySach(s.getId()));
                 list.add(s);
             }
             rs.getStatement().getConnection();
@@ -189,7 +162,14 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
         input = "%" + input + "%";
         return this.selectBySql(this.SELECT_BY_KEY, input, input, input, input);
     }
+
     public List<Sach> selectAllByTheLoai(Long theLoai) {
         return this.selectBySql(this.SELECT_ALL_BY_TL, theLoai);
+    }
+    
+    public static void main(String[] args) {
+        SachDAO sachDAO = SachDAO.getInstance();
+        
+        sachDAO.selectByID(Long.valueOf(1));
     }
 }
