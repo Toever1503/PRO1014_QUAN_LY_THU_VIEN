@@ -10,7 +10,7 @@ package views;
  */
 public class QLSach_JPanel extends javax.swing.JPanel {
 
-    private static QuanLySach_JPanel instance;
+    private static QLSach_JPanel instance;
 
     /**
      * Creates new form QLSach_JPanel
@@ -20,9 +20,9 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jTabbedPane1.remove(jPanelCapNhat);
     }
 
-    public static QuanLySach_JPanel getInstance() {
+    public static QLSach_JPanel getInstance() {
         if (instance == null) {
-            instance = new QuanLySach_JPanel();
+            instance = new QLSach_JPanel();
         }
         return instance;
 
