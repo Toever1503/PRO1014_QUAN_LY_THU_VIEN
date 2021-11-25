@@ -12,12 +12,14 @@ import java.sql.Date;
  */
 public class PhieuMuon {
 
+
     private long id;
     private long nguoiMuon;
     private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
+
 
     public PhieuMuon() {
     }
@@ -83,4 +85,5 @@ public class PhieuMuon {
     public String toString() {
         return "PhieuMuon{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", ngayMuon=" + ngayMuon + ", hanTra=" + hanTra + ", qr_code=" + qr_code + '}';
     }
+
 }
