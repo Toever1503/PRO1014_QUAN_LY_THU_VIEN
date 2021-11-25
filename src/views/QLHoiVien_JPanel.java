@@ -4,18 +4,60 @@
  */
 package views;
 
+import DAO.HoiVienDao;
+import Models.HoiVien;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author haunv
+ * @author dungbt
  */
 public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form QlNguoiDung1
-     */
+    private HoiVienDao hvDao;
+    private List<HoiVien> listHV;
+    private DefaultTableModel tableModel;
+    private Map<Long, HoiVien> ListHoiVien;
+
     public QLHoiVien_JPanel() {
         initComponents();
+        this.hvDao = new HoiVienDao();
         tabCapNhat.remove(jPanelCapNhat);
+
+    }
+
+    private HoiVien read() {
+        Long maPhieuMuon = txtMaTT.getText().isEmpty() ? null : Long.valueOf(txtMaTT.getText());
+        String nguoiTao = Helper.Auth.user.getMaQL();
+        String cccd = txtCCCD.getText();
+        String fullname = txtHoTen.getText();
+        String diachi = txtDiaChi.getText();
+        String sdt = txtSoDienThoai.getText();
+        String email = txtEmail.getText();
+        Date ngaysinh = jDateChooserNgaySinh.getDate() == null ? null : new Date(jDateChooserNgaySinh.getDate().getTime());
+        //Date ngayTao = txtNgayTao.getDate();//new java.sql.DateCalendar.getInstance().getTimeMiliseconds();
+        Date ngayhan = jDateChooserNgayHan.getDate() == null ? null : new Date(jDateChooserNgayHan.getDate().getTime());
+        String qr = lblQR_code.getText();
+        return new HoiVien(maPhieuMuon, nguoiTao, cccd, fullname, diachi, sdt, email, ngaysinh, null, ngayhan, qr);
+    }
+
+    private void loadTable() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        tableModel.setRowCount(0);
+        for (int i = 0; i < listHV.size(); ++i) {
+            HoiVien hv = listHV.get(i);
+            tableModel.addRow(new Object[]{
+                i + 1, hv.getId(), hv.getNguoiTao(), hv.getCccd(), hv.getFullName(),
+                hv.getDiaChi(), hv.getSoDienThoai(), hv.getEmail(),
+                dateFormat.format(hv.getNgaySinh()), dateFormat.format(hv.getNgayTao()),
+                dateFormat.format(hv.getNgayHan()), hv.getQr_code()
+            });
+        }
     }
 
     /**
@@ -37,10 +79,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         btnPrev = new javax.swing.JButton();
         btnFirst = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
+        txtTim = new javax.swing.JTextField();
+        btnCapNhat = new javax.swing.JButton();
+        btnChiTiet = new javax.swing.JButton();
         jPanelCapNhat = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,9 +102,11 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         btnClear = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
+        jDateChooserNgayHan = new com.toedter.calendar.JDateChooser();
         lblQR_code = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -146,19 +190,19 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
         jPanel4.setPreferredSize(new java.awt.Dimension(648, 50));
 
-        jButton1.setText("Tìm kiếm");
+        btnTimKiem.setText("Tìm kiếm");
 
-        jButton9.setText("Thêm Mới");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnCapNhatActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Chi Tiết");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnChiTiet.setText("Chi Tiết");
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnChiTietActionPerformed(evt);
             }
         });
 
@@ -168,13 +212,13 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton9)
+                .addComponent(btnCapNhat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
+                .addComponent(btnChiTiet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnTimKiem)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -182,10 +226,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton9))
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChiTiet)
+                    .addComponent(btnCapNhat))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -256,11 +300,19 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             }
         });
         jPanel3.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 62, -1));
-        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 170, -1));
-        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 170, -1));
+        jPanel3.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 170, -1));
+        jPanel3.add(jDateChooserNgayHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 170, -1));
 
         lblQR_code.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
         jPanel3.add(lblQR_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 214, 170, 120));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel10.setText("Ngày sinh :");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 68, 25));
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel11.setText("Ngày sinh :");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 68, 25));
 
         jPanelCapNhat.add(jPanel3);
 
@@ -277,6 +329,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        HoiVien h = this.read();
+        this.hvDao.insert(h);
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+        loadTable();
 
     }//GEN-LAST:event_btnInsertActionPerformed
 
@@ -289,49 +345,49 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnFirstActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         activeTabCapNhat();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnCapNhatActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         activeTabCapNhat();
-    }//GEN-LAST:event_jButton10ActionPerformed
-    public void activeTabCapNhat(){
+    }//GEN-LAST:event_btnChiTietActionPerformed
+    public void activeTabCapNhat() {
         tabCapNhat.add(jPanelCapNhat, "Cập Nhật");
         tabCapNhat.setSelectedIndex(1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
+    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserNgayHan;
+    private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -345,7 +401,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCapNhat;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblQR_code;
     private javax.swing.JTabbedPane tabCapNhat;
     private javax.swing.JPanel tabDanhSach;
@@ -356,5 +411,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMaTT;
     private javax.swing.JTextField txtSoDienThoai;
+    private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,8 +4,13 @@
  */
 package Models;
 
+<<<<<<< Updated upstream
 import java.math.BigInteger;
 import java.sql.Date;
+=======
+//import java.sql.Date;
+import java.util.Date;
+>>>>>>> Stashed changes
 
 /**
  *
@@ -130,9 +135,5 @@ public class HoiVien {
         this.qr_code = qr_code;
     }
 
-    @Override
-    public String toString() {
-        return "HoiVien{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", cccd=" + cccd + ", fullName=" + fullName + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + ", ngaySinh=" + ngaySinh + ", ngayTao=" + ngayTao + ", ngayHan=" + ngayHan + ", qr_code=" + qr_code + '}';
-    }
-
+ 
 }
