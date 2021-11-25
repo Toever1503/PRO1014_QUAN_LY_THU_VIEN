@@ -123,7 +123,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
                 s.setTenSach(rs.getString("TenSach"));
                 s.setViTri(rs.getString("ViTri"));
                 s.setNgayTao(rs.getDate("NgayTao"));
-                s.setNhaXuatBan(rs.getLong("NhaXuatBan"));
+                s.setNhaXuatBan("NhaXuatBan");
                 s.setTrangThai(rs.getBoolean("TrangThai"));
                 s.setQr_code(rs.getString("QR_FILE"));
                 list.add(s);

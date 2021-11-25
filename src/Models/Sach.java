@@ -18,13 +18,13 @@ public class Sach {
     private String viTri;
     private Date ngayTao;
     private String qr_code;
-    private long nhaXuatBan;
+    private String nhaXuatBan;
     private boolean trangThai;
 
     public Sach() {
     }
 
-    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai) {
+    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, String nhaXuatBan, boolean trangThai) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -83,11 +83,11 @@ public class Sach {
         this.qr_code = qr_code;
     }
 
-    public long getNhaXuatBan() {
+    public String getNhaXuatBan() {
         return nhaXuatBan;
     }
 
-    public void setNhaXuatBan(long nhaXuatBan) {
+    public void setNhaXuatBan(String nhaXuatBan) {
         this.nhaXuatBan = nhaXuatBan;
     }
 

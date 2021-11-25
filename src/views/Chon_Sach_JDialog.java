@@ -30,6 +30,10 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private int index;
     private String ACTION_TYPE;
 
+    public static void main(String[] args) {
+        Chon_Sach_JDialog.getInstance().show("1");
+    }
+
     /**
      * Creates new form Chon_Sach_JDialog
      */
@@ -40,14 +44,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoai.getModel();
 
         listSach = new ArrayList<Sach>();
-        listSach.add(new Sach(BigInteger.ONE, "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
-        listSach.add(new Sach(BigInteger.TWO, "shiki1", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
-        listSach.add(new Sach(BigInteger.TEN, "shiki2", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
-        listSach.add(new Sach(BigInteger.ONE, "shiki3", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
-        listSach.add(new Sach(BigInteger.ONE, "shiki4", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
-        listSach.add(new Sach(BigInteger.ONE, "shiki5", "khu 4", new Date(2021, 11, 25), "qr-code", BigInteger.ONE, "chung999", true));
+        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
+        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
+        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
+        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
 
         fillComboboxTheLoai();
+        fillTableSach();
     }
 
     public static Chon_Sach_JDialog getInstance() {
@@ -335,13 +338,17 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
             } else {
                 if (QLPhieuMuon_JPanel.getInstance().addSachMuon(new Sach(
-                        BigInteger.valueOf(Long.valueOf(tblSach.getValueAt(row, 0).toString())),
+                        Long.valueOf(tblSach.getValueAt(row, 0).toString()),
+                        null,
                         tblSach.getValueAt(row, 1).toString(),
-                        null, null, null, BigInteger.valueOf(Long.valueOf(tblSach.getValueAt(row, 2).toString())), null, false))) {
+                        null,
+                        null,
+                        null,
+                        tblSach.getValueAt(row, 2).toString(), false))) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                }
-                else
+                } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+                }
             }
 
         } else {
@@ -398,12 +405,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
     private void fillTableSach() {
         tableModelSach.setRowCount(0);
-        listSach.forEach((sach) -> {
-
-            tableModelSach.addRow(new Object[]{
-                sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()
+        if (listSach != null) {
+            listSach.forEach((sach) -> {
+                tableModelSach.addRow(new Object[]{
+                    sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()
+                });
             });
-        });
+        }
     }
 
     private void fillComboboxTheLoai() {

@@ -545,12 +545,12 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
     public void fillTablePhieuMuon() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-        listPhieuMuon.add(new PhieuMuon(BigInteger.ONE, BigInteger.TEN, "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
+        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
 
         tableModelPhieuMuon.setRowCount(0);
 
@@ -574,7 +574,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     }
 
     public PhieuMuon getForm() {
-        BigInteger maPhieuMuon = jTextFieldMaPhieuMuon.getText().isEmpty() ? null : BigInteger.valueOf(Long.valueOf(jTextFieldMaPhieuMuon.getText()));
+        Long maPhieuMuon = jTextFieldMaPhieuMuon.getText().isEmpty() ? null : Long.valueOf(jTextFieldMaPhieuMuon.getText());
         String nguoiMuon = jComboBoxNguoiMuon.getSelectedItem().toString().split("-")[0];
         Date ngayMuon = jDateChooserNgayMuon.getDate() == null ? null : new Date(jDateChooserNgayMuon.getDate().getTime());
         Date ngayTra = jDateChooserNgayTra.getDate() == null ? null : new Date(jDateChooserNgayTra.getDate().getTime());
@@ -596,17 +596,17 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
         return check == 2
                 ? new PhieuMuon(maPhieuMuon,
-                        BigInteger.valueOf(Long.valueOf(nguoiMuon)),
+                        "nguoiMuon",
                         Helper.Auth.user.getMaQL(),
                         ngayMuon, ngayTra, "sach-" + Calendar.getInstance().getTimeInMillis())
                 : null;
     }
 
     public boolean addSachMuon(Sach sach) {
-        if (ListSachMuon.containsKey(sach.getId().longValue())) {
+        if (ListSachMuon.containsKey(sach.getId())) {
             return false;
         } else {
-            ListSachMuon.put(sach.getId().longValue(), sach);
+            ListSachMuon.put(sach.getId(), sach);
             tableModelSachMuon.addRow(new Object[]{sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()});
             return true;
         }

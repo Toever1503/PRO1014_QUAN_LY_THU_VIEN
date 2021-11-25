@@ -14,7 +14,7 @@ public class PhieuMuon {
 
 
     private long id;
-    private long nguoiMuon;
+    private String nguoiMuon;
     private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
@@ -24,7 +24,7 @@ public class PhieuMuon {
     public PhieuMuon() {
     }
 
-    public PhieuMuon(long id, long nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
+    public PhieuMuon(long id, String nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -41,11 +41,11 @@ public class PhieuMuon {
         this.id = id;
     }
 
-    public long getNguoiMuon() {
+    public String getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(long nguoiMuon) {
+    public void setNguoiMuon(String nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 

@@ -113,7 +113,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
             while (rs.next()) {
                 PhieuMuon pm = new PhieuMuon();
                 pm.setId(rs.getLong("ID"));
-                pm.setNguoiMuon(rs.getLong("HoiVien"));
+                pm.setNguoiMuon(rs.getNString("HoiVien"));
                 pm.setNguoiXuLy(rs.getString("MaQL"));
                 pm.setNgayMuon(rs.getDate("NgayMuon"));
                 pm.setHanTra(rs.getDate("NgayHan"));

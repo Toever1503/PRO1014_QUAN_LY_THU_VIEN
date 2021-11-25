@@ -47,17 +47,17 @@ public class QrCapture extends JFrame implements Closeable {
         this.init();
     }
 
-//    public static QrCapture getInsance(String actionType) {
-//        if (instance == null) {
-//            instance = new QrCapture(actionType);
-//        }
-//        return instance;
-//    }
-//
-//    public void show() {
-////        repaint();
-////        setVisible(true);
-//    }
+    public static QrCapture getInsance(String actionType) {
+        if (instance == null) {
+            instance = new QrCapture(actionType);
+        }
+        return instance;
+    }
+
+    public void show() {
+//        repaint();
+//        setVisible(true);
+    }
 
     public void init() {
         webcam = Webcam.getDefault();
@@ -167,11 +167,11 @@ public class QrCapture extends JFrame implements Closeable {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                QrCapture qr = new QrCapture("");
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                QrCapture qr = new QrCapture("");
+//            }
+//        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
