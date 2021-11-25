@@ -5,62 +5,134 @@
 package DAO;
 
 import Models.Sach;
-import java.math.BigInteger;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author NguyenHoan
  */
-public class SachDAO extends LibrarianDAO<Sach, BigInteger> {
+public class SachDAO extends LibrarianDAO<Sach, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
-    private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
-    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE FROM sach";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE FROM sach WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?,?,?,?,?,?,?,?)";
+    private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
+    private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO sach (ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
+    private final String SELECT_BY_PAGE_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE FROM sach LIMIT ?, 30";
 
     @Override
     public int insert(Sach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_SQL,
+                    entity.getId(),
+                    entity.getNguoiTao(),
+                    entity.getTenSach(),
+                    entity.getViTri(),
+                    entity.getNgayTao(),
+                    entity.getNhaXuatBan(),
+                    entity.isTrangThai(),
+                    entity.getQr_code());
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int update(Sach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.UPDATE_SQL,
+                    entity.getNguoiTao(),
+                    entity.getTenSach(),
+                    entity.getViTri(),
+                    entity.getNgayTao(),
+                    entity.getNhaXuatBan(),
+                    entity.isTrangThai(),
+                    entity.getQr_code(),
+                    entity.getId());
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
     public int insertOnUpdate(Sach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getId(),
+                    entity.getNguoiTao(),
+                    entity.getTenSach(),
+                    entity.getViTri(),
+                    entity.getNgayTao(),
+                    entity.getNhaXuatBan(),
+                    entity.isTrangThai(),
+                    entity.getQr_code());
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
-    public int delete(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int delete(Long id) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.DELETE_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
-    public Sach selectByID(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Sach selectByID(Long id) {
+        List<Sach> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
-    public List<Sach> selectByPage(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Sach> selectByPage(Long id) {
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
     public List<Sach> selectALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
     @Override
     protected List<Sach> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Sach> list = new java.util.ArrayList<>();
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query(sql, args);
+            while (rs.next()) {
+                Sach s = new Sach();
+                s.setId(rs.getLong("ID"));
+                s.setNguoiTao(rs.getString("MaQL"));
+                s.setTenSach(rs.getString("TenSach"));
+                s.setViTri(rs.getString("ViTri"));
+                s.setNgayTao(rs.getDate("NgayTao"));
+                s.setNhaXuatBan(rs.getLong("NhaXuatBan"));
+                s.setTrangThai(rs.getBoolean("TrangThai"));
+                s.setQr_code(rs.getString("QR_FILE"));
+                list.add(s);
+            }
+            rs.getStatement().getConnection();
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }
