@@ -26,6 +26,8 @@ hs_err_pid*
 /nbproject/private/
 /nbproject/private/private.properties
 /nbproject/private/private.xml
+/nbproject/private/private.xml
+/nbproject//nbproject/private/private.xml
 *.env
 
 
