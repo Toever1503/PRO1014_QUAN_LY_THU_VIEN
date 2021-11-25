@@ -5,7 +5,6 @@
 package DAO;
 
 import Models.HoaDonDenBuChiTiet;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,13 +13,13 @@ import java.util.logging.Logger;
  *
  * @author haunv
  */
-public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, BigInteger> {
+public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet";
-    private final String SELECT_BY_ID_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet WHERE HoaDonDenBu = ? AND Sach = ?";
+    private final String SELECT_BY_SACH_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet(HoaDonDenBu, Sach, GiaSach) VALUES (?,?,?)";
-    private final String UPDATE_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
-    private final String DELETE_SQL = "DELETE FROM hoa_don_den_bu_sach_chi_tiet WHERE HoaDonDenBu= ? AND Sach= ?";
+    private final String UPDATE_BY_HD_SACH_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
+    private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet (HoaDonDenBu, Sach, GiaSach) VALUES (?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoaDonDenBu=VALUES(HoaDonDenBu), Sach=VALUES(Sach), GiaSach=VALUES(GiaSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet LIMIT ?, 30";
@@ -43,7 +42,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, BigI
     public int update(HoaDonDenBuChiTiet entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.UPDATE_SQL,
+            row = Helper.Utility.update(this.UPDATE_BY_HD_SACH_SQL,
                     entity.getGia(),
                     entity.getHoaDonDenBu(),
                     entity.getSach());
@@ -57,7 +56,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, BigI
     public int insertOnUpdate(HoaDonDenBuChiTiet entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.INSERT_SQL,
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getHoaDonDenBu(),
                     entity.getSach(),
                     entity.getGia());
@@ -68,17 +67,27 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, BigI
     }
 
     @Override
-    public int delete(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int delete(Long id) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.DELETE_BY_SACH_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(HoaDonDenBuChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
     }
 
     @Override
-    public HoaDonDenBuChiTiet selectByID(BigInteger id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public HoaDonDenBuChiTiet selectByID(Long id) {
+        List<HoaDonDenBuChiTiet> list = this.selectBySql(this.SELECT_BY_SACH_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
-    public List<HoaDonDenBuChiTiet> selectByPage(BigInteger id) {
+    public List<HoaDonDenBuChiTiet> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
@@ -94,8 +103,8 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, BigI
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
                 HoaDonDenBuChiTiet hddbct = new HoaDonDenBuChiTiet();
-                hddbct.setHoaDonDenBu(rs.getObject("HoaDonDenBu", BigInteger.class));
-                hddbct.setSach(rs.getObject("Sach", BigInteger.class));
+                hddbct.setHoaDonDenBu(rs.getLong("HoaDonDenBu"));
+                hddbct.setSach(rs.getLong("Sach"));
                 hddbct.setGia(rs.getFloat("GiaSach"));
                 list.add(hddbct);
             }

@@ -4,7 +4,6 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 /**
@@ -13,9 +12,9 @@ import java.sql.Date;
  */
 public class HoaDonDenBu {
 
-    private BigInteger id;
-    private BigInteger nguoiMuon;
-    private BigInteger nguoiXuLy;
+    private long id;
+    private long nguoiMuon;
+    private String nguoiXuLy;
     private float tongTien;
     private String qr_code;
     private Date ngayTao;
@@ -23,7 +22,7 @@ public class HoaDonDenBu {
     public HoaDonDenBu() {
     }
 
-    public HoaDonDenBu(BigInteger id, BigInteger nguoiMuon, BigInteger nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
+    public HoaDonDenBu(long id, long nguoiMuon, String nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -32,27 +31,27 @@ public class HoaDonDenBu {
         this.ngayTao = ngayTao;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiMuon() {
+    public long getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(BigInteger nguoiMuon) {
+    public void setNguoiMuon(long nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public BigInteger getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(BigInteger nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 

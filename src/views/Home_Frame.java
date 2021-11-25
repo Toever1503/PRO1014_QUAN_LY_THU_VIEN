@@ -4,6 +4,8 @@
  */
 package views;
 
+import Helper.XImage;
+import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
@@ -12,20 +14,28 @@ import java.awt.CardLayout;
  * @author NguyenHoan
  */
 public class Home_Frame extends javax.swing.JFrame {
+
     private CardLayout cardLayoutMainRight;
+
     /**
      * Creates new form main_frame
      */
     public Home_Frame() {
-        initComponents();
         this.init();
+
     }
 
     void init() {
+        XImage.init();
+        QuanLy user = new QuanLy();
+        user.setMaQL("SHIKI_ADMIN");
+        Helper.Auth.user = user;
+        initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
-        cardLayoutMainRight = (CardLayout)pnlMainRight.getLayout();        
+        cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
+        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -35,6 +45,10 @@ public class Home_Frame extends javax.swing.JFrame {
             java.text.SimpleDateFormat s = new java.text.SimpleDateFormat("hh:mm:ss aa");
             this.lblClock.setText(s.format(now));
         }).start();
+    }
+
+    public void activeDialogChonSach() {
+
     }
 
     /**
@@ -70,7 +84,6 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlSach = new javax.swing.JPanel();
         qLSach_JPanel1 = new views.QLSach_JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
-        qLPhieuMuon_JPanel1 = new views.QLPhieuMuon_JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
         qLHoiVien_JPanel1 = new views.QLHoiVien_JPanel();
         jPanel_QlThuThu = new javax.swing.JPanel();
@@ -298,8 +311,6 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.add(jPanel_QlSach, "card3");
 
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
-        jPanel_QlPhieuMuon.add(qLPhieuMuon_JPanel1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
@@ -492,11 +503,11 @@ public class Home_Frame extends javax.swing.JFrame {
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
 
-      cardLayoutMainRight.show(pnlMainRight, "card9");
+        cardLayoutMainRight.show(pnlMainRight, "card9");
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseClicked
-    cardLayoutMainRight.show(pnlMainRight, "card3");
+        cardLayoutMainRight.show(pnlMainRight, "card3");
     }//GEN-LAST:event_btnQLSachMouseClicked
 
     private void btnQLPhieuMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseClicked
@@ -504,7 +515,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLPhieuMuonMouseClicked
 
     private void btnQLHoiVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseClicked
-       cardLayoutMainRight.show(pnlMainRight, "card5");
+        cardLayoutMainRight.show(pnlMainRight, "card5");
     }//GEN-LAST:event_btnQLHoiVienMouseClicked
 
     private void btnHoaDonDenBuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseClicked
@@ -516,7 +527,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeMouseClicked
 
     private void btnScanQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScanQRActionPerformed
-       
+
     }//GEN-LAST:event_btnScanQRActionPerformed
 
     private void btnScanQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScanQRMouseClicked
@@ -530,12 +541,12 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
-        
+
     }//GEN-LAST:event_mniQLThuThuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        new DoiMatKhau_JDialog(this,true);
+        new DoiMatKhau_JDialog(this, true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -626,7 +637,6 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlWest;
     private views.QLHoaDonDenBu qLHoaDonDenBu1;
     private views.QLHoiVien_JPanel qLHoiVien_JPanel1;
-    private views.QLPhieuMuon_JPanel qLPhieuMuon_JPanel1;
     private views.QLSach_JPanel qLSach_JPanel1;
     private views.QLThuThu_JPanel qLThuThu_JPanel1;
     private views.ThongKe_JPanel thongKe_JPanel1;

@@ -4,13 +4,7 @@
  */
 package Models;
 
-<<<<<<< Updated upstream
-import java.math.BigInteger;
-import java.sql.Date;
-=======
-//import java.sql.Date;
 import java.util.Date;
->>>>>>> Stashed changes
 
 /**
  *
@@ -18,8 +12,8 @@ import java.util.Date;
  */
 public class HoiVien {
 
-    private BigInteger id;
-    private BigInteger nguoiTao;
+    private long id;
+    private String nguoiTao;
     private String cccd;
     private String fullName;
     private String diaChi;
@@ -33,7 +27,7 @@ public class HoiVien {
     public HoiVien() {
     }
 
-    public HoiVien(BigInteger id, BigInteger nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
+    public HoiVien(long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.cccd = cccd;
@@ -47,19 +41,19 @@ public class HoiVien {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiTao() {
+    public String getNguoiTao() {
         return nguoiTao;
     }
 
-    public void setNguoiTao(BigInteger nguoiTao) {
+    public void setNguoiTao(String nguoiTao) {
         this.nguoiTao = nguoiTao;
     }
 

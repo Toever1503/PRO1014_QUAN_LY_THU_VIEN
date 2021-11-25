@@ -10,11 +10,8 @@ package views;
  */
 public class QLSach_JPanel extends javax.swing.JPanel {
 
-<<<<<<< Updated upstream
-=======
     private static QLSach_JPanel instance;
 
->>>>>>> Stashed changes
     /**
      * Creates new form QLSach_JPanel
      */
@@ -23,17 +20,16 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jTabbedPane1.remove(jPanelCapNhat);
     }
 
-<<<<<<< Updated upstream
-=======
     public static QLSach_JPanel getInstance() {
         if (instance == null) {
             instance = new QLSach_JPanel();
+
         }
         return instance;
 
     }
 
->>>>>>> Stashed changes
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

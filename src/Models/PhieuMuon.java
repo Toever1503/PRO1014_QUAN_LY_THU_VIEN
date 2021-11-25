@@ -4,21 +4,27 @@
  */
 package Models;
 
-import java.math.BigInteger;
 import java.sql.Date;
+
 /**
  *
  * @author haunv
  */
 public class PhieuMuon {
-    private BigInteger id;
-    private BigInteger nguoiMuon;
-    private BigInteger nguoiXuLy;
+
+
+    private long id;
+    private String nguoiMuon;
+    private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
 
-    public PhieuMuon(BigInteger id, BigInteger nguoiMuon, BigInteger nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
+
+    public PhieuMuon() {
+    }
+
+    public PhieuMuon(long id, String nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -27,27 +33,27 @@ public class PhieuMuon {
         this.qr_code = qr_code;
     }
 
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public BigInteger getNguoiMuon() {
+    public String getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(BigInteger nguoiMuon) {
+    public void setNguoiMuon(String nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public BigInteger getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(BigInteger nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
@@ -74,4 +80,10 @@ public class PhieuMuon {
     public void setQr_code(String qr_code) {
         this.qr_code = qr_code;
     }
+
+    @Override
+    public String toString() {
+        return "PhieuMuon{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", ngayMuon=" + ngayMuon + ", hanTra=" + hanTra + ", qr_code=" + qr_code + '}';
+    }
+
 }
