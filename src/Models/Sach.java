@@ -20,11 +20,12 @@ public class Sach {
     private String qr_code;
     private String nhaXuatBan;
     private boolean trangThai;
+    private Double gia;
 
     public Sach() {
     }
 
-    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, String nhaXuatBan, boolean trangThai) {
+    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, String nhaXuatBan, boolean trangThai, double gia) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -33,6 +34,7 @@ public class Sach {
         this.qr_code = qr_code;
         this.nhaXuatBan = nhaXuatBan;
         this.trangThai = trangThai;
+        this.gia = gia;
     }
 
     public long getId() {
@@ -99,9 +101,17 @@ public class Sach {
         this.trangThai = trangThai;
     }
 
+    public Double getGia() {
+        return gia;
+    }
+
+    public void setGia(Double gia) {
+        this.gia = gia;
+    }
+
     @Override
     public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + '}';
+        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", gia=" + gia + '}';
     }
 
 }

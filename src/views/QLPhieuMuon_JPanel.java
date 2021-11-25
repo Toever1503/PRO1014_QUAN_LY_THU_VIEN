@@ -86,29 +86,33 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         btnFirst = new javax.swing.JButton();
         jPanelCapNhat = new javax.swing.JPanel();
         jPanelWrapCapNhat = new javax.swing.JPanel();
+        jPanelDetailSach = new javax.swing.JPanel();
         jLabelNgayTra = new javax.swing.JLabel();
         jLabelMaPhieuMuon = new javax.swing.JLabel();
-        jLabelSachMuon = new javax.swing.JLabel();
         jTextFieldMaPhieuMuon = new javax.swing.JTextField();
         jLabelNguoiMuon = new javax.swing.JLabel();
         jLabelNgayMuon = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         jPanelQR_CODE = new javax.swing.JPanel();
         jLabelQR_CODE = new javax.swing.JLabel();
         jButtonDownLoadQR = new javax.swing.JButton();
+        jLabelErrorMaPhieuMuon = new javax.swing.JLabel();
+        jLabelErrorNgayMuon = new javax.swing.JLabel();
+        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
+        jLabelErrorNguoiMuon = new javax.swing.JLabel();
+        jComboBoxNguoiMuon = new javax.swing.JComboBox<>();
+        jLabelErrorNgayTra = new javax.swing.JLabel();
+        jDateChooserNgayTra = new com.toedter.calendar.JDateChooser();
+        jPanelSachMuon = new javax.swing.JPanel();
+        jLabelSachMuon = new javax.swing.JLabel();
+        btnScanSach = new javax.swing.JButton();
+        jButtonThemSachMuon = new javax.swing.JButton();
         jScrollPaneSachMuon = new javax.swing.JScrollPane();
         tblSachMuon = new javax.swing.JTable();
-        btnScanSach = new javax.swing.JButton();
-        jDateChooserNgayTra = new com.toedter.calendar.JDateChooser();
-        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
-        jLabelErrorMaPhieuMuon = new javax.swing.JLabel();
         jLabelErrorAction = new javax.swing.JLabel();
-        jComboBoxNguoiMuon = new javax.swing.JComboBox<>();
-        jLabelErrorNguoiMuon = new javax.swing.JLabel();
-        jLabelErrorNgayMuon = new javax.swing.JLabel();
-        jLabelErrorNgayTra = new javax.swing.JLabel();
-        jButtonThemSach1 = new javax.swing.JButton();
+        jPanelAction = new javax.swing.JPanel();
+        btnClear = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -148,7 +152,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 .addComponent(jButtonThemPhieuMuon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonChiTietPhieuMuon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 688, Short.MAX_VALUE)
                 .addComponent(txtTimKiemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonTimKiemPhieuMuon)
@@ -231,7 +235,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanelPhanTrangLayout.setHorizontalGroup(
             jPanelPhanTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPhanTrangLayout.createSequentialGroup()
-                .addContainerGap(394, Short.MAX_VALUE)
+                .addContainerGap(849, Short.MAX_VALUE)
                 .addComponent(btnFirst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
@@ -259,66 +263,43 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
         jPanelCapNhat.setLayout(new java.awt.BorderLayout());
 
-        jPanelWrapCapNhat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelWrapCapNhat.setLayout(new java.awt.BorderLayout());
+
+        jPanelDetailSach.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelNgayTra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNgayTra.setText("Ngày trả:");
-        jPanelWrapCapNhat.add(jLabelNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanelDetailSach.add(jLabelNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         jLabelMaPhieuMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelMaPhieuMuon.setText("Mã phiếu mượn:");
-        jPanelWrapCapNhat.add(jLabelMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
-
-        jLabelSachMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSachMuon.setText("Danh Sách:");
-        jPanelWrapCapNhat.add(jLabelSachMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jPanelDetailSach.add(jLabelMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jTextFieldMaPhieuMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldMaPhieuMuon.setEnabled(false);
-        jPanelWrapCapNhat.add(jTextFieldMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 240, -1));
+        jPanelDetailSach.add(jTextFieldMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 420, -1));
 
         jLabelNguoiMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNguoiMuon.setText("Người mượn:");
-        jPanelWrapCapNhat.add(jLabelNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPanelDetailSach.add(jLabelNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jLabelNgayMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNgayMuon.setText("Ngày mượn:");
-        jPanelWrapCapNhat.add(jLabelNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-        jPanelWrapCapNhat.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 62, -1));
-
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-        jPanelWrapCapNhat.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 62, -1));
+        jPanelDetailSach.add(jLabelNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         javax.swing.GroupLayout jPanelQR_CODELayout = new javax.swing.GroupLayout(jPanelQR_CODE);
         jPanelQR_CODE.setLayout(jPanelQR_CODELayout);
         jPanelQR_CODELayout.setHorizontalGroup(
             jPanelQR_CODELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelQR_CODELayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelQR_CODE, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 185, Short.MAX_VALUE)
         );
         jPanelQR_CODELayout.setVerticalGroup(
             jPanelQR_CODELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelQR_CODELayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelQR_CODE, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 188, Short.MAX_VALUE)
         );
 
-        jPanelWrapCapNhat.add(jPanelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 47, -1, -1));
+        jPanelDetailSach.add(jPanelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+        jPanelDetailSach.add(jLabelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jButtonDownLoadQR.setText("Download");
         jButtonDownLoadQR.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +307,41 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 jButtonDownLoadQRActionPerformed(evt);
             }
         });
-        jPanelWrapCapNhat.add(jButtonDownLoadQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, 191, 30));
+        jPanelDetailSach.add(jButtonDownLoadQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 191, 30));
+
+        jLabelErrorMaPhieuMuon.setText(" ");
+        jPanelDetailSach.add(jLabelErrorMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 420, 10));
+        jPanelDetailSach.add(jLabelErrorNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 420, 10));
+
+        jDateChooserNgayMuon.setDateFormatString("dd-MM-yyyy");
+        jPanelDetailSach.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, 23));
+        jPanelDetailSach.add(jLabelErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 420, 10));
+
+        jComboBoxNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanelDetailSach.add(jComboBoxNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, -1));
+        jPanelDetailSach.add(jLabelErrorNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 10));
+
+        jDateChooserNgayTra.setDateFormatString("dd-MM-yyyy");
+        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, 23));
+
+        jPanelWrapCapNhat.add(jPanelDetailSach, java.awt.BorderLayout.PAGE_START);
+
+        jLabelSachMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelSachMuon.setText("Danh Sách:");
+
+        btnScanSach.setText("Scan");
+        btnScanSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScanSachActionPerformed(evt);
+            }
+        });
+
+        jButtonThemSachMuon.setText("Thêm Sách");
+        jButtonThemSachMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonThemSachMuonActionPerformed(evt);
+            }
+        });
 
         tblSachMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -346,41 +361,91 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         });
         jScrollPaneSachMuon.setViewportView(tblSachMuon);
 
-        jPanelWrapCapNhat.add(jScrollPaneSachMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 630, 140));
-
-        btnScanSach.setText("Scan");
-        btnScanSach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnScanSachActionPerformed(evt);
-            }
-        });
-        jPanelWrapCapNhat.add(btnScanSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, -1, -1));
-
-        jDateChooserNgayTra.setDateFormatString("dd-MM-yyyy");
-        jPanelWrapCapNhat.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 240, 23));
-
-        jDateChooserNgayMuon.setDateFormatString("dd-MM-yyyy");
-        jPanelWrapCapNhat.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 240, 23));
-
-        jLabelErrorMaPhieuMuon.setText(" ");
-        jPanelWrapCapNhat.add(jLabelErrorMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 240, -1));
-
         jLabelErrorAction.setText(" ");
-        jPanelWrapCapNhat.add(jLabelErrorAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 370, -1));
 
-        jComboBoxNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanelWrapCapNhat.add(jComboBoxNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 240, -1));
-        jPanelWrapCapNhat.add(jLabelErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 240, 10));
-        jPanelWrapCapNhat.add(jLabelErrorNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 240, 10));
-        jPanelWrapCapNhat.add(jLabelErrorNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 240, 10));
+        javax.swing.GroupLayout jPanelSachMuonLayout = new javax.swing.GroupLayout(jPanelSachMuon);
+        jPanelSachMuon.setLayout(jPanelSachMuonLayout);
+        jPanelSachMuonLayout.setHorizontalGroup(
+            jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSachMuonLayout.createSequentialGroup()
+                .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSachMuonLayout.createSequentialGroup()
+                        .addComponent(jLabelErrorAction, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnScanSach, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonThemSachMuon))
+                    .addGroup(jPanelSachMuonLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSachMuon)
+                            .addComponent(jScrollPaneSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelSachMuonLayout.setVerticalGroup(
+            jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSachMuonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelSachMuon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneSachMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonThemSachMuon)
+                    .addComponent(btnScanSach)
+                    .addComponent(jLabelErrorAction))
+                .addContainerGap())
+        );
 
-        jButtonThemSach1.setText("Thêm Sách");
-        jButtonThemSach1.addActionListener(new java.awt.event.ActionListener() {
+        jPanelWrapCapNhat.add(jPanelSachMuon, java.awt.BorderLayout.CENTER);
+
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonThemSach1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
-        jPanelWrapCapNhat.add(jButtonThemSach1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, -1, -1));
+
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Quay Lại");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelActionLayout = new javax.swing.GroupLayout(jPanelAction);
+        jPanelAction.setLayout(jPanelActionLayout);
+        jPanelActionLayout.setHorizontalGroup(
+            jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelActionLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(829, Short.MAX_VALUE))
+        );
+        jPanelActionLayout.setVerticalGroup(
+            jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelActionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jPanelWrapCapNhat.add(jPanelAction, java.awt.BorderLayout.PAGE_END);
 
         jPanelCapNhat.add(jPanelWrapCapNhat, java.awt.BorderLayout.CENTER);
 
@@ -483,16 +548,20 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonTimKiemPhieuMuonActionPerformed
 
-    private void jButtonThemSach1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemSach1ActionPerformed
+    private void jButtonThemSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemSachMuonActionPerformed
         // TODO add your handling code here:
         Chon_Sach_JDialog.getInstance().show("PHIEU_MUON");
-    }//GEN-LAST:event_jButtonThemSach1ActionPerformed
+    }//GEN-LAST:event_jButtonThemSachMuonActionPerformed
 
     private void jButtonDownLoadQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownLoadQRActionPerformed
         // TODO add your handling code here:
         if(jLabelQR_CODE.getIcon() == null)
             System.out.println("null");
     }//GEN-LAST:event_jButtonDownLoadQRActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -503,10 +572,11 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScanSach;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonChiTietPhieuMuon;
     private javax.swing.JButton jButtonDownLoadQR;
     private javax.swing.JButton jButtonThemPhieuMuon;
-    private javax.swing.JButton jButtonThemSach1;
+    private javax.swing.JButton jButtonThemSachMuon;
     private javax.swing.JButton jButtonTimKiemPhieuMuon;
     private javax.swing.JComboBox<String> jComboBoxNguoiMuon;
     private com.toedter.calendar.JDateChooser jDateChooserNgayMuon;
@@ -524,10 +594,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelQR_CODE;
     private javax.swing.JLabel jLabelSachMuon;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanelAction;
     private javax.swing.JPanel jPanelCapNhat;
     private javax.swing.JPanel jPanelDanhSach;
+    private javax.swing.JPanel jPanelDetailSach;
     private javax.swing.JPanel jPanelPhanTrang;
     private javax.swing.JPanel jPanelQR_CODE;
+    private javax.swing.JPanel jPanelSachMuon;
     private javax.swing.JPanel jPanelWrapCapNhat;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPaneSachMuon;

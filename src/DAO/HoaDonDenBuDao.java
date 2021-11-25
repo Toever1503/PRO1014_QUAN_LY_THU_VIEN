@@ -113,7 +113,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             while (rs.next()) {
                 HoaDonDenBu hddb = new HoaDonDenBu();
                 hddb.setId(rs.getLong("ID"));
-                hddb.setNguoiMuon(rs.getLong("HoiVien"));
+                hddb.setNguoiMuon(rs.getNString("HoiVien"));
                 hddb.setNguoiXuLy(rs.getString("MaQL"));
                 hddb.setTongTien(rs.getFloat("TongTien"));
                 hddb.setNgayTao(rs.getDate("NgayTao"));

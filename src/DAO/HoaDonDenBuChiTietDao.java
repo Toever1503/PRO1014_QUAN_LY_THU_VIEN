@@ -104,8 +104,8 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
             while (rs.next()) {
                 HoaDonDenBuChiTiet hddbct = new HoaDonDenBuChiTiet();
                 hddbct.setHoaDonDenBu(rs.getLong("HoaDonDenBu"));
-                hddbct.setSach(rs.getLong("Sach"));
-                hddbct.setGia(rs.getFloat("GiaSach"));
+                hddbct.setSach(rs.getNString("Sach"));
+                hddbct.setGia(rs.getDouble("GiaSach"));
                 list.add(hddbct);
             }
             rs.getStatement().getConnection().close();

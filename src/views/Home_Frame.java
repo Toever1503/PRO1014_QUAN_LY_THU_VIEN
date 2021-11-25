@@ -35,7 +35,7 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
-        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -84,12 +84,13 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlSach = new javax.swing.JPanel();
         qLSach_JPanel1 = new views.QLSach_JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
+        qLPhieuMuon_JPanel1 = QLPhieuMuon_JPanel.getInstance();
         jPanel_QlHoiVien = new javax.swing.JPanel();
         qLHoiVien_JPanel1 = new views.QLHoiVien_JPanel();
         jPanel_QlThuThu = new javax.swing.JPanel();
         qLThuThu_JPanel1 = new views.QLThuThu_JPanel();
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
-        qLHoaDonDenBu1 = new views.QLHoaDonDenBu();
+        qLHoaDonDenBu1 = QLHoaDonDenBu.getInstance();
         jPanel_ThongKe = new javax.swing.JPanel();
         thongKe_JPanel1 = new views.ThongKe_JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -311,6 +312,8 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.add(jPanel_QlSach, "card3");
 
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
+        jPanel_QlPhieuMuon.add(qLPhieuMuon_JPanel1, java.awt.BorderLayout.CENTER);
+
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
@@ -637,6 +640,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlWest;
     private views.QLHoaDonDenBu qLHoaDonDenBu1;
     private views.QLHoiVien_JPanel qLHoiVien_JPanel1;
+    private views.QLPhieuMuon_JPanel qLPhieuMuon_JPanel1;
     private views.QLSach_JPanel qLSach_JPanel1;
     private views.QLThuThu_JPanel qLThuThu_JPanel1;
     private views.ThongKe_JPanel thongKe_JPanel1;

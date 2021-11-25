@@ -13,7 +13,7 @@ import java.sql.Date;
 public class HoaDonDenBu {
 
     private long id;
-    private long nguoiMuon;
+    private String nguoiMuon;
     private String nguoiXuLy;
     private float tongTien;
     private String qr_code;
@@ -22,7 +22,7 @@ public class HoaDonDenBu {
     public HoaDonDenBu() {
     }
 
-    public HoaDonDenBu(long id, long nguoiMuon, String nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
+    public HoaDonDenBu(long id, String nguoiMuon, String nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -39,11 +39,11 @@ public class HoaDonDenBu {
         this.id = id;
     }
 
-    public long getNguoiMuon() {
+    public String getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(long nguoiMuon) {
+    public void setNguoiMuon(String nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 

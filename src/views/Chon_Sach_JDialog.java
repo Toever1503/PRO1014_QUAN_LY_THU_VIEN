@@ -4,7 +4,9 @@
  */
 package views;
 
+import DAO.SachDAO;
 import DAO.TheLoaiDao;
+import Models.HoaDonDenBuChiTiet;
 import Models.Sach;
 import Models.TheLoai;
 import java.math.BigInteger;
@@ -29,9 +31,11 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private List<Sach> listSach;
     private int index;
     private String ACTION_TYPE;
+    private TheLoaiDao theLoaiDao;
+    private SachDAO sachDAO;
 
     public static void main(String[] args) {
-        Chon_Sach_JDialog.getInstance().show("1");
+        Chon_Sach_JDialog.getInstance().show("NHAP_SACH");
     }
 
     /**
@@ -40,21 +44,21 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private Chon_Sach_JDialog() {
         initComponents();
         setLocationRelativeTo(null);
+        theLoaiDao = TheLoaiDao.getInstance();
+        sachDAO = SachDAO.getInstance();
         tableModelSach = (DefaultTableModel) tblSach.getModel();
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoai.getModel();
 
-        listSach = new ArrayList<Sach>();
-        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
-        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
-        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
-        listSach.add(new Sach(2l, "chung999", "shiki", "khu 4", new Date(2021, 11, 25), "qr-code", "1", true));
-
         fillComboboxTheLoai();
+        listSach = sachDAO.selectByPage(Long.valueOf(0));
         fillTableSach();
     }
 
     public static Chon_Sach_JDialog getInstance() {
-        return instance == null ? new Chon_Sach_JDialog() : instance;
+        if (instance == null) {
+            instance = new Chon_Sach_JDialog();
+        }
+        return instance;
     }
 
     public void show(String type) {
@@ -64,9 +68,26 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         if (ACTION_TYPE == "PHIEU_MUON") {
             btnReset.setVisible(false);
             jPanelDetailSach.setVisible(false);
-        } else {
-            btnReset.setVisible(true);
+        } else if (ACTION_TYPE == "HOA_DON") {
+            btnReset.setVisible(false);
             jPanelDetailSach.setVisible(true);
+
+            lblLoaiSach.setVisible(false);
+            lblSoLuong.setVisible(false);
+            txtSoLuong.setVisible(false);
+
+            radMoi.setVisible(false);
+            radCu.setVisible(false);
+        } else {
+            btnReset.setVisible(false);
+            jPanelDetailSach.setVisible(true);
+
+            lblLoaiSach.setVisible(true);
+            lblSoLuong.setVisible(true);
+            txtSoLuong.setVisible(true);
+
+            radMoi.setVisible(true);
+            radCu.setVisible(true);
         }
     }
 
@@ -90,6 +111,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
         cmbTheLoai = new javax.swing.JComboBox<>();
+        btnSearch = new javax.swing.JButton();
         jPanelDetailSach = new javax.swing.JPanel();
         lblGia = new javax.swing.JLabel();
         lblLoaiSach = new javax.swing.JLabel();
@@ -121,6 +143,11 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 "Mã Sách", "Tên Sách", "Nhà Xuất Bản"
             }
         ));
+        tblSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSach);
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
@@ -158,6 +185,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             }
         });
 
+        btnSearch.setText("Tìm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSachLayout = new javax.swing.GroupLayout(jPanelSach);
         jPanelSach.setLayout(jPanelSachLayout);
         jPanelSachLayout.setHorizontalGroup(
@@ -174,6 +208,8 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 .addComponent(btnLast))
             .addGroup(jPanelSachLayout.createSequentialGroup()
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmbTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -184,7 +220,8 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -202,13 +239,15 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
         lblGia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblGia.setText("Giá");
-        jPanelDetailSach.add(lblGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        jPanelDetailSach.add(lblGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lblLoaiSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblLoaiSach.setText("Loại Sách");
         jPanelDetailSach.add(lblLoaiSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-        jPanelDetailSach.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 160, -1));
-        jPanelDetailSach.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 210, -1));
+        jPanelDetailSach.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 160, -1));
+
+        txtGia.setEnabled(false);
+        jPanelDetailSach.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 210, -1));
 
         buttonGroup1.add(radCu);
         radCu.setText("Cũ");
@@ -221,13 +260,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
         lblSoLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSoLuong.setText("Số Lượng");
-        jPanelDetailSach.add(lblSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanelDetailSach.add(lblSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         lblErrorSoLuong.setText(" ");
-        jPanelDetailSach.add(lblErrorSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 160, -1));
+        jPanelDetailSach.add(lblErrorSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 160, -1));
 
         lblErrorGia.setText("  ");
-        jPanelDetailSach.add(lblErrorGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 210, -1));
+        jPanelDetailSach.add(lblErrorGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 210, -1));
 
         jPanel1.add(jPanelDetailSach, java.awt.BorderLayout.CENTER);
 
@@ -294,28 +333,28 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
 //        index = 
-        listSach = null;
+        listSach = sachDAO.selectByPage(Long.valueOf(index));
         fillTableSach();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
         index++;
-        listSach = null;
+        listSach = sachDAO.selectByPage(Long.valueOf(index));
         fillTableSach();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
         index--;
-        listSach = null;
+        listSach = sachDAO.selectByPage(Long.valueOf(index));
         fillTableSach();
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
         index = 0;
-        listSach = null;
+        listSach = sachDAO.selectByPage(Long.valueOf(index));
         fillTableSach();
     }//GEN-LAST:event_btnFirstActionPerformed
 
@@ -344,23 +383,70 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                         null,
                         null,
                         null,
-                        tblSach.getValueAt(row, 2).toString(), false))) {
+                        tblSach.getValueAt(row, 2).toString(), false, 0))) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
                 }
             }
 
-        } else {
+        } else if (ACTION_TYPE == "HOA_DON") {
+            int row = tblSach.getSelectedRow();
+            if (row == -1) {
+                lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
+            } else {
+//                int soLuong;
+//                if (txtSoLuong.getText().isEmpty()) {
+//                    lblErrorSoLuong.setText("Số lượng không được bỏ trống");
+//                }
+//                try {
+//                    soLuong = Integer.valueOf(txtSoLuong.getText());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    lblErrorSoLuong.setText("Số lượng phải là số nguyên");
+//                    return;
+//                }
+
+                if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(0, tblSach.getValueAt(row, 0).toString() + "-" + tblSach.getValueAt(row, 1), Double.valueOf(txtGia.getText().replace(".0", ""))))) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+                }
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void cmbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTheLoaiActionPerformed
         // TODO add your handling code here:
-//        Long maTheLoai = Long.valueOf(cmbTheLoai.getSelectedItem().toString().split("-")[0]);
-//        listSach = null;
-//        fillComboboxTheLoai();
+        String itemSelected = cmbTheLoai.getSelectedItem() == null ? null : cmbTheLoai.getSelectedItem().toString();
+        if(itemSelected != null){
+            Long maTheLoai = Long.valueOf(itemSelected.split("-")[0]);
+            
+            listSach = sachDAO.selectAllByTheLoai(maTheLoai);
+            fillTableSach();
+        }
     }//GEN-LAST:event_cmbTheLoaiActionPerformed
+
+    private void tblSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSachMouseClicked
+        // TODO add your handling code here:
+        if (ACTION_TYPE == "HOA_DON" || ACTION_TYPE == "NHAP_SACH") {
+            int row = tblSach.getSelectedRow();
+            txtGia.setText(listSach.get(row).getGia().toString());
+        }
+    }//GEN-LAST:event_tblSachMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        String search = txtSearch.getText();
+        if (search.isEmpty()) {
+            listSach = sachDAO.selectByPage(Long.valueOf(0));
+        } else {
+            listSach = sachDAO.searchByKey(search);
+        }
+        fillTableSach();
+
+
+    }//GEN-LAST:event_btnSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -370,6 +456,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbTheLoai;
@@ -408,7 +495,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         if (listSach != null) {
             listSach.forEach((sach) -> {
                 tableModelSach.addRow(new Object[]{
-                    sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()
+                    sach.getId(), sach.getTenSach(), sach.getNhaXuatBan().split("-")[1]
                 });
             });
         }
