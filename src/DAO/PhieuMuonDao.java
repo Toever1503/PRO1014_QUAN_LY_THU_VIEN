@@ -23,6 +23,14 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO nha_xuat_ban (ID, TenNhaXuatBan) VALUES (?, ?)\n"
             + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE FROM phieu_muon LIMIT ?, 30";
+    private static PhieuMuonDao instance;
+
+    public static PhieuMuonDao getInstance() {
+        if (instance == null) {
+            instance = new PhieuMuonDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(PhieuMuon entity) {

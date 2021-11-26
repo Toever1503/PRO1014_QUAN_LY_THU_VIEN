@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class Sach {
 
-    private long id;
+    private Long id;
     private String nguoiTao;
     private String tenSach;
     private String viTri;
@@ -20,11 +20,17 @@ public class Sach {
     private String qr_code;
     private long nhaXuatBan;
     private boolean trangThai;
+    private Double gia;
 
     public Sach() {
     }
 
-    public Sach(long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai) {
+    public Sach(Long id, String tenSach) {
+        this.id = id;
+        this.nguoiTao = nguoiTao;
+    }
+
+    public Sach(Long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai, Double gia) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -33,13 +39,14 @@ public class Sach {
         this.qr_code = qr_code;
         this.nhaXuatBan = nhaXuatBan;
         this.trangThai = trangThai;
+        this.gia = gia;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -99,9 +106,17 @@ public class Sach {
         this.trangThai = trangThai;
     }
 
+    public Double getGia() {
+        return gia;
+    }
+
+    public void setGia(Double gia) {
+        this.gia = gia;
+    }
+
     @Override
     public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + '}';
+        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", gia=" + gia + '}';
     }
 
 }

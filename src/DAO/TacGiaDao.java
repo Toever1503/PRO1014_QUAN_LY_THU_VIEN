@@ -22,6 +22,14 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
     private final String DELETE_SQL = "DELETE * FROM tac_gia WHERE ID = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO tac_gia (ID, TenTacGia) VALUES (?, ?) ON DUPLICATE KEY UPDATE TenTacGia = VALUES(TenTacGia)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTacGia FROM tac_gia LIMIT ?, 30";
+    private static TacGiaDao instance;
+
+    public static TacGiaDao getInstance() {
+        if (instance == null) {
+            instance = new TacGiaDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(TacGia entity) {

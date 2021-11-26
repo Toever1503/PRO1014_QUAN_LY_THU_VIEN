@@ -23,6 +23,14 @@ public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO nha_xuat_ban (ID, TenNhaXuatBan) VALUES (?, ?)\n"
             + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
     private final String SELECT_BY_PAGE_SQL = "SELECT TenNhaXuatBan, ID FROM nha_xuat_ban LIMIT ?, 30";
+    private static NhaXuatBanDao instance;
+
+    public static NhaXuatBanDao getInstance() {
+        if (instance == null) {
+            instance = new NhaXuatBanDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(NhaXuatBan entity) {

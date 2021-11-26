@@ -23,6 +23,14 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
             + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private static TheLoaiDao instance;
+
+    public static TheLoaiDao getInstance() {
+        if (instance == null) {
+            instance = new TheLoaiDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(TheLoai entity) {

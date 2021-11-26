@@ -23,6 +23,14 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet (HoaDonDenBu, Sach, GiaSach) VALUES (?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoaDonDenBu=VALUES(HoaDonDenBu), Sach=VALUES(Sach), GiaSach=VALUES(GiaSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet LIMIT ?, 30";
+    private static HoaDonDenBuChiTietDao instance;
+
+    public static HoaDonDenBuChiTietDao getInstance() {
+        if (instance == null) {
+            instance = new HoaDonDenBuChiTietDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(HoaDonDenBuChiTiet entity) {
