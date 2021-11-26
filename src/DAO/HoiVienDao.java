@@ -155,8 +155,4 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
         return list;
     }
 
-//    @Override
-//    public List<HoiVien> selectALLHau() {
-//        return this.selectBySql(this.SELECT_ALL_SQL);
-//    }
 }

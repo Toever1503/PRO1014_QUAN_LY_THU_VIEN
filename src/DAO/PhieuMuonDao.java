@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author haunv
  */
 public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
-    
+
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE From phieu_muon";
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO phieu_muon(ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?)";
@@ -22,28 +22,28 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO nha_xuat_ban (ID, TenNhaXuatBan) VALUES (?, ?)\n"
             + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
-    private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
+    private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
-    
+
     private HoiVienDao hoiVienDao;
     private QuanLyDao quanLyDao;
     private PhieuMuonChiTietDao phieuMuonChiTietDao;
-    
+
     private static PhieuMuonDao instance;
-    
+
     private PhieuMuonDao() {
         hoiVienDao = HoiVienDao.getInstance();
         quanLyDao = QuanLyDao.getInstance();
         phieuMuonChiTietDao = PhieuMuonChiTietDao.getInstance();
     }
-    
+
     public static PhieuMuonDao getInstance() {
         if (instance == null) {
             instance = new PhieuMuonDao();
         }
         return instance;
     }
-    
+
     @Override
     public int insert(PhieuMuon entity) {
         int row = 0;
@@ -60,7 +60,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return row;
     }
-    
+
     @Override
     public int update(PhieuMuon entity) {
         int row = 0;
@@ -77,7 +77,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return row;
     }
-    
+
     @Override
     public int insertOnUpdate(PhieuMuon entity) {
         int row = 0;
@@ -94,7 +94,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return row;
     }
-    
+
     @Override
     public int delete(Long id) {
         int row = 0;
@@ -105,7 +105,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return row;
     }
-    
+
     @Override
     public PhieuMuon selectByID(Long id) {
         List<PhieuMuon> list = this.selectBySql(this.SELECT_BY_ID_SQL, id);
@@ -114,17 +114,17 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return list.get(0);
     }
-    
+
     @Override
     public List<PhieuMuon> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
-    
+
     @Override
     public List<PhieuMuon> selectALL() {
         return this.selectBySql(this.SELECT_ALL_SQL);
     }
-    
+
     @Override
     protected List<PhieuMuon> selectBySql(String sql, Object... args) {
         List<PhieuMuon> list = new java.util.ArrayList<>();
@@ -145,12 +145,25 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<PhieuMuon> selectALLByKey(String input) {
         return this.selectBySql(this.SELECT_ALL_BY_KEY, input, input, input);
     }
-    
+
+    public int getTotalPage() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM phieu_muon");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+  
 }

@@ -4,6 +4,7 @@
  */
 package views;
 
+import DAO.HoiVienDao;
 import DAO.PhieuMuonDao;
 import Helper.QrCapture;
 import Helper.XImage;
@@ -35,12 +36,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
-    private List<PhieuMuon> listPhieuMuon;
+    private Map<Integer, List<PhieuMuon>> listPhieuMuon;
+    private Map<Long, Sach> listSachMuon;
     private DefaultTableModel tableModelPhieuMuon;
     private DefaultTableModel tableModelSachMuon;
     private DefaultComboBoxModel boxModelNguoiMuon;
-    private Map<Long, Sach> ListSachMuon;
     private PhieuMuonDao phieuMuonDao;
+    private HoiVienDao hoiVienDao;
+    private int pageIndex = 0;
+    private int totalPage;
     private static QLPhieuMuon_JPanel instance;
 
     /**
@@ -49,15 +53,21 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private QLPhieuMuon_JPanel() {
         initComponents();
         phieuMuonDao = PhieuMuonDao.getInstance();
-        jTabbedPane1.remove(jPanelCapNhat);
-        listPhieuMuon = phieuMuonDao.selectByPage(Long.valueOf(0));
-        ListSachMuon = new HashMap<Long, Sach>();
+        hoiVienDao = HoiVienDao.getInstance();
+        listPhieuMuon = new HashMap<Integer, List<PhieuMuon>>();
+        listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
+
+        listSachMuon = new HashMap<Long, Sach>();
+
         tableModelPhieuMuon = (DefaultTableModel) tblPhieuMuon.getModel();
         tableModelSachMuon = (DefaultTableModel) tblSachMuon.getModel();
         boxModelNguoiMuon = (DefaultComboBoxModel) jComboBoxNguoiMuon.getModel();
 
-        fillTablePhieuMuon();
+        fillTablePhieuMuon(listPhieuMuon.get(0));
         fillComBoBoxNguoiMuon();
+
+        jTabbedPane1.remove(jPanelCapNhat);
+        totalPage = phieuMuonDao.getTotalPage();
     }
 
     public static QLPhieuMuon_JPanel getInstance() {
@@ -81,8 +91,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jButtonTimKiemPhieuMuon = new javax.swing.JButton();
         txtTimKiemPhieuMuon = new javax.swing.JTextField();
-        jButtonThemPhieuMuon = new javax.swing.JButton();
+        btnThemPhieuMuon = new javax.swing.JButton();
         jButtonChiTietPhieuMuon = new javax.swing.JButton();
+        btnLamMoi = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         tblPhieuMuon = new javax.swing.JTable();
         jPanelPhanTrang = new javax.swing.JPanel();
@@ -113,9 +124,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelSachMuon = new javax.swing.JLabel();
         btnScanSach = new javax.swing.JButton();
         jButtonThemSachMuon = new javax.swing.JButton();
-        jScrollPaneSachMuon = new javax.swing.JScrollPane();
-        tblSachMuon = new javax.swing.JTable();
         jLabelErrorAction = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSachMuon = new javax.swing.JTable();
         jPanelAction = new javax.swing.JPanel();
         btnClear = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -136,10 +147,10 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             }
         });
 
-        jButtonThemPhieuMuon.setText("Thêm Mới");
-        jButtonThemPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
+        btnThemPhieuMuon.setText("Thêm Mới");
+        btnThemPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonThemPhieuMuonActionPerformed(evt);
+                btnThemPhieuMuonActionPerformed(evt);
             }
         });
 
@@ -150,16 +161,25 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLamMoi.setText("Làm Mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonThemPhieuMuon)
+                .addComponent(btnThemPhieuMuon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonChiTietPhieuMuon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 688, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLamMoi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 611, Short.MAX_VALUE)
                 .addComponent(txtTimKiemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonTimKiemPhieuMuon)
@@ -173,7 +193,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     .addComponent(jButtonTimKiemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimKiemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonChiTietPhieuMuon)
-                    .addComponent(jButtonThemPhieuMuon))
+                    .addComponent(btnThemPhieuMuon)
+                    .addComponent(btnLamMoi))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -190,7 +211,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Người Mượn", "Ngày mượn", "Thời hạn trả", "Người xử lí", "Trạng thái"
+                "STT", "Mã phiếu", "Người Mượn", "Ngày mượn", "Thời hạn trả", "Người xử lí", "QR_CODE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -342,25 +363,20 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabelErrorAction.setText(" ");
+
         tblSachMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
                 "Mã Sách", "Tên Sách", "Nhà Xuất Bản"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPaneSachMuon.setViewportView(tblSachMuon);
-
-        jLabelErrorAction.setText(" ");
+        ));
+        jScrollPane1.setViewportView(tblSachMuon);
 
         javax.swing.GroupLayout jPanelSachMuonLayout = new javax.swing.GroupLayout(jPanelSachMuon);
         jPanelSachMuon.setLayout(jPanelSachMuonLayout);
@@ -377,9 +393,10 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     .addGroup(jPanelSachMuonLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelSachMuon)
-                            .addComponent(jScrollPaneSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanelSachMuonLayout.createSequentialGroup()
+                                .addComponent(jLabelSachMuon)
+                                .addGap(0, 1013, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         jPanelSachMuonLayout.setVerticalGroup(
@@ -388,7 +405,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabelSachMuon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneSachMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonThemSachMuon)
@@ -400,6 +417,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanelWrapCapNhat.add(jPanelSachMuon, java.awt.BorderLayout.CENTER);
 
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
+        btnClear.setText("Làm Mới");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -407,6 +425,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         });
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
+        btnSave.setText("Lưu");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -426,12 +445,12 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelActionLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClear)
+                .addGap(23, 23, 23)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(829, Short.MAX_VALUE))
+                .addContainerGap(734, Short.MAX_VALUE))
         );
         jPanelActionLayout.setVerticalGroup(
             jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,8 +458,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -465,58 +485,62 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         PhieuMuon phieuMuon = getForm();
         if (phieuMuon == null) {
             return;
-        } else if (ListSachMuon.size() == 0) {
-            jLabelErrorAction.setText("Hãy chọn sách cần mượn!");
         } else {
             //save phieu muon
             // save sach
-            String qr_codeKey = phieuMuon.getQr_code().split("-")[1];
-            String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey + ".png";
-            if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
-                jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(jLabelQR_CODE.getWidth(), jLabelQR_CODE.getWidth(), HEIGHT)));
-            }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-
+        resetForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-        listPhieuMuon = null;
-        fillTablePhieuMuon();
+        pageIndex = totalPage;
+        List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+        fillTablePhieuMuon(listPM);
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        listPhieuMuon = null;
-        if (listPhieuMuon == null) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy sách!");
+        if (pageIndex + 1 > totalPage) {
+            JOptionPane.showMessageDialog(this, "Hiện đã là trang đầu tiên!");
+            return;
+        } else {
+            pageIndex++;
+            List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+            fillTablePhieuMuon(listPM);
         }
-        fillTablePhieuMuon();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-        listPhieuMuon = null;
-        if (listPhieuMuon == null) {
-            JOptionPane.showMessageDialog(this, "Không tìm thấy sách!");
+
+        if (pageIndex - 1 < 0) {
+            JOptionPane.showMessageDialog(this, "Hiện đã là trang đầu tiên!");
+            return;
+        } else {
+            pageIndex--;
+            List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+            fillTablePhieuMuon(listPM);
         }
-        fillTablePhieuMuon();
-        fillComBoBoxNguoiMuon();
+
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
-        listPhieuMuon = null;
-        fillTablePhieuMuon();
+        pageIndex = 0;
+        List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+        fillTablePhieuMuon(listPM);
     }//GEN-LAST:event_btnFirstActionPerformed
 
-    private void jButtonThemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemPhieuMuonActionPerformed
+    private void btnThemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuMuonActionPerformed
         // TODO add your handling code here:
+        btnSave.setText("Thêm");
+        resetForm();
         activeTabCapNhat();
-    }//GEN-LAST:event_jButtonThemPhieuMuonActionPerformed
+    }//GEN-LAST:event_btnThemPhieuMuonActionPerformed
 
     private void jButtonChiTietPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChiTietPhieuMuonActionPerformed
         // TODO add your handling code here:
@@ -524,7 +548,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn phiếu mượn cần xem!");
         } else {
-            setForm(listPhieuMuon.get(row));
+            btnSave.setText("Lưu");
+            setForm(listPhieuMuon.get(pageIndex).get(row));
             activeTabCapNhat();
         }
     }//GEN-LAST:event_jButtonChiTietPhieuMuonActionPerformed
@@ -545,14 +570,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private void jButtonTimKiemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemPhieuMuonActionPerformed
         // TODO add your handling code here:
         String search = txtTimKiemPhieuMuon.getText();
+        List<PhieuMuon> list;
         if (search.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy nhập thông tin cần tìm kiếm!");
-            listPhieuMuon = phieuMuonDao.selectByPage(Long.valueOf(0));
-
         } else {
             search = "%" + search + "%";
-            listPhieuMuon = phieuMuonDao.selectALLByKey(search);
-            fillTablePhieuMuon();
+            list = phieuMuonDao.selectALLByKey(search);
+            fillTablePhieuMuon(list);
         }
     }//GEN-LAST:event_jButtonTimKiemPhieuMuonActionPerformed
 
@@ -571,19 +595,25 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        fillTablePhieuMuon(listPhieuMuon.get(0));
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDownLoadQR;
     private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScanSach;
+    private javax.swing.JButton btnThemPhieuMuon;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonChiTietPhieuMuon;
-    private javax.swing.JButton jButtonThemPhieuMuon;
     private javax.swing.JButton jButtonThemSachMuon;
     private javax.swing.JButton jButtonTimKiemPhieuMuon;
     private javax.swing.JComboBox<String> jComboBoxNguoiMuon;
@@ -611,7 +641,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelSachMuon;
     private javax.swing.JPanel jPanelWrapCapNhat;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JScrollPane jScrollPaneSachMuon;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblQR_CODE;
     private javax.swing.JTable tblPhieuMuon;
@@ -625,84 +655,119 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jTabbedPane1.setSelectedIndex(1);
     }
 
-    public void fillTablePhieuMuon() {
+    public void fillTablePhieuMuon(List<PhieuMuon> list) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        listPhieuMuon.add(new PhieuMuon(1l, "smm", "12", new Date(2021, 11, 24), new Date(2021, 11, 24), "qrcode"));
-
         tableModelPhieuMuon.setRowCount(0);
-
-        for (int i = 0; i < listPhieuMuon.size(); ++i) {
-            PhieuMuon phieuMuon = listPhieuMuon.get(i);
+        if (list == null) {
+            JOptionPane.showMessageDialog(this, "Không có sách nào!");
+            return;
+        }
+        for (int i = 0; i < list.size(); ++i) {
+            PhieuMuon phieuMuon = list.get(i);
             tableModelPhieuMuon.addRow(new Object[]{
                 i + 1, phieuMuon.getId(), phieuMuon.getNguoiMuon().getFullName(), dateFormat.format(phieuMuon.getNgayMuon()), dateFormat.format(phieuMuon.getHanTra()), phieuMuon.getNguoiXuLy().getFullName(), phieuMuon.getQr_code()
             });
-
         }
     }
 
     public void fillComBoBoxNguoiMuon() {
-        List<String> listNguoiMuon = new ArrayList<String>();
-        listNguoiMuon.add("1-SHIKI");
-        listNguoiMuon.add("2-HAU");
-        listNguoiMuon.add("3-ORIS");
-
+        List<HoiVien> listNguoiMuon = hoiVienDao.selectALL();
+        if (listNguoiMuon == null) {
+            return;
+        }
         boxModelNguoiMuon.removeAllElements();
-        listNguoiMuon.forEach((nguoiMuon) -> boxModelNguoiMuon.addElement(nguoiMuon));
+        listNguoiMuon.forEach((nguoiMuon) -> boxModelNguoiMuon.addElement(nguoiMuon.getId() + "-" + nguoiMuon.getFullName()));
     }
 
     public PhieuMuon getForm() {
-        Long maPhieuMuon = txtMaPhieuMuon.getText().isEmpty() ? null : Long.valueOf(txtMaPhieuMuon.getText());
-        String nguoiMuon = jComboBoxNguoiMuon.getSelectedItem().toString().split("-")[0];
-        Date ngayMuon = jDateChooserNgayMuon.getDate() == null ? null : new Date(jDateChooserNgayMuon.getDate().getTime());
+        Long maPhieuMuon = txtMaPhieuMuon.getText().isEmpty() ? null : Long.valueOf(txtMaPhieuMuon.getText()); //parse maPhieuMuon
+        String nguoiMuon = jComboBoxNguoiMuon.getSelectedItem().toString().split("-")[0]; // parse id hoiVien
+        Date ngayMuon = jDateChooserNgayMuon.getDate() == null ? null : new Date(jDateChooserNgayMuon.getDate().getTime()); // parse date
         Date ngayTra = jDateChooserNgayTra.getDate() == null ? null : new Date(jDateChooserNgayTra.getDate().getTime());
 
         int check = 0;
+        //check valid date
         if (ngayMuon == null) {
             jLabelErrorNgayMuon.setText("Định dạng ngày tháng phải là 05-03-2021");
         } else {
             jLabelErrorNgayMuon.setText("");
             check++;
         }
-
+        //check valid date
         if (ngayTra == null) {
             jLabelErrorNgayTra.setText("Định dạng ngày tháng phải là 05-03-2021");
         } else {
             check++;
             jLabelErrorNgayTra.setText("");
         }
-        PhieuMuon phieuMuon = new PhieuMuon();
-        phieuMuon.setId(maPhieuMuon);
+        //check list sachMuon exist?
+        if (listSachMuon.size() == 0) {
+            jLabelErrorAction.setText("Hãy chọn sách cần mượn!");
+        } else {
+            check++;
+        }
 
-        HoiVien nm = new HoiVien();
-        nm.setId(Long.valueOf(nguoiMuon));
-        phieuMuon.setNguoiMuon(nm);
-        phieuMuon.setNgayMuon(ngayMuon);
-        phieuMuon.setHanTra(ngayTra);
-        phieuMuon.setQr_code("sach-" + Calendar.getInstance().getTimeInMillis());
+        PhieuMuon phieuMuon = null;
+        if (check == 3) {
+            phieuMuon = new PhieuMuon();
+            phieuMuon.setId(maPhieuMuon);
 
-        return check == 2 ? phieuMuon : null;
+            HoiVien nm = new HoiVien();
+            nm.setId(Long.valueOf(nguoiMuon));
+            phieuMuon.setNguoiMuon(nm);
+            phieuMuon.setNgayMuon(ngayMuon);
+            phieuMuon.setHanTra(ngayTra);
+            phieuMuon.setQr_code("sach-" + Calendar.getInstance().getTimeInMillis());
+            
+            String qr_codeKey = phieuMuon.getQr_code().split("-")[1]; // create key phieuMuon
+            String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey + ".png"; //create qr_code path
+            // create qr_code image and parse qrcode image fit with label qr_code
+            if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
+                jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(jLabelQR_CODE.getWidth(), jLabelQR_CODE.getWidth(), HEIGHT)));
+            }
+        }
+
+        return phieuMuon;
     }
 
     public void setForm(PhieuMuon phieuMuon) {
-        
         txtMaPhieuMuon.setText(String.valueOf(phieuMuon.getId()));
         jDateChooserNgayMuon.setDate(phieuMuon.getNgayMuon());
         jDateChooserNgayTra.setDate(phieuMuon.getHanTra());
-//        lblQR_CODE.setIcon(new ImageIcon(new ImageIcon(Helper.XImage.PHIEUMUON_UPLOAD.concat("/" + phieuMuon.getQr_code().split("-")[1] + ".png")).getImage().getScaledInstance(lblQR_CODE.getWidth(), lblQR_CODE.getHeight(), Image.SCALE_DEFAULT)));
         btnDownLoadQR.setVisible(true);
-        
-        phieuMuon.getListPhieuMuonChiTiet().forEach((pmct)->{
-            tableModelSachMuon.addRow(new Object[]{
-                pmct.getSach().getId(), pmct.getSach().getTenSach(), pmct.getSach().getNhaXuatBan()
+        tableModelSachMuon.setRowCount(0);
+        HoiVien nguoiMuon = phieuMuon.getNguoiMuon();
+        jComboBoxNguoiMuon.setSelectedItem(nguoiMuon.getId() + "-" + nguoiMuon.getFullName());
+
+        if (phieuMuon.getListPhieuMuonChiTiet() != null) {
+            phieuMuon.getListPhieuMuonChiTiet().forEach((pmct) -> {
+                Sach sach = pmct.getSach();
+                listSachMuon.put(sach.getId(), sach);
+                tableModelSachMuon.addRow(new Object[]{
+                    sach.getId(),
+                    sach.getTenSach(),
+                    sach.getNhaXuatBan().getTenNhaXuatBan()
+                });
             });
-        });
+            tblSachMuon.setModel(tableModelSachMuon);
+        }
+    }
+
+    public void resetForm() {
+        txtMaPhieuMuon.setText(null);
+        jComboBoxNguoiMuon.setSelectedIndex(0);
+        jDateChooserNgayMuon.setDate(null);
+        jDateChooserNgayTra.setDate(null);
+        tableModelSachMuon.setRowCount(0);
+        lblQR_CODE.setIcon(null);
+        btnDownLoadQR.setVisible(false);
     }
 
     public boolean addSachMuon(Sach sach) {
-        if (ListSachMuon.containsKey(sach.getId())) {
+        if (listSachMuon.containsKey(sach.getId())) {
             return false;
         } else {
-            ListSachMuon.put(sach.getId(), sach);
+            listSachMuon.put(sach.getId(), sach);
             tableModelSachMuon.addRow(new Object[]{sach.getId(), sach.getTenSach(), sach.getNhaXuatBan().getTenNhaXuatBan()});
             return true;
         }
