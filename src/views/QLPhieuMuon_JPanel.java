@@ -46,7 +46,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLPhieuMuon
      */
-    public QLPhieuMuon_JPanel() {
+    private QLPhieuMuon_JPanel() {
         initComponents();
         phieuMuonDao = PhieuMuonDao.getInstance();
         jTabbedPane1.remove(jPanelCapNhat);

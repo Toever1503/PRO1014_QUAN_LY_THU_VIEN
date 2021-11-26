@@ -10,11 +10,20 @@ package views;
  */
 public class ThongKe_JPanel extends javax.swing.JPanel {
 
+    private static ThongKe_JPanel instance;
+
     /**
      * Creates new form ThongKe_JPanel
      */
-    public ThongKe_JPanel() {
+    private ThongKe_JPanel() {
         initComponents();
+    }
+
+    public static ThongKe_JPanel getInstance() {
+        if (instance == null) {
+            instance = new ThongKe_JPanel();
+        }
+        return instance;
     }
 
     /**

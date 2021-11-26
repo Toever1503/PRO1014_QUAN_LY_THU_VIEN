@@ -10,12 +10,21 @@ package views;
  */
 public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
+    private static QLHoiVien_JPanel instance;
+
     /**
      * Creates new form QlNguoiDung1
      */
-    public QLHoiVien_JPanel() {
+    private QLHoiVien_JPanel() {
         initComponents();
         tabCapNhat.remove(jPanelCapNhat);
+    }
+
+    public static QLHoiVien_JPanel getInstance() {
+        if (instance == null) {
+            instance = new QLHoiVien_JPanel();
+        }
+        return instance;
     }
 
     /**
@@ -313,7 +322,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         activeTabCapNhat();
     }//GEN-LAST:event_jButton10ActionPerformed
-    public void activeTabCapNhat(){
+    public void activeTabCapNhat() {
         tabCapNhat.add(jPanelCapNhat, "Cập Nhật");
         tabCapNhat.setSelectedIndex(1);
     }

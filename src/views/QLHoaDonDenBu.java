@@ -39,7 +39,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     /**
      * Creates new form QLHoaDonDenBu
      */
-    public QLHoaDonDenBu() {
+    private QLHoaDonDenBu() {
         initComponents();
         this.init();
     }

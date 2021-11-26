@@ -34,7 +34,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     private NhaXuatBanDao nhaXuatBanDao;
 
     private SachDAO() {
-        hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
+//        hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
         quanLyDao = QuanLyDao.getInstance();
         nhaXuatBanDao = NhaXuatBanDao.getInstance();
     }
@@ -44,6 +44,10 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             instance = new SachDAO();
         }
         return instance;
+    }
+
+    public void setHoaDonNhapSachChiTietDao(HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao) {
+        this.hoaDonNhapSachChiTietDao = hoaDonNhapSachChiTietDao;
     }
 
     @Override
@@ -166,10 +170,10 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     public List<Sach> selectAllByTheLoai(Long theLoai) {
         return this.selectBySql(this.SELECT_ALL_BY_TL, theLoai);
     }
-    
+
     public static void main(String[] args) {
         SachDAO sachDAO = SachDAO.getInstance();
-        
+
         sachDAO.selectByID(Long.valueOf(1));
     }
 }

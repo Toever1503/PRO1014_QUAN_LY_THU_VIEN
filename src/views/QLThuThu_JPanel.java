@@ -10,12 +10,21 @@ package views;
  */
 public class QLThuThu_JPanel extends javax.swing.JPanel {
 
+    private static QLThuThu_JPanel instance;
+
     /**
      * Creates new form QLThuThu_JPanel
      */
-    public QLThuThu_JPanel() {
+    private QLThuThu_JPanel() {
         initComponents();
         tabs.remove(tabCapNhat);
+    }
+
+    public static QLThuThu_JPanel getInstance() {
+        if (instance == null) {
+            instance = new QLThuThu_JPanel();
+        }
+        return instance;
     }
 
     /**
@@ -418,23 +427,23 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-       
+
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-   
+
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-   
+
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
- 
+
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-     
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -442,7 +451,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
- 
+
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
@@ -470,7 +479,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         activeTabCapNhat();
     }//GEN-LAST:event_jButton10ActionPerformed
-    public void activeTabCapNhat(){
+    public void activeTabCapNhat() {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
