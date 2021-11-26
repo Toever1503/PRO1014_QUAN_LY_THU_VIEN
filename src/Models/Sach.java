@@ -13,22 +13,23 @@ import java.sql.Date;
 public class Sach {
 
     private Long id;
-    private QuanLy nguoiTao;
+    private String nguoiTao;
     private String tenSach;
     private String viTri;
     private Date ngayTao;
     private String qr_code;
-    private NhaXuatBan nhaXuatBan;
+    private String nhaXuatBan;
     private boolean trangThai;
-    private HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet;
+    private Double gia;
 
     public Sach() {
     }
+
     public Sach(Long id) {
-        this.id=id;
+        this.id = id;
     }
 
-    public Sach(long id, QuanLy nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, NhaXuatBan nhaXuatBan, boolean trangThai, HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet) {
+    public Sach(Long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, String nhaXuatBan, boolean trangThai, Double gia) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -37,22 +38,22 @@ public class Sach {
         this.qr_code = qr_code;
         this.nhaXuatBan = nhaXuatBan;
         this.trangThai = trangThai;
-        this.hoaDonNhapSachChiTiet = hoaDonNhapSachChiTiet;
+        this.gia = gia;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public QuanLy getNguoiTao() {
+    public String getNguoiTao() {
         return nguoiTao;
     }
 
-    public void setNguoiTao(QuanLy nguoiTao) {
+    public void setNguoiTao(String nguoiTao) {
         this.nguoiTao = nguoiTao;
     }
 
@@ -88,11 +89,11 @@ public class Sach {
         this.qr_code = qr_code;
     }
 
-    public NhaXuatBan getNhaXuatBan() {
+    public String getNhaXuatBan() {
         return nhaXuatBan;
     }
 
-    public void setNhaXuatBan(NhaXuatBan nhaXuatBan) {
+    public void setNhaXuatBan(String nhaXuatBan) {
         this.nhaXuatBan = nhaXuatBan;
     }
 
@@ -104,17 +105,12 @@ public class Sach {
         this.trangThai = trangThai;
     }
 
-    public HoaDonNhapSachChiTiet getHoaDonNhapSachChiTiet() {
-        return hoaDonNhapSachChiTiet;
+    public Double getGia() {
+        return gia;
     }
 
-    public void setHoaDonNhapSachChiTiet(HoaDonNhapSachChiTiet hoaDonNhapSachChiTiet) {
-        this.hoaDonNhapSachChiTiet = hoaDonNhapSachChiTiet;
-    }
-
-    @Override
-    public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", hoaDonNhapSachChiTiet=" + hoaDonNhapSachChiTiet + '}';
+    public void setGia(Double gia) {
+        this.gia = gia;
     }
 
 }

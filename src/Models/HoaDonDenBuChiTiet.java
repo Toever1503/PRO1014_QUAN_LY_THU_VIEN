@@ -10,14 +10,14 @@ package Models;
  */
 public class HoaDonDenBuChiTiet {
 
-    private long hoaDonDenBu;
-    private Sach sach;
+    private Long hoaDonDenBu;
+    private String sach;
     private Double gia;
 
     public HoaDonDenBuChiTiet() {
     }
 
-    public HoaDonDenBuChiTiet(long hoaDonDenBu, Sach sach, Double gia) {
+    public HoaDonDenBuChiTiet(Long hoaDonDenBu, String sach, Double gia) {
         this.hoaDonDenBu = hoaDonDenBu;
         this.sach = sach;
         this.gia = gia;
@@ -31,11 +31,11 @@ public class HoaDonDenBuChiTiet {
         this.hoaDonDenBu = hoaDonDenBu;
     }
 
-    public Sach getSach() {
+    public String getSach() {
         return sach;
     }
 
-    public void setSach(Sach sach) {
+    public void setSach(String sach) {
         this.sach = sach;
     }
 

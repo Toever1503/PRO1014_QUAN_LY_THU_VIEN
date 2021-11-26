@@ -12,7 +12,9 @@ import Models.TheLoai;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,14 +30,16 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private String type;
     private DefaultTableModel tableModelSach;
     private DefaultComboBoxModel boxModelTheLoai;
-    private List<Sach> listSach;
-    private int index;
+    private Map<Integer, List<Sach>> listSach;
     private String ACTION_TYPE;
     private TheLoaiDao theLoaiDao;
     private SachDAO sachDAO;
+    private int pageIndex = 0;
+    private int total;
 
     public static void main(String[] args) {
-        Chon_Sach_JDialog.getInstance().show("NHAP_SACH");
+//        Chon_Sach_JDialog.getInstance().show("NHAP_SACH");
+        new Chon_Sach_JDialog().setVisible(true);
     }
 
     /**
@@ -46,12 +50,14 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         theLoaiDao = TheLoaiDao.getInstance();
         sachDAO = SachDAO.getInstance();
+        total = sachDAO.getTotal();
         tableModelSach = (DefaultTableModel) tblSach.getModel();
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoai.getModel();
-
+//
+        listSach = new HashMap<Integer, List<Sach>>();
+        listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
         fillComboboxTheLoai();
-        listSach = sachDAO.selectByPage(Long.valueOf(0));
-        fillTableSach();
+        fillTableSach(listSach.get(0));
     }
 
     public static Chon_Sach_JDialog getInstance() {
@@ -63,32 +69,33 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
     public void show(String type) {
         setVisible(true);
-        fillTableSach();
+        fillTableSach(listSach.get(0));
         ACTION_TYPE = type;
-        if (ACTION_TYPE == "PHIEU_MUON") {
-            btnReset.setVisible(false);
-            jPanelDetailSach.setVisible(false);
-        } else if (ACTION_TYPE == "HOA_DON") {
-            btnReset.setVisible(false);
-            jPanelDetailSach.setVisible(true);
 
-            lblLoaiSach.setVisible(false);
-            lblSoLuong.setVisible(false);
-            txtSoLuong.setVisible(false);
-
-            radMoi.setVisible(false);
-            radCu.setVisible(false);
-        } else {
-            btnReset.setVisible(false);
-            jPanelDetailSach.setVisible(true);
-
-            lblLoaiSach.setVisible(true);
-            lblSoLuong.setVisible(true);
-            txtSoLuong.setVisible(true);
-
-            radMoi.setVisible(true);
-            radCu.setVisible(true);
-        }
+//        if (ACTION_TYPE == "PHIEU_MUON") {
+//            btnReset.setVisible(false);
+//            jPanelDetailSach.setVisible(false);
+//        } else if (ACTION_TYPE == "HOA_DON") {
+//            btnReset.setVisible(false);
+//            jPanelDetailSach.setVisible(true);
+//
+//            lblLoaiSach.setVisible(false);
+//            lblSoLuong.setVisible(false);
+//            txtSoLuong.setVisible(false);
+//
+//            radMoi.setVisible(false);
+//            radCu.setVisible(false);
+//        } else {
+//            btnReset.setVisible(false);
+//            jPanelDetailSach.setVisible(true);
+//
+//            lblLoaiSach.setVisible(true);
+//            lblSoLuong.setVisible(true);
+//            txtSoLuong.setVisible(true);
+//
+//            radMoi.setVisible(true);
+//            radCu.setVisible(true);
+//        }
     }
 
     /**
@@ -134,13 +141,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
         tblSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Nhà Xuất Bản"
+                "Mã Sách", "Tên Sách"
             }
         ));
         tblSach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,30 +339,38 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-//        index = 
-        listSach = sachDAO.selectByPage(Long.valueOf(index));
-        fillTableSach();
+        pageIndex = 0;
+        fillTableSach(listSach.get(pageIndex));
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        index++;
-        listSach = sachDAO.selectByPage(Long.valueOf(index));
-        fillTableSach();
+        if (pageIndex + 1 > total) {
+            JOptionPane.showMessageDialog(this, "Bạn đang ở trang cuối!");
+        } else {
+            pageIndex++;
+            List<Sach> list = listSach.get(pageIndex);
+            if (list == null) {
+                list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+            }
+            fillTableSach(list);
+        }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-        index--;
-        listSach = sachDAO.selectByPage(Long.valueOf(index));
-        fillTableSach();
+        if (pageIndex - 1 < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn đang ở trang đầu!");
+        } else {
+            pageIndex--;
+            fillTableSach(listSach.get(pageIndex));
+        }
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
-        index = 0;
-        listSach = sachDAO.selectByPage(Long.valueOf(index));
-        fillTableSach();
+        pageIndex = total;
+        fillTableSach(listSach.get(pageIndex));
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
@@ -376,14 +391,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             if (row == -1) {
                 lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
             } else {
-                if (QLPhieuMuon_JPanel.getInstance().addSachMuon(new Sach(
-                        Long.valueOf(tblSach.getValueAt(row, 0).toString()),
-                        null,
-                        tblSach.getValueAt(row, 1).toString(),
-                        null,
-                        null,
-                        null,
-                        tblSach.getValueAt(row, 2).toString(), false, 0))) {
+                if (QLPhieuMuon_JPanel.getInstance().addSachMuon(listSach.get(pageIndex).get(row))) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
@@ -407,11 +415,11 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 //                    return;
 //                }
 
-                if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(0, tblSach.getValueAt(row, 0).toString() + "-" + tblSach.getValueAt(row, 1), Double.valueOf(txtGia.getText().replace(".0", ""))))) {
-                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
-                }
+//                if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(0, tblSach.getValueAt(row, 0).toString() + "-" + tblSach.getValueAt(row, 1), Double.valueOf(txtGia.getText().replace(".0", ""))))) {
+//                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+//                }
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -419,11 +427,11 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     private void cmbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTheLoaiActionPerformed
         // TODO add your handling code here:
         String itemSelected = cmbTheLoai.getSelectedItem() == null ? null : cmbTheLoai.getSelectedItem().toString();
-        if(itemSelected != null){
+        if (itemSelected != null) {
             Long maTheLoai = Long.valueOf(itemSelected.split("-")[0]);
-            
-            listSach = sachDAO.selectAllByTheLoai(maTheLoai);
-            fillTableSach();
+
+            List<Sach> listSachByTheLoai = sachDAO.selectAllByTheLoai(maTheLoai);
+            fillTableSach(listSachByTheLoai);
         }
     }//GEN-LAST:event_cmbTheLoaiActionPerformed
 
@@ -431,7 +439,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (ACTION_TYPE == "HOA_DON" || ACTION_TYPE == "NHAP_SACH") {
             int row = tblSach.getSelectedRow();
-            txtGia.setText(listSach.get(row).getGia().toString());
+            txtGia.setText(listSach.get(pageIndex).get(row).getHoaDonNhapSachChiTiet().getGia().toString());
         }
     }//GEN-LAST:event_tblSachMouseClicked
 
@@ -439,11 +447,15 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         String search = txtSearch.getText();
         if (search.isEmpty()) {
-            listSach = sachDAO.selectByPage(Long.valueOf(0));
+            JOptionPane.showMessageDialog(this, "Hãy điền thông tin sách cần tìm kiếm!");
         } else {
-            listSach = sachDAO.searchByKey(search);
+            List<Sach> list = sachDAO.searchByKey(search);
+            if (list == null) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách!");
+            } else {
+                fillTableSach(list);
+            }
         }
-        fillTableSach();
 
 
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -480,8 +492,8 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void resetForm() {
-        listSach = null;
-        fillTableSach();
+        pageIndex = 0;
+        fillTableSach(listSach.get(pageIndex));
         cmbTheLoai.setSelectedIndex(0);
         txtGia.setText(null);
         txtSearch.setText(null);
@@ -490,15 +502,14 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         lblErrorSoLuong.setText(null);
     }
 
-    private void fillTableSach() {
+    private void fillTableSach(List<Sach> list) {
         tableModelSach.setRowCount(0);
-        if (listSach != null) {
-            listSach.forEach((sach) -> {
-                tableModelSach.addRow(new Object[]{
-                    sach.getId(), sach.getTenSach(), sach.getNhaXuatBan().split("-")[1]
-                });
+        System.out.println("runn");
+        list.forEach((sach) -> {
+            tableModelSach.addRow(new Object[]{
+                sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()
             });
-        }
+        });
     }
 
     private void fillComboboxTheLoai() {

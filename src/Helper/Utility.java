@@ -43,7 +43,8 @@ public class Utility {
 
         return con; // return null if connecttion failed else connection object
     }
-      private static PreparedStatement getStm(String sql, Object... args) throws  Exception {
+
+    public static PreparedStatement getStm(String sql, Object... args) throws Exception {
         PreparedStatement ps = null;
         if (sql.trim().startsWith("{")) {
             ps = new Utility().getConnection().prepareCall(sql);
@@ -56,7 +57,7 @@ public class Utility {
         return ps;
     }
 
-    public static ResultSet query(String sql, Object... args) throws  Exception {
+    public static ResultSet query(String sql, Object... args) throws Exception {
         PreparedStatement ps = Utility.getStm(sql, args);
         return ps.executeQuery();
     }
@@ -86,4 +87,7 @@ public class Utility {
 //        }
 //        return null;
 //    }
+    public static void main(String[] args) {
+        System.out.println(getConnection() == null);
+    }
 }

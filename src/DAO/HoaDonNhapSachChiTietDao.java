@@ -23,7 +23,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet (HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE GiaSach=VALUES(GiaSach), SoLuong=VALUES(SoLuong), LoaiSach=VALUES(LoaiSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet LIMIT ?, 30";
-    private final String SELECT_BY_SACH = SELECT_ALL_SQL_BY_HOA_DON + " WHERE Sach = ? AND GiaSach = (SELECT MAX(giaSach) FROM hoa_don_nhap_sach_chi_tiet WHERE sach = ?)";
+    private final String SELECT_BY_SACH ="SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ? LIMIT 1, 1";
 
     private SachDAO sachDAO;
     private static HoaDonNhapSachChiTietDao instance;
@@ -123,7 +123,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     }
 
     public HoaDonNhapSachChiTiet selectBySach(Long sach) {
-        List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_SACH, sach, sach);
+        List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_SACH, sach);
         if (list.isEmpty()) {
             return null;
         }
@@ -152,4 +152,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
         return list;
     }
 
+//      public static void main(String[] args) {
+//          System.out.println(HoaDonNhapSachChiTietDao.getInstance().selectBySach(Long.valueOf(1)));;
+//    }
 }

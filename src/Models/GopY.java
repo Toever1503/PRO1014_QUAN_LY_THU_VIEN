@@ -12,8 +12,8 @@ import java.sql.Date;
  */
 public class GopY {
 
-    private long id;
-    private long hoiVien;
+    private Long id;
+    private String hoiVien;
     private Date ngayTao;
     private String noiDung;
     private boolean trangThai;
@@ -21,27 +21,19 @@ public class GopY {
     public GopY() {
     }
 
-    public GopY(long id, long hoiVien, Date ngayTao, String noiDung, boolean trangThai) {
-        this.id = id;
-        this.hoiVien = hoiVien;
-        this.ngayTao = ngayTao;
-        this.noiDung = noiDung;
-        this.trangThai = trangThai;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getHoiVien() {
+    public String getHoiVien() {
         return hoiVien;
     }
 
-    public void setHoiVien(long hoiVien) {
+    public void setHoiVien(String hoiVien) {
         this.hoiVien = hoiVien;
     }
 

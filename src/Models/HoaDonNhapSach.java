@@ -14,7 +14,7 @@ import java.util.List;
 public class HoaDonNhapSach {
 
     private Long id;
-    private QuanLy nguoiXuLy;
+    private String nguoiXuLy;
     private Double tongTien;
     private Date ngayTao;
     private String qr_code;
@@ -27,7 +27,7 @@ public class HoaDonNhapSach {
         this.id = id;
     }
 
-    public HoaDonNhapSach(Long id, QuanLy nguoiXuLy, Double tongTien, Date ngayTao, String qr_code, List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
+    public HoaDonNhapSach(Long id, String nguoiXuLy, Double tongTien, Date ngayTao, String qr_code, List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
@@ -44,11 +44,11 @@ public class HoaDonNhapSach {
         this.id = id;
     }
 
-    public QuanLy getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(QuanLy nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 

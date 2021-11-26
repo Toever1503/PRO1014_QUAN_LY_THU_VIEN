@@ -367,13 +367,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
         tblSachMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Nhà Xuất Bản"
+                "Mã Sách", "Tên Sách"
             }
         ));
         jScrollPane1.setViewportView(tblSachMuon);
@@ -498,8 +498,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
         pageIndex = totalPage;
-        List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
-        fillTablePhieuMuon(listPM);
+        fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -510,6 +509,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         } else {
             pageIndex++;
             List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+            if (listPM == null) {
+                listPM = phieuMuonDao.selectByPage(Long.valueOf(pageIndex));
+            }
             fillTablePhieuMuon(listPM);
         }
     }//GEN-LAST:event_btnNextActionPerformed
@@ -522,8 +524,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             return;
         } else {
             pageIndex--;
-            List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
-            fillTablePhieuMuon(listPM);
+            fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
         }
 
     }//GEN-LAST:event_btnPrevActionPerformed
@@ -531,8 +532,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
         pageIndex = 0;
-        List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
-        fillTablePhieuMuon(listPM);
+        fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnThemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhieuMuonActionPerformed
@@ -597,7 +597,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         // TODO add your handling code here:
-        fillTablePhieuMuon(listPhieuMuon.get(0));
+        pageIndex = 0;
+        fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
 
@@ -718,7 +719,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             phieuMuon.setNgayMuon(ngayMuon);
             phieuMuon.setHanTra(ngayTra);
             phieuMuon.setQr_code("sach-" + Calendar.getInstance().getTimeInMillis());
-            
+
             String qr_codeKey = phieuMuon.getQr_code().split("-")[1]; // create key phieuMuon
             String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey + ".png"; //create qr_code path
             // create qr_code image and parse qrcode image fit with label qr_code

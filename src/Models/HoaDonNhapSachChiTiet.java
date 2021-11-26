@@ -11,7 +11,7 @@ package Models;
 public class HoaDonNhapSachChiTiet {
 
     private Long hoaDonNhap;
-    private Sach sach;
+    private String sach;
     private Double gia;
     private int soLuong;
     private boolean loaiSach;
@@ -19,7 +19,7 @@ public class HoaDonNhapSachChiTiet {
     public HoaDonNhapSachChiTiet() {
     }
 
-    public HoaDonNhapSachChiTiet(Long hoaDonNhap, Sach sach, Double gia, int soLuong, boolean loaiSach) {
+    public HoaDonNhapSachChiTiet(Long hoaDonNhap, String sach, Double gia, int soLuong, boolean loaiSach) {
         this.hoaDonNhap = hoaDonNhap;
         this.sach = sach;
         this.gia = gia;
@@ -35,11 +35,11 @@ public class HoaDonNhapSachChiTiet {
         this.hoaDonNhap = hoaDonNhap;
     }
 
-    public Sach getSach() {
+    public String getSach() {
         return sach;
     }
 
-    public void setSach(Sach sach) {
+    public void setSach(String sach) {
         this.sach = sach;
     }
 

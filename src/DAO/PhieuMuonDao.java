@@ -8,6 +8,8 @@ import Models.PhieuMuon;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -21,7 +23,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String UPDATE_SQL = "UPDATE phieu_muon SET HoiVien=?,MaQL=?,NgayMuon=?,NgayHan=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO nha_xuat_ban (ID, TenNhaXuatBan) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
+            + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan); SELECT LAST_INSERT_ID() as ID;";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
@@ -48,6 +50,8 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     public int insert(PhieuMuon entity) {
         int row = 0;
         try {
+//            prepare
+//            Helper.Utility.getStm(INSERT_SQL, args)
             row = Helper.Utility.update(this.INSERT_SQL,
                     entity.getId(),
                     entity.getNguoiMuon(),
@@ -81,16 +85,31 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     @Override
     public int insertOnUpdate(PhieuMuon entity) {
         int row = 0;
+        PreparedStatement prepare = null;
         try {
-            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
-                    entity.getId(),
+            row = 0;
+            prepare = Helper.Utility.getStm(this.UPDATE_SQL,
                     entity.getNguoiMuon(),
                     entity.getNguoiXuLy(),
                     entity.getNgayMuon(),
                     entity.getHanTra(),
-                    entity.getQr_code());
+                    entity.getQr_code(),
+                    entity.getId());
+            if (entity.getId() == null) {
+                row = prepare.executeUpdate();
+            } else {
+                ResultSet rs = prepare.getResultSet();
+                rs.next();
+                entity.setId(rs.getLong("ID"));
+            }
+            entity.getListPhieuMuonChiTiet().forEach(pmct -> {
+                phieuMuonChiTietDao.insertOnUpdate(pmct);
+            });
+
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+//            prepare.getConnection().close();
         }
         return row;
     }
@@ -165,5 +184,5 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         }
         return total;
     }
-  
+
 }

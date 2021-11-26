@@ -14,8 +14,8 @@ import java.util.List;
 public class PhieuMuon {
 
     private Long id;
-    private HoiVien nguoiMuon;
-    private QuanLy nguoiXuLy;
+    private String nguoiMuon;
+    private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
     private String qr_code;
@@ -23,11 +23,12 @@ public class PhieuMuon {
 
     public PhieuMuon() {
     }
+
     public PhieuMuon(Long id) {
         this.id = id;
     }
 
-    public PhieuMuon(long id, HoiVien nguoiMuon, QuanLy nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code, List<PhieuMuonChiTiet> listPhieuMuonChiTiet) {
+    public PhieuMuon(Long id, String nguoiMuon, String nguoiXuLy, Date ngayMuon, Date hanTra, String qr_code, List<PhieuMuonChiTiet> listPhieuMuonChiTiet) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
@@ -37,27 +38,27 @@ public class PhieuMuon {
         this.listPhieuMuonChiTiet = listPhieuMuonChiTiet;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public HoiVien getNguoiMuon() {
+    public String getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(HoiVien nguoiMuon) {
+    public void setNguoiMuon(String nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public QuanLy getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(QuanLy nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 

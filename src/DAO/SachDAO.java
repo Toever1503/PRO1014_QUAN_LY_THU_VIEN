@@ -15,16 +15,16 @@ import java.util.logging.Logger;
  */
 public class SachDAO extends LibrarianDAO<Sach, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE FROM sach";
+    private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach FROM sach";
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?,?,?,?,?,?,?,?)";
+    private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO sach (ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
-    private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE s.ID like ? or s.TenSach like ? or nxb.TenNhaXuatBan like ? or s.ViTri like ?";
-    private final String SELECT_ALL_BY_TL = SELECT_ALL_SQL + " JOIN the_loai_va_sach AS tlvs\n"
+    private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE ID like ? or TenSach like ? or ViTri like ?";
+    private final String SELECT_ALL_BY_TL = SELECT_ALL_SQL + " as s JOIN the_loai_va_sach AS tlvs\n"
             + "ON\n"
             + "    tlvs.Sach = s.ID\n"
             + "WHERE tlvs.TheLoai = ?";
@@ -145,14 +145,14 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             while (rs.next()) {
                 Sach s = new Sach();
                 s.setId(rs.getLong("ID"));
-                s.setNguoiTao(quanLyDao.selectByID(rs.getString("MaQL")));
+//                s.setNguoiTao(quanLyDao.selectByID(rs.getString("MaQL")));
                 s.setTenSach(rs.getString("TenSach"));
                 s.setViTri(rs.getString("ViTri"));
                 s.setNgayTao(rs.getDate("NgayTao"));
                 s.setNhaXuatBan(nhaXuatBanDao.selectByID(rs.getLong("NhaXuatBan")));
                 s.setTrangThai(rs.getBoolean("TrangThai"));
                 s.setQr_code(rs.getString("QR_FILE"));
-//                s.setHoaDonNhapSachChiTiet(hoaDonNhapSachChiTietDao.selectBySach(s.getId()));
+                s.setGia(rs.getDouble("giaSach"));
                 list.add(s);
             }
             rs.getStatement().getConnection();
@@ -164,16 +164,29 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
 
     public List<Sach> searchByKey(String input) {
         input = "%" + input + "%";
-        return this.selectBySql(this.SELECT_BY_KEY, input, input, input, input);
+        return this.selectBySql(this.SELECT_BY_KEY, input, input, input);
     }
 
     public List<Sach> selectAllByTheLoai(Long theLoai) {
         return this.selectBySql(this.SELECT_ALL_BY_TL, theLoai);
     }
 
+    public int getTotal() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM sach");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
     public static void main(String[] args) {
         SachDAO sachDAO = SachDAO.getInstance();
 
-        sachDAO.selectByID(Long.valueOf(1));
+        System.out.println(sachDAO.selectByPage(Long.valueOf(0)).size());
     }
 }

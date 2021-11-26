@@ -14,8 +14,8 @@ import java.util.List;
 public class HoaDonDenBu {
 
     private Long id;
-    private HoiVien nguoiMuon;
-    private QuanLy nguoiXuLy;
+    private String nguoiMuon;
+    private String nguoiXuLy;
     private Double tongTien;
     private String qr_code;
     private Date ngayTao;
@@ -28,37 +28,27 @@ public class HoaDonDenBu {
         this.id = id;
     }
 
-    public HoaDonDenBu(long id, HoiVien nguoiMuon, QuanLy nguoiXuLy, double tongTien, String qr_code, Date ngayTao, List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets) {
-        this.id = id;
-        this.nguoiMuon = nguoiMuon;
-        this.nguoiXuLy = nguoiXuLy;
-        this.tongTien = tongTien;
-        this.qr_code = qr_code;
-        this.ngayTao = ngayTao;
-        this.listHoaDonDenBuChiTiets = listHoaDonDenBuChiTiets;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public HoiVien getNguoiMuon() {
+    public String getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(HoiVien nguoiMuon) {
+    public void setNguoiMuon(String nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
-    public QuanLy getNguoiXuLy() {
+    public String getNguoiXuLy() {
         return nguoiXuLy;
     }
 
-    public void setNguoiXuLy(QuanLy nguoiXuLy) {
+    public void setNguoiXuLy(String nguoiXuLy) {
         this.nguoiXuLy = nguoiXuLy;
     }
 
@@ -66,7 +56,7 @@ public class HoaDonDenBu {
         return tongTien;
     }
 
-    public void setTongTien(double tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 
