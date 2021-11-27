@@ -4,20 +4,118 @@
  */
 package views;
 
+import DAO.QuanLyDao;
+import Models.QuanLy;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
+import java.awt.Component;
+import java.sql.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Nguyen Hoan
  */
 public class QLThuThu_JPanel extends javax.swing.JPanel {
-
+    QuanLyDao dao = new QuanLyDao();
+    private List<QuanLy> listQLThuThu;
     /**
      * Creates new form QLThuThu_JPanel
      */
     public QLThuThu_JPanel() {
         initComponents();
         tabs.remove(tabCapNhat);
+        fillTable();
+        this.index = -1;
     }
+    int index = -1;
+    void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyThuThu.getModel();
+        model.setRowCount(0);
+        try {
+            List<QuanLy> list = dao.selectALL();
+            for (QuanLy ql : list) {
+                Object[] row = {
+                    ql.getMaQL(),
+                    ql.getFullName(),
+                    ql.getDiaChi(),
+                    ql.getNgaySinh(),
+                    ql.getSoDienThoai(),
+                    ql.getEmail(),
+                    ql.isVaiTro() ? "Thủ thư" : "Admin",
+                    ql.isTrangThai() ? "Khóa" : "Hoạt động"
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+    void insert() {
+        QuanLy model = getForm();
+        try {
+            dao.insertOnUpdate(model);
+            this.fillTable();
+            clearForm();
+            JOptionPane.showMessageDialog(this, "thêm mới thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "thêm mới thất bại");
+        }
 
+    }
+    void update() {
+        QuanLy model = getForm();
+        try {
+            dao.update(model);
+            this.fillTable();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        }
+    }
+    void clearForm() {
+        this.setForm(new QuanLy());
+        this.index = -1;
+    }
+    void edit() {
+        String manv = (String) tblQuanLyThuThu.getValueAt(this.index, 0);
+        QuanLy model = dao.selectByID(manv);
+        this.setForm(model);
+        tabs.setSelectedIndex(0);
+
+    }
+    void setForm(QuanLy model) {
+
+        txtMaTT.setText(model.getMaQL());
+        txtMatKhau.setText(model.getMatKhau());
+        txtCCCD.setText(model.getCccd());
+        txtHoTen.setText(model.getFullName());
+        rdoQuanLy.setSelected(model.isVaiTro());
+        rdoThuThu.setSelected(model.isVaiTro());
+        txtSoDienThoai.setText(model.getSoDienThoai());
+        txtEmail.setText(model.getEmail());
+        txtDiaChi.setText(model.getDiaChi());
+        rdoHoatDong.setSelected(model.isTrangThai());
+        rdoKhoa.setSelected(model.isTrangThai());
+        jDateChooserNgaySinh.setDate(model.getNgaySinh());
+    }
+    QuanLy getForm() {
+        QuanLy model = new QuanLy();
+        model.setMaQL(txtMaTT.getText());
+        model.setFullName(txtHoTen.getText());
+        model.setSoDienThoai(txtSoDienThoai.getText());
+        model.setMatKhau(new String(txtMatKhau.getPassword()));
+        model.setCccd(txtCCCD.getText());
+        model.setEmail(txtEmail.getText());
+        model.setDiaChi(txtDiaChi.getText());
+        model.setVaiTro(rdoThuThu.isSelected());
+        model.setNgaySinh(jDateChooserNgaySinh.getDate() == null ? null
+                : new Date(jDateChooserNgaySinh.getDate().getTime()));
+        return model;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,11 +131,11 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblSachDaMuon = new javax.swing.JTable();
+        tblQuanLyThuThu = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        btnThemMoi = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnLast1 = new javax.swing.JButton();
@@ -48,7 +146,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtMaTT = new javax.swing.JTextField();
-        txtMatKhau = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -74,7 +171,8 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         btnClear = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
+        txtMatKhau = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -87,9 +185,9 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setColumnHeaderView(null);
 
-        tblSachDaMuon.setAutoCreateRowSorter(true);
-        tblSachDaMuon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        tblSachDaMuon.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuanLyThuThu.setAutoCreateRowSorter(true);
+        tblQuanLyThuThu.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblQuanLyThuThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -105,22 +203,32 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblSachDaMuon.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSachDaMuon.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblSachDaMuon.setRowHeight(25);
-        tblSachDaMuon.setSelectionBackground(new java.awt.Color(6, 143, 202));
-        jScrollPane1.setViewportView(tblSachDaMuon);
+        tblQuanLyThuThu.setGridColor(new java.awt.Color(255, 255, 255));
+        tblQuanLyThuThu.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblQuanLyThuThu.setRowHeight(25);
+        tblQuanLyThuThu.setSelectionBackground(new java.awt.Color(6, 143, 202));
+        tblQuanLyThuThu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuanLyThuThuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblQuanLyThuThu);
 
         tabDanhSach.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(648, 50));
 
-        jButton1.setText("Tìm kiếm");
-
-        jButton9.setText("Thêm Mới");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+
+        btnThemMoi.setText("Thêm Mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
             }
         });
 
@@ -137,13 +245,13 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton9)
+                .addComponent(btnThemMoi)
                 .addGap(3, 3, 3)
                 .addComponent(jButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 435, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnTimKiem)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -151,11 +259,11 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9)
+                    .addComponent(btnThemMoi)
                     .addComponent(jButton10)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -226,7 +334,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         jLabel1.setText("Mã thủ thư :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 45, 68, 25));
         jPanel1.add(txtMaTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 45, 244, 25));
-        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 81, 244, 25));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("CCCD :");
@@ -376,7 +483,8 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 62, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        jPanel1.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 240, -1));
 
         javax.swing.GroupLayout tabCapNhatLayout = new javax.swing.GroupLayout(tabCapNhat);
         tabCapNhat.setLayout(tabCapNhatLayout);
@@ -434,15 +542,27 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-     
+        clearForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
+        //if (Auth.user.isVaiTro()) {
+        if (checkNullText(txtMaTT) && checkNullText(txtMatKhau)
+                && checkNullText(txtCCCD) && checkNullText(txtHoTen)
+                && checkNullText(txtSoDienThoai) && checkNullText(txtEmail) && checkNullText(txtDiaChi)) {
+            update();
+        }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "chỉ Admin mới được cập nhật");
+//        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
- 
+        if (checkNullText(txtMaTT) && checkNullText(txtMatKhau)
+                && checkNullText(txtCCCD) && checkNullText(txtHoTen)
+                && checkNullText(txtSoDienThoai) && checkNullText(txtEmail) && checkNullText(txtDiaChi)) {
+            insert();
+        }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLast1ActionPerformed
@@ -461,20 +581,73 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFirst1ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void tblQuanLyThuThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyThuThuMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            activeTabCapNhat();
+            this.index = tblQuanLyThuThu.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(1);
+
+            }
+        }
+        
+    }//GEN-LAST:event_tblQuanLyThuThuMouseClicked
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        String search = txtTimKiem.getText();
+        if (search.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập thông tin cần tìm kiếm!");
+        } else {
+            listQLThuThu = null;
+            fillTable();
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
     public void activeTabCapNhat(){
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
+    public static boolean checkNullText(JTextField txt) {// check null 
+        txt.setBackground(white);
+        if (txt.getText().trim().length() > 0) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            JOptionPane.showMessageDialog(txt.getRootPane(), "Không được để trống " + txt.getName());
+            return false;
+        }
+    }
+    public void alert(Component parent, String message) {
+        JOptionPane.showMessageDialog(parent, message, "Hệ thống quản lý đào tạo", JOptionPane.INFORMATION_MESSAGE);
+    }
 
+    public boolean confirm(Component parent, String message) {
+        int result = JOptionPane.showConfirmDialog(parent, message, "Hệ thống quản lý đào tạo", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        return result == JOptionPane.YES_OPTION;
+    }
+
+    public String prompt(Component parent, String message) {
+        return JOptionPane.showInputDialog(parent, message, "Hệ thống quản lý đào tạo", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static void main(String[] args) {
+        javax.swing.JFrame frame = new javax.swing.JFrame();
+        frame.setSize(900, 600);
+       // frame.setExtendedState(frame.MAXIMIZED_BOTH);
+        frame.add(new QLThuThu_JPanel());
+        frame.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFirst;
@@ -486,13 +659,13 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNext1;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnPrev1;
+    private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -509,7 +682,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton rdoHoatDong;
     private javax.swing.JRadioButton rdoKhoa;
     private javax.swing.JRadioButton rdoQuanLy;
@@ -517,13 +689,14 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tabCapNhat;
     private javax.swing.JPanel tabDanhSach;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblSachDaMuon;
+    private javax.swing.JTable tblQuanLyThuThu;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMaTT;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtSoDienThoai;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
