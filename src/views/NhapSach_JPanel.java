@@ -15,7 +15,7 @@ public class NhapSach_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form NhapSach_JPanel
      */
-    public NhapSach_JPanel() {
+    private NhapSach_JPanel() {
         initComponents();
     }
 

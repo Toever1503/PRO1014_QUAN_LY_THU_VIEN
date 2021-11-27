@@ -19,6 +19,14 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO quan_ly (MaQL, MatKhau, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, VaiTro, TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MatKhau=VALUES(MatKhau), CCCD=VALUES(CCCD), HoTen=VALUES(HoTen), DiaChi=VALUES(DiaChi), NgaySinh=VALUES(NgaySinh), SoDienThoai=VALUES(SoDienThoai), Email=VALUES(Email), VaiTro=VALUES(VaiTro), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly LIMIT ?, 30";
+    private static QuanLyDao instance;
+
+    public static QuanLyDao getInstance() {
+        if (instance == null) {
+            instance = new QuanLyDao();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(QuanLy entity) {

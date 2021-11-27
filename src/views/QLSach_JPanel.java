@@ -15,7 +15,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLSach_JPanel
      */
-    public QLSach_JPanel() {
+    private QLSach_JPanel() {
         initComponents();
         jTabbedPane1.remove(jPanelCapNhat);
     }

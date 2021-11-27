@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +10,7 @@ import java.util.List;
 public class ThongKeDAO {
 
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
-        List<Object[]> list = new ArrayList<>();
+        List<Object[]> list = new java.util.ArrayList<>();
         try {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
