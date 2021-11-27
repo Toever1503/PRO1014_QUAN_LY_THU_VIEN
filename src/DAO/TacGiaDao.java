@@ -121,4 +121,8 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
         }
         return list;
     }
+    public static void main(String[] args) {
+        new TacGiaDao().selectALL();
+        
+    }
 }

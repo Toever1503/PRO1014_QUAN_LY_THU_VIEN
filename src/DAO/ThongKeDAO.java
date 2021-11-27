@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import java.util.List;
@@ -33,25 +29,19 @@ public class ThongKeDAO {
 
     public List<Object[]> getSachDaMuon() {
         String sql = "{CALL sp_sach_da_muon}";
-        String[] cols = {"ID","TenSach","TenTacGia","TenTheLoai","TenNhaXuatBan","NgayMuon","NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachBiLoai() {
         String sql = "{CALL sp_sach_bi_loai}";
-        String[] cols = {"ID","TenSach","TenTacGia","TenTheLoai","TenNhaXuatBan","ViTri"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan","ViTri"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachTreHan() {
         String sql = "{CALL sp_sach_tre_han}";
-        String[] cols = {"ID","TenSach","TenTacGia","TenTheLoai","TenNhaXuatBan","NgayMuon","NgayHan"};
-        return this.getListOfArray(sql, cols);
-    }
-
-    public List<Object[]> getSachConLai() {
-        String sql = "{CALL sp_sach_con_lai}";
-        String[] cols = {"ID","TenSach","TenTacGia","TenTheLoai","TenNhaXuatBan","ViTri"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
         return this.getListOfArray(sql, cols);
     }
 }
