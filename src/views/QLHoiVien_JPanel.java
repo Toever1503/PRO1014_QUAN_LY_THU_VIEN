@@ -22,12 +22,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
+    private static QLHoiVien_JPanel instance;
+
+    /**
+     * Creates new form QlNguoiDung1
+     */
+    private QLHoiVien_JPanel() {
     // vị trí của hoi vien đang đc chọn
     HoiVienDao dao = new HoiVienDao();
     int index = -1;
     List<HoiVien> listHV;
     private DefaultTableModel tableModel;
-    
+    }
     public QLHoiVien_JPanel() {
         initComponents();
         tabs.remove(jPanelCapNhat);
@@ -89,6 +95,13 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
+    }
+
+    public static QLHoiVien_JPanel getInstance() {
+        if (instance == null) {
+            instance = new QLHoiVien_JPanel();
+        }
+        return instance;
     }
 
     /**
