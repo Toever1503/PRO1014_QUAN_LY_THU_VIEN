@@ -36,31 +36,16 @@ public class ThongKeDAO {
         String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
         return this.getListOfArray(sql, cols);
     }
-//
-//    public List<Object[]> getLuongNguoiHoc() {
-//        String sql = "{CALL dbo.sp_LuongNguoiHoc}";
-//        String[] cols = {"Nam", "SoLuong", "DauTien", "CuoiCung"};
-//        return this.getListOfArray(sql, cols);
-//    }
-//
-//    public List<Object[]> getDiemChuyenDe() {
-//        String sql = "{CALL dbo.sp_DiemChuyenDe}";
-//        String[] cols = {"ChuyenDe", "SoHV", "ThapNhat", "CaoNhat", "TrungBinh"};
-//        return this.getListOfArray(sql, cols);
-//    }
 
-    public static void main(String[] args) {
-        ThongKeDAO tk = new ThongKeDAO();
-        try {
-               List l = tk.getSachDaMuon();
-        System.out.println(l);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-     
-        
-//          String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
-//             System.out.println(tk.getListOfArray("CALL sp_sach_da_muon", cols));   
+    public List<Object[]> getSachBiLoai() {
+        String sql = "{CALL sp_sach_bi_loai}";
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan","ViTri"};
+        return this.getListOfArray(sql, cols);
     }
 
+    public List<Object[]> getSachTreHan() {
+        String sql = "{CALL sp_sach_tre_han}";
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
+        return this.getListOfArray(sql, cols);
+    }
 }
