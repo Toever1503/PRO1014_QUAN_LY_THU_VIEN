@@ -1,6 +1,8 @@
 package DAO;
 
 import Models.QuanLy;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,8 +75,13 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     @Override
     public int insertOnUpdate(QuanLy entity) {
         int row = 0;
+        PreparedStatement ps = null;
         try {
-            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+            String sql = this.INSERT_ON_UPDATE_SQL;
+            if (entity.getMaQL() == null) {
+                sql += " SELECT LAST_INSERT_ID() as ID;";
+            }
+            ps = Helper.Utility.getStm(this.INSERT_ON_UPDATE_SQL,
                     entity.getMaQL(),
                     entity.getMatKhau(),
                     entity.getCccd(),
@@ -85,10 +92,57 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
                     entity.getEmail(),
                     entity.isVaiTro(),
                     entity.isTrangThai());
+
+            if (entity.getMaQL() == null) {
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                rs.next();
+                String id = rs.getNString("ID");
+                entity.setMaQL(id);
+//                row = id.intValue();
+            } else {
+                row = ps.executeUpdate();
+            }
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return row;
+    }
+
+    public String insertOnUpdateNew(QuanLy entity) {
+        String maQl = null;
+        PreparedStatement ps = null;
+        try {
+            String sql = this.INSERT_ON_UPDATE_SQL;
+            if (entity.getMaQL() == null) {
+                sql += " SELECT LAST_INSERT_ID() as maQl;";
+            }
+            ps = Helper.Utility.getStm(this.INSERT_ON_UPDATE_SQL,
+                    entity.getMaQL(),
+                    entity.getMatKhau(),
+                    entity.getCccd(),
+                    entity.getFullName(),
+                    entity.getDiaChi(),
+                    entity.getNgaySinh(),
+                    entity.getSoDienThoai(),
+                    entity.getEmail(),
+                    entity.isVaiTro(),
+                    entity.isTrangThai());
+
+            if (entity.getMaQL() == null) {
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                rs.next();
+                String id = rs.getNString("maQl");
+                entity.setMaQL(id);
+                maQl = id;
+            } else {
+                maQl = ps.executeUpdate() == 0 ? null : entity.getMaQL();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return maQl;
     }
 
     @Override
