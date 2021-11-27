@@ -83,8 +83,6 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             String sql = this.INSERT_ON_UPDATE_SQL;
             if (entity.getId() == null) {
                 sql += " SELECT LAST_INSERT_ID() as ID;";
-            } else {
-
             }
             ps = Helper.Utility.getStm(sql,
                     entity.getId(),
@@ -93,6 +91,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
                     entity.getTongTien(),
                     entity.getNgayTao(),
                     entity.getQr_code());
+            
             if (entity.getId() == null) {
                 ps.execute();
                 ResultSet rs = ps.getResultSet();

@@ -39,14 +39,14 @@ import javax.swing.table.DefaultTableModel;
 public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
     private Map<Integer, List<PhieuMuon>> listPhieuMuon;
-    private Map<Long, Sach> listSachMuon;
+    private Map<Long, PhieuMuonChiTiet> listSachMuon;
     private DefaultTableModel tableModelPhieuMuon;
     private DefaultTableModel tableModelSachMuon;
     private DefaultComboBoxModel boxModelNguoiMuon;
     private PhieuMuonDao phieuMuonDao;
     private HoiVienDao hoiVienDao;
     private SachDAO sachDAO;
-     private PhieuMuonChiTietDao phieuMuonChiTietDao;
+    private PhieuMuonChiTietDao phieuMuonChiTietDao;
     private int pageIndex = 0;
     private int totalPage;
     private static QLPhieuMuon_JPanel instance;
@@ -59,11 +59,11 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         phieuMuonDao = PhieuMuonDao.getInstance();
         hoiVienDao = HoiVienDao.getInstance();
         sachDAO = SachDAO.getInstance();
-        phieuMuonChiTietDao =PhieuMuonChiTietDao.getInstance();
+        phieuMuonChiTietDao = PhieuMuonChiTietDao.getInstance();
         listPhieuMuon = new HashMap<Integer, List<PhieuMuon>>();
         listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
 
-        listSachMuon = new HashMap<Long, Sach>();
+        listSachMuon = new HashMap<Long, PhieuMuonChiTiet>();
 
         tableModelPhieuMuon = (DefaultTableModel) tblPhieuMuon.getModel();
         tableModelSachMuon = (DefaultTableModel) tblSachMuon.getModel();
@@ -133,10 +133,12 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelErrorAction = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSachMuon = new javax.swing.JTable();
+        btnMark = new javax.swing.JButton();
         jPanelAction = new javax.swing.JPanel();
         btnClear = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnXoaSach = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -327,7 +329,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanelDetailSach.add(jPanelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 190, 190));
         jPanelDetailSach.add(jLabelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        btnDownLoadQR.setText("Download");
+        btnDownLoadQR.setText("Print");
         btnDownLoadQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDownLoadQRActionPerformed(evt);
@@ -373,16 +375,37 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
         tblSachMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách"
+                "Mã Sách", "Tên Sách", "Ngày trả", "Người Xử Lý", "Đã trả sách?"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblSachMuon);
+        if (tblSachMuon.getColumnModel().getColumnCount() > 0) {
+            tblSachMuon.getColumnModel().getColumn(2).setResizable(false);
+            tblSachMuon.getColumnModel().getColumn(3).setResizable(false);
+            tblSachMuon.getColumnModel().getColumn(4).setResizable(false);
+            tblSachMuon.getColumnModel().getColumn(4).setPreferredWidth(200);
+        }
+
+        btnMark.setText("Đánh dấu trả sách");
+        btnMark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMarkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelSachMuonLayout = new javax.swing.GroupLayout(jPanelSachMuon);
         jPanelSachMuon.setLayout(jPanelSachMuonLayout);
@@ -392,6 +415,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSachMuonLayout.createSequentialGroup()
                         .addComponent(jLabelErrorAction, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMark)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnScanSach, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -416,7 +441,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                 .addGroup(jPanelSachMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonThemSachMuon)
                     .addComponent(btnScanSach)
-                    .addComponent(jLabelErrorAction))
+                    .addComponent(jLabelErrorAction)
+                    .addComponent(btnMark))
                 .addContainerGap())
         );
 
@@ -445,6 +471,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             }
         });
 
+        btnXoaSach.setText("Xóa Sách");
+        btnXoaSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSachActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelActionLayout = new javax.swing.GroupLayout(jPanelAction);
         jPanelAction.setLayout(jPanelActionLayout);
         jPanelActionLayout.setHorizontalGroup(
@@ -452,21 +485,23 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             .addGroup(jPanelActionLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnXoaSach)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnClear)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(734, Short.MAX_VALUE))
+                .addContainerGap(676, Short.MAX_VALUE))
         );
         jPanelActionLayout.setVerticalGroup(
             jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelActionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnXoaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -492,6 +527,42 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (phieuMuon == null) {
             return;
         } else {
+            List<PhieuMuonChiTiet> phieuMuonChiTiets = new ArrayList<PhieuMuonChiTiet>();
+            listSachMuon.forEach((key, pmct) -> phieuMuonChiTiets.add(pmct));
+            phieuMuon.setListPhieuMuonChiTiets(phieuMuonChiTiets);
+            System.out.println(phieuMuon);
+
+            if (phieuMuon.getId() == null) {
+                Long id = Long.valueOf(phieuMuonDao.insertOnUpdate(phieuMuon));
+                if (id <= 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    phieuMuon.setId(id);
+                    txtMaPhieuMuon.setText(id.toString());
+                    pageIndex = 0;
+                    listPhieuMuon.clear();
+                    listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
+                }
+
+            } else {
+                if (phieuMuonDao.insertOnUpdate(phieuMuon) <= 0) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                    phieuMuon = phieuMuonDao.selectByID(phieuMuon.getId());
+                    List<PhieuMuon> list = listPhieuMuon.get(pageIndex);
+                    for (int i = 0; i < list.size(); ++i) {
+                        if (list.get(i).getId().equals(phieuMuon.getId())) {
+                            list.set(i, phieuMuon);
+                            break;
+                        }
+                    }
+                }
+
+            }
             //save phieu muon
             // save sach
         }
@@ -554,6 +625,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn phiếu mượn cần xem!");
         } else {
+            listSachMuon.clear();
             btnSave.setText("Lưu");
             PhieuMuon phieuM = listPhieuMuon.get(pageIndex).get(row);
             phieuM.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(phieuM.getId()));
@@ -609,6 +681,40 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
+    private void btnXoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSachActionPerformed
+        // TODO add your handling code here:
+        int row = tblSachMuon.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn sách cần xóa!");
+        } else {
+            long maSach = Long.valueOf(tblSachMuon.getValueAt(row, 0).toString());
+            listSachMuon.remove(maSach);
+            tableModelSachMuon.removeRow(row);
+        }
+    }//GEN-LAST:event_btnXoaSachActionPerformed
+
+    private void btnMarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarkActionPerformed
+        // TODO add your handling code here:
+        int row = tblSachMuon.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn sách cần đánh dấu!");
+        } else {
+            PhieuMuonChiTiet pmct = listSachMuon.get(Long.valueOf(tblSachMuon.getValueAt(row, 0).toString()));
+            pmct.setNguoiXuLy(Helper.Auth.user.getMaQL());
+            pmct.setNgayTra(new Date(Calendar.getInstance().getTimeInMillis()));
+            pmct.setTrangThai(true);
+            if (phieuMuonChiTietDao.insertOnUpdate(pmct) <= 0) {
+                JOptionPane.showMessageDialog(this, "Đánh Dấu trả sách thất bại!");
+            } else {
+                tblSachMuon.setValueAt(pmct.getNgayTra(), row, 2);
+                tblSachMuon.setValueAt(pmct.getNguoiXuLy(), row, 3);
+                tblSachMuon.setValueAt("Đã trả", row, 4);
+                JOptionPane.showMessageDialog(this, "Đánh Dấu trả sách thành công!");
+            }
+        }
+    }//GEN-LAST:event_btnMarkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -616,11 +722,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnMark;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScanSach;
     private javax.swing.JButton btnThemPhieuMuon;
+    private javax.swing.JButton btnXoaSach;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonChiTietPhieuMuon;
     private javax.swing.JButton jButtonThemSachMuon;
@@ -720,16 +828,28 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (check == 3) {
             phieuMuon = new PhieuMuon();
             phieuMuon.setId(maPhieuMuon);
+            phieuMuon.setNguoiXuLy(Helper.Auth.user.getMaQL());
             phieuMuon.setNguoiMuon(Long.valueOf(nguoiMuon));
             phieuMuon.setNgayMuon(ngayMuon);
             phieuMuon.setHanTra(ngayTra);
-            phieuMuon.setQr_code("sach-" + Calendar.getInstance().getTimeInMillis());
 
-            String qr_codeKey = phieuMuon.getQr_code().split("-")[1]; // create key phieuMuon
-            String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey + ".png"; //create qr_code path
-            // create qr_code image and parse qrcode image fit with label qr_code
-            if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
-                jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(jLabelQR_CODE.getWidth(), jLabelQR_CODE.getWidth(), HEIGHT)));
+            if (maPhieuMuon == null) {
+                Long timeNow = Calendar.getInstance().getTimeInMillis();
+                phieuMuon.setQr_code("sach-" + timeNow);
+
+                String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
+                String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + timeNow.toString() + ".png"; //create qr_code path
+                // create qr_code image and parse qrcode image fit with label qr_code
+                if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
+                    try {
+                        jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, HEIGHT)));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                int row = tblPhieuMuon.getSelectedRow();
+                phieuMuon.setQr_code(listPhieuMuon.get(pageIndex).get(row).getQr_code());
             }
         }
 
@@ -748,18 +868,35 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (phieuMuon.getListPhieuMuonChiTiets() != null) {
             phieuMuon.getListPhieuMuonChiTiets().forEach((pmct) -> {
                 Sach sach = sachDAO.selectByID(pmct.getSach());
-                
-                listSachMuon.put(sach.getId(), sach);
+
+                listSachMuon.put(sach.getId(), pmct);
                 tableModelSachMuon.addRow(new Object[]{
                     sach.getId(),
-                    sach.getTenSach()
+                    sach.getTenSach(),
+                    pmct.getNgayTra() == null ? "" : pmct.getNgayTra(),
+                    pmct.getNguoiXuLy(),
+                    pmct.isTrangThai() ? "Đã trả sách" : "Chưa trả sách"
                 });
-            });
+            }
+            );
             tblSachMuon.setModel(tableModelSachMuon);
+        }
+
+        if (phieuMuon.getQr_code()
+                != null) {
+            try {
+                lblQR_CODE.setIcon(new ImageIcon(
+                        new ImageIcon(Helper.XImage.PHIEUMUON_UPLOAD.concat("/" + phieuMuon.getQr_code() + ".png"))
+                                .getImage()
+                                .getScaledInstance(190, 190, Image.SCALE_DEFAULT)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void resetForm() {
+        listSachMuon.clear();
         txtMaPhieuMuon.setText(null);
         jComboBoxNguoiMuon.setSelectedIndex(0);
         jDateChooserNgayMuon.setDate(null);
@@ -769,13 +906,16 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         btnDownLoadQR.setVisible(false);
     }
 
-    public boolean addSachMuon(Sach sach) {
+    public boolean addSachMuon(PhieuMuonChiTiet pmct, Sach sach) {
         if (listSachMuon.containsKey(sach.getId())) {
             return false;
         } else {
-            listSachMuon.put(sach.getId(), sach);
+            listSachMuon.put(sach.getId(), pmct);
             tableModelSachMuon.addRow(new Object[]{
-                sach.getId().toString(), sach.getTenSach()
+                sach.getId().toString(), sach.getTenSach(),
+                null,
+                pmct.getNguoiXuLy(),
+                "Mới"
             });
             return true;
         }

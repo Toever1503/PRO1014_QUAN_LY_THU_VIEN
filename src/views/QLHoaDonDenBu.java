@@ -118,7 +118,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlAction = new javax.swing.JPanel();
         btnChonSach = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
-        Xóa = new javax.swing.JButton();
+        btnXoaSach = new javax.swing.JButton();
         Lưu = new javax.swing.JButton();
         lblErrorAction = new javax.swing.JLabel();
         btnReset = new javax.swing.JButton();
@@ -353,14 +353,14 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         });
         pnlAction.add(btnQuayLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, 30));
 
-        Xóa.setText("Xóa Sách");
-        Xóa.setPreferredSize(new java.awt.Dimension(100, 30));
-        Xóa.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaSach.setText("Xóa Sách");
+        btnXoaSach.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnXoaSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                XóaActionPerformed(evt);
+                btnXoaSachActionPerformed(evt);
             }
         });
-        pnlAction.add(Xóa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 30));
+        pnlAction.add(btnXoaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 30));
 
         Lưu.setText("Lưu");
         Lưu.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -480,6 +480,10 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
         pageIndex = total;
+        List<HoaDonDenBu> list = listHoaDonDenBu.get(pageIndex);
+        if (list == null) {
+            listHoaDonDenBu.put(pageIndex, hoaDonDenBuDao.selectByPage(Long.valueOf(pageIndex)));
+        }
         fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
     }//GEN-LAST:event_btnLastActionPerformed
 
@@ -503,6 +507,10 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn đã ở tranđầug !");
         } else {
             pageIndex--;
+            List<HoaDonDenBu> list = listHoaDonDenBu.get(pageIndex);
+            if (list == null) {
+                listHoaDonDenBu.put(pageIndex, hoaDonDenBuDao.selectByPage(Long.valueOf(pageIndex)));
+            }
             fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
         }
     }//GEN-LAST:event_btnPrevActionPerformed
@@ -532,7 +540,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
 
-    private void XóaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XóaActionPerformed
+    private void btnXoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSachActionPerformed
         // TODO add your handling code here:
         int row = tblHoaDonChiTiet.getSelectedRow();
         if (row == -1) {
@@ -543,7 +551,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             tableModelHoaDonDenBuChiTiet.removeRow(row);
             tinhTongTien();;
         }
-    }//GEN-LAST:event_XóaActionPerformed
+    }//GEN-LAST:event_btnXoaSachActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
@@ -570,7 +578,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Lưu;
-    private javax.swing.JButton Xóa;
     private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnChonSach;
     private javax.swing.JButton btnDownloadQr;
@@ -582,6 +589,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnXoaSach;
     private javax.swing.JComboBox<String> cmbNguoiMuon;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

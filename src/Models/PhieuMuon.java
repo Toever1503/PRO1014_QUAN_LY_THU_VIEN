@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class PhieuMuon {
 
-    private long id;
-    private long nguoiMuon;
+    private Long id;
+    private Long nguoiMuon;
     private String nguoiXuLy;
     private Date ngayMuon;
     private Date hanTra;
@@ -24,11 +24,11 @@ public class PhieuMuon {
     public PhieuMuon() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class PhieuMuon {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(long nguoiMuon) {
+    public void setNguoiMuon(Long nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 

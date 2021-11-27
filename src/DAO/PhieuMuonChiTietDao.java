@@ -19,7 +19,7 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
     private final String SELECT_BY_SACH_SQL = "SELECT PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai FROM phieu_muon_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO phieu_muon_chi_tiet(PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai) VALUES (?,?,?,?,?)";
     private final String UPDATE_BY_PM_SACH_SQL = "UPDATE phieu_muon_chi_tiet SET NguoiTiepNhan=?,NgayTra=?,TrangThai=? WHERE PhieuMuon=? AND Sach=?";
-    private final String DELETE_BY_SACH_SQL = "DELETE FROM phieu_muon_chi_tiet WHERE Sach = ?";
+    private final String DELETE_BY_SACH_SQL = "DELETE FROM phieu_muon_chi_tiet WHERE PhieuMuon = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO phieu_muon_chi_tiet (PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE NguoiTiepNhan=VALUES(NguoiTiepNhan), NgayTra=VALUES(NgayTra), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai FROM phieu_muon_chi_tiet LIMIT ?, 30";

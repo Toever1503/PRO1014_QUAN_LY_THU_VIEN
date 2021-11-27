@@ -7,6 +7,7 @@ package views;
 import DAO.SachDAO;
 import DAO.TheLoaiDao;
 import Models.HoaDonDenBuChiTiet;
+import Models.PhieuMuonChiTiet;
 import Models.Sach;
 import Models.TheLoai;
 import java.math.BigInteger;
@@ -394,7 +395,10 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             if (row == -1) {
                 lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
             } else {
-                if (QLPhieuMuon_JPanel.getInstance().addSachMuon(listSach.get(pageIndex).get(row))) {
+                Sach sach = listSach.get(pageIndex).get(row);
+                PhieuMuonChiTiet pmct = new PhieuMuonChiTiet(Long.valueOf(0), sach.getId(), Helper.Auth.user.getMaQL(), null, false);
+
+                if (QLPhieuMuon_JPanel.getInstance().addSachMuon(pmct, sach)) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");

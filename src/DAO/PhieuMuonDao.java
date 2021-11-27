@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -21,15 +22,17 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO phieu_muon(ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE phieu_muon SET HoiVien=?,MaQL=?,NgayMuon=?,NgayHan=?,QR_FILE=? WHERE ID=?";
-    private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO nha_xuat_ban (ID, TenNhaXuatBan) VALUES (?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan); SELECT LAST_INSERT_ID() as ID;";
+    private final String DELETE_SQL = "DELETE FROM phieu_muon WHERE ID =?";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO phieu_muon (ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?, ?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), MaQL=VALUES(MaQL), NgayMuon=VALUES(NgayMuon), NgayHan=VALUES(NgayHan),QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
+    private PhieuMuonChiTietDao phieuMuonChiTietDao;
     private static PhieuMuonDao instance;
 
     private PhieuMuonDao() {
+        phieuMuonChiTietDao = PhieuMuonChiTietDao.getInstance();
     }
 
     public static PhieuMuonDao getInstance() {
@@ -78,31 +81,45 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     @Override
     public int insertOnUpdate(PhieuMuon entity) {
         int row = 0;
-        PreparedStatement prepare = null;
+        PreparedStatement ps = null;
         try {
             row = 0;
-            prepare = Helper.Utility.getStm(this.UPDATE_SQL,
+            String sql = this.INSERT_ON_UPDATE_SQL;
+            if (entity.getId() == null) {
+                sql += " SELECT LAST_INSERT_ID() as ID;";
+            }
+            ps = Helper.Utility.getStm(sql,
+                    entity.getId(),
                     entity.getNguoiMuon(),
                     entity.getNguoiXuLy(),
                     entity.getNgayMuon(),
                     entity.getHanTra(),
-                    entity.getQr_code(),
-                    entity.getId());
-//            if (entity.getId() == null) {
-//                row = prepare.executeUpdate();
-//            } else {
-//                ResultSet rs = prepare.getResultSet();
-//                rs.next();
-//                entity.setId(rs.getLong("ID"));
-//            }
-//            entity.getListPhieuMuonChiTiet().forEach(pmct -> {
-//                phieuMuonChiTietDao.insertOnUpdate(pmct);
-//            });
+                    entity.getQr_code());
+
+            if (entity.getId() == null) {
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                rs.next();
+                Long id = rs.getLong("ID");
+                entity.setId(id);
+                row = id.intValue();
+            } else {
+                row = ps.executeUpdate();
+            }
+            phieuMuonChiTietDao.delete(entity.getId());
+            entity.getListPhieuMuonChiTiets().forEach((pmct) -> {
+                pmct.setPhieuMuon(entity.getId());
+                phieuMuonChiTietDao.insertOnUpdate(pmct);
+            });
 
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-//            prepare.getConnection().close();
+            try {
+                ps.getConnection().close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return row;
     }
