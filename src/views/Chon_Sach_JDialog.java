@@ -72,30 +72,30 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         fillTableSach(listSach.get(0));
         ACTION_TYPE = type;
 
-//        if (ACTION_TYPE == "PHIEU_MUON") {
-//            btnReset.setVisible(false);
-//            jPanelDetailSach.setVisible(false);
-//        } else if (ACTION_TYPE == "HOA_DON") {
-//            btnReset.setVisible(false);
-//            jPanelDetailSach.setVisible(true);
-//
-//            lblLoaiSach.setVisible(false);
-//            lblSoLuong.setVisible(false);
-//            txtSoLuong.setVisible(false);
-//
-//            radMoi.setVisible(false);
-//            radCu.setVisible(false);
-//        } else {
-//            btnReset.setVisible(false);
-//            jPanelDetailSach.setVisible(true);
-//
-//            lblLoaiSach.setVisible(true);
-//            lblSoLuong.setVisible(true);
-//            txtSoLuong.setVisible(true);
-//
-//            radMoi.setVisible(true);
-//            radCu.setVisible(true);
-//        }
+        if (ACTION_TYPE == "PHIEU_MUON") {
+            btnReset.setVisible(false);
+            jPanelDetailSach.setVisible(false);
+        } else if (ACTION_TYPE == "HOA_DON") {
+            btnReset.setVisible(false);
+            jPanelDetailSach.setVisible(true);
+
+            lblLoaiSach.setVisible(false);
+            lblSoLuong.setVisible(false);
+            txtSoLuong.setVisible(false);
+
+            radMoi.setVisible(false);
+            radCu.setVisible(false);
+        } else {
+            btnReset.setVisible(false);
+            jPanelDetailSach.setVisible(true);
+
+            lblLoaiSach.setVisible(true);
+            lblSoLuong.setVisible(true);
+            txtSoLuong.setVisible(true);
+
+            radMoi.setVisible(true);
+            radCu.setVisible(true);
+        }
     }
 
     /**
@@ -156,6 +156,9 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tblSach);
+        if (tblSach.getColumnModel().getColumnCount() > 0) {
+            tblSach.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +406,15 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             if (row == -1) {
                 lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
             } else {
-//                int soLuong;
+                Sach sach = listSach.get(pageIndex).get(row);
+                if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(null, sach.getId(), sach.getGia()), sach.getGia().toString())) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+                }
+            }
+        } else { //for nhap sach
+            //                int soLuong;
 //                if (txtSoLuong.getText().isEmpty()) {
 //                    lblErrorSoLuong.setText("Số lượng không được bỏ trống");
 //                }
@@ -414,13 +425,6 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 //                    lblErrorSoLuong.setText("Số lượng phải là số nguyên");
 //                    return;
 //                }
-
-//                if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(0, tblSach.getValueAt(row, 0).toString() + "-" + tblSach.getValueAt(row, 1), Double.valueOf(txtGia.getText().replace(".0", ""))))) {
-//                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
-//                }
-            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -439,7 +443,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (ACTION_TYPE == "HOA_DON" || ACTION_TYPE == "NHAP_SACH") {
             int row = tblSach.getSelectedRow();
-            txtGia.setText(listSach.get(pageIndex).get(row).getHoaDonNhapSachChiTiet().getGia().toString());
+            txtGia.setText(listSach.get(pageIndex).get(row).getGia().toString());
         }
     }//GEN-LAST:event_tblSachMouseClicked
 
@@ -507,7 +511,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         System.out.println("runn");
         list.forEach((sach) -> {
             tableModelSach.addRow(new Object[]{
-                sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()
+                sach.getId(), sach.getTenSach()
             });
         });
     }

@@ -29,14 +29,8 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             + "    tlvs.Sach = s.ID\n"
             + "WHERE tlvs.TheLoai = ?";
     private static SachDAO instance;
-    private HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao;
-    private QuanLyDao quanLyDao;
-    private NhaXuatBanDao nhaXuatBanDao;
 
     private SachDAO() {
-//        hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
-        quanLyDao = QuanLyDao.getInstance();
-        nhaXuatBanDao = NhaXuatBanDao.getInstance();
     }
 
     public static SachDAO getInstance() {
@@ -46,9 +40,6 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
         return instance;
     }
 
-    public void setHoaDonNhapSachChiTietDao(HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao) {
-        this.hoaDonNhapSachChiTietDao = hoaDonNhapSachChiTietDao;
-    }
 
     @Override
     public int insert(Sach entity) {
@@ -145,11 +136,11 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             while (rs.next()) {
                 Sach s = new Sach();
                 s.setId(rs.getLong("ID"));
-//                s.setNguoiTao(quanLyDao.selectByID(rs.getString("MaQL")));
+                s.setNguoiTao(rs.getString("MaQL"));
                 s.setTenSach(rs.getString("TenSach"));
                 s.setViTri(rs.getString("ViTri"));
                 s.setNgayTao(rs.getDate("NgayTao"));
-                s.setNhaXuatBan(nhaXuatBanDao.selectByID(rs.getLong("NhaXuatBan")));
+                s.setNhaXuatBan(rs.getLong("NhaXuatBan")    );
                 s.setTrangThai(rs.getBoolean("TrangThai"));
                 s.setQr_code(rs.getString("QR_FILE"));
                 s.setGia(rs.getDouble("giaSach"));

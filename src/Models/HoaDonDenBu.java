@@ -14,18 +14,24 @@ import java.util.List;
 public class HoaDonDenBu {
 
     private Long id;
-    private String nguoiMuon;
+    private Long nguoiMuon;
     private String nguoiXuLy;
     private Double tongTien;
     private String qr_code;
     private Date ngayTao;
-    private List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets;
+    List<HoaDonDenBuChiTiet> listhBuChiTiets;
 
     public HoaDonDenBu() {
     }
 
-    public HoaDonDenBu(Long id) {
+    public HoaDonDenBu(Long id, Long nguoiMuon, String nguoiXuLy, Double tongTien, String qr_code, Date ngayTao, List<HoaDonDenBuChiTiet> listhBuChiTiets) {
         this.id = id;
+        this.nguoiMuon = nguoiMuon;
+        this.nguoiXuLy = nguoiXuLy;
+        this.tongTien = tongTien;
+        this.qr_code = qr_code;
+        this.ngayTao = ngayTao;
+        this.listhBuChiTiets = listhBuChiTiets;
     }
 
     public Long getId() {
@@ -36,11 +42,11 @@ public class HoaDonDenBu {
         this.id = id;
     }
 
-    public String getNguoiMuon() {
+    public Long getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(String nguoiMuon) {
+    public void setNguoiMuon(Long nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
@@ -76,17 +82,17 @@ public class HoaDonDenBu {
         this.ngayTao = ngayTao;
     }
 
-    public List<HoaDonDenBuChiTiet> getListHoaDonDenBuChiTiets() {
-        return listHoaDonDenBuChiTiets;
+    public List<HoaDonDenBuChiTiet> getListhBuChiTiets() {
+        return listhBuChiTiets;
     }
 
-    public void setListHoaDonDenBuChiTiets(List<HoaDonDenBuChiTiet> listHoaDonDenBuChiTiets) {
-        this.listHoaDonDenBuChiTiets = listHoaDonDenBuChiTiets;
+    public void setListhBuChiTiets(List<HoaDonDenBuChiTiet> listhBuChiTiets) {
+        this.listhBuChiTiets = listhBuChiTiets;
     }
 
     @Override
     public String toString() {
-        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + ", listHoaDonDenBuChiTiets=" + listHoaDonDenBuChiTiets + '}';
+        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + ", listhBuChiTiets=" + listhBuChiTiets + '}';
     }
 
 }

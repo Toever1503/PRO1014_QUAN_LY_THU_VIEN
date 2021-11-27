@@ -21,9 +21,6 @@ public class QuanLy {
 
     public QuanLy() {
     }
-     public QuanLy(String maQl) {
-        this.maQL=maQl;
-    }
 
     public QuanLy(String maQL, String matKhau, String cccd, String fullName, String diaChi, Date ngaySinh, String soDienThoai, String email, boolean vaiTro, boolean trangThai) {
         this.maQL = maQL;

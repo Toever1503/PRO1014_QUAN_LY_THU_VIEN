@@ -5,7 +5,6 @@
 package Models;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  *
@@ -13,34 +12,28 @@ import java.util.List;
  */
 public class HoaDonNhapSach {
 
-    private Long id;
+    private long id;
     private String nguoiXuLy;
-    private Double tongTien;
+    private float tongTien;
     private Date ngayTao;
     private String qr_code;
-    private List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets;
 
     public HoaDonNhapSach() {
     }
 
-    public HoaDonNhapSach(Long id) {
-        this.id = id;
-    }
-
-    public HoaDonNhapSach(Long id, String nguoiXuLy, Double tongTien, Date ngayTao, String qr_code, List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
+    public HoaDonNhapSach(long id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
         this.ngayTao = ngayTao;
         this.qr_code = qr_code;
-        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -52,11 +45,11 @@ public class HoaDonNhapSach {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public Double getTongTien() {
+    public float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(Double tongTien) {
+    public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -76,17 +69,8 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
-    public List<HoaDonNhapSachChiTiet> getListHoaDonNhapSachChiTiets() {
-        return listHoaDonNhapSachChiTiets;
-    }
-
-    public void setListHoaDonNhapSachChiTiets(List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
-        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
-    }
-
     @Override
     public String toString() {
-        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", listHoaDonNhapSachChiTiets=" + listHoaDonNhapSachChiTiets + '}';
+        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + '}';
     }
-
 }

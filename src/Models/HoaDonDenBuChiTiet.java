@@ -11,31 +11,31 @@ package Models;
 public class HoaDonDenBuChiTiet {
 
     private Long hoaDonDenBu;
-    private String sach;
+    private Long sach;
     private Double gia;
 
     public HoaDonDenBuChiTiet() {
     }
 
-    public HoaDonDenBuChiTiet(Long hoaDonDenBu, String sach, Double gia) {
+    public HoaDonDenBuChiTiet(Long hoaDonDenBu, Long sach, Double gia) {
         this.hoaDonDenBu = hoaDonDenBu;
         this.sach = sach;
         this.gia = gia;
     }
 
-    public long getHoaDonDenBu() {
+    public Long getHoaDonDenBu() {
         return hoaDonDenBu;
     }
 
-    public void setHoaDonDenBu(long hoaDonDenBu) {
+    public void setHoaDonDenBu(Long hoaDonDenBu) {
         this.hoaDonDenBu = hoaDonDenBu;
     }
 
-    public String getSach() {
+    public Long getSach() {
         return sach;
     }
 
-    public void setSach(String sach) {
+    public void setSach(Long sach) {
         this.sach = sach;
     }
 
@@ -47,10 +47,9 @@ public class HoaDonDenBuChiTiet {
         this.gia = gia;
     }
 
-
     @Override
     public String toString() {
-        return "HoaDonDenBuChiTiet{" + "hoaDonDenBu=" + hoaDonDenBu + ", sach=" + sach + ", gia=" + gia +  '}';
+        return "HoaDonDenBuChiTiet{" + "hoaDonDenBu=" + hoaDonDenBu + ", sach=" + sach + ", gia=" + gia + '}';
     }
 
 }

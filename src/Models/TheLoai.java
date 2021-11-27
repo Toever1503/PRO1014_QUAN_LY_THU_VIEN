@@ -10,13 +10,10 @@ package Models;
  */
 public class TheLoai {
 
-    private Long id;
+    private long id;
     private String tenTheLoai;
 
     public TheLoai() {
-    }
-    public TheLoai(Long id) {
-        this.id=id;
     }
 
     public long getId() {

@@ -24,12 +24,10 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
             + "ON DUPLICATE KEY UPDATE NguoiTiepNhan=VALUES(NguoiTiepNhan), NgayTra=VALUES(NgayTra), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai FROM phieu_muon_chi_tiet LIMIT ?, 30";
     private SachDAO sachDao;
-    private QuanLyDao quanLyDao;
     private static PhieuMuonChiTietDao instance;
 
     private PhieuMuonChiTietDao() {
         sachDao = SachDAO.getInstance();
-        quanLyDao = QuanLyDao.getInstance();
     }
 
     public static PhieuMuonChiTietDao getInstance() {
@@ -132,8 +130,8 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
             while (rs.next()) {
                 PhieuMuonChiTiet pmct = new PhieuMuonChiTiet();
                 pmct.setPhieuMuon(rs.getLong("PhieuMuon"));
-                pmct.setSach(sachDao.selectByID(rs.getLong("Sach")));
-                pmct.setNguoiXuLy(quanLyDao.selectByID(rs.getNString("NguoiTiepNhan")));
+                pmct.setSach(rs.getLong("Sach"));
+                pmct.setNguoiXuLy(rs.getNString("NguoiTiepNhan"));
                 pmct.setNgayTra(rs.getDate("NgayTra"));
                 pmct.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(pmct);

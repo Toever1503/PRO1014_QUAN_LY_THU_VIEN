@@ -19,7 +19,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
     private final String SELECT_BY_SACH_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet(HoaDonDenBu, Sach, GiaSach) VALUES (?,?,?)";
     private final String UPDATE_BY_HD_SACH_SQL = "UPDATE hoa_don_den_bu_sach_chi_tiet SET GiaSach= ? WHERE HoaDonDenBu= ? AND Sach= ?";
-    private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_den_bu_sach_chi_tiet WHERE Sach = ?";
+    private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_den_bu_sach_chi_tiet WHERE HoaDonDenBu = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_den_bu_sach_chi_tiet (HoaDonDenBu, Sach, GiaSach) VALUES (?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoaDonDenBu=VALUES(HoaDonDenBu), Sach=VALUES(Sach), GiaSach=VALUES(GiaSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HoaDonDenBu, Sach, GiaSach FROM hoa_don_den_bu_sach_chi_tiet LIMIT ?, 30";
@@ -123,7 +123,7 @@ public class HoaDonDenBuChiTietDao extends LibrarianDAO<HoaDonDenBuChiTiet, Long
             while (rs.next()) {
                 HoaDonDenBuChiTiet hddbct = new HoaDonDenBuChiTiet();
                 hddbct.setHoaDonDenBu(rs.getLong("HoaDonDenBu"));
-                hddbct.setSach(sachDAO.selectByID(rs.getLong("Sach")));
+                hddbct.setSach(rs.getLong("Sach"));
                 hddbct.setGia(rs.getDouble("GiaSach"));
                 list.add(hddbct);
             }

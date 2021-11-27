@@ -27,16 +27,9 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
-    private HoiVienDao hoiVienDao;
-    private QuanLyDao quanLyDao;
-    private PhieuMuonChiTietDao phieuMuonChiTietDao;
-
     private static PhieuMuonDao instance;
 
     private PhieuMuonDao() {
-        hoiVienDao = HoiVienDao.getInstance();
-        quanLyDao = QuanLyDao.getInstance();
-        phieuMuonChiTietDao = PhieuMuonChiTietDao.getInstance();
     }
 
     public static PhieuMuonDao getInstance() {
@@ -95,16 +88,16 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
                     entity.getHanTra(),
                     entity.getQr_code(),
                     entity.getId());
-            if (entity.getId() == null) {
-                row = prepare.executeUpdate();
-            } else {
-                ResultSet rs = prepare.getResultSet();
-                rs.next();
-                entity.setId(rs.getLong("ID"));
-            }
-            entity.getListPhieuMuonChiTiet().forEach(pmct -> {
-                phieuMuonChiTietDao.insertOnUpdate(pmct);
-            });
+//            if (entity.getId() == null) {
+//                row = prepare.executeUpdate();
+//            } else {
+//                ResultSet rs = prepare.getResultSet();
+//                rs.next();
+//                entity.setId(rs.getLong("ID"));
+//            }
+//            entity.getListPhieuMuonChiTiet().forEach(pmct -> {
+//                phieuMuonChiTietDao.insertOnUpdate(pmct);
+//            });
 
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,12 +145,12 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
             while (rs.next()) {
                 PhieuMuon pm = new PhieuMuon();
                 pm.setId(rs.getLong("ID"));
-                pm.setNguoiMuon(hoiVienDao.selectByID(rs.getLong("HoiVien")));
-                pm.setNguoiXuLy(quanLyDao.selectByID(rs.getString("MaQL")));
+                pm.setNguoiMuon(rs.getLong("HoiVien"));
+                pm.setNguoiXuLy(rs.getString("MaQL"));
                 pm.setNgayMuon(rs.getDate("NgayMuon"));
                 pm.setHanTra(rs.getDate("NgayHan"));
                 pm.setQr_code(rs.getString("QR_FILE"));
-                pm.setListPhieuMuonChiTiet(phieuMuonChiTietDao.selectALL(rs.getLong("ID")));
+//                pm.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(rs.getLong("ID")));
                 list.add(pm);
             }
             rs.getStatement().getConnection().close();

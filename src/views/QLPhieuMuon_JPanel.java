@@ -5,7 +5,9 @@
 package views;
 
 import DAO.HoiVienDao;
+import DAO.PhieuMuonChiTietDao;
 import DAO.PhieuMuonDao;
+import DAO.SachDAO;
 import Helper.QrCapture;
 import Helper.XImage;
 import Models.HoiVien;
@@ -43,6 +45,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private DefaultComboBoxModel boxModelNguoiMuon;
     private PhieuMuonDao phieuMuonDao;
     private HoiVienDao hoiVienDao;
+    private SachDAO sachDAO;
+     private PhieuMuonChiTietDao phieuMuonChiTietDao;
     private int pageIndex = 0;
     private int totalPage;
     private static QLPhieuMuon_JPanel instance;
@@ -50,10 +54,12 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLPhieuMuon
      */
-    private QLPhieuMuon_JPanel() {
+    public QLPhieuMuon_JPanel() {
         initComponents();
         phieuMuonDao = PhieuMuonDao.getInstance();
         hoiVienDao = HoiVienDao.getInstance();
+        sachDAO = SachDAO.getInstance();
+        phieuMuonChiTietDao =PhieuMuonChiTietDao.getInstance();
         listPhieuMuon = new HashMap<Integer, List<PhieuMuon>>();
         listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
 
@@ -211,11 +217,11 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã phiếu", "Người Mượn", "Ngày mượn", "Thời hạn trả", "Người xử lí", "QR_CODE"
+                "STT", "Mã phiếu", "Ngày mượn", "Thời hạn trả", "Người xử lí", "QR_CODE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, false
+                false, false, false, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -549,7 +555,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hãy chọn phiếu mượn cần xem!");
         } else {
             btnSave.setText("Lưu");
-            setForm(listPhieuMuon.get(pageIndex).get(row));
+            PhieuMuon phieuM = listPhieuMuon.get(pageIndex).get(row);
+            phieuM.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(phieuM.getId()));
+            setForm(phieuM);
             activeTabCapNhat();
         }
     }//GEN-LAST:event_jButtonChiTietPhieuMuonActionPerformed
@@ -666,7 +674,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         for (int i = 0; i < list.size(); ++i) {
             PhieuMuon phieuMuon = list.get(i);
             tableModelPhieuMuon.addRow(new Object[]{
-                i + 1, phieuMuon.getId(), phieuMuon.getNguoiMuon().getFullName(), dateFormat.format(phieuMuon.getNgayMuon()), dateFormat.format(phieuMuon.getHanTra()), phieuMuon.getNguoiXuLy().getFullName(), phieuMuon.getQr_code()
+                i + 1, phieuMuon.getId(), dateFormat.format(phieuMuon.getNgayMuon()), dateFormat.format(phieuMuon.getHanTra()), phieuMuon.getNguoiXuLy(), phieuMuon.getQr_code()
             });
         }
     }
@@ -712,10 +720,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         if (check == 3) {
             phieuMuon = new PhieuMuon();
             phieuMuon.setId(maPhieuMuon);
-
-            HoiVien nm = new HoiVien();
-            nm.setId(Long.valueOf(nguoiMuon));
-            phieuMuon.setNguoiMuon(nm);
+            phieuMuon.setNguoiMuon(Long.valueOf(nguoiMuon));
             phieuMuon.setNgayMuon(ngayMuon);
             phieuMuon.setHanTra(ngayTra);
             phieuMuon.setQr_code("sach-" + Calendar.getInstance().getTimeInMillis());
@@ -737,17 +742,17 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jDateChooserNgayTra.setDate(phieuMuon.getHanTra());
         btnDownLoadQR.setVisible(true);
         tableModelSachMuon.setRowCount(0);
-        HoiVien nguoiMuon = phieuMuon.getNguoiMuon();
+        HoiVien nguoiMuon = hoiVienDao.selectByID(phieuMuon.getNguoiMuon());
         jComboBoxNguoiMuon.setSelectedItem(nguoiMuon.getId() + "-" + nguoiMuon.getFullName());
 
-        if (phieuMuon.getListPhieuMuonChiTiet() != null) {
-            phieuMuon.getListPhieuMuonChiTiet().forEach((pmct) -> {
-                Sach sach = pmct.getSach();
+        if (phieuMuon.getListPhieuMuonChiTiets() != null) {
+            phieuMuon.getListPhieuMuonChiTiets().forEach((pmct) -> {
+                Sach sach = sachDAO.selectByID(pmct.getSach());
+                
                 listSachMuon.put(sach.getId(), sach);
                 tableModelSachMuon.addRow(new Object[]{
                     sach.getId(),
-                    sach.getTenSach(),
-                    sach.getNhaXuatBan().getTenNhaXuatBan()
+                    sach.getTenSach()
                 });
             });
             tblSachMuon.setModel(tableModelSachMuon);
@@ -769,7 +774,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             return false;
         } else {
             listSachMuon.put(sach.getId(), sach);
-            tableModelSachMuon.addRow(new Object[]{sach.getId(), sach.getTenSach(), sach.getNhaXuatBan().getTenNhaXuatBan()});
+            tableModelSachMuon.addRow(new Object[]{
+                sach.getId().toString(), sach.getTenSach()
+            });
             return true;
         }
     }

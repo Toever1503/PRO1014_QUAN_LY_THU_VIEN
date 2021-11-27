@@ -6,6 +6,8 @@
 package views;
 
 import DAO.HoaDonDenBuDao;
+import DAO.HoiVienDao;
+import DAO.SachDAO;
 import Models.HoaDonDenBu;
 import Models.HoaDonDenBuChiTiet;
 import Models.HoiVien;
@@ -17,6 +19,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,12 +30,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLHoaDonDenBu extends javax.swing.JPanel {
 
-    private List<HoaDonDenBu> listHoaDonDenBu;
+    private Map<Integer, List<HoaDonDenBu>> listHoaDonDenBu;
     private Map<Long, HoaDonDenBuChiTiet> listHoaDonChiTiet;
     private DefaultTableModel tableModelHoaDonDenBu;
     private DefaultTableModel tableModelHoaDonDenBuChiTiet;
+    private DefaultComboBoxModel boxModelNguoiMuon;
     private int pageIndex = 0;
-    
+    private int total;
+
+    HoiVienDao hoiVienDao;
+    private SachDAO sachDao;
     private HoaDonDenBuDao hoaDonDenBuDao;
     private static QLHoaDonDenBu instance;
 
@@ -53,14 +60,21 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
     public void init() {
         tabs.remove(tabCapNhat);
+        hoiVienDao = HoiVienDao.getInstance();
+        sachDao = SachDAO.getInstance();
         hoaDonDenBuDao = HoaDonDenBuDao.getInstance();
-        listHoaDonDenBu = hoaDonDenBuDao.selectALL();
+        total = hoaDonDenBuDao.getTotal();
+
+        listHoaDonDenBu = new HashMap<Integer, List<HoaDonDenBu>>();
         listHoaDonChiTiet = new HashMap<Long, HoaDonDenBuChiTiet>();
+        listHoaDonDenBu.put(0, hoaDonDenBuDao.selectByPage(Long.valueOf(0)));
+
         tableModelHoaDonDenBu = (DefaultTableModel) tblHoaDonDenBu.getModel();
         tableModelHoaDonDenBuChiTiet = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+        boxModelNguoiMuon = (DefaultComboBoxModel) cmbNguoiMuon.getModel();
 
-//        listHoaDonDenBu.add(new HoaDonDenBu(7l, "akari6", "chung999", 19933f, "of", new Date(2021, 11, 25)));
-        fillTableHoaDonDenBu();
+        fillTableHoaDonDenBu(listHoaDonDenBu.get(0));
+        fillCmbHoiVien();
     }
 
     /**
@@ -119,17 +133,17 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tblHoaDonDenBu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Người Mượn", "Người Xử Lý", "Tổng Tiền", "Ngày Tạo"
+                "Mã Hóa Đơn", "Người Xử Lý", "Tổng Tiền", "Ngày Tạo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -250,7 +264,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tabCapNhat.setLayout(new java.awt.BorderLayout());
 
-        btnDownloadQr.setText("Download");
+        btnDownloadQr.setText("print");
         btnDownloadQr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDownloadQrActionPerformed(evt);
@@ -263,14 +277,14 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlQrCode.setLayout(pnlQrCodeLayout);
         pnlQrCodeLayout.setHorizontalGroup(
             pnlQrCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlQrCodeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblQR_CODE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQrCodeLayout.createSequentialGroup()
                 .addContainerGap(71, Short.MAX_VALUE)
                 .addComponent(btnDownloadQr)
                 .addGap(65, 65, 65))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQrCodeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblQR_CODE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlQrCodeLayout.setVerticalGroup(
             pnlQrCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +316,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlDetail.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         cmbNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlDetail.add(cmbNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 130, 20));
+        pnlDetail.add(cmbNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 230, 20));
 
         lblErrorMaHoaDonDenBu.setText(" ");
         pnlDetail.add(lblErrorMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, -1));
@@ -406,6 +420,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
     private void btnDownloadQrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadQrActionPerformed
         // TODO add your handling code here:
+        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.selectByID(Long.valueOf(txtMaHoaDonDenBu.getText()));
     }//GEN-LAST:event_btnDownloadQrActionPerformed
 
     private void LưuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LưuActionPerformed
@@ -416,6 +431,44 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             //save
             HoaDonDenBu hoaDonDenBu = getForm();
 
+            List<HoaDonDenBuChiTiet> listHDCT = new ArrayList<HoaDonDenBuChiTiet>();
+            listHoaDonChiTiet.forEach((key, hdct) -> listHDCT.add(hdct));
+            hoaDonDenBu.setListhBuChiTiets(listHDCT);
+
+            if (hoaDonDenBu.getId() == null) {
+                Long id = Long.valueOf(hoaDonDenBuDao.insertOnUpdate(hoaDonDenBu));
+                if (id <= 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+                    return;
+                } else {
+                    String keyData = hoaDonDenBu.getQr_code().split("-")[1];
+                    if (!Helper.QR_CODE.generateQRcode(keyData, Helper.XImage.HOADON_UPLOAD.concat("/" + keyData + ".png"))) {
+                        JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    hoaDonDenBu.setId(id);
+                    txtMaHoaDonDenBu.setText(id.toString());
+                    pageIndex = 0;
+                    listHoaDonDenBu.clear();
+                    listHoaDonDenBu.put(pageIndex, hoaDonDenBuDao.selectByPage(Long.valueOf(pageIndex)));
+                }
+            } else {
+                if (hoaDonDenBuDao.insertOnUpdate(hoaDonDenBu) <= 0) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                    hoaDonDenBu = hoaDonDenBuDao.selectByID(hoaDonDenBu.getId());
+                    List<HoaDonDenBu> list = listHoaDonDenBu.get(pageIndex);
+                    for (int i = 0; i < list.size(); ++i) {
+                        if (list.get(i).getId().equals(hoaDonDenBu.getId())) {
+                            list.set(i, hoaDonDenBu);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_LưuActionPerformed
 
@@ -426,35 +479,46 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-        pageIndex = 0;
-        listHoaDonDenBu = null;
-        fillTableHoaDonDenBu();
+        pageIndex = total;
+        fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        pageIndex--;
-        listHoaDonDenBu = null;
-        fillTableHoaDonDenBu();
+        if (pageIndex + 1 > total) {
+            JOptionPane.showMessageDialog(this, "Bạn đã ở trang cuối!");
+        } else {
+            pageIndex++;
+            List<HoaDonDenBu> list = listHoaDonDenBu.get(pageIndex);
+            if (list == null) {
+                listHoaDonDenBu.put(pageIndex, hoaDonDenBuDao.selectByPage(Long.valueOf(pageIndex)));
+            }
+            fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
+        }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-        pageIndex--;
-        listHoaDonDenBu = null;
-        fillTableHoaDonDenBu();
+        if (pageIndex - 1 < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn đã ở tranđầug !");
+        } else {
+            pageIndex--;
+            fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
+        }
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
         pageIndex = 0;
-        listHoaDonDenBu = null;
-        fillTableHoaDonDenBu();
+        fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
+        resetForm();
         activeTabCapNhat();
+        if (listHoaDonChiTiet.size() > 0)
+            listHoaDonChiTiet.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
@@ -463,8 +527,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn 1 hóa đơn cần xem!");
         } else {
+            setForm(listHoaDonDenBu.get(pageIndex).get(row));
             activeTabCapNhat();
-            setForm(listHoaDonDenBu.get(row));
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
 
@@ -475,7 +539,9 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hãy chọn sách cần xóa!");
         } else {
             long maSach = Long.valueOf(tblHoaDonChiTiet.getValueAt(row, 0).toString());
+            listHoaDonChiTiet.remove(maSach);
             tableModelHoaDonDenBuChiTiet.removeRow(row);
+            tinhTongTien();;
         }
     }//GEN-LAST:event_XóaActionPerformed
 
@@ -543,74 +609,85 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
-    public void fillTableHoaDonDenBu() {
+    public void fillTableHoaDonDenBu(List<HoaDonDenBu> list) {
         if (listHoaDonDenBu == null) {
             return;
         }
-        System.out.println("123");
         tableModelHoaDonDenBu.setRowCount(0);
-        listHoaDonDenBu.forEach((hoaDon) -> {
-            tableModelHoaDonDenBu.addRow(new Object[]{hoaDon.getId(), hoaDon.getNguoiMuon().getFullName(), hoaDon.getNguoiXuLy().getFullName(), hoaDon.getTongTien(), hoaDon.getNgayTao()});
+        list.forEach((hoaDon) -> {
+            tableModelHoaDonDenBu.addRow(new Object[]{hoaDon.getId(),
+                hoaDon.getNguoiXuLy(), hoaDon.getTongTien(), hoaDon.getNgayTao()});
         });
     }
 
     public HoaDonDenBu getForm() {
         long maHoaDonDenBu = txtMaHoaDonDenBu.getText().isEmpty() ? 0 : Long.valueOf(txtMaHoaDonDenBu.getText());
-        String nguoiMuon = cmbNguoiMuon.getSelectedItem() == null ? null : cmbNguoiMuon.getSelectedItem().toString();
+        String nguoiMuon = cmbNguoiMuon.getSelectedItem() == null ? null : cmbNguoiMuon.getSelectedItem().toString().split("-")[0];
         Double tongTien = txtTongTien.getText().isEmpty() ? 0 : Double.valueOf(txtTongTien.getText());
 
         Long timeNow = Calendar.getInstance().getTimeInMillis();
 
         HoaDonDenBu hoaDonDenBu = new HoaDonDenBu();
         hoaDonDenBu.setId(maHoaDonDenBu);
-        hoaDonDenBu.setNguoiMuon(new HoiVien(Long.valueOf(nguoiMuon)));
-        hoaDonDenBu.setNguoiXuLy(Helper.Auth.user);
+        hoaDonDenBu.setNguoiMuon(Long.valueOf(nguoiMuon));
+        hoaDonDenBu.setNguoiXuLy(Helper.Auth.user.getMaQL());
         hoaDonDenBu.setNgayTao(new Date(timeNow));
         hoaDonDenBu.setTongTien(tongTien);
-        hoaDonDenBu.setQr_code(timeNow.toString());
+        hoaDonDenBu.setQr_code("hoadon-" + timeNow.toString());
 
         return hoaDonDenBu;
     }
 
     public void setForm(HoaDonDenBu hoaDonDenBu) {
         txtMaHoaDonDenBu.setText(String.valueOf(hoaDonDenBu.getId()));
-        txtTongTien.setText(String.valueOf(hoaDonDenBu.getTongTien()));
-        cmbNguoiMuon.setSelectedItem(hoaDonDenBu.getNguoiMuon().getFullName());
+        txtTongTien.setText(hoaDonDenBu.getTongTien().toString());
+        for (int i = cmbNguoiMuon.getItemCount() - 1; i >= 0; --i) {
+            if (cmbNguoiMuon.getItemAt(i).toString().split("-")[0].equals(hoaDonDenBu.getNguoiMuon().toString())) {
+                cmbNguoiMuon.setSelectedIndex(i);
+                break;
+            }
+        }
 
         tableModelHoaDonDenBuChiTiet.setRowCount(0);
-        if (hoaDonDenBu.getListHoaDonDenBuChiTiets() != null) {
+        if (hoaDonDenBu.getListhBuChiTiets() != null) {
 
-            hoaDonDenBu.getListHoaDonDenBuChiTiets().forEach((hdct) -> {
-                tableModelHoaDonDenBuChiTiet.addRow(
-                        new Object[]{hdct.getSach().getId(),
-                            hdct.getSach().getTenSach(),
-                            hdct.getSach().getHoaDonNhapSachChiTiet().getGia()
-                        });
+            hoaDonDenBu.getListhBuChiTiets().forEach((hdct) -> {
+                listHoaDonChiTiet.put(hdct.getSach(), hdct);
+                Sach sach = sachDao.selectByID(hdct.getSach());
+                tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
+                    sach.getId(),
+                    sach.getTenSach(),
+                    sach.getGia()
+                });
             });
         }
-//        if (hoaDonDenBu.getQr_code() != null) {
-//            lblQR_CODE.setIcon(new ImageIcon(
-//                    new ImageIcon(Helper.XImage.HOADON_UPLOAD.concat("/" + hoaDonDenBu.getQr_code().strip("-")[1]))
-//                            .getImage().getScaledInstance(lblQR_CODE.getWidth(), lblQR_CODE.getHeight(),
-//                                    Image.SCALE_DEFAULT)));
-//        }
+        if (hoaDonDenBu.getQr_code() != null) {
+            try {
+                lblQR_CODE.setIcon(new ImageIcon(
+                        new ImageIcon(Helper.XImage.HOADON_UPLOAD.concat("/" + hoaDonDenBu.getQr_code().split("-")[1] + ".png"))
+                                .getImage()
+                                .getScaledInstance(195, 210,
+                                        Image.SCALE_DEFAULT)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         btnDownloadQr.setVisible(true);
         tinhTongTien();
     }
 
-    public boolean addSach(HoaDonDenBuChiTiet hdct) {
-//        String[] sach = hdct.getSach().split("-");
-//        long key = Long.valueOf(sach[0]);
-//        if (!listHoaDonChiTiet.containsKey(key)) {
-//            listHoaDonChiTiet.put(key, hdct);
-//            tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
-//                key,
-//                sach[1],
-//                hdct.getGia()
-//            });
-//            tinhTongTien();
-//            return true;
-//        }
+    public boolean addSach(HoaDonDenBuChiTiet hdct, String tenSach) {
+        long key = hdct.getSach();
+        if (!listHoaDonChiTiet.containsKey(key)) {
+            listHoaDonChiTiet.put(key, hdct);
+            tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
+                key,
+                tenSach,
+                hdct.getGia()
+            });
+            tinhTongTien();
+            return true;
+        }
         return false;
     }
 
@@ -624,12 +701,20 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     }
 
     public void resetForm() {
-        listHoaDonChiTiet.entrySet();
+        listHoaDonChiTiet.clear();
         txtMaHoaDonDenBu.setText(null);
         txtTongTien.setText(null);
         cmbNguoiMuon.setSelectedIndex(0);
         lblQR_CODE.setIcon(null);
         btnDownloadQr.setVisible(false);
+    }
+
+    private void fillCmbHoiVien() {
+        boxModelNguoiMuon.removeAllElements();
+        List<HoiVien> listHoiViens = hoiVienDao.selectALL();
+        if (listHoiViens != null) {
+            listHoiViens.forEach((nm) -> boxModelNguoiMuon.addElement(nm.getId() + "-" + nm.getFullName()));
+        }
     }
 
 }

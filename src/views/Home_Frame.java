@@ -38,9 +38,9 @@ public class Home_Frame extends javax.swing.JFrame {
      */
     public Home_Frame() {
         QuanLy user = new QuanLy();
-        user.setMaQL("SHIKI_ADMIN");
+        user.setMaQL("admin");
         Helper.Auth.user = user;
-        this.initDao();
+//        this.initDao();
         this.init();
         this.initPnlQuanLy();
     }
@@ -56,7 +56,6 @@ public class Home_Frame extends javax.swing.JFrame {
         HoaDonDenBuChiTietDao.getInstance();
         HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
         PhieuMuonChiTietDao.getInstance();
-        SachDAO.getInstance().setHoaDonNhapSachChiTietDao(hoaDonNhapSachChiTietDao);
         
         HoaDonDenBuDao.getInstance();
         HoaDonNhapSachDao.getInstance();
@@ -73,8 +72,8 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     public void initPnlQuanLy() {
-        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
 //        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
