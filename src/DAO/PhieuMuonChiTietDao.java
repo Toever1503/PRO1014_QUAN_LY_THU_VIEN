@@ -116,8 +116,7 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
 
     @Override
     public List<PhieuMuonChiTiet> selectALL() {
-        return this.selectBySql(this.SELECT_ALL_SQL);
-//        throw new Exception();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<PhieuMuonChiTiet> selectALL(Long phieuMuon) {

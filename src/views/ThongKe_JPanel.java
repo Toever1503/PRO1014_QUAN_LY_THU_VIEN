@@ -4,6 +4,10 @@
  */
 package views;
 
+import DAO.ThongKeDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author NguyenHoan
@@ -17,6 +21,36 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
      */
     private ThongKe_JPanel() {
         initComponents();
+        this.init();
+    }
+
+    DAO.ThongKeDAO tkDAO;
+
+    private void init() {
+        this.tkDAO = new ThongKeDAO();
+
+    }
+
+    void fillTableDaMuon() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.tkDAO.getSachDaMuon();
+//        list.forEach(row -> {
+//            model.addRow(new Object[]{row[0],row[1],row[2],row[3],row[4],row[0],row[0]
+//            });
+//        });
+    }
+
+    void fillTableBiLoai() {
+
+    }
+
+    void fillTableTreHan() {
+
+    }
+
+    void fillTableConLai() {
+
     }
 
     public static ThongKe_JPanel getInstance() {

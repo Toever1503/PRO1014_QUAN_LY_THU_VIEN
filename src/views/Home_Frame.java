@@ -18,12 +18,9 @@ import DAO.SachDAO;
 import DAO.TacGiaDao;
 import DAO.TheLoaiDao;
 import Helper.XImage;
-import Models.HoaDonNhapSachChiTiet;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import views.DoiMatKhau_JDialog;
-import views.Login_JFrame;
 
 /**
  *
