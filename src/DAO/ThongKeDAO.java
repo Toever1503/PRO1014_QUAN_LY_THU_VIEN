@@ -9,8 +9,13 @@ import java.util.List;
  */
 public class ThongKeDAO {
 
+<<<<<<< Updated upstream
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         List<Object[]> list = new java.util.ArrayList<>();
+=======
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        List<Object[]> list = new ArrayList<>();
+>>>>>>> Stashed changes
         try {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {
@@ -29,19 +34,25 @@ public class ThongKeDAO {
 
     public List<Object[]> getSachDaMuon() {
         String sql = "{CALL sp_sach_da_muon}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachBiLoai() {
         String sql = "{CALL sp_sach_bi_loai}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan","ViTri"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "ViTri"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachTreHan() {
         String sql = "{CALL sp_sach_tre_han}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan"};
+        return this.getListOfArray(sql, cols);
+    }
+
+    public List<Object[]> getSachConLai() {
+        String sql = "{CALL sp_sach_con_lai}";
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "ViTri"};
         return this.getListOfArray(sql, cols);
     }
 }

@@ -4,15 +4,26 @@
  */
 package views;
 
+<<<<<<< Updated upstream
 import DAO.ThongKeDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+=======
+import DAO.SachDAO;
+import DAO.ThongKeDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import Helper.MsgBox;
+>>>>>>> Stashed changes
 
 /**
  *
  * @author NguyenHoan
  */
-public class ThongKe_JPanel extends javax.swing.JPanel {
+public final class ThongKe_JPanel extends javax.swing.JPanel {
+
+    private final ThongKeDAO thongKeDAO;
+    private final SachDAO sachDAO;
 
     private static ThongKe_JPanel instance;
 
@@ -21,6 +32,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
      */
     private ThongKe_JPanel() {
         initComponents();
+<<<<<<< Updated upstream
         this.init();
     }
 
@@ -58,6 +70,13 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             instance = new ThongKe_JPanel();
         }
         return instance;
+=======
+        this.thongKeDAO = new ThongKeDAO();
+        this.sachDAO = new SachDAO();
+        this.fillTableSachDaMuon();
+        this.fillTableSachBiLoai();
+        this.fillTableSachConLai();
+>>>>>>> Stashed changes
     }
 
     /**
@@ -296,6 +315,60 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    void fillTableSachDaMuon() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachDaMuon();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachBiLoai() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachBiLoai.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachBiLoai();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachTreHan() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachTreHan();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachConLai() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachConLai.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachConLai();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void thuHoi() {
+        if (!Helper.Auth.isManager()) {
+            MsgBox.alert_WARNING(this, "Bạn không có quyền cho thao tác này!");
+            return;
+        }
+        for (int row : this.tblSachBiLoai.getSelectedRows()) {
+            Long maSach = (Long) this.tblSachBiLoai.getValueAt(row, 2);
+            this.sachDAO.delete(maSach);
+        }
+        MsgBox.alert_INFORMATION(this, "Thu hồi thành cống!");
+    }
+
+//    public static void main(String[] args) {
+//        javax.swing.JFrame frame = new javax.swing.JFrame();
+//        frame.setSize(900, 800);
+//        frame.add(new ThongKe_JPanel());
+//        frame.setVisible(true);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
