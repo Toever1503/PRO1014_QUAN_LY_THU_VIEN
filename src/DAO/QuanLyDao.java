@@ -4,13 +4,15 @@ import Models.QuanLy;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author haunv
  */
 public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
-
+    private static QuanLyDao insttanceDao;
     private final String SELECT_ALL_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly";
     private final String SELECT_BY_ID_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly WHERE MaQL = ?";
     private final String INSERT_SQL = "INSERT INTO quan_ly (MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,)";
@@ -19,7 +21,13 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO quan_ly (MaQL, MatKhau, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, VaiTro, TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MatKhau=VALUES(MatKhau), CCCD=VALUES(CCCD), HoTen=VALUES(HoTen), DiaChi=VALUES(DiaChi), NgaySinh=VALUES(NgaySinh), SoDienThoai=VALUES(SoDienThoai), Email=VALUES(Email), VaiTro=VALUES(VaiTro), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly LIMIT ?, 30";
-
+    private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE MaQL like ? or HoTen like ? or SoDienThoai like ?";
+    public static QuanLyDao getInstance() {
+        if (insttanceDao == null) {
+            insttanceDao = new QuanLyDao();
+        }
+        return insttanceDao;
+    }
     @Override
     public int insert(QuanLy entity) {
         int row = 0;
@@ -62,11 +70,15 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
         return row;
     }
 
-    @Override
-    public int insertOnUpdate(QuanLy entity) {
-        int row = 0;
+    public String insertOnUpdateNew(QuanLy entity) {
+        String maQl = null;
+        PreparedStatement ps = null;
         try {
-            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+            String sql = this.INSERT_ON_UPDATE_SQL;
+            if (entity.getMaQL() == null) {
+                sql += " SELECT LAST_INSERT_ID() as maQl;";
+            }
+            ps = Helper.Utility.getStm(this.INSERT_ON_UPDATE_SQL,
                     entity.getMaQL(),
                     entity.getMatKhau(),
                     entity.getCccd(),
@@ -77,10 +89,21 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
                     entity.getEmail(),
                     entity.isVaiTro(),
                     entity.isTrangThai());
+
+            if (entity.getMaQL() == null) {
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                rs.next();
+                String id = rs.getNString("maQl");
+                entity.setMaQL(id);
+                maQl = id;
+            } else {
+                maQl = ps.executeUpdate() == 0 ? null : entity.getMaQL();
+            }
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return row;
+        return maQl;
     }
 
     @Override
@@ -105,7 +128,7 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
 
     @Override
     public List<QuanLy> selectByPage(String id) {
-        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, Long.valueOf(id));
     }
 
     @Override
@@ -137,5 +160,43 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
             Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public int getTotalPage() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM hoi_vien");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    @Override
+    public int insertOnUpdate(QuanLy entity) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+                    entity.getMaQL(),
+                    entity.getMatKhau(),
+                    entity.getCccd(),
+                    entity.getFullName(),
+                    entity.getDiaChi(),
+                    entity.getNgaySinh(),
+                    entity.getSoDienThoai(),
+                    entity.getEmail(),
+                    entity.isVaiTro(),
+                    entity.isTrangThai());
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+    public List<QuanLy> searchByKey(String input) {
+        input = "%" + input + "%";
+        return this.selectBySql(this.SELECT_BY_KEY, input, input, input);
     }
 }
