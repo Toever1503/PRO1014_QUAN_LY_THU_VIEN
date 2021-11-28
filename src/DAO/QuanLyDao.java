@@ -22,12 +22,15 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
             + "ON DUPLICATE KEY UPDATE MatKhau=VALUES(MatKhau), CCCD=VALUES(CCCD), HoTen=VALUES(HoTen), DiaChi=VALUES(DiaChi), NgaySinh=VALUES(NgaySinh), SoDienThoai=VALUES(SoDienThoai), Email=VALUES(Email), VaiTro=VALUES(VaiTro), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT MaQL,MatKhau,CCCD,HoTen,DiaChi,NgaySinh,SoDienThoai,Email,VaiTro,TrangThai FROM quan_ly LIMIT ?, 30";
     private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE MaQL like ? or HoTen like ? or SoDienThoai like ?";
+    private static QuanLyDao instance;
+
     public static QuanLyDao getInstance() {
-        if (insttanceDao == null) {
-            insttanceDao = new QuanLyDao();
+        if (instance == null) {
+            instance = new QuanLyDao();
         }
-        return insttanceDao;
+        return instance;
     }
+
     @Override
     public int insert(QuanLy entity) {
         int row = 0;

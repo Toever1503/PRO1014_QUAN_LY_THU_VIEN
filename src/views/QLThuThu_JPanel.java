@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Nguyen Hoan
  */
 public class QLThuThu_JPanel extends javax.swing.JPanel {
+    private static QLThuThu_JPanel instance;
 
     private List<QuanLy> listQLThuThu;
     private Map<Integer, List<QuanLy>> listQLTT;
@@ -38,7 +39,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLThuThu_JPanel
      */
-    public QLThuThu_JPanel() {
+    private QLThuThu_JPanel() {
         initComponents();
         tabs.remove(tabCapNhat);
         QLDao = QLDao.getInstance();
@@ -118,6 +119,35 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         return model;
     }
 
+    void setForm(QuanLy model) {
+
+        txtMaTT.setText(model.getMaQL());
+        txtMatKhau.setText(model.getMatKhau());
+        txtCCCD.setText(model.getCccd());
+        txtHoTen.setText(model.getFullName());
+        rdoQuanLy.setSelected(model.isVaiTro());
+        rdoThuThu.setSelected(model.isVaiTro());
+        txtSoDienThoai.setText(model.getSoDienThoai());
+        txtEmail.setText(model.getEmail());
+        txtDiaChi.setText(model.getDiaChi());
+        rdoHoatDong.setSelected(model.isTrangThai());
+        rdoKhoa.setSelected(model.isTrangThai());
+        jDateChooserNgaySinh.setDate(model.getNgaySinh());
+    }
+    QuanLy getForm() {
+        QuanLy model = new QuanLy();
+        model.setMaQL(txtMaTT.getText());
+        model.setFullName(txtHoTen.getText());
+        model.setSoDienThoai(txtSoDienThoai.getText());
+        model.setMatKhau(new String(txtMatKhau.getPassword()));
+        model.setCccd(txtCCCD.getText());
+        model.setEmail(txtEmail.getText());
+        model.setDiaChi(txtDiaChi.getText());
+        model.setVaiTro(rdoThuThu.isSelected());
+        model.setNgaySinh(jDateChooserNgaySinh.getDate() == null ? null
+                : new Date(jDateChooserNgaySinh.getDate().getTime()));
+        return model;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -511,7 +541,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
 
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-
         if (checkNullText(txtMaTT) && checkNullPass(txtMatKhau) && checkNullText(txtCCCD)
                 && checkNullText(txtHoTen) && checkNullDate(jDateChooserNgaySinh) && checkNullText(txtSoDienThoai)
                 && checkNullText(txtEmail) && checkNullText(txtDiaChi)) {
@@ -598,6 +627,19 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     public void activeTabCapNhat() {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
+    }
+    public static boolean checkNullText(JTextField txt) {// check null 
+        txt.setBackground(white);
+        if (txt.getText().trim().length() > 0) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            JOptionPane.showMessageDialog(txt.getRootPane(), "Không được để trống " + txt.getName());
+            return false;
+        }
+    }
+    public void alert(Component parent, String message) {
+        JOptionPane.showMessageDialog(parent, message, "Hệ thống quản lý đào tạo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static boolean checkNullText(JTextField txt) {
