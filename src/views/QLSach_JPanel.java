@@ -43,7 +43,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private DefaultTableModel tableModelListTheLoais;
 
     private DefaultComboBoxModel boxModelTheLoai;
-    private DefaultComboBoxModel boxModelTacGia;
     private DefaultComboBoxModel boxModelNhaXuatBan;
     private DefaultComboBoxModel boxModelKhuVuc;
     private int pageIndex = 0;
@@ -89,12 +88,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         tableModelListTheLoais = (DefaultTableModel) tblTheLoai.getModel();
 
         boxModelKhuVuc = (DefaultComboBoxModel) cmbKhuVuc.getModel();
-        boxModelTacGia = (DefaultComboBoxModel) cmbTacGia.getModel();
         boxModelNhaXuatBan = (DefaultComboBoxModel) cmbNhaXuatBan.getModel();
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoaiFilter.getModel();
 
         fillCmbKhuVuc();
-        fillCmbTacGia();
         fillCmbNhaXuatBan();
         fillTableSach(listSach.get(pageIndex));
         fillCmbTheLoai();
@@ -642,7 +639,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         lblErrorTenSach.setText(null);
         cmbKhuVuc.setSelectedIndex(0);
         cmbNhaXuatBan.setSelectedIndex(0);
-        cmbTacGia.setSelectedIndex(0);
         lblQr_Code.setIcon(null);
         btnDownload.setVisible(false);
     }
@@ -655,13 +651,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         boxModelKhuVuc.addElement("Khu D");
         boxModelKhuVuc.addElement("Khu E");
 
-    }
-
-    private void fillCmbTacGia() {
-        boxModelTacGia.removeAllElements();
-        if (listTacGia != null) {
-            listTacGia.forEach((x, tg) -> boxModelTacGia.addElement(tg.getId() + "-" + tg.getTenTacGia()));
-        }
     }
 
     private void fillCmbNhaXuatBan() {
