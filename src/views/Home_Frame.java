@@ -4,6 +4,19 @@
  */
 package views;
 
+import DAO.GopYDAO;
+import DAO.HoaDonDenBuChiTietDao;
+import DAO.HoaDonDenBuDao;
+import DAO.HoaDonNhapSachChiTietDao;
+import DAO.HoaDonNhapSachDao;
+import DAO.HoiVienDao;
+import DAO.NhaXuatBanDao;
+import DAO.PhieuMuonChiTietDao;
+import DAO.PhieuMuonDao;
+import DAO.QuanLyDao;
+import DAO.SachDAO;
+import DAO.TacGiaDao;
+import DAO.TheLoaiDao;
 import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
@@ -21,21 +34,47 @@ public class Home_Frame extends javax.swing.JFrame {
      * Creates new form main_frame
      */
     public Home_Frame() {
+        QuanLy user = new QuanLy();
+        user.setMaQL("admin");
+        Helper.Auth.user = user;
+//        this.initDao();
         this.init();
-
+        this.initPnlQuanLy();
     }
 
-    void init() {
+    public void initDao() {
+        HoiVienDao.getInstance();
+        QuanLyDao.getInstance();
+        TacGiaDao.getInstance();
+        TheLoaiDao.getInstance();
+        NhaXuatBanDao.getInstance();        
+        GopYDAO.getInstance();
+
+        HoaDonDenBuChiTietDao.getInstance();
+        HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
+        PhieuMuonChiTietDao.getInstance();
+        
+        HoaDonDenBuDao.getInstance();
+        HoaDonNhapSachDao.getInstance();
+        PhieuMuonDao.getInstance();
+    }
+
+    public void init() {
         XImage.init();
-        QuanLy user = new QuanLy();
-        user.setMaQL("SHIKI_ADMIN");
-        Helper.Auth.user = user;
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
-        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+    }
+
+    public void initPnlQuanLy() {
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -82,16 +121,11 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_home = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
-        qLSach_JPanel1 = new views.QLSach_JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
-        qLHoiVien_JPanel1 = new views.QLHoiVien_JPanel();
         jPanel_QlThuThu = new javax.swing.JPanel();
-        qLThuThu_JPanel1 = new views.QLThuThu_JPanel();
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
-        qLHoaDonDenBu1 = new views.QLHoaDonDenBu();
         jPanel_ThongKe = new javax.swing.JPanel();
-        thongKe_JPanel1 = new views.ThongKe_JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -117,7 +151,6 @@ public class Home_Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
-        setPreferredSize(new java.awt.Dimension(900, 800));
 
         pnlMain.setLayout(new java.awt.BorderLayout());
 
@@ -306,31 +339,21 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.add(jPanel_home, "card9");
 
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
-        jPanel_QlSach.add(qLSach_JPanel1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_QlSach, "card3");
 
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
-        jPanel_QlHoiVien.add(qLHoiVien_JPanel1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_QlHoiVien, "card5");
 
         jPanel_QlThuThu.setLayout(new java.awt.BorderLayout());
-        jPanel_QlThuThu.add(qLThuThu_JPanel1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_QlThuThu, "card6");
 
         jPanel_QlHoaDonDenBu.setLayout(new java.awt.BorderLayout());
-        jPanel_QlHoaDonDenBu.add(qLHoaDonDenBu1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_QlHoaDonDenBu, "card7");
 
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
-        jPanel_ThongKe.add(thongKe_JPanel1, java.awt.BorderLayout.CENTER);
-
         pnlMainRight.add(jPanel_ThongKe, "card8");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
@@ -537,7 +560,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new Login_JFrame().setVisible(true);
+//        new Login_JFrame().setVisible(true);
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
@@ -546,7 +569,7 @@ public class Home_Frame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        new DoiMatKhau_JDialog(this, true);
+//        new DoiMatKhau_JDialog(this, true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -574,6 +597,12 @@ public class Home_Frame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Home_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -635,10 +664,5 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainRight;
     private javax.swing.JPanel pnlWest;
-    private views.QLHoaDonDenBu qLHoaDonDenBu1;
-    private views.QLHoiVien_JPanel qLHoiVien_JPanel1;
-    private views.QLSach_JPanel qLSach_JPanel1;
-    private views.QLThuThu_JPanel qLThuThu_JPanel1;
-    private views.ThongKe_JPanel thongKe_JPanel1;
     // End of variables declaration//GEN-END:variables
 }

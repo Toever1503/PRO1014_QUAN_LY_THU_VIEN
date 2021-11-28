@@ -5,6 +5,7 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -12,38 +13,40 @@ import java.sql.Date;
  */
 public class HoaDonDenBu {
 
-    private long id;
-    private long nguoiMuon;
+    private Long id;
+    private Long nguoiMuon;
     private String nguoiXuLy;
-    private float tongTien;
+    private Double tongTien;
     private String qr_code;
     private Date ngayTao;
+    List<HoaDonDenBuChiTiet> listhBuChiTiets;
 
     public HoaDonDenBu() {
     }
 
-    public HoaDonDenBu(long id, long nguoiMuon, String nguoiXuLy, float tongTien, String qr_code, Date ngayTao) {
+    public HoaDonDenBu(Long id, Long nguoiMuon, String nguoiXuLy, Double tongTien, String qr_code, Date ngayTao, List<HoaDonDenBuChiTiet> listhBuChiTiets) {
         this.id = id;
         this.nguoiMuon = nguoiMuon;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
         this.qr_code = qr_code;
         this.ngayTao = ngayTao;
+        this.listhBuChiTiets = listhBuChiTiets;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getNguoiMuon() {
+    public Long getNguoiMuon() {
         return nguoiMuon;
     }
 
-    public void setNguoiMuon(long nguoiMuon) {
+    public void setNguoiMuon(Long nguoiMuon) {
         this.nguoiMuon = nguoiMuon;
     }
 
@@ -55,11 +58,11 @@ public class HoaDonDenBu {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public float getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -79,9 +82,17 @@ public class HoaDonDenBu {
         this.ngayTao = ngayTao;
     }
 
+    public List<HoaDonDenBuChiTiet> getListhBuChiTiets() {
+        return listhBuChiTiets;
+    }
+
+    public void setListhBuChiTiets(List<HoaDonDenBuChiTiet> listhBuChiTiets) {
+        this.listhBuChiTiets = listhBuChiTiets;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + '}';
+        return "HoaDonDenBu{" + "id=" + id + ", nguoiMuon=" + nguoiMuon + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", qr_code=" + qr_code + ", ngayTao=" + ngayTao + ", listhBuChiTiets=" + listhBuChiTiets + '}';
     }
 
 }

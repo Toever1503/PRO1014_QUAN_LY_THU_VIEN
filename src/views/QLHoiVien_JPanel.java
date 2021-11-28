@@ -74,7 +74,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         buttonGroup1 = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
@@ -214,7 +213,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 btnCapNhatActionPerformed(evt);
             }
         });
-
         btnChiTiet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnChiTiet.setText("Chi Tiết");
         btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
@@ -588,7 +586,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             }
         }
     }
-
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -730,5 +727,4 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSoDienThoai;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
-
 }

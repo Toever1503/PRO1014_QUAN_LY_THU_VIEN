@@ -24,6 +24,22 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TongTien=VALUES(TongTien), NgayThem=VALUES(NgayThem), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach LIMIT ?, 30";
 
+//    private QuanLyDao quanLyDao;
+//    private HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao;
+    private static HoaDonNhapSachDao instance;
+
+    private HoaDonNhapSachDao() {
+//        quanLyDao = QuanLyDao.getInstance();
+//        hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
+    }
+
+    public static HoaDonNhapSachDao getInstance() {
+        if (instance == null) {
+            instance = new HoaDonNhapSachDao();
+        }
+        return instance;
+    }
+
     @Override
     public int insert(HoaDonNhapSach entity) {
         int row = 0;
@@ -110,7 +126,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
             while (rs.next()) {
                 HoaDonNhapSach hdns = new HoaDonNhapSach();
                 hdns.setId(rs.getLong("ID"));
-                hdns.setNguoiXuLy(rs.getString("MaQL"));
+                hdns.setNguoiXuLy(rs.getNString("MaQL"));
                 hdns.setTongTien(rs.getFloat("TongTien"));
                 hdns.setNgayTao(rs.getDate("NgayThem"));
                 hdns.setQr_code(rs.getString("QR_FILE"));
@@ -122,4 +138,8 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
         }
         return list;
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(HoaDonNhapSachDao.getInstance().selectALL());
+//    }
 }

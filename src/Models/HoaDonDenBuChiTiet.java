@@ -10,40 +10,40 @@ package Models;
  */
 public class HoaDonDenBuChiTiet {
 
-    private long hoaDonDenBu;
-    private long sach;
-    private float gia;
+    private Long hoaDonDenBu;
+    private Long sach;
+    private Double gia;
 
     public HoaDonDenBuChiTiet() {
     }
 
-    public HoaDonDenBuChiTiet(long hoaDonDenBu, long sach, float gia) {
+    public HoaDonDenBuChiTiet(Long hoaDonDenBu, Long sach, Double gia) {
         this.hoaDonDenBu = hoaDonDenBu;
         this.sach = sach;
         this.gia = gia;
     }
 
-    public long getHoaDonDenBu() {
+    public Long getHoaDonDenBu() {
         return hoaDonDenBu;
     }
 
-    public void setHoaDonDenBu(long hoaDonDenBu) {
+    public void setHoaDonDenBu(Long hoaDonDenBu) {
         this.hoaDonDenBu = hoaDonDenBu;
     }
 
-    public long getSach() {
+    public Long getSach() {
         return sach;
     }
 
-    public void setSach(long sach) {
+    public void setSach(Long sach) {
         this.sach = sach;
     }
 
-    public float getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(float gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 
