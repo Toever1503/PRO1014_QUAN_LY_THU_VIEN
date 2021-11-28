@@ -16,6 +16,8 @@ import Models.TacGia;
 import Models.TacGiaVaSach;
 import Models.TheLoai;
 import Models.TheLoaiVaSach;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,8 +95,8 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         fillCmbKhuVuc();
         fillCmbNhaXuatBan();
-        fillTableSach(listSach.get(pageIndex));
         fillCmbTheLoai();
+        fillTableSach(listSach.get(pageIndex));
     }
 
     public static QLSach_JPanel getInstance() {
@@ -120,8 +122,8 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSach = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         btnAddNew = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         cmbTheLoaiFilter = new javax.swing.JComboBox<>();
@@ -130,6 +132,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         btnNext = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnFirst = new javax.swing.JButton();
+        btnLamMoi = new javax.swing.JButton();
         jPanelCapNhat = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblMaSach = new javax.swing.JLabel();
@@ -203,7 +206,12 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel3.setPreferredSize(new java.awt.Dimension(648, 50));
 
-        jButton1.setText("Tìm kiếm");
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnAddNew.setText("Thêm Mới");
         btnAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -235,12 +243,12 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 .addComponent(btnAddNew)
                 .addGap(3, 3, 3)
                 .addComponent(btnDetails)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTheLoaiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnSearch)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -248,13 +256,13 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField6)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnAddNew)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDetails)
                             .addComponent(cmbTheLoaiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -288,12 +296,21 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(466, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnLamMoi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
                 .addComponent(btnFirst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
@@ -305,9 +322,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLamMoi)
                     .addComponent(btnFirst)
                     .addComponent(btnPrev)
                     .addComponent(btnNext)
@@ -330,6 +348,11 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel4.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 48, 236, -1));
 
         txtTenSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTenSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenSachActionPerformed(evt);
+            }
+        });
         jPanel4.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 89, 236, -1));
 
         lblTenSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -348,7 +371,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblQr_Code, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblQr_Code, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 55, -1, -1));
@@ -498,7 +521,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hãy chọn sách cần xem!");
         } else {
             setForm(listSach.get(pageIndex).get(row));
-            btnAdd.setText("");
+            btnAdd.setText("Lưu");
             activeTabCapNhat();
         }
 
@@ -523,6 +546,13 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
     private void cmbTheLoaiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTheLoaiFilterActionPerformed
         // TODO add your handling code here:
+        String itemSelected = cmbTheLoaiFilter.getSelectedItem() == null ? null : cmbTheLoaiFilter.getSelectedItem().toString();
+        if (itemSelected != null) {
+            Long maTheLoai = Long.valueOf(itemSelected.split("-")[0]);
+
+            List<Sach> listSachByTheLoai = sachDAO.selectAllByTheLoai(maTheLoai);
+            fillTableSach(listSachByTheLoai);
+        }
     }//GEN-LAST:event_cmbTheLoaiFilterActionPerformed
 
     private void btnXoaTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTheLoaiActionPerformed
@@ -582,8 +612,107 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        Sach sach = getForm();
+        if (sach != null) {
+            if (sach.getId() == null) {
+                Long id = Long.valueOf(sachDAO.insertOnUpdate(sach));
 
+                if (id <= 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    sach.setId(id);
+                    txtMaSach.setText(id.toString());
+                    btnAdd.setText("Lưu");
+                    updateSach(id);
+                    String key = sach.getQr_code().split("-")[1];
+                    String path = Helper.XImage.SACH_UPLOAD.concat("/" + key + ".png");
+                    if (Helper.QR_CODE.generateQRcode(key, path)) {
+                        try {
+                            lblQr_Code.setIcon(new ImageIcon(
+                                    new ImageIcon(path).getImage().getScaledInstance(185, 200, 1)
+                            ));
+                            btnDownload.setVisible(true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã QR_CODE!");
+                        }
+                    }
+                    listSach.clear();
+                    pageIndex = 0;
+                    listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
+
+                }
+            } else {
+                if (sachDAO.insertOnUpdate(sach) <= 0) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+                } else {
+                    updateSach(sach.getId());
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                    List<Sach> list = listSach.get(pageIndex);
+                    for (int i = 0; i < list.size(); ++i) {
+                        if (list.get(i).getId().equals(sach.getId())) {
+                            list.set(i, sach);
+                            break;
+                        }
+                    }
+                    listSach.replace(pageIndex, list);
+                }
+            }
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    public void updateSach(Long id) {
+        new Thread() {
+            @Override
+            public void run() {
+                tacGiaVaSachDao.delete(id);
+                tacGiaAdd.forEach((x, y) -> {
+                    if (tacGiaVaSachDao.insert(new TacGiaVaSach(id, x)) == 0) {
+                        JOptionPane.showMessageDialog(null, "Lỗi cập nhật tác giả: " + listTacGia.get(x).getTenTacGia());
+                    }
+                });
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                theLoaiVaSachDao.delete(id);
+                theLoaiAdd.forEach((x, y) -> {
+                    if (theLoaiVaSachDao.insert(new TheLoaiVaSach(id, x)) == 0) {
+                        JOptionPane.showMessageDialog(null, "Lỗi cập nhật thể loại: " + listTheLoai.get(x).getTenTheLoai());
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        String search = txtSearch.getText();
+        if (search.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập thông tin cần tìm kiếm");
+        } else {
+            search = "%" + search + "%";
+            List<Sach> listSearch = sachDAO.searchByKey(search);
+            if (listSearch == null) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách nào!");
+            } else {
+                fillTableSach(listSearch);
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        pageIndex = 0;
+        fillTableSach(listSach.get(pageIndex));
+        cmbNhaXuatBan.setSelectedIndex(0);
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void txtTenSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenSachActionPerformed
     public void activeTabCapNhat() {
         jTabbedPane1.add(jPanelCapNhat, "Cập Nhật");
         jTabbedPane1.setSelectedIndex(1);
@@ -598,16 +727,17 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnDownload;
     private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnXoaTacGia;
     private javax.swing.JButton btnXoaTheLoai;
     private javax.swing.JComboBox<String> cmbKhuVuc;
     private javax.swing.JComboBox<String> cmbNhaXuatBan;
     private javax.swing.JComboBox<String> cmbTheLoaiFilter;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -619,7 +749,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblErrorTenSach;
     private javax.swing.JLabel lblMaSach;
     private javax.swing.JLabel lblNhaXuatBan1;
@@ -630,6 +759,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblTacGia;
     private javax.swing.JTable tblTheLoai;
     private javax.swing.JTextField txtMaSach;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenSach;
     // End of variables declaration//GEN-END:variables
 
@@ -641,6 +771,11 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         cmbNhaXuatBan.setSelectedIndex(0);
         lblQr_Code.setIcon(null);
         btnDownload.setVisible(false);
+
+        tacGiaAdd.clear();
+        theLoaiAdd.clear();
+        tableModelListTacGia.setRowCount(0);
+        tableModelListTheLoais.setRowCount(0);
     }
 
     private void fillCmbKhuVuc() {
@@ -686,21 +821,25 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             @Override
             public void run() {
                 List<TacGiaVaSach> tacGiaVaSachs = tacGiaVaSachDao.selectALLBySach(sach.getId());
-                tacGiaVaSachs.forEach((tg) -> {
-                    tacGiaAdd.put(tg.getTacGia(), tg.getSach());
-                    tableModelListTacGia.addRow(new Object[]{tg.getTacGia(), listTacGia.get(tg.getTacGia()).getTenTacGia()});
-                });
+                if (tacGiaVaSachs != null) {
+                    tacGiaVaSachs.forEach((tg) -> {
+                        tacGiaAdd.put(tg.getTacGia(), tg.getSach());
+                        tableModelListTacGia.addRow(new Object[]{tg.getTacGia(), listTacGia.get(tg.getTacGia()).getTenTacGia()});
+                    });
+                }
             }
         }.start();
         new Thread() {
             @Override
             public void run() {
                 List<TheLoaiVaSach> theLoaiVaSachs = theLoaiVaSachDao.selectALLBySach(sach.getId());
-                theLoaiVaSachs.forEach((tl) -> {
-                    theLoaiAdd.put(tl.getTheLoai(), tl.getSach());
+                if (theLoaiVaSachs != null) {
+                    theLoaiVaSachs.forEach((tl) -> {
+                        theLoaiAdd.put(tl.getTheLoai(), tl.getSach());
 
-                    tableModelListTheLoais.addRow(new Object[]{tl.getTheLoai(), listTheLoai.get(tl.getTheLoai()).getTenTheLoai()});
-                });
+                        tableModelListTheLoais.addRow(new Object[]{tl.getTheLoai(), listTheLoai.get(tl.getTheLoai()).getTenTheLoai()});
+                    });
+                }
             }
         }.start();
 
@@ -763,4 +902,52 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         return true;
     }
 
+    private Sach getForm() {
+        String tenSach = txtTenSach.getText();
+        int check = 0;
+        if (tenSach.isEmpty()) {
+            System.out.println("hêr");
+            lblErrorTenSach.setText("Tên sách không được bỏ trống");
+        } else if (tenSach.length() > 255) {
+            lblErrorTenSach.setText("Tên sách không được quá 255 ký tự");
+        } else {
+            check++;
+            lblErrorTenSach.setText(null);
+        }
+
+        Sach sach = null;
+
+        if (check == 1) {
+            if (tacGiaAdd.size() == 0) {
+                JOptionPane.showMessageDialog(this, "Hãy chọn tác giả!");
+            } else if (theLoaiAdd.size() == 0) {
+                JOptionPane.showMessageDialog(this, "Hãy chọn thể loại!");
+            } else {
+                sach = new Sach();
+                Long maSach = txtMaSach.getText().isEmpty() ? null : Long.valueOf(txtMaSach.getText());
+                String viTri = cmbKhuVuc.getSelectedItem().toString();
+                Long nhaXuatBan = Long.valueOf(cmbNhaXuatBan.getSelectedItem().toString().split("-")[0]);
+
+                Long timeNow = Calendar.getInstance().getTimeInMillis();
+
+                sach.setNguoiTao(Helper.Auth.user.getMaQL());
+                sach.setTrangThai(true);
+                sach.setId(maSach);
+                sach.setViTri(viTri);
+                sach.setTenSach(tenSach);
+                sach.setNhaXuatBan(nhaXuatBan);
+
+                int row = tblSach.getSelectedRow();
+                if (row == -1) {
+                    sach.setNgayTao(new Date(timeNow));
+                    sach.setQr_code("sach-" + timeNow.toString());
+                } else {
+                    Sach s = listSach.get(pageIndex).get(row);
+                    sach.setQr_code(s.getQr_code());
+                    sach.setNgayTao(s.getNgayTao());
+                }
+            }
+        }
+        return sach;
+    }
 }

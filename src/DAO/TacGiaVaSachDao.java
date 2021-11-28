@@ -19,7 +19,7 @@ public class TacGiaVaSachDao extends LibrarianDAO<TacGiaVaSach, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT Sach, TacGia FROM tac_gia_va_sach";
     private final String SELECT_ALL_BY_SACH = SELECT_ALL_SQL + " WHERE Sach = ?";
-    private final String DELETE_SQL = "DELETE tac_gia_va_sach WHERE Sach = ?";
+    private final String DELETE_SQL = "DELETE FROM `tac_gia_va_sach` WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO tac_gia_va_sach (Sach, TacGia) VALUES (?, ?)";
     private final String UPDATE_SQL = "";
     private static TacGiaVaSachDao instance;
@@ -33,11 +33,12 @@ public class TacGiaVaSachDao extends LibrarianDAO<TacGiaVaSach, Long> {
 
     @Override
     public int insert(TacGiaVaSach entity) {
+        System.out.println("tacgiavasach: "+entity);
         int row = 0;
         try {
             row = Helper.Utility.update(INSERT_SQL, entity.getSach(), entity.getTacGia());
         } catch (Exception ex) {
-            Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, "tacgia va sach loi", ex);
         }
 
         return row;
@@ -57,11 +58,13 @@ public class TacGiaVaSachDao extends LibrarianDAO<TacGiaVaSach, Long> {
     public int delete(Long id) {
         int row = 0;
         try {
+            System.out.println("id sach =>" + id);
             row = Helper.Utility.update(DELETE_SQL, id);
+            
         } catch (Exception ex) {
             Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.out.println("delete tacgia");
         return row;
     }
 

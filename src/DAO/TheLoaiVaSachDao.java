@@ -19,7 +19,7 @@ public class TheLoaiVaSachDao extends LibrarianDAO<TheLoaiVaSach, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT Sach, TheLoai FROM the_loai_va_sach";
     private final String SELECT_ALL_BY_SACH = SELECT_ALL_SQL + " WHERE Sach = ?";
-    private final String DELETE_SQL = "DELETE the_loai_va_sach WHERE Sach = ?";
+    private final String DELETE_SQL = "DELETE FROM the_loai_va_sach WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO the_loai_va_sach (Sach, TheLoai) VALUES (?, ?)";
     private final String UPDATE_SQL = "";
     private static TheLoaiVaSachDao instance;
@@ -37,7 +37,7 @@ public class TheLoaiVaSachDao extends LibrarianDAO<TheLoaiVaSach, Long> {
         try {
             row = Helper.Utility.update(INSERT_SQL, entity.getSach(), entity.getTheLoai());
         } catch (Exception ex) {
-            Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, "error theloai va sach", ex);
         }
 
         return row;
@@ -56,12 +56,12 @@ public class TheLoaiVaSachDao extends LibrarianDAO<TheLoaiVaSach, Long> {
     @Override
     public int delete(Long id) {
         int row = 0;
+        System.out.println("id sach =>" + id);
         try {
             row = Helper.Utility.update(DELETE_SQL, id);
         } catch (Exception ex) {
             Logger.getLogger(TheLoaiVaSachDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return row;
     }
 
