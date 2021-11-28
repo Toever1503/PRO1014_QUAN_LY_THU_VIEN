@@ -27,13 +27,12 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form QlNguoiDung1
      */
-    private QLHoiVien_JPanel() {
     // vị trí của hoi vien đang đc chọn
     HoiVienDao dao = new HoiVienDao();
     int index = -1;
     List<HoiVien> listHV;
     private DefaultTableModel tableModel;
-    }
+
     public QLHoiVien_JPanel() {
         initComponents();
         tabs.remove(jPanelCapNhat);
@@ -41,7 +40,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         init();
         fillTable();
     }
-    
+
     void init() {
         tabs.setSelectedIndex(1);  //chuyển tabsPanel sang tab 2
         //   updateStatus();
@@ -405,12 +404,12 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-       
+
         activeTabCapNhat();
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
-       
+
         activeTabCapNhat();
     }//GEN-LAST:event_btnChiTietActionPerformed
 
@@ -428,7 +427,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         tabs.add(jPanelCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
-    
+
     void insert() {
         //getModel() viết ở dưới, lấy thông tin trên form điền vào đt model
         HoiVien model = getForm();
@@ -442,7 +441,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
         }
     }
-    
+
     void update() {
         HoiVien model = getForm();
         try {
@@ -453,7 +452,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
         }
     }
-    
+
     void updateStatus() {
         boolean edit = (this.index >= 0);
         boolean first = (this.index == 0);
@@ -468,9 +467,9 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
-        
+
     }
-    
+
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -519,7 +518,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
-
     void setForm(HoiVien model) {
         txtMaTT.setText(model.getId() + "");
         txtHoTen.setText(model.getFullName());
@@ -532,16 +530,16 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     HoiVien getForm() {
         HoiVien model = new HoiVien();
         //model.setId(Long.parseLong(txtMaTT.getText()) + "");
-       
+
         model.setNguoiTao(Helper.Auth.user.getMaQL());
         model.setCccd(txtCCCD.getText());
         model.setFullName(txtHoTen.getText());
         model.setDiaChi(txtDiaChi.getText());
-      //  model.setNgaySinh(jDateChooserNgaySinh.getDate());
+        //  model.setNgaySinh(jDateChooserNgaySinh.getDate());
         model.setSoDienThoai(txtSoDienThoai.getText());
         model.setEmail(txtEmail.getText());
         model.setNgayTao(null);
-      //  model.setNgayHan(ngayHan);
+        //  model.setNgayHan(ngayHan);
         model.setQr_code(TOOL_TIP_TEXT_KEY);
         return model;
     }

@@ -1,4 +1,3 @@
-
 package DAO;
 
 import java.util.List;
@@ -8,6 +7,18 @@ import java.util.List;
  * @author Nguyen Hoan
  */
 public class ThongKeDAO {
+
+    private static ThongKeDAO instance;
+
+    private ThongKeDAO() {
+    }
+
+    public static ThongKeDAO getInstance() {
+        if (instance == null) {
+            instance = new ThongKeDAO();
+        }
+        return instance;
+    }
 
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         List<Object[]> list = new java.util.ArrayList<>();
@@ -29,19 +40,25 @@ public class ThongKeDAO {
 
     public List<Object[]> getSachDaMuon() {
         String sql = "{CALL sp_sach_da_muon}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachBiLoai() {
         String sql = "{CALL sp_sach_bi_loai}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan","ViTri"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "ViTri"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getSachTreHan() {
         String sql = "{CALL sp_sach_tre_han}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayMuon", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan"};
+        return this.getListOfArray(sql, cols);
+    }
+
+    public List<Object[]> getSachConLai() {
+        String sql = "{CALL sp_sach_con_lai}";
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "ViTri"};
         return this.getListOfArray(sql, cols);
     }
 }

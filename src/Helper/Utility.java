@@ -43,8 +43,7 @@ public class Utility {
 
         return con; // return null if connecttion failed else connection object
     }
-
-    public static PreparedStatement getStm(String sql, Object... args) throws Exception {
+      public static PreparedStatement getStm(String sql, Object... args) throws  Exception {
         PreparedStatement ps = null;
         if (sql.trim().startsWith("{")) {
             ps = new Utility().getConnection().prepareCall(sql);

@@ -12,16 +12,16 @@ import java.sql.Date;
  */
 public class HoaDonNhapSach {
 
-    private long id;
+    private Long id;
     private String nguoiXuLy;
-    private float tongTien;
+    private Float tongTien;
     private Date ngayTao;
     private String qr_code;
 
     public HoaDonNhapSach() {
     }
 
-    public HoaDonNhapSach(long id, String nguoiXuLy, float tongTien, Date ngayTao, String qr_code) {
+    public HoaDonNhapSach(Long id, String nguoiXuLy, Float tongTien, Date ngayTao, String qr_code) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
@@ -29,11 +29,11 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +45,11 @@ public class HoaDonNhapSach {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public float getTongTien() {
+    public Float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(Float tongTien) {
         this.tongTien = tongTien;
     }
 
