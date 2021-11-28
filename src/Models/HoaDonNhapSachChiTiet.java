@@ -10,16 +10,16 @@ package Models;
  */
 public class HoaDonNhapSachChiTiet {
 
-    private long hoaDonNhap;
-    private long sach;
-    private float gia;
+    private Long hoaDonNhap;
+    private Long sach;
+    private Float gia;
     private int soLuong;
-    private boolean loaiSach;
+    private Boolean loaiSach;
 
     public HoaDonNhapSachChiTiet() {
     }
 
-    public HoaDonNhapSachChiTiet(long hoaDonNhap, long sach, float gia, int soLuong, boolean loaiSach) {
+    public HoaDonNhapSachChiTiet(Long hoaDonNhap, Long sach, Float gia, int soLuong, Boolean loaiSach) {
         this.hoaDonNhap = hoaDonNhap;
         this.sach = sach;
         this.gia = gia;
@@ -27,27 +27,27 @@ public class HoaDonNhapSachChiTiet {
         this.loaiSach = loaiSach;
     }
 
-    public long getHoaDonNhap() {
+    public Long getHoaDonNhap() {
         return hoaDonNhap;
     }
 
-    public void setHoaDonNhap(long hoaDonNhap) {
+    public void setHoaDonNhap(Long hoaDonNhap) {
         this.hoaDonNhap = hoaDonNhap;
     }
 
-    public long getSach() {
+    public Long getSach() {
         return sach;
     }
 
-    public void setSach(long sach) {
+    public void setSach(Long sach) {
         this.sach = sach;
     }
 
-    public float getGia() {
+    public Float getGia() {
         return gia;
     }
 
-    public void setGia(float gia) {
+    public void setGia(Float gia) {
         this.gia = gia;
     }
 
@@ -59,11 +59,11 @@ public class HoaDonNhapSachChiTiet {
         this.soLuong = soLuong;
     }
 
-    public boolean isLoaiSach() {
+    public Boolean getLoaiSach() {
         return loaiSach;
     }
 
-    public void setLoaiSach(boolean loaiSach) {
+    public void setLoaiSach(Boolean loaiSach) {
         this.loaiSach = loaiSach;
     }
 

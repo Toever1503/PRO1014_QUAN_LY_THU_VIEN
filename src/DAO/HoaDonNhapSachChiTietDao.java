@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet, Long> {
 
-    private final String SELECT_ALL_SQL_BY_HOA_DON = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet Where HD_Sach = ?";
+    private final String SELECT_ALL_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet";
     private final String SELECT_BY_SACH_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet(HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?,?,?,?,?)";
     private final String UPDATE_BY_HD_AND_SACH_SQL = "UPDATE hoa_don_nhap_sach_chi_tiet SET GiaSach=?,SoLuong=?,LoaiSach=?  WHERE HD_Sach=? AND Sach=?";
@@ -48,7 +48,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
                     entity.getSach(),
                     entity.getGia(),
                     entity.getSoLuong(),
-                    entity.isLoaiSach());
+                    entity.getLoaiSach());
         } catch (Exception ex) {
             Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,7 +62,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
             row = Helper.Utility.update(this.UPDATE_BY_HD_AND_SACH_SQL,
                     entity.getGia(),
                     entity.getSoLuong(),
-                    entity.isLoaiSach(),
+                    entity.getLoaiSach(),
                     entity.getHoaDonNhap(),
                     entity.getSach());
         } catch (Exception ex) {
@@ -80,7 +80,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
                     entity.getSach(),
                     entity.getGia(),
                     entity.getSoLuong(),
-                    entity.isLoaiSach());
+                    entity.getLoaiSach());
         } catch (Exception ex) {
             Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,12 +114,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
 
     @Override
     public List<HoaDonNhapSachChiTiet> selectALL() {
-//        return this.selectBySql(this.SELECT_ALL_SQL);
-        return null;
-    }
-
-    public List<HoaDonNhapSachChiTiet> selectALLByHoaDon(Long hoaDon) {
-        return this.selectBySql(this.SELECT_ALL_SQL_BY_HOA_DON, hoaDon);
+        return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
     public HoaDonNhapSachChiTiet selectBySach(Long sach) {
@@ -135,12 +130,11 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
         List<HoaDonNhapSachChiTiet> list = new java.util.ArrayList<>();
         try {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
-            //HD_Sach, Sach, GiaSach, SoLuong, LoaiSach
             while (rs.next()) {
                 HoaDonNhapSachChiTiet hdnsct = new HoaDonNhapSachChiTiet();
                 hdnsct.setHoaDonNhap(rs.getLong("HD_Sach"));
-                hdnsct.setSach(sachDAO.selectByID(rs.getLong("Sach")));
-                hdnsct.setGia(rs.getDouble("GiaSach"));
+                hdnsct.setSach(rs.getLong("Sach"));
+                hdnsct.setGia(rs.getFloat("GiaSach"));
                 hdnsct.setSoLuong(rs.getInt("SoLuong"));
                 hdnsct.setLoaiSach(rs.getBoolean("LoaiSach"));
                 list.add(hdnsct);
@@ -153,6 +147,6 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     }
 
 //      public static void main(String[] args) {
-//          System.out.println(HoaDonNhapSachChiTietDao.getInstance().selectBySach(Long.valueOf(1)));;
+//          System.out.println(HoaDonNhapSachChiTietDao.getInstance().selectALL());
 //    }
 }

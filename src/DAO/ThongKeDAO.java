@@ -1,4 +1,3 @@
-
 package DAO;
 
 import java.util.List;
@@ -9,13 +8,20 @@ import java.util.List;
  */
 public class ThongKeDAO {
 
-<<<<<<< Updated upstream
+    private static ThongKeDAO instance;
+
+    private ThongKeDAO() {
+    }
+
+    public static ThongKeDAO getInstance() {
+        if (instance == null) {
+            instance = new ThongKeDAO();
+        }
+        return instance;
+    }
+
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         List<Object[]> list = new java.util.ArrayList<>();
-=======
-    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
-        List<Object[]> list = new ArrayList<>();
->>>>>>> Stashed changes
         try {
             java.sql.ResultSet rs = Helper.Utility.query(sql, args);
             while (rs.next()) {

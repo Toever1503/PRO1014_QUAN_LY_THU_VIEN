@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Nguyen Hoan
  */
 public class QLThuThu_JPanel extends javax.swing.JPanel {
+
     private static QLThuThu_JPanel instance;
 
     private List<QuanLy> listQLThuThu;
@@ -119,35 +120,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         return model;
     }
 
-    void setForm(QuanLy model) {
-
-        txtMaTT.setText(model.getMaQL());
-        txtMatKhau.setText(model.getMatKhau());
-        txtCCCD.setText(model.getCccd());
-        txtHoTen.setText(model.getFullName());
-        rdoQuanLy.setSelected(model.isVaiTro());
-        rdoThuThu.setSelected(model.isVaiTro());
-        txtSoDienThoai.setText(model.getSoDienThoai());
-        txtEmail.setText(model.getEmail());
-        txtDiaChi.setText(model.getDiaChi());
-        rdoHoatDong.setSelected(model.isTrangThai());
-        rdoKhoa.setSelected(model.isTrangThai());
-        jDateChooserNgaySinh.setDate(model.getNgaySinh());
-    }
-    QuanLy getForm() {
-        QuanLy model = new QuanLy();
-        model.setMaQL(txtMaTT.getText());
-        model.setFullName(txtHoTen.getText());
-        model.setSoDienThoai(txtSoDienThoai.getText());
-        model.setMatKhau(new String(txtMatKhau.getPassword()));
-        model.setCccd(txtCCCD.getText());
-        model.setEmail(txtEmail.getText());
-        model.setDiaChi(txtDiaChi.getText());
-        model.setVaiTro(rdoThuThu.isSelected());
-        model.setNgaySinh(jDateChooserNgaySinh.getDate() == null ? null
-                : new Date(jDateChooserNgaySinh.getDate().getTime()));
-        return model;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -628,6 +600,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
+
     public static boolean checkNullText(JTextField txt) {// check null 
         txt.setBackground(white);
         if (txt.getText().trim().length() > 0) {
@@ -638,22 +611,8 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             return false;
         }
     }
-    public void alert(Component parent, String message) {
-        JOptionPane.showMessageDialog(parent, message, "Hệ thống quản lý đào tạo", JOptionPane.INFORMATION_MESSAGE);
-    }
 
-    public static boolean checkNullText(JTextField txt) {
-        txt.setBackground(white);
-        if (txt.getText().trim().length() > 0) {
-            return true;
-        } else {
-            txt.setBackground(pink);
-            alert(txt.getRootPane(), "Không được để trống " + txt.getName());
-            return false;
-        }
-    }
-
-    public static boolean checkName(JTextField txt) {
+    public boolean checkName(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,25}$";
@@ -666,7 +625,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static boolean checkSDT(JTextField txt) {
+    public boolean checkSDT(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "(086|096|097|098|032|033|034|035|036|037|038|039|089|090|093|070|079|077|078|076|088|091|094|083|084|085|081|082|092|056|058|099|059)[0-9]{7}";
@@ -679,7 +638,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static boolean checkEmail(JTextField txt) {
+    public boolean checkEmail(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[a-zA-Z][a-zA-Z0-9_\\.]{2,32}@[a-zA-Z0-9]{2,10}(\\.[a-zA-Z0-9]{2,4}){1,2}$";
@@ -692,7 +651,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static boolean checkNullDate(JDateChooser txt) {
+    public boolean checkNullDate(JDateChooser txt) {
         txt.setBackground(Color.white);
         if (txt.getDate() != null) {
             return true;
@@ -703,7 +662,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static boolean checkNullPass(JPasswordField txt) {
+    public boolean checkNullPass(JPasswordField txt) {
         txt.setBackground(white);
         if (txt.getPassword().length > 0) {
             return true;
@@ -714,7 +673,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static boolean checkCCCD(JTextField txt) {
+    public boolean checkCCCD(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "[0-9]{12}";
@@ -727,16 +686,16 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public static void alert(Component parent, String message) {
+    public void alert(Component parent, String message) {
         JOptionPane.showMessageDialog(parent, message, "Quản lý thư viện", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static boolean confirm(Component parent, String message) {
+    public boolean confirm(Component parent, String message) {
         int result = JOptionPane.showConfirmDialog(parent, message, "Quản lý thư viện", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         return result == JOptionPane.YES_OPTION;
     }
 
-    public static String prompt(Component parent, String message) {
+    public String prompt(Component parent, String message) {
         return JOptionPane.showInputDialog(parent, message, "Quản lý thư viện", JOptionPane.INFORMATION_MESSAGE);
     }
 

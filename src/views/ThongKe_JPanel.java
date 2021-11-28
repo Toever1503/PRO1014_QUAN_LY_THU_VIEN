@@ -4,17 +4,11 @@
  */
 package views;
 
-<<<<<<< Updated upstream
-import DAO.ThongKeDAO;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-=======
 import DAO.SachDAO;
 import DAO.ThongKeDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Helper.MsgBox;
->>>>>>> Stashed changes
 
 /**
  *
@@ -22,8 +16,8 @@ import Helper.MsgBox;
  */
 public final class ThongKe_JPanel extends javax.swing.JPanel {
 
-    private final ThongKeDAO thongKeDAO;
-    private final SachDAO sachDAO;
+    private ThongKeDAO thongKeDAO;
+    private SachDAO sachDAO;
 
     private static ThongKe_JPanel instance;
 
@@ -32,37 +26,25 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
      */
     private ThongKe_JPanel() {
         initComponents();
-<<<<<<< Updated upstream
         this.init();
     }
 
-    DAO.ThongKeDAO tkDAO;
-
     private void init() {
-        this.tkDAO = new ThongKeDAO();
-
+        this.thongKeDAO = ThongKeDAO.getInstance();
+        this.sachDAO = SachDAO.getInstance();
+        this.fillTableSachDaMuon();
+        this.fillTableSachBiLoai();
+        this.fillTableSachConLai();
     }
 
     void fillTableDaMuon() {
         DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
         model.setRowCount(0);
-        List<Object[]> list = this.tkDAO.getSachDaMuon();
+        List<Object[]> list = this.thongKeDAO.getSachDaMuon();
 //        list.forEach(row -> {
 //            model.addRow(new Object[]{row[0],row[1],row[2],row[3],row[4],row[0],row[0]
 //            });
 //        });
-    }
-
-    void fillTableBiLoai() {
-
-    }
-
-    void fillTableTreHan() {
-
-    }
-
-    void fillTableConLai() {
-
     }
 
     public static ThongKe_JPanel getInstance() {
@@ -70,13 +52,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
             instance = new ThongKe_JPanel();
         }
         return instance;
-=======
-        this.thongKeDAO = new ThongKeDAO();
-        this.sachDAO = new SachDAO();
-        this.fillTableSachDaMuon();
-        this.fillTableSachBiLoai();
-        this.fillTableSachConLai();
->>>>>>> Stashed changes
     }
 
     /**
