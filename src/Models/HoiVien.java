@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class HoiVien {
 
-    private long id;
+    private Long id;
     private String nguoiTao;
     private String cccd;
     private String fullName;
@@ -22,12 +22,13 @@ public class HoiVien {
     private Date ngaySinh;
     private Date ngayTao;
     private Date ngayHan;
+    private boolean trangThai;
     private String qr_code;
 
     public HoiVien() {
     }
 
-    public HoiVien(long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
+    public HoiVien(Long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, boolean trangThai, String qr_code) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.cccd = cccd;
@@ -38,14 +39,15 @@ public class HoiVien {
         this.ngaySinh = ngaySinh;
         this.ngayTao = ngayTao;
         this.ngayHan = ngayHan;
+        this.trangThai = trangThai;
         this.qr_code = qr_code;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -119,6 +121,14 @@ public class HoiVien {
 
     public void setNgayHan(Date ngayHan) {
         this.ngayHan = ngayHan;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getQr_code() {
