@@ -10,17 +10,17 @@ package Models;
  */
 public class TheLoai {
 
-    private long id;
+    private Long id;
     private String tenTheLoai;
 
     public TheLoai() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,7 +32,7 @@ public class TheLoai {
         this.tenTheLoai = tenTheLoai;
     }
 
-    public TheLoai(long id, String tenTheLoai) {
+    public TheLoai(Long id, String tenTheLoai) {
         this.id = id;
         this.tenTheLoai = tenTheLoai;
     }

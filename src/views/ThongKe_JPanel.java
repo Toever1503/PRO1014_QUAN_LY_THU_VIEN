@@ -4,17 +4,54 @@
  */
 package views;
 
+import DAO.SachDAO;
+import DAO.ThongKeDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import Helper.MsgBox;
+
 /**
  *
  * @author NguyenHoan
  */
-public class ThongKe_JPanel extends javax.swing.JPanel {
+public final class ThongKe_JPanel extends javax.swing.JPanel {
+
+    private ThongKeDAO thongKeDAO;
+    private SachDAO sachDAO;
+
+    private static ThongKe_JPanel instance;
 
     /**
      * Creates new form ThongKe_JPanel
      */
-    public ThongKe_JPanel() {
+    private ThongKe_JPanel() {
         initComponents();
+        this.init();
+    }
+
+    private void init() {
+        this.thongKeDAO = ThongKeDAO.getInstance();
+        this.sachDAO = SachDAO.getInstance();
+        this.fillTableSachDaMuon();
+        this.fillTableSachBiLoai();
+        this.fillTableSachConLai();
+    }
+
+    void fillTableDaMuon() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachDaMuon();
+//        list.forEach(row -> {
+//            model.addRow(new Object[]{row[0],row[1],row[2],row[3],row[4],row[0],row[0]
+//            });
+//        });
+    }
+
+    public static ThongKe_JPanel getInstance() {
+        if (instance == null) {
+            instance = new ThongKe_JPanel();
+        }
+        return instance;
     }
 
     /**
@@ -253,6 +290,60 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    void fillTableSachDaMuon() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachDaMuon();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachBiLoai() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachBiLoai.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachBiLoai();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachTreHan() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachTreHan();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void fillTableSachConLai() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachConLai.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = this.thongKeDAO.getSachConLai();
+        for (int i = 0; i < list.size(); i++) {
+            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        }
+    }
+
+    void thuHoi() {
+        if (!Helper.Auth.isManager()) {
+            MsgBox.alert_WARNING(this, "Bạn không có quyền cho thao tác này!");
+            return;
+        }
+        for (int row : this.tblSachBiLoai.getSelectedRows()) {
+            Long maSach = (Long) this.tblSachBiLoai.getValueAt(row, 2);
+            this.sachDAO.delete(maSach);
+        }
+        MsgBox.alert_INFORMATION(this, "Thu hồi thành cống!");
+    }
+
+//    public static void main(String[] args) {
+//        javax.swing.JFrame frame = new javax.swing.JFrame();
+//        frame.setSize(900, 800);
+//        frame.add(new ThongKe_JPanel());
+//        frame.setVisible(true);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

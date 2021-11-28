@@ -24,6 +24,18 @@ public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, Long> {
             + "ON DUPLICATE KEY UPDATE TenNhaXuatBan=VALUES(TenNhaXuatBan)";
     private final String SELECT_BY_PAGE_SQL = "SELECT TenNhaXuatBan, ID FROM nha_xuat_ban LIMIT ?, 30";
 
+    private static NhaXuatBanDao instance;
+
+    private NhaXuatBanDao() {
+    }
+
+    public static NhaXuatBanDao getInstance() {
+        if (instance == null) {
+            instance = new NhaXuatBanDao();
+        }
+        return instance;
+    }
+
     @Override
     public int insert(NhaXuatBan entity) {
         int row = 0;

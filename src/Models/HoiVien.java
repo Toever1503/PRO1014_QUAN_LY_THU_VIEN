@@ -28,7 +28,12 @@ public class HoiVien {
     public HoiVien() {
     }
 
-    public HoiVien(Long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, boolean trangThai, String qr_code) {
+    public HoiVien(Long id) {
+        this.id = id;
+
+    }
+
+    public HoiVien(Long id, String nguoiTao, String cccd, String fullName, String diaChi, String soDienThoai, String email, Date ngaySinh, Date ngayTao, Date ngayHan, String qr_code) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.cccd = cccd;

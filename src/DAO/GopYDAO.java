@@ -19,6 +19,17 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai = VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM the_loai LIMIT ?, 30";
+    private static GopYDAO instance;
+
+    private GopYDAO() {
+    }
+
+    public static GopYDAO getInstance() {
+        if (instance == null) {
+            instance = new GopYDAO();
+        }
+        return instance;
+    }
 
     @Override
     public int insert(GopY entity) {

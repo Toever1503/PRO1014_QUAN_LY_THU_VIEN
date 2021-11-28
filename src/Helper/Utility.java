@@ -31,7 +31,7 @@ public class Utility {
         String dbHost = sqlConfig.get("DB_HOST");
         String dbUser = sqlConfig.get("DB_USERNAME");
         String dbPassword = sqlConfig.get("DB_PASSWORD");
-        String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
+        String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?noAccessToProcedureBodies=true";
 
         Connection con = null;
         try {
@@ -56,7 +56,7 @@ public class Utility {
         return ps;
     }
 
-    public static ResultSet query(String sql, Object... args) throws  Exception {
+    public static ResultSet query(String sql, Object... args) throws Exception {
         PreparedStatement ps = Utility.getStm(sql, args);
         return ps.executeQuery();
     }
