@@ -121,10 +121,10 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         btnDownLoadQR = new javax.swing.JButton();
         jLabelErrorMaPhieuMuon = new javax.swing.JLabel();
         jLabelErrorNgayMuon = new javax.swing.JLabel();
-        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
         jLabelErrorNguoiMuon = new javax.swing.JLabel();
         jComboBoxNguoiMuon = new javax.swing.JComboBox<>();
         jLabelErrorNgayTra = new javax.swing.JLabel();
+        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
         jDateChooserNgayTra = new com.toedter.calendar.JDateChooser();
         jPanelSachMuon = new javax.swing.JPanel();
         jLabelSachMuon = new javax.swing.JLabel();
@@ -340,17 +340,13 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelErrorMaPhieuMuon.setText(" ");
         jPanelDetailSach.add(jLabelErrorMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 420, 10));
         jPanelDetailSach.add(jLabelErrorNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 420, 10));
-
-        jDateChooserNgayMuon.setDateFormatString("dd-MM-yyyy");
-        jPanelDetailSach.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, 23));
         jPanelDetailSach.add(jLabelErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 420, 10));
 
         jComboBoxNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanelDetailSach.add(jComboBoxNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, -1));
         jPanelDetailSach.add(jLabelErrorNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 10));
-
-        jDateChooserNgayTra.setDateFormatString("dd-MM-yyyy");
-        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, 23));
+        jPanelDetailSach.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, -1));
+        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, -1));
 
         jPanelWrapCapNhat.add(jPanelDetailSach, java.awt.BorderLayout.PAGE_START);
 

@@ -49,6 +49,13 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         fillTable(listQLTT.get(row));
     }
 
+    public static QLThuThu_JPanel getInstance() {
+        if (instance == null) {
+            instance = new QLThuThu_JPanel();
+        }
+        return instance;
+    }
+
     void fillTable(List<QuanLy> QLList) {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyThuThu.getModel();
         model.setRowCount(0);
