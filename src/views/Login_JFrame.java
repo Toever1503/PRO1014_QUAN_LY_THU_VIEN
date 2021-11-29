@@ -4,7 +4,9 @@
  */
 package views;
 
+import DAO.QuanLyDao;
 import Helper.PasswordEncoder;
+import Models.QuanLy;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -16,10 +18,13 @@ import javax.swing.JOptionPane;
  */
 public class Login_JFrame extends javax.swing.JFrame {
 
+    private QuanLyDao quanLyDao;
+
     /**
      * Creates new form JFrame_Login
      */
     public Login_JFrame() {
+        quanLyDao = QuanLyDao.getInstance();
         initComponents();
         this.init();
     }
@@ -46,7 +51,7 @@ public class Login_JFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
-        lblLogin = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
         lblMess = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -121,13 +126,11 @@ public class Login_JFrame extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
-        lblLogin.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogin.setText("Login");
-        lblLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblLoginMouseClicked(evt);
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setText("Đăng Nhập");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -135,15 +138,11 @@ public class Login_JFrame extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 150, 40));
@@ -205,10 +204,11 @@ public class Login_JFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-    private void lblLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseClicked
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        lblMess.setText(null);
         login();
-
-    }//GEN-LAST:event_lblLoginMouseClicked
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +247,7 @@ public class Login_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -257,7 +258,6 @@ public class Login_JFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblMess;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
@@ -273,13 +273,14 @@ public class Login_JFrame extends javax.swing.JFrame {
         } else {
             password = PasswordEncoder.getInstance().encode(password);
 
-            Object obj = null;
-//            if(obj == null){
-//                lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
-//                return;
-//            }
+            QuanLy user = quanLyDao.selectByID(username);
+            if (user == null) {
+                lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
+                return;
+            }
 
-            if (password.equals("81dc9bdb52d04dc20036dbd8313ed055")) {
+            if (password.equals(user.getMatKhau())) {
+                Helper.Auth.user = user;
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
                 new Home_Frame().setVisible(true);
                 this.dispose();

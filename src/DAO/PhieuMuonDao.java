@@ -23,8 +23,23 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     private final String INSERT_SQL = "INSERT INTO phieu_muon(ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE phieu_muon SET HoiVien=?,MaQL=?,NgayMuon=?,NgayHan=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM phieu_muon WHERE ID =?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO phieu_muon (ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?, ?, ?, ?, ?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), MaQL=VALUES(MaQL), NgayMuon=VALUES(NgayMuon), NgayHan=VALUES(NgayHan),QR_FILE=VALUES(QR_FILE)";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO phieu_muon(\n"
+            + "    ID,\n"
+            + "    HoiVien,\n"
+            + "    MaQL,\n"
+            + "    NgayMuon,\n"
+            + "    NgayHan,\n"
+            + "    QR_FILE\n"
+            + ")\n"
+            + "VALUES(?, ?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY\n"
+            + "UPDATE\n"
+            + "    HoiVien =\n"
+            + "VALUES(HoiVien), MaQL =\n"
+            + "VALUES(MaQL), NgayMuon =\n"
+            + "VALUES(NgayMuon), NgayHan =\n"
+            + "VALUES(NgayHan), QR_FILE =\n"
+            + "VALUES(QR_FILE);";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
@@ -45,19 +60,6 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
     @Override
     public int insert(PhieuMuon entity) {
         int row = 0;
-        try {
-//            prepare
-//            Helper.Utility.getStm(INSERT_SQL, args)
-            row = Helper.Utility.update(this.INSERT_SQL,
-                    entity.getId(),
-                    entity.getNguoiMuon(),
-                    entity.getNguoiXuLy(),
-                    entity.getNgayMuon(),
-                    entity.getHanTra(),
-                    entity.getQr_code());
-        } catch (Exception ex) {
-            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return row;
     }
 
@@ -86,8 +88,10 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
             row = 0;
             String sql = this.INSERT_ON_UPDATE_SQL;
             if (entity.getId() == null) {
-                sql += " SELECT LAST_INSERT_ID() as ID;";
+                sql += " SELECT\n"
+                        + "    LAST_INSERT_ID() AS ID;";
             }
+            System.out.println(entity);
             ps = Helper.Utility.getStm(sql,
                     entity.getId(),
                     entity.getNguoiMuon(),
@@ -95,6 +99,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
                     entity.getNgayMuon(),
                     entity.getHanTra(),
                     entity.getQr_code());
+            System.out.println("sql->" + sql);
 
             if (entity.getId() == null) {
                 ps.execute();

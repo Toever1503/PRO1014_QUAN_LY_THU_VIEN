@@ -467,6 +467,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                             break;
                         }
                     }
+                    listHoaDonDenBu.replace(pageIndex, list);
+                    fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
                 }
             }
         }

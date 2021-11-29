@@ -526,7 +526,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             List<PhieuMuonChiTiet> phieuMuonChiTiets = new ArrayList<PhieuMuonChiTiet>();
             listSachMuon.forEach((key, pmct) -> phieuMuonChiTiets.add(pmct));
             phieuMuon.setListPhieuMuonChiTiets(phieuMuonChiTiets);
-            System.out.println(phieuMuon);
 
             if (phieuMuon.getId() == null) {
                 Long id = Long.valueOf(phieuMuonDao.insertOnUpdate(phieuMuon));
@@ -535,6 +534,17 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
+
+                    String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
+                    String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey.toString().split("-")[1] + ".png"; //create qr_code path
+                    // create qr_code image and parse qrcode image fit with label qr_code
+                    if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
+                        try {
+                            jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, HEIGHT)));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                     phieuMuon.setId(id);
                     txtMaPhieuMuon.setText(id.toString());
                     pageIndex = 0;

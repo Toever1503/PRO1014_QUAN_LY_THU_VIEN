@@ -182,6 +182,7 @@ public class QuanLyDao extends LibrarianDAO<QuanLy, String> {
     public int insertOnUpdate(QuanLy entity) {
         int row = 0;
         try {
+            System.out.println(entity);
             row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getMaQL(),
                     entity.getMatKhau(),

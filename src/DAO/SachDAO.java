@@ -23,7 +23,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO sach (ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO `sach` (`ID`, `MaQL`, `TenSach`, `ViTri`, `NgayTao`, `NhaXuatBan`, `TrangThai`, `QR_FILE`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
     private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE ID like ? or TenSach like ? or ViTri like ?";
@@ -52,21 +52,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
 
     @Override
     public int insert(Sach entity) {
-        int row = 0;
-        try {
-            row = Helper.Utility.update(this.INSERT_SQL,
-                    entity.getId(),
-                    entity.getNguoiTao(),
-                    entity.getTenSach(),
-                    entity.getViTri(),
-                    entity.getNgayTao(),
-                    entity.getNhaXuatBan(),
-                    entity.isTrangThai(),
-                    entity.getQr_code());
-        } catch (Exception ex) {
-            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return row;
+        return 0;
     }
 
     @Override
@@ -108,7 +94,6 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
                     entity.getNhaXuatBan(),
                     entity.isTrangThai(),
                     entity.getQr_code());
-
             if (entity.getId() == null) {
                 ps.execute();
                 ResultSet rs = ps.getResultSet();
