@@ -8,6 +8,9 @@ import Models.HoiVien;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
 
+    private static HoiVienDao insttanceDao;
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien";
     private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO hoi_vien(ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -79,8 +83,13 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
     @Override
     public int insertOnUpdate(HoiVien entity) {
         int row = 0;
+        PreparedStatement ps = null;
         try {
-            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
+            String sql = this.INSERT_ON_UPDATE_SQL;
+            if (entity.getId() == null) {
+                sql += " SELECT LAST_INSERT_ID() as ID;";
+            }
+            ps = Helper.Utility.getStm(sql,
                     entity.getId(),
                     entity.getNguoiTao(),
                     entity.getCccd(),
@@ -92,8 +101,24 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
                     entity.getNgayTao(),
                     entity.getNgayHan(),
                     entity.getQr_code());
+            if (entity.getId() == null) {
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                rs.next();
+                Long id = rs.getLong("ID");
+                entity.setId(id);
+                row = id.intValue();
+            } else {
+                row = ps.executeUpdate();
+            }
         } catch (Exception ex) {
             Logger.getLogger(HoiVienDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.getConnection().close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(HoaDonDenBuDao.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
         return row;
     }
@@ -155,4 +180,16 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
         return list;
     }
 
+    public int getTotalPage() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM hoi_vien");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 }

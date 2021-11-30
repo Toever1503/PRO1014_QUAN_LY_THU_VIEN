@@ -22,6 +22,7 @@ public class HoiVien {
     private Date ngaySinh;
     private Date ngayTao;
     private Date ngayHan;
+    private boolean trangThai;
     private String qr_code;
 
     public HoiVien() {
@@ -43,6 +44,7 @@ public class HoiVien {
         this.ngaySinh = ngaySinh;
         this.ngayTao = ngayTao;
         this.ngayHan = ngayHan;
+        this.trangThai = trangThai;
         this.qr_code = qr_code;
     }
 
@@ -124,6 +126,14 @@ public class HoiVien {
 
     public void setNgayHan(Date ngayHan) {
         this.ngayHan = ngayHan;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getQr_code() {
