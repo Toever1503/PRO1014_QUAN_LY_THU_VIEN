@@ -5,6 +5,7 @@
  */
 package views;
 
+import DAO.HoaDonDenBuChiTietDao;
 import DAO.HoaDonDenBuDao;
 import DAO.HoiVienDao;
 import DAO.SachDAO;
@@ -41,6 +42,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     HoiVienDao hoiVienDao;
     private SachDAO sachDao;
     private HoaDonDenBuDao hoaDonDenBuDao;
+    private HoaDonDenBuChiTietDao hoaDonDenBuChiTietDao;
     private static QLHoaDonDenBu instance;
 
     /**
@@ -63,6 +65,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         hoiVienDao = HoiVienDao.getInstance();
         sachDao = SachDAO.getInstance();
         hoaDonDenBuDao = HoaDonDenBuDao.getInstance();
+        hoaDonDenBuChiTietDao = HoaDonDenBuChiTietDao.getInstance();
         total = hoaDonDenBuDao.getTotal();
 
         listHoaDonDenBu = new HashMap<Integer, List<HoaDonDenBu>>();
@@ -100,6 +103,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         btnThemMoi = new javax.swing.JButton();
         btnChiTiet = new javax.swing.JButton();
+        btnReload = new javax.swing.JButton();
         tabCapNhat = new javax.swing.JPanel();
         pnlQrCode = new javax.swing.JPanel();
         btnDownloadQr = new javax.swing.JButton();
@@ -119,7 +123,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         btnChonSach = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
         btnXoaSach = new javax.swing.JButton();
-        Lưu = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         lblErrorAction = new javax.swing.JLabel();
         btnReset = new javax.swing.JButton();
         jScrollPaneTableSachMuon = new javax.swing.JScrollPane();
@@ -231,6 +235,13 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             }
         });
 
+        btnReload.setText("Làm Mới");
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlActionHoaDonLayout = new javax.swing.GroupLayout(pnlActionHoaDon);
         pnlActionHoaDon.setLayout(pnlActionHoaDonLayout);
         pnlActionHoaDonLayout.setHorizontalGroup(
@@ -240,7 +251,9 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 .addComponent(btnThemMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChiTiet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
@@ -254,7 +267,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChiTiet)
-                    .addComponent(btnThemMoi))
+                    .addComponent(btnThemMoi)
+                    .addComponent(btnReload))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -362,14 +376,14 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         });
         pnlAction.add(btnXoaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 30));
 
-        Lưu.setText("Lưu");
-        Lưu.setPreferredSize(new java.awt.Dimension(100, 30));
-        Lưu.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Lưu");
+        btnSave.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LưuActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        pnlAction.add(Lưu, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 30));
+        pnlAction.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 30));
 
         lblErrorAction.setText(" ");
         pnlAction.add(lblErrorAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 370, 10));
@@ -423,7 +437,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.selectByID(Long.valueOf(txtMaHoaDonDenBu.getText()));
     }//GEN-LAST:event_btnDownloadQrActionPerformed
 
-    private void LưuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LưuActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if (listHoaDonChiTiet.size() == 0) {
             JOptionPane.showMessageDialog(this, "Hãy thêm sách cần đền bù");
@@ -431,9 +445,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             //save
             HoaDonDenBu hoaDonDenBu = getForm();
 
-            List<HoaDonDenBuChiTiet> listHDCT = new ArrayList<HoaDonDenBuChiTiet>();
-            listHoaDonChiTiet.forEach((key, hdct) -> listHDCT.add(hdct));
-            hoaDonDenBu.setListhBuChiTiets(listHDCT);
+            System.out.println("insert hoaDonDenBu->" + hoaDonDenBu);
+            System.out.println("HoaDonDenBu Detail->" + listHoaDonChiTiet.size());
 
             if (hoaDonDenBu.getId() == null) {
                 Long id = Long.valueOf(hoaDonDenBuDao.insertOnUpdate(hoaDonDenBu));
@@ -445,19 +458,21 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                     if (!Helper.QR_CODE.generateQRcode(keyData, Helper.XImage.HOADON_UPLOAD.concat("/" + keyData + ".png"))) {
                         JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
                     }
-
+                    InsertOnUpdateListHoaDenChiTiet(hoaDonDenBu.getId());
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
                     hoaDonDenBu.setId(id);
                     txtMaHoaDonDenBu.setText(id.toString());
                     pageIndex = 0;
                     listHoaDonDenBu.clear();
                     listHoaDonDenBu.put(pageIndex, hoaDonDenBuDao.selectByPage(Long.valueOf(pageIndex)));
+
                 }
             } else {
                 if (hoaDonDenBuDao.insertOnUpdate(hoaDonDenBu) <= 0) {
                     JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
                     return;
                 } else {
+                    InsertOnUpdateListHoaDenChiTiet(hoaDonDenBu.getId());
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
                     hoaDonDenBu = hoaDonDenBuDao.selectByID(hoaDonDenBu.getId());
                     List<HoaDonDenBu> list = listHoaDonDenBu.get(pageIndex);
@@ -467,10 +482,12 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                             break;
                         }
                     }
+                    listHoaDonDenBu.replace(pageIndex, list);
+                    fillTableHoaDonDenBu(listHoaDonDenBu.get(pageIndex));
                 }
             }
         }
-    }//GEN-LAST:event_LưuActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnChonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonSachActionPerformed
         // TODO add your handling code here:
@@ -564,6 +581,12 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         tabs.setSelectedIndex(0);
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        // TODO add your handling code here:
+        pageIndex = 0;
+        fillTableHoaDonDenBu(listHoaDonDenBu.get(0));
+    }//GEN-LAST:event_btnReloadActionPerformed
+
     public void activeTabCapNhat() {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
@@ -577,7 +600,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         frame.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Lưu;
     private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnChonSach;
     private javax.swing.JButton btnDownloadQr;
@@ -586,7 +608,9 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnQuayLai;
+    private javax.swing.JButton btnReload;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoaSach;
@@ -629,7 +653,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     }
 
     public HoaDonDenBu getForm() {
-        long maHoaDonDenBu = txtMaHoaDonDenBu.getText().isEmpty() ? 0 : Long.valueOf(txtMaHoaDonDenBu.getText());
+        Long maHoaDonDenBu = txtMaHoaDonDenBu.getText().isEmpty() ? null : Long.valueOf(txtMaHoaDonDenBu.getText());
         String nguoiMuon = cmbNguoiMuon.getSelectedItem() == null ? null : cmbNguoiMuon.getSelectedItem().toString().split("-")[0];
         Double tongTien = txtTongTien.getText().isEmpty() ? 0 : Double.valueOf(txtTongTien.getText());
 
@@ -641,7 +665,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         hoaDonDenBu.setNguoiXuLy(Helper.Auth.user.getMaQL());
         hoaDonDenBu.setNgayTao(new Date(timeNow));
         hoaDonDenBu.setTongTien(tongTien);
-        hoaDonDenBu.setQr_code("hoadon-" + timeNow.toString());
+        if (maHoaDonDenBu == null) {
+            hoaDonDenBu.setQr_code("hoadon-" + timeNow.toString());
+        } else {
+            hoaDonDenBu.setQr_code(listHoaDonDenBu.get(pageIndex).get(tblHoaDonDenBu.getSelectedRow()).getQr_code());
+        }
 
         return hoaDonDenBu;
     }
@@ -657,18 +685,25 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         }
 
         tableModelHoaDonDenBuChiTiet.setRowCount(0);
-        if (hoaDonDenBu.getListhBuChiTiets() != null) {
+        new Thread() {
+            @Override
+            public void run() {
+                hoaDonDenBu.setListhBuChiTiets(HoaDonDenBuChiTietDao.getInstance().selectALLByHoaDonDenBu(hoaDonDenBu.getId()));
+                if (hoaDonDenBu.getListhBuChiTiets() != null) {
 
-            hoaDonDenBu.getListhBuChiTiets().forEach((hdct) -> {
-                listHoaDonChiTiet.put(hdct.getSach(), hdct);
-                Sach sach = sachDao.selectByID(hdct.getSach());
-                tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
-                    sach.getId(),
-                    sach.getTenSach(),
-                    sach.getGia()
-                });
-            });
-        }
+                    hoaDonDenBu.getListhBuChiTiets().forEach((hdct) -> {
+                        listHoaDonChiTiet.put(hdct.getSach(), hdct);
+                        Sach sach = sachDao.selectByID(hdct.getSach());
+                        tableModelHoaDonDenBuChiTiet.addRow(new Object[]{
+                            sach.getId(),
+                            sach.getTenSach(),
+                            sach.getGia()
+                        });
+                    });
+                }
+            }
+        }.start();;
+
         if (hoaDonDenBu.getQr_code() != null) {
             try {
                 lblQR_CODE.setIcon(new ImageIcon(
@@ -681,7 +716,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
             }
         }
         btnDownloadQr.setVisible(true);
-        tinhTongTien();
     }
 
     public boolean addSach(HoaDonDenBuChiTiet hdct, String tenSach) {
@@ -709,12 +743,14 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     }
 
     public void resetForm() {
+        tableModelHoaDonDenBuChiTiet.setRowCount(0);
         listHoaDonChiTiet.clear();
         txtMaHoaDonDenBu.setText(null);
         txtTongTien.setText(null);
         cmbNguoiMuon.setSelectedIndex(0);
         lblQR_CODE.setIcon(null);
         btnDownloadQr.setVisible(false);
+        btnSave.setText("Thêm");
     }
 
     private void fillCmbHoiVien() {
@@ -723,6 +759,18 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         if (listHoiViens != null) {
             listHoiViens.forEach((nm) -> boxModelNguoiMuon.addElement(nm.getId() + "-" + nm.getFullName()));
         }
+    }
+
+    private void InsertOnUpdateListHoaDenChiTiet(Long id) {
+        listHoaDonChiTiet.forEach((x, hdct) -> {
+            hdct.setHoaDonDenBu(id);
+            new Thread() {
+                @Override
+                public void run() {
+                    hoaDonDenBuChiTietDao.insert(hdct);
+                }
+            }.start();
+        });
     }
 
 }

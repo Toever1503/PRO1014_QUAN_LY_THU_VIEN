@@ -37,8 +37,14 @@ public class Home_Frame extends javax.swing.JFrame {
         QuanLy user = new QuanLy();
         user.setMaQL("admin");
         Helper.Auth.user = user;
-//        this.initDao();
+        new Thread() {
+            @Override
+            public void run() {
+                initDao();
+            }
+        }.start();
         this.init();
+
         this.initPnlQuanLy();
     }
 
@@ -47,16 +53,10 @@ public class Home_Frame extends javax.swing.JFrame {
         QuanLyDao.getInstance();
         TacGiaDao.getInstance();
         TheLoaiDao.getInstance();
-        NhaXuatBanDao.getInstance();        
+        NhaXuatBanDao.getInstance();
         GopYDAO.getInstance();
-
         HoaDonDenBuChiTietDao.getInstance();
-        HoaDonNhapSachChiTietDao hoaDonNhapSachChiTietDao = HoaDonNhapSachChiTietDao.getInstance();
         PhieuMuonChiTietDao.getInstance();
-        
-        HoaDonDenBuDao.getInstance();
-        HoaDonNhapSachDao.getInstance();
-        PhieuMuonDao.getInstance();
     }
 
     public void init() {
@@ -69,12 +69,48 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     public void initPnlQuanLy() {
-//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+
+        new Thread() {
+            @Override
+            public void run() {
+                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
     }
 
     //Đồng hồ
@@ -569,7 +605,8 @@ public class Home_Frame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-//        new DoiMatKhau_JDialog(this, true);
+        System.out.println("change pass");
+        new DoiMatKhau_JDialog().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

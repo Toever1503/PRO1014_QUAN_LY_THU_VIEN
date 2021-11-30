@@ -1,34 +1,35 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package views;
 
+import DAO.QuanLyDao;
+import Models.QuanLy;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Sieu Nhan Bay
+ * @author haunv
  */
 public class DoiMatKhau_JDialog extends javax.swing.JDialog {
 
+    private QuanLy u;
+
     /**
-     * Creates new form doiMatKhauJDialog
+     * Creates new form DoiMatKhau_JDialog
      */
-    public DoiMatKhau_JDialog() {
-        this.init();
-
-    }
-
     public DoiMatKhau_JDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.init();
-    }
-
-    void init() {
         initComponents();
         setLocationRelativeTo(null);
-        this.txtMaQL.setEnabled(false);
+    }
+
+    public DoiMatKhau_JDialog() {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.u = Helper.Auth.user;
+        txtMaQL.setText(u.getMaQL());
     }
 
     /**
@@ -47,15 +48,12 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         btnXacNhan = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JPasswordField();
-        txtMatKhauMoi = new javax.swing.JPasswordField();
-        txtXacNhanMKM = new javax.swing.JPasswordField();
+        textOldPassword = new javax.swing.JPasswordField();
+        textNewPassword = new javax.swing.JPasswordField();
+        textConfirmPassword = new javax.swing.JPasswordField();
         btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ĐỔI MẬT KHẨU");
-        setAlwaysOnTop(true);
-        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 51));
@@ -81,44 +79,39 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
                 btnXacNhanActionPerformed(evt);
             }
         });
-        btnXacNhan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnXacNhanKeyPressed(evt);
-            }
-        });
 
         jLabel5.setText("Xác nhận mật khẩu mới");
 
-        txtMatKhau.addFocusListener(new java.awt.event.FocusAdapter() {
+        textOldPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMatKhauFocusGained(evt);
+                textOldPasswordFocusGained(evt);
             }
         });
-        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+        textOldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMatKhauKeyPressed(evt);
+                textOldPasswordKeyPressed(evt);
             }
         });
 
-        txtMatKhauMoi.addFocusListener(new java.awt.event.FocusAdapter() {
+        textNewPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMatKhauMoiFocusGained(evt);
+                textNewPasswordFocusGained(evt);
             }
         });
-        txtMatKhauMoi.addKeyListener(new java.awt.event.KeyAdapter() {
+        textNewPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMatKhauMoiKeyPressed(evt);
+                textNewPasswordKeyPressed(evt);
             }
         });
 
-        txtXacNhanMKM.addFocusListener(new java.awt.event.FocusAdapter() {
+        textConfirmPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtXacNhanMKMFocusGained(evt);
+                textConfirmPasswordFocusGained(evt);
             }
         });
-        txtXacNhanMKM.addKeyListener(new java.awt.event.KeyAdapter() {
+        textConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtXacNhanMKMKeyPressed(evt);
+                textConfirmPasswordKeyPressed(evt);
             }
         });
 
@@ -140,9 +133,9 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtXacNhanMKM, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textConfirmPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textNewPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textOldPassword, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMaQL, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -157,7 +150,7 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,15 +164,15 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtXacNhanMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan)
@@ -194,75 +187,62 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
         this.doiMatKhau();
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnHuyActionPerformed
+    private void textOldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textOldPasswordFocusGained
+        this.textOldPassword.setText("");
+    }//GEN-LAST:event_textOldPasswordFocusGained
 
-    private void txtMatKhauFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatKhauFocusGained
-        this.txtMatKhau.setText("");
-    }//GEN-LAST:event_txtMatKhauFocusGained
-
-    private void txtMatKhauMoiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatKhauMoiFocusGained
-        this.txtMatKhauMoi.setText("");
-    }//GEN-LAST:event_txtMatKhauMoiFocusGained
-
-    private void txtXacNhanMKMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtXacNhanMKMFocusGained
-        this.txtXacNhanMKM.setText("");
-    }//GEN-LAST:event_txtXacNhanMKMFocusGained
-
-    private void btnXacNhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnXacNhanKeyPressed
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            this.doiMatKhau();
-        } else if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnXacNhanKeyPressed
-
-    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+    private void textOldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textOldPasswordKeyPressed
         switch (evt.getKeyCode()) {
             case java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.VK_DOWN ->
-                this.txtMatKhauMoi.requestFocus();
+                this.textNewPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_UP ->
-                this.txtXacNhanMKM.requestFocus();
+                this.textConfirmPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_ESCAPE ->
                 this.dispose();
             default -> {
             }
         }
-    }//GEN-LAST:event_txtMatKhauKeyPressed
+    }//GEN-LAST:event_textOldPasswordKeyPressed
 
-    private void txtMatKhauMoiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauMoiKeyPressed
+    private void textNewPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNewPasswordFocusGained
+        this.textNewPassword.setText("");
+    }//GEN-LAST:event_textNewPasswordFocusGained
+
+    private void textNewPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNewPasswordKeyPressed
         switch (evt.getKeyCode()) {
             case java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.VK_DOWN ->
-                this.txtXacNhanMKM.requestFocus();
+                this.textConfirmPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_UP ->
-                this.txtMatKhau.requestFocus();
+                this.textOldPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_ESCAPE ->
                 this.dispose();
             default -> {
             }
         }
-    }//GEN-LAST:event_txtMatKhauMoiKeyPressed
+    }//GEN-LAST:event_textNewPasswordKeyPressed
 
-    private void txtXacNhanMKMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtXacNhanMKMKeyPressed
+    private void textConfirmPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textConfirmPasswordFocusGained
+        this.textConfirmPassword.setText("");
+    }//GEN-LAST:event_textConfirmPasswordFocusGained
+
+    private void textConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textConfirmPasswordKeyPressed
         switch (evt.getKeyCode()) {
             case java.awt.event.KeyEvent.VK_ENTER ->
                 this.doiMatKhau();
             case java.awt.event.KeyEvent.VK_UP ->
-                this.txtMatKhauMoi.requestFocus();
+                this.textNewPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_DOWN ->
-                this.txtMatKhau.requestFocus();
+                this.textOldPassword.requestFocus();
             case java.awt.event.KeyEvent.VK_ESCAPE ->
                 this.dispose();
             default -> {
             }
         }
-    }//GEN-LAST:event_txtXacNhanMKMKeyPressed
+    }//GEN-LAST:event_textConfirmPasswordKeyPressed
 
-
-    public void doiMatKhau() {
-
-    }
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,23 +261,20 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DoiMatKhau_JDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DoiMatKhau_JDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DoiMatKhau_JDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(DoiMatKhau_JDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
 //        //</editor-fold>
 //
 //        /* Create and display the dialog */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                DoiMatKhauJDialog dialog = new DoiMatKhauJDialog(new javax.swing.JFrame(), true);
+//                DoiMatKhau_JDialog dialog = new DoiMatKhau_JDialog(new javax.swing.JFrame(), true);
 //                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 //                    @Override
 //                    public void windowClosing(java.awt.event.WindowEvent e) {
@@ -317,9 +294,68 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField textConfirmPassword;
+    private javax.swing.JPasswordField textNewPassword;
+    private javax.swing.JPasswordField textOldPassword;
     private javax.swing.JTextField txtMaQL;
-    private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JPasswordField txtMatKhauMoi;
-    private javax.swing.JPasswordField txtXacNhanMKM;
     // End of variables declaration//GEN-END:variables
+
+    private void doiMatKhau() {
+        if (checkForm()) {
+            String oldPass = String.valueOf(textOldPassword.getPassword()).trim();
+            if (oldPass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu cũ không được bỏ trống");
+                return;
+            }
+            oldPass = Helper.PasswordEncoder.getInstance()
+                    .encode(oldPass);
+
+            if (!u.getMatKhau().equals(oldPass)) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu cũ sai");
+            } else {
+                String newPass = String.valueOf(textNewPassword.getPassword()).trim();
+                if (newPass.length() < 6) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu phải từ 6 ký tự trở lên");
+                } else if (newPass.contains(" ")) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu không hợp lệ");
+                } else {
+                    String confirmPass = String.valueOf(textConfirmPassword.getPassword()).trim();
+
+                    if (!newPass.equals(confirmPass)) {
+                        JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận sai!");
+                        return;
+                    } else {
+                        newPass = Helper.PasswordEncoder.getInstance()
+                                .encode(newPass);
+                        u.setMatKhau(newPass);
+
+                        if (QuanLyDao.getInstance().insertOnUpdate(u) <= 0) {
+                            JOptionPane.showMessageDialog(this, "Lỗi server\n code: -1!");
+                            return;
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                            Helper.Auth.user = u;
+                            refresh();
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean checkForm() {
+        if (textNewPassword.getText().isEmpty() | textOldPassword.getText().isEmpty()
+                | textConfirmPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu không đuọc bỏ trống");
+            return false;
+        }
+        return true;
+    }
+
+    private void refresh() {
+        textOldPassword.setText(null);
+        textNewPassword.setText(null);
+        textConfirmPassword.setText(null);
+    }
 }
