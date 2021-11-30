@@ -77,15 +77,8 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     @Override
     public int insertOnUpdate(Sach entity) {
         int row = 0;
-        PreparedStatement ps = null;
         try {
-            String sql = this.INSERT_ON_UPDATE_SQL;
-
-            if (entity.getId() == null) {
-                sql += " SELECT LAST_INSERT_ID() as ID;";
-            }
-
-            ps = Helper.Utility.getStm(sql,
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getId(),
                     entity.getNguoiTao(),
                     entity.getTenSach(),
@@ -94,22 +87,19 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
                     entity.getNhaXuatBan(),
                     entity.isTrangThai(),
                     entity.getQr_code());
-            if (entity.getId() == null) {
-                ps.execute();
-                ResultSet rs = ps.getResultSet();
-                rs.next();
-                row = Long.valueOf(rs.getLong("ID")).intValue();
-            } else {
-                row = ps.executeUpdate();
+            if (row > 0) {
+                if (entity.getId() == null) {
+                    ResultSet rs = Helper.Utility.query("SELECT ID FROM sach\n"
+                            + "ORDER BY ID DESC\n"
+                            + "LIMIT 0,?", 1);
+                    rs.next();
+                    Long id = rs.getLong("ID");
+                    entity.setId(id);
+                    row = id.intValue();
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                ps.getConnection().close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return row;
     }

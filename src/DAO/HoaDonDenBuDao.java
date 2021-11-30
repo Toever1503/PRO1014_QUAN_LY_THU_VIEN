@@ -78,44 +78,36 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
     @Override
     public int insertOnUpdate(HoaDonDenBu entity) {
         int row = 0;
-        PreparedStatement ps = null;
         try {
-            String sql = this.INSERT_ON_UPDATE_SQL;
-            if (entity.getId() == null) {
-                sql += " SELECT LAST_INSERT_ID() as ID;";
-            }
-            ps = Helper.Utility.getStm(sql,
+
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getId(),
                     entity.getNguoiMuon(),
                     entity.getNguoiXuLy(),
                     entity.getTongTien(),
                     entity.getNgayTao(),
                     entity.getQr_code());
-            
-            if (entity.getId() == null) {
-                ps.execute();
-                ResultSet rs = ps.getResultSet();
-                rs.next();
-                Long id = rs.getLong("ID");
-                entity.setId(id);
-                row = id.intValue();
-            } else {
-                row = ps.executeUpdate();
+
+            if (row > 0) {
+                if (entity.getId() == null) {
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            hoaDonDenBuChiTietDao.delete(entity.getId());
+                        }
+                    }.start();
+                    ResultSet rs = Helper.Utility.query("SELECT ID FROM hoa_don_den_bu_sach\n"
+                            + "ORDER BY ID DESC\n"
+                            + "LIMIT 0,?", 1);
+                    rs.next();
+                    Long id = rs.getLong("ID");
+                    entity.setId(id);
+                    row = id.intValue();
+                }
             }
-            hoaDonDenBuChiTietDao.delete(entity.getId());
-            entity.getListhBuChiTiets().forEach((hdct) -> {
-                hdct.setHoaDonDenBu(entity.getId());
-                hoaDonDenBuChiTietDao.insertOnUpdate(hdct);
-            });
 
         } catch (Exception ex) {
             Logger.getLogger(HoaDonDenBuDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                ps.getConnection().close();
-            } catch (SQLException ex) {
-                Logger.getLogger(HoaDonDenBuDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return row;
     }
@@ -176,7 +168,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
                 hddb.setTongTien(rs.getDouble("TongTien"));
                 hddb.setNgayTao(rs.getDate("NgayTao"));
                 hddb.setQr_code(rs.getNString("QR_FILE"));
-                hddb.setListhBuChiTiets(hoaDonDenBuChiTietDao.selectALLByHoaDonDenBu(hddb.getId()));
+//                hddb.setListhBuChiTiets(hoaDonDenBuChiTietDao.selectALLByHoaDonDenBu(hddb.getId()));
                 list.add(hddb);
             }
             rs.getStatement().getConnection().close();

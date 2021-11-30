@@ -39,7 +39,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
             + "VALUES(MaQL), NgayMuon =\n"
             + "VALUES(NgayMuon), NgayHan =\n"
             + "VALUES(NgayHan), QR_FILE =\n"
-            + "VALUES(QR_FILE);";
+            + "VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
     private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
@@ -86,45 +86,40 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         PreparedStatement ps = null;
         try {
             row = 0;
-            String sql = this.INSERT_ON_UPDATE_SQL;
-            if (entity.getId() == null) {
-                sql += " SELECT\n"
-                        + "    LAST_INSERT_ID() AS ID;";
-            }
-            System.out.println(entity);
-            ps = Helper.Utility.getStm(sql,
+
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getId(),
                     entity.getNguoiMuon(),
                     entity.getNguoiXuLy(),
                     entity.getNgayMuon(),
                     entity.getHanTra(),
                     entity.getQr_code());
-            System.out.println("sql->" + sql);
 
-            if (entity.getId() == null) {
-                ps.execute();
-                ResultSet rs = ps.getResultSet();
-                rs.next();
-                Long id = rs.getLong("ID");
-                entity.setId(id);
-                row = id.intValue();
-            } else {
-                row = ps.executeUpdate();
+            if (row > 0) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        phieuMuonChiTietDao.delete(entity.getId());
+                    }
+                }.start();
+                if (entity.getId() == null) {
+                    ResultSet rs = Helper.Utility.query("SELECT ID FROM phieu_muon\n"
+                            + "ORDER BY ID DESC\n"
+                            + "LIMIT 0,?", 1);
+                    rs.next();
+                    Long id = rs.getLong("ID");
+                    entity.setId(id);
+                    row = id.intValue();
+                }
+                phieuMuonChiTietDao.delete(entity.getId());
+                entity.getListPhieuMuonChiTiets().forEach((pmct) -> {
+                    pmct.setPhieuMuon(entity.getId());
+                    phieuMuonChiTietDao.insertOnUpdate(pmct);
+                });
             }
-            phieuMuonChiTietDao.delete(entity.getId());
-            entity.getListPhieuMuonChiTiets().forEach((pmct) -> {
-                pmct.setPhieuMuon(entity.getId());
-                phieuMuonChiTietDao.insertOnUpdate(pmct);
-            });
 
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                ps.getConnection().close();
-            } catch (SQLException ex) {
-                Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return row;
     }

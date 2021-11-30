@@ -115,8 +115,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         txtMaPhieuMuon = new javax.swing.JTextField();
         jLabelNguoiMuon = new javax.swing.JLabel();
         jLabelNgayMuon = new javax.swing.JLabel();
-        jPanelQR_CODE = new javax.swing.JPanel();
-        lblQR_CODE = new javax.swing.JLabel();
         jLabelQR_CODE = new javax.swing.JLabel();
         btnDownLoadQR = new javax.swing.JButton();
         jLabelErrorMaPhieuMuon = new javax.swing.JLabel();
@@ -126,6 +124,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelErrorNgayTra = new javax.swing.JLabel();
         jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
         jDateChooserNgayTra = new com.toedter.calendar.JDateChooser();
+        lblQR_CODE = new javax.swing.JLabel();
         jPanelSachMuon = new javax.swing.JPanel();
         jLabelSachMuon = new javax.swing.JLabel();
         btnScanSach = new javax.swing.JButton();
@@ -322,11 +321,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelNgayMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNgayMuon.setText("Ngày mượn:");
         jPanelDetailSach.add(jLabelNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
-        jPanelQR_CODE.setLayout(new java.awt.BorderLayout());
-        jPanelQR_CODE.add(lblQR_CODE, java.awt.BorderLayout.CENTER);
-
-        jPanelDetailSach.add(jPanelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 190, 190));
         jPanelDetailSach.add(jLabelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         btnDownLoadQR.setText("Print");
@@ -340,13 +334,19 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelErrorMaPhieuMuon.setText(" ");
         jPanelDetailSach.add(jLabelErrorMaPhieuMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 420, 10));
         jPanelDetailSach.add(jLabelErrorNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 420, 10));
+
+        jDateChooserNgayMuon.setDateFormatString("dd-MM-yyyy");
+        jDateChooserNgayMuon.setEnabled(false);
+        jPanelDetailSach.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, 23));
         jPanelDetailSach.add(jLabelErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 420, 10));
 
         jComboBoxNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanelDetailSach.add(jComboBoxNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, -1));
         jPanelDetailSach.add(jLabelErrorNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 10));
-        jPanelDetailSach.add(jDateChooserNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, -1));
-        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, -1));
+
+        jDateChooserNgayTra.setDateFormatString("dd-MM-yyyy");
+        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, 23));
+        jPanelDetailSach.add(lblQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 190, 190));
 
         jPanelWrapCapNhat.add(jPanelDetailSach, java.awt.BorderLayout.PAGE_START);
 
@@ -533,23 +533,24 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Thêm thất bại!");
                     return;
                 } else {
+                    System.out.println("id->" + id);
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
-
-                    String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
-                    String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + qr_codeKey.toString().split("-")[1] + ".png"; //create qr_code path
-                    // create qr_code image and parse qrcode image fit with label qr_code
-                    if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
-                        try {
-                            jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, HEIGHT)));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
                     phieuMuon.setId(id);
                     txtMaPhieuMuon.setText(id.toString());
                     pageIndex = 0;
                     listPhieuMuon.clear();
                     listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
+                    
+                    String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
+                    String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + phieuMuon.getQr_code().toString().split("-")[1] + ".png"; //create qr_code path
+                    // create qr_code image and parse qrcode image fit with label qr_code
+                    if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
+                        try {
+                            jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, Image.SCALE_DEFAULT)));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
             } else {
@@ -634,7 +635,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             listSachMuon.clear();
             btnSave.setText("Lưu");
             PhieuMuon phieuM = listPhieuMuon.get(pageIndex).get(row);
-            phieuM.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(phieuM.getId()));
             setForm(phieuM);
             activeTabCapNhat();
         }
@@ -760,7 +760,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelDanhSach;
     private javax.swing.JPanel jPanelDetailSach;
     private javax.swing.JPanel jPanelPhanTrang;
-    private javax.swing.JPanel jPanelQR_CODE;
     private javax.swing.JPanel jPanelSachMuon;
     private javax.swing.JPanel jPanelWrapCapNhat;
     private javax.swing.JScrollPane jScrollPane;
@@ -805,20 +804,16 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     public PhieuMuon getForm() {
         Long maPhieuMuon = txtMaPhieuMuon.getText().isEmpty() ? null : Long.valueOf(txtMaPhieuMuon.getText()); //parse maPhieuMuon
         String nguoiMuon = jComboBoxNguoiMuon.getSelectedItem().toString().split("-")[0]; // parse id hoiVien
-        Date ngayMuon = jDateChooserNgayMuon.getDate() == null ? null : new Date(jDateChooserNgayMuon.getDate().getTime()); // parse date
+        Date ngayMuon = new Date(jDateChooserNgayMuon.getDate().getTime()); // parse date
         Date ngayTra = jDateChooserNgayTra.getDate() == null ? null : new Date(jDateChooserNgayTra.getDate().getTime());
 
         int check = 0;
         //check valid date
-        if (ngayMuon == null) {
-            jLabelErrorNgayMuon.setText("Định dạng ngày tháng phải là 05-03-2021");
-        } else {
-            jLabelErrorNgayMuon.setText("");
-            check++;
-        }
         //check valid date
         if (ngayTra == null) {
             jLabelErrorNgayTra.setText("Định dạng ngày tháng phải là 05-03-2021");
+        } else if (ngayTra.before(ngayMuon)) {
+            jLabelErrorNgayTra.setText("Ngày trả phải sau ngày mượn!");
         } else {
             check++;
             jLabelErrorNgayTra.setText("");
@@ -831,7 +826,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         }
 
         PhieuMuon phieuMuon = null;
-        if (check == 3) {
+        if (check == 2) {
             phieuMuon = new PhieuMuon();
             phieuMuon.setId(maPhieuMuon);
             phieuMuon.setNguoiXuLy(Helper.Auth.user.getMaQL());
@@ -842,17 +837,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             if (maPhieuMuon == null) {
                 Long timeNow = Calendar.getInstance().getTimeInMillis();
                 phieuMuon.setQr_code("sach-" + timeNow);
-
-                String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
-                String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + timeNow.toString() + ".png"; //create qr_code path
-                // create qr_code image and parse qrcode image fit with label qr_code
-                if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
-                    try {
-                        jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, HEIGHT)));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
             } else {
                 int row = tblPhieuMuon.getSelectedRow();
                 phieuMuon.setQr_code(listPhieuMuon.get(pageIndex).get(row).getQr_code());
@@ -868,31 +852,50 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jDateChooserNgayTra.setDate(phieuMuon.getHanTra());
         btnDownLoadQR.setVisible(true);
         tableModelSachMuon.setRowCount(0);
-        HoiVien nguoiMuon = hoiVienDao.selectByID(phieuMuon.getNguoiMuon());
-        jComboBoxNguoiMuon.setSelectedItem(nguoiMuon.getId() + "-" + nguoiMuon.getFullName());
 
-        if (phieuMuon.getListPhieuMuonChiTiets() != null) {
-            phieuMuon.getListPhieuMuonChiTiets().forEach((pmct) -> {
-                Sach sach = sachDAO.selectByID(pmct.getSach());
-
-                listSachMuon.put(sach.getId(), pmct);
-                tableModelSachMuon.addRow(new Object[]{
-                    sach.getId(),
-                    sach.getTenSach(),
-                    pmct.getNgayTra() == null ? "" : pmct.getNgayTra(),
-                    pmct.getNguoiXuLy(),
-                    pmct.isTrangThai() ? "Đã trả sách" : "Chưa trả sách"
-                });
+        new Thread() {
+            @Override
+            public void run() {
+                HoiVien nguoiMuon = hoiVienDao.selectByID(phieuMuon.getNguoiMuon());
+                jComboBoxNguoiMuon.setSelectedItem(nguoiMuon.getId() + "-" + nguoiMuon.getFullName());
             }
-            );
-            tblSachMuon.setModel(tableModelSachMuon);
-        }
+
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                phieuMuon.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(phieuMuon.getId()));
+                if (phieuMuon.getListPhieuMuonChiTiets() != null) {
+                    phieuMuon.getListPhieuMuonChiTiets().forEach((pmct) -> {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                Sach sach = sachDAO.selectByID(pmct.getSach());
+                                listSachMuon.put(sach.getId(), pmct);
+                                tableModelSachMuon.addRow(new Object[]{
+                                    sach.getId(),
+                                    sach.getTenSach(),
+                                    pmct.getNgayTra() == null ? "" : pmct.getNgayTra(),
+                                    pmct.getNguoiXuLy(),
+                                    pmct.isTrangThai() ? "Đã trả sách" : "Chưa trả sách"
+                                });
+                            }
+
+                        }.start();
+
+                    }
+                    );
+                }
+            }
+        }.start();
 
         if (phieuMuon.getQr_code()
                 != null) {
+            System.out.println("qr_code phieuMuon->" + phieuMuon.getQr_code());
             try {
                 lblQR_CODE.setIcon(new ImageIcon(
-                        new ImageIcon(Helper.XImage.PHIEUMUON_UPLOAD.concat("/" + phieuMuon.getQr_code() + ".png"))
+                        new ImageIcon(Helper.XImage.PHIEUMUON_UPLOAD.concat("/" + phieuMuon.getQr_code().split("-")[1] + ".png"))
                                 .getImage()
                                 .getScaledInstance(190, 190, Image.SCALE_DEFAULT)));
             } catch (Exception e) {
@@ -905,7 +908,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         listSachMuon.clear();
         txtMaPhieuMuon.setText(null);
         jComboBoxNguoiMuon.setSelectedIndex(0);
-        jDateChooserNgayMuon.setDate(null);
+        jDateChooserNgayMuon.setDate(Calendar.getInstance().getTime());
         jDateChooserNgayTra.setDate(null);
         tableModelSachMuon.setRowCount(0);
         lblQR_CODE.setIcon(null);
