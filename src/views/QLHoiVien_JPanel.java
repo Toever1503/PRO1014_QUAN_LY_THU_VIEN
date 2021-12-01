@@ -61,16 +61,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 };
                 model.addRow(row);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
-    }
-
-    public static QLHoiVien_JPanel getInstance() {
-        if (instance == null) {
-            instance = new QLHoiVien_JPanel();
-        }
-        return instance;
     }
 
     /**
@@ -81,7 +72,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -127,12 +118,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
         tabDanhSach.setLayout(new java.awt.BorderLayout(0, 10));
 
+        tblQuanLyNguoiDung.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblQuanLyNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã ND", "Họ Và Tên", "Ngày Sinh", "Số điện thoại", "Email", "Địa Chỉ"
@@ -188,7 +177,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(700, Short.MAX_VALUE)
+                .addContainerGap(702, Short.MAX_VALUE)
                 .addComponent(btnFirst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
@@ -214,6 +203,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
         jPanel4.setPreferredSize(new java.awt.Dimension(648, 50));
 
+        btnTim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTim.setText("Tìm kiếm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +217,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 btnThemMoiActionPerformed(evt);
             }
         });
-
+        btnChiTiet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnChiTiet.setText("Chi Tiết");
         btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +247,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTim)
-                .addContainerGap())
+                .addGap(152, 152, 152))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,8 +268,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
         jPanelCapNhat.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Mã hội viên :");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 68, 25));
@@ -287,26 +276,32 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         txtMaTT.setEnabled(false);
         jPanel3.add(txtMaTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 244, 25));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("CCCD :");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 68, 25));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Ngày hạn :");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 68, 25));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Họ tên :");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 68, 25));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("Ngày sinh :");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 68, 25));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Số điện thoại :");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 100, 25));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("Email :");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 77, 25));
@@ -315,6 +310,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jPanel3.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 244, 25));
         jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 244, 25));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Địa chỉ :");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 77, 25));
@@ -351,6 +347,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jPanel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 300, -1));
         jPanel3.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 150, -1));
         jPanel3.add(jDateChooserNgayHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, -1));
+
 
         jPanelCapNhat.add(jPanel3, java.awt.BorderLayout.CENTER);
 
@@ -510,6 +507,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
     }
 
+
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -520,6 +518,95 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         btnInsert.setText("Thêm");
         jDateChooserNgayHan.setDate(null);
         jDateChooserNgaySinh.setDate(null);
+    }
+
+    void setForm(HoiVien model) {
+        txtMaTT.setText(model.getId() + "");
+        model.setNguoiTao(Helper.Auth.user.getMaQL());
+        txtCCCD.setText(model.getCccd());
+        txtHoTen.setText(model.getFullName());
+        txtDiaChi.setText(model.getDiaChi());
+        jDateChooserNgaySinh.setDate(model.getNgaySinh());
+        model.setNgaySinh(jDateChooserNgaySinh.getDate() == null ? null : new Date(jDateChooserNgaySinh.getDate().getTime()));
+        txtSoDienThoai.setText(model.getSoDienThoai());
+        txtEmail.setText(model.getEmail());
+        jDateChooserNgayHan.setDate(model.getNgayHan());
+        model.setNgayHan(jDateChooserNgayHan.getDate() == null ? null : new Date(jDateChooserNgayHan.getDate().getTime()));
+        model.setNgayTao(null);
+        // qr_code
+        if (model.getQr_code() != null) {
+            try {
+                lblQR_code.setIcon(new ImageIcon(new ImageIcon(Helper.XImage.USER_UPLOAD.concat("/"
+                        + model.getQr_code().split("-")[1]
+                        + ".png")).getImage().getScaledInstance(200, 200, 1)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    HoiVien getForm() {
+        Long timeNow = Calendar.getInstance().getTimeInMillis();
+        HoiVien model = new HoiVien();
+        model.setId(Long.parseLong(txtMaTT.getText()));
+        model.setNguoiTao(Helper.Auth.user.getMaQL());
+        model.setCccd(txtCCCD.getText());
+        model.setFullName(txtHoTen.getText());
+        model.setDiaChi(txtDiaChi.getText());
+        model.setNgaySinh(jDateChooserNgaySinh.getDate() == null ? null : new Date(jDateChooserNgaySinh.getDate().getTime()));
+        model.setSoDienThoai(txtSoDienThoai.getText());
+        model.setEmail(txtEmail.getText());
+        model.setNgayTao(null);
+        model.setNgayHan(jDateChooserNgayHan.getDate() == null ? null : new Date(jDateChooserNgayHan.getDate().getTime()));
+        if (model.getId() == null) {
+            model.setQr_code("HoiVien-" + timeNow.toString());
+
+            String keyData = model.getQr_code().split("-")[1];
+            String past = Helper.XImage.USER_UPLOAD.concat("/" + keyData + ".png");
+            if (!Helper.QR_CODE.generateQRcode(keyData, past)) {
+                JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
+            } else {
+                int row = tblQuanLyNguoiDung.getSelectedRow();
+                model.setQr_code(listHV.get(index).get(row).getQr_code());
+            }
+            try {
+                lblQR_code.setIcon(new ImageIcon(new ImageIcon(past).getImage().getScaledInstance(200, 200, 1)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return model;
+        }
+        return null;
+    }
+
+    boolean check() {
+        if (txtMaTT.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã hội viên trống!");
+            return false;
+        } else if (txtCCCD.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Căn cước công dân trống!");
+            return false;
+        } else if (txtHoTen.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên hội viên trống!");
+            return false;
+        } else if (jDateChooserNgaySinh.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh!");
+            return false;
+        } else if (txtSoDienThoai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại trống!");
+            return false;
+        } else if (txtEmail.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email trống!");
+            return false;
+        } else if (txtDiaChi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ trống!");
+            return false;
+        } else if (jDateChooserNgayHan.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày hạn!");
+            return false;
+        }
+        return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -536,6 +623,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooserNgayHan;
     private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -545,12 +633,15 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCapNhat;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblQR_code;
+    private javax.swing.JRadioButton rdoHoatDong;
+    private javax.swing.JRadioButton rdoKhoa;
     private javax.swing.JPanel tabDanhSach;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblQuanLyNguoiDung;
@@ -640,4 +731,5 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 //        this.updateStatus();  //chuyển sang editable
 //
 //    }
+
 }
