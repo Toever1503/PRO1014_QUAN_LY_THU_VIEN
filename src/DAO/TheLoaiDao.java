@@ -16,13 +16,14 @@ import java.util.logging.Logger;
 public class TheLoaiDao extends LibrarianDAO<TheLoai, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTheLoai FROM the_loai";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTheLoai FROM the_loai WHERE ID = ?";
+    private final String SELECT_BY_ID_SQL = this.SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO the_loai(ID, TenTheLoai) VALUES (?,?);";
     private final String UPDATE_SQL = "UPDATE the_loai SET TenTheLoai = ?, WHERE ID = ?";
     private final String DELETE_SQL = "DELETE FROM the_loai WHERE ID =?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO the_loai (ID, TenTheLoai) VALUES (?, ?)\n"
             + "ON DUPLICATE KEY UPDATE TenTheLoai = VALUES(TenTheLoai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTheLoai FROM the_loai LIMIT ?, 30";
+    private final String SELECT_BY_PAGE_SQL = this.SELECT_ALL_SQL + " LIMIT ?, 30";
+    private final String SELECT_BY_KEY_SQL = this.SELECT_ALL_SQL + " WHERE TenTheLoai = ?";
     private static TheLoaiDao instance;
 
     private TheLoaiDao() {
@@ -39,9 +40,7 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, Long> {
     public int insert(TheLoai entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.INSERT_SQL,
-                    entity.getId(),
-                    entity.getTenTheLoai());
+            row = Helper.Utility.update(this.INSERT_SQL, entity.getTenTheLoai());
         } catch (Exception ex) {
             Logger.getLogger(TheLoaiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,6 +96,10 @@ public class TheLoaiDao extends LibrarianDAO<TheLoai, Long> {
     @Override
     public List<TheLoai> selectByPage(Long id) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
+    }
+
+    public List<TheLoai> selectByKeyWorld(String keyWorld) {
+        return this.selectBySql(this.SELECT_BY_KEY_SQL, keyWorld);
     }
 
     @Override

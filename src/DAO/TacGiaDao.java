@@ -16,13 +16,13 @@ import java.util.logging.Logger;
 public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenTacGia FROM tac_gia";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenTacGia FROM tac_gia WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO tac_gia(ID, TenTacGia) VALUES (?,?)";
+    private final String SELECT_BY_ID_SQL = this.SELECT_ALL_SQL + " WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO tac_gia(TenTacGia) VALUES (?)";
     private final String UPDATE_SQL = "UPDATE tac_gia SET TenTacGia = ? WHERE ID = ?";
     private final String DELETE_SQL = "DELETE * FROM tac_gia WHERE ID = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO tac_gia (ID, TenTacGia) VALUES (?, ?) ON DUPLICATE KEY UPDATE TenTacGia = VALUES(TenTacGia)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, TenTacGia FROM tac_gia LIMIT ?, 30";
-
+    private final String SELECT_BY_PAGE_SQL = this.SELECT_ALL_SQL + " LIMIT ?, 30";
+    private final String SELECT_BY_KEY_SQL = this.SELECT_ALL_SQL + " WHERE TenTacGia = ?";
     private static TacGiaDao instance;
 
     public TacGiaDao() {
@@ -39,9 +39,7 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
     public int insert(TacGia entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.INSERT_SQL,
-                    entity.getId(),
-                    entity.getTenTacGia());
+            row = Helper.Utility.update(this.INSERT_SQL, entity.getTenTacGia());
         } catch (Exception ex) {
             Logger.getLogger(TacGiaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,9 +92,13 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
         return list.get(0);
     }
 
+    public List<TacGia> selectByKeyWorld(String keyWorld) {
+        return this.selectBySql(this.SELECT_BY_KEY_SQL, keyWorld);
+    }
+
     @Override
     public List<TacGia> selectByPage(Long id) {
-        return this.selectBySql(this.SELECT_ALL_SQL, id);
+        return this.selectBySql(this.SELECT_BY_PAGE_SQL, id);
     }
 
     @Override
@@ -121,8 +123,9 @@ public class TacGiaDao extends LibrarianDAO<TacGia, Long> {
         }
         return list;
     }
+
     public static void main(String[] args) {
         new TacGiaDao().selectALL();
-        
+
     }
 }

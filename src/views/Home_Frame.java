@@ -4,20 +4,10 @@
  */
 package views;
 
-import DAO.GopYDAO;
-import DAO.HoaDonDenBuChiTietDao;
-import DAO.HoiVienDao;
-import DAO.NhaXuatBanDao;
-import DAO.PhieuMuonChiTietDao;
-import DAO.QuanLyDao;
-import DAO.TacGiaDao;
-import DAO.TheLoaiDao;
 import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
