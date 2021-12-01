@@ -82,13 +82,8 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
     @Override
     public int insertOnUpdate(HoiVien entity) {
         int row = 0;
-        PreparedStatement ps = null;
         try {
-            String sql = this.INSERT_ON_UPDATE_SQL;
-            if (entity.getId() == null) {
-                sql += " SELECT LAST_INSERT_ID() as ID;";
-            }
-            ps = Helper.Utility.getStm(sql,
+            row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getId(),
                     entity.getNguoiTao(),
                     entity.getCccd(),
@@ -113,12 +108,6 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
             }
         } catch (Exception ex) {
             Logger.getLogger(HoiVienDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                ps.getConnection().close();
-            } catch (SQLException ex1) {
-                Logger.getLogger(HoaDonDenBuDao.class.getName()).log(Level.SEVERE, null, ex1);
-            }
         }
         return row;
     }

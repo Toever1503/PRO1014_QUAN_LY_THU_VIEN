@@ -71,9 +71,9 @@ public class Home_Frame extends javax.swing.JFrame {
 //            }
 //        }.start();
 //         
-        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
 //         
 //        new Thread() {
 //            @Override
@@ -88,7 +88,7 @@ public class Home_Frame extends javax.swing.JFrame {
 //            }
 //        }.start();
 
-        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+//        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
 
     }
 
