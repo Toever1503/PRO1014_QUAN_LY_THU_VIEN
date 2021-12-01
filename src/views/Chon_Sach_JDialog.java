@@ -7,6 +7,7 @@ package views;
 import DAO.SachDAO;
 import DAO.TheLoaiDao;
 import Models.HoaDonDenBuChiTiet;
+import Models.HoaDonNhapSachChiTiet;
 import Models.PhieuMuonChiTiet;
 import Models.Sach;
 import Models.TheLoai;
@@ -93,6 +94,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             lblLoaiSach.setVisible(true);
             lblSoLuong.setVisible(true);
             txtSoLuong.setVisible(true);
+            txtGia.setEnabled(true);
 
             radMoi.setVisible(true);
             radCu.setVisible(true);
@@ -255,7 +257,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         lblLoaiSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblLoaiSach.setText("Loại Sách");
         jPanelDetailSach.add(lblLoaiSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-        jPanelDetailSach.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 160, -1));
+        jPanelDetailSach.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 210, -1));
 
         txtGia.setEnabled(false);
         jPanelDetailSach.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 210, -1));
@@ -274,7 +276,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         jPanelDetailSach.add(lblSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         lblErrorSoLuong.setText(" ");
-        jPanelDetailSach.add(lblErrorSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 160, -1));
+        jPanelDetailSach.add(lblErrorSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 210, -1));
 
         lblErrorGia.setText("  ");
         jPanelDetailSach.add(lblErrorGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 210, -1));
@@ -389,13 +391,13 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        int row = tblSach.getSelectedRow();
+        if (row == -1) {
+            lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
+        } else {
+            Sach sach = listSach.get(pageIndex).get(row);
+            if (ACTION_TYPE == "PHIEU_MUON") {
 
-        if (ACTION_TYPE == "PHIEU_MUON") {
-            int row = tblSach.getSelectedRow();
-            if (row == -1) {
-                lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
-            } else {
-                Sach sach = listSach.get(pageIndex).get(row);
                 PhieuMuonChiTiet pmct = new PhieuMuonChiTiet(Long.valueOf(0), sach.getId(), Helper.Auth.user.getMaQL(), null, false);
 
                 if (QLPhieuMuon_JPanel.getInstance().addSachMuon(pmct, sach)) {
@@ -403,33 +405,33 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
                 }
-            }
 
-        } else if (ACTION_TYPE == "HOA_DON") {
-            int row = tblSach.getSelectedRow();
-            if (row == -1) {
-                lblErrorAction.setText("Hãy chọn 1 sách cần thêm!");
-            } else {
-                Sach sach = listSach.get(pageIndex).get(row);
+            } else if (ACTION_TYPE == "HOA_DON") {
                 if (QLHoaDonDenBu.getInstance().addSach(new HoaDonDenBuChiTiet(null, sach.getId(), sach.getGia()), sach.getGia().toString())) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
                 }
+            } else { //for nhap sach
+                HoaDonNhapSachChiTiet hdct = getFormHdct();
+                System.out.println("nhapSach->"+hdct);
+                if (hdct != null) {
+                    if (hdct.getLoaiSach()) {
+                        if (hdct.getGia() < sach.getGia()) {
+                            JOptionPane.showMessageDialog(this, "Giá sách mới phải lớn hơn hoặc bằng giá ban đầu!");
+                        }else {
+                            hdct.setSach(sach.getId());
+                            if (QLHoaDonNhapSach.getInstance().addSach(hdct, sach.getTenSach())) {
+                                JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+                            }
+                        }
+                    } 
+                }
             }
-        } else { //for nhap sach
-            //                int soLuong;
-//                if (txtSoLuong.getText().isEmpty()) {
-//                    lblErrorSoLuong.setText("Số lượng không được bỏ trống");
-//                }
-//                try {
-//                    soLuong = Integer.valueOf(txtSoLuong.getText());
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    lblErrorSoLuong.setText("Số lượng phải là số nguyên");
-//                    return;
-//                }
         }
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void cmbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTheLoaiActionPerformed
@@ -448,6 +450,8 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         if (ACTION_TYPE == "HOA_DON" || ACTION_TYPE == "NHAP_SACH") {
             int row = tblSach.getSelectedRow();
             txtGia.setText(listSach.get(pageIndex).get(row).getGia().toString());
+            txtSoLuong.setText(null);
+            radMoi.setSelected(true);
         }
     }//GEN-LAST:event_tblSachMouseClicked
 
@@ -527,5 +531,45 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             return;
         }
         listTheLoai.forEach((theLoai) -> boxModelTheLoai.addElement(theLoai.getId() + "-" + theLoai.getTenTheLoai()));
+    }
+
+    private HoaDonNhapSachChiTiet getFormHdct() {
+        HoaDonNhapSachChiTiet hdct = null;
+        Integer soLuong = null;
+        Double gia = null;
+        int check = 0;
+        boolean isNew = radMoi.isSelected();
+
+        if (txtSoLuong.getText().isEmpty()) {
+            lblErrorSoLuong.setText("Số lượng không được bỏ trống");
+        } else {
+            try {
+                soLuong = Integer.valueOf(txtSoLuong.getText());
+                check++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                lblErrorSoLuong.setText("Số lượng phải là số nguyên");
+            }
+        }
+
+        if (txtGia.getText().isEmpty()) {
+            lblErrorGia.setText("Giá không được bỏ trống");
+        } else {
+            try {
+                gia = Double.valueOf(txtGia.getText().replace(".0", ""));
+                check++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                lblErrorGia.setText("Giá phải là số nguyên");
+            }
+        }
+
+        if (check == 2) {
+            hdct = new HoaDonNhapSachChiTiet();
+            hdct.setGia(gia);
+            hdct.setSoLuong(soLuong);
+            hdct.setLoaiSach(radMoi.isSelected());
+        }
+        return hdct;
     }
 }

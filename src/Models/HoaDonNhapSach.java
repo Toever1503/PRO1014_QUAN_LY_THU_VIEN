@@ -5,6 +5,7 @@
 package Models;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -14,19 +15,21 @@ public class HoaDonNhapSach {
 
     private Long id;
     private String nguoiXuLy;
-    private Float tongTien;
+    private Double tongTien;
     private Date ngayTao;
     private String qr_code;
+    private List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets;
 
     public HoaDonNhapSach() {
     }
 
-    public HoaDonNhapSach(Long id, String nguoiXuLy, Float tongTien, Date ngayTao, String qr_code) {
+    public HoaDonNhapSach(Long id, String nguoiXuLy, Double tongTien, Date ngayTao, String qr_code, List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
         this.id = id;
         this.nguoiXuLy = nguoiXuLy;
         this.tongTien = tongTien;
         this.ngayTao = ngayTao;
         this.qr_code = qr_code;
+        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
     }
 
     public Long getId() {
@@ -45,11 +48,11 @@ public class HoaDonNhapSach {
         this.nguoiXuLy = nguoiXuLy;
     }
 
-    public Float getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(Float tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -69,8 +72,17 @@ public class HoaDonNhapSach {
         this.qr_code = qr_code;
     }
 
+    public List<HoaDonNhapSachChiTiet> getListHoaDonNhapSachChiTiets() {
+        return listHoaDonNhapSachChiTiets;
+    }
+
+    public void setListHoaDonNhapSachChiTiets(List<HoaDonNhapSachChiTiet> listHoaDonNhapSachChiTiets) {
+        this.listHoaDonNhapSachChiTiets = listHoaDonNhapSachChiTiets;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + '}';
+        return "HoaDonNhapSach{" + "id=" + id + ", nguoiXuLy=" + nguoiXuLy + ", tongTien=" + tongTien + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", listHoaDonNhapSachChiTiets=" + listHoaDonNhapSachChiTiets + '}';
     }
+
 }

@@ -4,6 +4,18 @@
  */
 package views;
 
+import DAO.GopYDAO;
+import DAO.HoaDonDenBuChiTietDao;
+import DAO.HoaDonDenBuDao;
+import DAO.HoaDonNhapSachChiTietDao;
+import DAO.HoaDonNhapSachDao;
+import DAO.HoiVienDao;
+import DAO.NhaXuatBanDao;
+import DAO.PhieuMuonChiTietDao;
+import DAO.PhieuMuonDao;
+import DAO.QuanLyDao;
+import DAO.TacGiaDao;
+import DAO.TheLoaiDao;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +31,29 @@ public class Loading_JFrame extends javax.swing.JFrame {
      */
     public Loading_JFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+        new Thread() {
+            @Override
+            public void run() {
+                HoiVienDao.getInstance();
+                QuanLyDao.getInstance();
+                TacGiaDao.getInstance();
+                TheLoaiDao.getInstance();
+                NhaXuatBanDao.getInstance();
+                GopYDAO.getInstance();
+
+                HoaDonDenBuChiTietDao.getInstance();
+                PhieuMuonChiTietDao.getInstance();
+                HoaDonNhapSachChiTietDao.getInstance();
+
+                PhieuMuonDao.getInstance();
+                HoaDonDenBuDao.getInstance();
+                HoaDonNhapSachDao.getInstance();
+                
+                Home_Frame.getInstance().setVisible(true);
+            }
+        }.start();
+
         new Thread() {
             @Override
             public void run() {
@@ -27,11 +62,14 @@ public class Loading_JFrame extends javax.swing.JFrame {
                 while (i <= 100) {
                     try {
                         i++;
-                        Thread.sleep(ran.nextInt(1000));
+                        jProgressBar1.setValue(i);
+                        Thread.sleep(ran.nextInt(600));
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Loading_JFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                dispose();
+                new Login_JFrame().setVisible(true);
             }
         }.start();;
     }

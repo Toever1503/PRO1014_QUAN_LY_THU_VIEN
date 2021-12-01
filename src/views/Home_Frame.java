@@ -21,6 +21,8 @@ import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +31,7 @@ import java.awt.CardLayout;
 public class Home_Frame extends javax.swing.JFrame {
 
     private CardLayout cardLayoutMainRight;
+    private static Home_Frame instance;
 
     /**
      * Creates new form main_frame
@@ -37,26 +40,16 @@ public class Home_Frame extends javax.swing.JFrame {
         QuanLy user = new QuanLy();
         user.setMaQL("admin");
         Helper.Auth.user = user;
-        new Thread() {
-            @Override
-            public void run() {
-                initDao();
-            }
-        }.start();
         this.init();
 
         this.initPnlQuanLy();
     }
 
-    public void initDao() {
-        HoiVienDao.getInstance();
-        QuanLyDao.getInstance();
-        TacGiaDao.getInstance();
-        TheLoaiDao.getInstance();
-        NhaXuatBanDao.getInstance();
-        GopYDAO.getInstance();
-        HoaDonDenBuChiTietDao.getInstance();
-        PhieuMuonChiTietDao.getInstance();
+    public static Home_Frame getInstance() {
+        if (instance == null) {
+            instance = new Home_Frame();
+        }
+        return instance;
     }
 
     public void init() {
@@ -69,48 +62,39 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     public void initPnlQuanLy() {
-
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
-//
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
-//
-//        new Thread() {
+//         new Thread() {
 //            @Override
 //            public void run() {
 //                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
 //            }
 //        }.start();
-//
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
-        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
-//
-//        new Thread() {
+//         
+//         new Thread() {
 //            @Override
 //            public void run() {
 //                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
 //            }
 //        }.start();
+//         
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+//         
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(2000);
+//
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+
+        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+
     }
 
     //Đồng hồ
@@ -151,6 +135,8 @@ public class Home_Frame extends javax.swing.JFrame {
         btnScanQR = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jPanel_QL_NHAPSACH = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
@@ -162,6 +148,7 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlThuThu = new javax.swing.JPanel();
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
         jPanel_ThongKe = new javax.swing.JPanel();
+        jPanel_Ql_Nhap_Sach = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -174,6 +161,7 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQuanLyHoiVien = new javax.swing.JMenuItem();
         mniQLHoaDon = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mniQLThuThu = new javax.swing.JMenuItem();
         mnThongKe = new javax.swing.JMenu();
         mniSachDaMuon = new javax.swing.JMenuItem();
@@ -215,7 +203,7 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl1.add(btnQLSach, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 250, 45));
+        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 185, 250, 40));
 
         pnl2.setBackground(new java.awt.Color(6, 143, 202));
         pnl2.setLayout(new java.awt.BorderLayout());
@@ -348,6 +336,15 @@ public class Home_Frame extends javax.swing.JFrame {
         jSeparator5.setPreferredSize(new java.awt.Dimension(40, 2));
         pnlWest.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 120, 200, -1));
 
+        jPanel_QL_NHAPSACH.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel_QL_NHAPSACH.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setBackground(new java.awt.Color(51, 153, 255));
+        jLabel2.setText("Quản Lý Nhập Sách");
+        jPanel_QL_NHAPSACH.add(jLabel2, java.awt.BorderLayout.CENTER);
+
+        pnlWest.add(jPanel_QL_NHAPSACH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 250, 40));
+
         pnlMain.add(pnlWest, java.awt.BorderLayout.WEST);
 
         pnlLast.setBackground(new java.awt.Color(255, 255, 255));
@@ -391,6 +388,9 @@ public class Home_Frame extends javax.swing.JFrame {
 
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_ThongKe, "card8");
+
+        jPanel_Ql_Nhap_Sach.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_Ql_Nhap_Sach, "card9");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -453,6 +453,14 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLHoaDon.setText("Hóa đơn đề bù");
         mnQuanLy.add(mniQLHoaDon);
         mnQuanLy.add(jSeparator1);
+
+        jMenuItem2.setText("Quản Lý Nhập Sách");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnQuanLy.add(jMenuItem2);
 
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
@@ -609,6 +617,11 @@ public class Home_Frame extends javax.swing.JFrame {
         new DoiMatKhau_JDialog().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        cardLayoutMainRight.show(pnlMainRight, "card9");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -660,13 +673,17 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btnScanQR;
     private javax.swing.JLabel btnThongKe;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel_QL_NHAPSACH;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
     private javax.swing.JPanel jPanel_QlSach;
     private javax.swing.JPanel jPanel_QlThuThu;
+    private javax.swing.JPanel jPanel_Ql_Nhap_Sach;
     private javax.swing.JPanel jPanel_ThongKe;
     private javax.swing.JPanel jPanel_home;
     private javax.swing.JPopupMenu.Separator jSeparator1;

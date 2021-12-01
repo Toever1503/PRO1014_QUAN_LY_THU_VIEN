@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet";
-    private final String SELECT_BY_SACH_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
+    private final String SELECT_ALL_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet where HD_Sach = ?";
+    private final String SELECT_BY_SACH_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE HD_Sach = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet(HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?,?,?,?,?)";
     private final String UPDATE_BY_HD_AND_SACH_SQL = "UPDATE hoa_don_nhap_sach_chi_tiet SET GiaSach=?,SoLuong=?,LoaiSach=?  WHERE HD_Sach=? AND Sach=?";
     private final String DELETE_BY_SACH_SQL = "DELETE FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ?";
@@ -116,6 +116,10 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     public List<HoaDonNhapSachChiTiet> selectALL() {
         return this.selectBySql(this.SELECT_ALL_SQL);
     }
+    
+    public List<HoaDonNhapSachChiTiet> selectALLByHoaDon(Long id) {
+        return this.selectBySql(this.SELECT_ALL_SQL, id);
+    }
 
     public HoaDonNhapSachChiTiet selectBySach(Long sach) {
         List<HoaDonNhapSachChiTiet> list = this.selectBySql(this.SELECT_BY_SACH, sach);
@@ -134,7 +138,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
                 HoaDonNhapSachChiTiet hdnsct = new HoaDonNhapSachChiTiet();
                 hdnsct.setHoaDonNhap(rs.getLong("HD_Sach"));
                 hdnsct.setSach(rs.getLong("Sach"));
-                hdnsct.setGia(rs.getFloat("GiaSach"));
+                hdnsct.setGia(rs.getDouble("GiaSach"));
                 hdnsct.setSoLuong(rs.getInt("SoLuong"));
                 hdnsct.setLoaiSach(rs.getBoolean("LoaiSach"));
                 list.add(hdnsct);
