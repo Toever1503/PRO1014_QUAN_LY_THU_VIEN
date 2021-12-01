@@ -10,13 +10,13 @@ package Models;
  */
 public class NhaXuatBan {
 
-    private long id;
+    private Long id;
     private String tenNhaXuatBan;
 
     public NhaXuatBan() {
     }
 
-    public NhaXuatBan(long id, String tenNhaXuatBan) {
+    public NhaXuatBan(Long id, String tenNhaXuatBan) {
         this.id = id;
         this.tenNhaXuatBan = tenNhaXuatBan;
     }
@@ -25,7 +25,7 @@ public class NhaXuatBan {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

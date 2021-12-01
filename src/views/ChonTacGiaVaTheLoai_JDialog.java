@@ -6,15 +6,9 @@ package views;
 
 import Models.TacGia;
 import Models.TheLoai;
-import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
-import views.QLSach_JPanel;
 
 /**
  *
@@ -77,6 +71,7 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
         tblTacGiaVaTheLoai = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,6 +106,9 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
+
+        btnUpdate.setText("Update");
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,6 +187,7 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTacGiaVaTheLoai;
     // End of variables declaration//GEN-END:variables
