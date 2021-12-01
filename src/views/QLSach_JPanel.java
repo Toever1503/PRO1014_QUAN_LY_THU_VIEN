@@ -10,6 +10,7 @@ import DAO.TacGiaDao;
 import DAO.TacGiaVaSachDao;
 import DAO.TheLoaiDao;
 import DAO.TheLoaiVaSachDao;
+import Helper.MsgBox;
 import Models.NhaXuatBan;
 import Models.Sach;
 import Models.TacGia;
@@ -158,6 +159,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         tblTacGia = new javax.swing.JTable();
         btnChonTheLoai = new javax.swing.JButton();
         btnXoaTheLoai = new javax.swing.JButton();
+        btnNhaXuatBan = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -374,7 +376,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             .addComponent(lblQr_Code, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 55, -1, -1));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
         btnAdd.setText("Thêm");
@@ -395,7 +397,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel4.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, 108, -1));
 
         btnDownload.setText("Download");
-        jPanel4.add(btnDownload, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 266, -1, -1));
+        jPanel4.add(btnDownload, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, -1, -1));
 
         lblErrorTenSach.setText(" ");
         jPanel4.add(lblErrorTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 118, 236, -1));
@@ -490,6 +492,14 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         });
         jPanel4.add(btnXoaTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
+
+        btnNhaXuatBan.setText("Update");
+        btnNhaXuatBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhaXuatBanActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
 
         javax.swing.GroupLayout jPanelCapNhatLayout = new javax.swing.GroupLayout(jPanelCapNhat);
         jPanelCapNhat.setLayout(jPanelCapNhatLayout);
@@ -713,6 +723,31 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private void txtTenSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSachActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenSachActionPerformed
+
+    private void btnNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaXuatBanActionPerformed
+        this.updateTacGia();
+    }//GEN-LAST:event_btnNhaXuatBanActionPerformed
+   
+    void updateTacGia() {
+        String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
+        if(tenTg.isEmpty()){
+            MsgBox.alert_WARNING(this, "Không được để trống");
+            return;
+        }
+        if(!this.nhaXuatBanDao.selectByKeyWorld(tenTg).isEmpty()){
+            MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
+            return;
+        }
+        NhaXuatBan nxb = new NhaXuatBan(null, tenTg);
+        int row = this.nhaXuatBanDao.insert(nxb);
+        if(row>0){
+            MsgBox.alert_INFORMATION(this, "Update thành công!");
+            this.fillCmbNhaXuatBan();
+        }else{
+            MsgBox.alert_ERROR(this, "Update thất bại!");
+        }
+    }
+
     public void activeTabCapNhat() {
         jTabbedPane1.add(jPanelCapNhat, "Cập Nhật");
         jTabbedPane1.setSelectedIndex(1);
@@ -730,6 +765,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnNhaXuatBan;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSearch;
@@ -790,6 +826,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
     private void fillCmbNhaXuatBan() {
         boxModelNhaXuatBan.removeAllElements();
+        this.listNhaXuatBan = nhaXuatBanDao.selectALL();
         if (listNhaXuatBan != null) {
             listNhaXuatBan.forEach((nxb) -> boxModelNhaXuatBan.addElement(nxb.getId() + "-" + nxb.getTenNhaXuatBan()));
         }
