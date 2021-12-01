@@ -115,14 +115,14 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         txtMaPhieuMuon = new javax.swing.JTextField();
         jLabelNguoiMuon = new javax.swing.JLabel();
         jLabelNgayMuon = new javax.swing.JLabel();
-        jLabelQR_CODE = new javax.swing.JLabel();
         btnDownLoadQR = new javax.swing.JButton();
         jLabelErrorMaPhieuMuon = new javax.swing.JLabel();
         jLabelErrorNgayMuon = new javax.swing.JLabel();
+        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
         jLabelErrorNguoiMuon = new javax.swing.JLabel();
         jComboBoxNguoiMuon = new javax.swing.JComboBox<>();
         jLabelErrorNgayTra = new javax.swing.JLabel();
-        jDateChooserNgayMuon = new com.toedter.calendar.JDateChooser();
+        jDateChooserNgayMuon1 = new com.toedter.calendar.JDateChooser();
         jDateChooserNgayTra = new com.toedter.calendar.JDateChooser();
         lblQR_CODE = new javax.swing.JLabel();
         jPanelSachMuon = new javax.swing.JPanel();
@@ -321,7 +321,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jLabelNgayMuon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNgayMuon.setText("Ngày mượn:");
         jPanelDetailSach.add(jLabelNgayMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-        jPanelDetailSach.add(jLabelQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         btnDownLoadQR.setText("Print");
         btnDownLoadQR.addActionListener(new java.awt.event.ActionListener() {
@@ -343,9 +342,8 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jComboBoxNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanelDetailSach.add(jComboBoxNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, -1));
         jPanelDetailSach.add(jLabelErrorNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 10));
-
-        jDateChooserNgayTra.setDateFormatString("dd-MM-yyyy");
-        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, 23));
+        jPanelDetailSach.add(jDateChooserNgayMuon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 420, -1));
+        jPanelDetailSach.add(jDateChooserNgayTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 420, -1));
         jPanelDetailSach.add(lblQR_CODE, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 190, 190));
 
         jPanelWrapCapNhat.add(jPanelDetailSach, java.awt.BorderLayout.PAGE_START);
@@ -546,7 +544,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     // create qr_code image and parse qrcode image fit with label qr_code
                     if (Helper.QR_CODE.generateQRcode(qr_codeKey, qr_codePath)) {
                         try {
-                            jLabelQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, Image.SCALE_DEFAULT)));
+                            lblQR_CODE.setIcon(new ImageIcon(new ImageIcon(qr_codePath).getImage().getScaledInstance(190, 190, Image.SCALE_DEFAULT)));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -673,7 +671,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
     private void btnDownLoadQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownLoadQRActionPerformed
         // TODO add your handling code here:
-        if (jLabelQR_CODE.getIcon() == null)
+        if (lblQR_CODE.getIcon() == null)
             System.out.println("null");
     }//GEN-LAST:event_btnDownLoadQRActionPerformed
 
@@ -741,6 +739,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButtonTimKiemPhieuMuon;
     private javax.swing.JComboBox<String> jComboBoxNguoiMuon;
     private com.toedter.calendar.JDateChooser jDateChooserNgayMuon;
+    private com.toedter.calendar.JDateChooser jDateChooserNgayMuon1;
     private com.toedter.calendar.JDateChooser jDateChooserNgayTra;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelErrorAction;
@@ -752,7 +751,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelNgayMuon;
     private javax.swing.JLabel jLabelNgayTra;
     private javax.swing.JLabel jLabelNguoiMuon;
-    private javax.swing.JLabel jLabelQR_CODE;
     private javax.swing.JLabel jLabelSachMuon;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAction;

@@ -13,6 +13,7 @@ import static java.awt.Color.white;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,9 +29,9 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
      * Creates new form QlNguoiDung1
      */
     // vị trí của hoi vien đang đc chọn
-    HoiVienDao dao = new HoiVienDao();
-    int index = -1;
-    List<HoiVien> listHV;
+    private HoiVienDao dao = new HoiVienDao();
+    private int index = 0;
+    private Map<Integer, List<HoiVien>> listHV;
     private DefaultTableModel tableModel;
 
     public QLHoiVien_JPanel() {
@@ -44,7 +45,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     void init() {
         tabs.setSelectedIndex(1);  //chuyển tabsPanel sang tab 2
         //   updateStatus();
-        this.index = -1;
     }
 // private HoiVien read() {
 //        Long maPhieuMuon = txtMaTT.getText().isEmpty() ? null : Long.valueOf(txtMaTT.getText());

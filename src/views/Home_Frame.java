@@ -76,28 +76,28 @@ public class Home_Frame extends javax.swing.JFrame {
                 jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
             }
         }.start();
-
-        new Thread() {
-            @Override
-            public void run() {
-                jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-            }
-        }.start();
-
-        new Thread() {
-            @Override
-            public void run() {
-                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-            }
-        }.start();
-
-        new Thread() {
-            @Override
-            public void run() {
-                jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-            }
-        }.start();
 //
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
 //        new Thread() {
 //            @Override
 //            public void run() {
@@ -600,7 +600,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
-
+        cardLayoutMainRight.show(pnlMainRight, "card6");
     }//GEN-LAST:event_mniQLThuThuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
