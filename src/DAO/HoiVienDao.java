@@ -8,6 +8,8 @@ import Models.HoiVien;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -92,6 +94,17 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
                     entity.getNgayTao(),
                     entity.getNgayHan(),
                     entity.getQr_code());
+            if (row > 0) {
+                if (entity.getId() == null) {
+                    ResultSet rs = Helper.Utility.query("SELECT ID FROM hoi_vien\n"
+                            + "ORDER BY ID DESC\n"
+                            + "LIMIT 0,?", 1);
+                    rs.next();
+                    Long id = rs.getLong("ID");
+                    entity.setId(id);
+                    row = id.intValue();
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(HoiVienDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,6 +166,19 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
             Logger.getLogger(HoiVienDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public int getTotal() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM hoi_vien");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
     }
 
 }

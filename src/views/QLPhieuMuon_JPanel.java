@@ -538,7 +538,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
                     pageIndex = 0;
                     listPhieuMuon.clear();
                     listPhieuMuon.put(0, phieuMuonDao.selectByPage(Long.valueOf(pageIndex)));
-                    
+
                     String qr_codeKey = phieuMuon.getQr_code(); // create key phieuMuon
                     String qr_codePath = Helper.XImage.PHIEUMUON_UPLOAD + "/" + phieuMuon.getQr_code().toString().split("-")[1] + ".png"; //create qr_code path
                     // create qr_code image and parse qrcode image fit with label qr_code
@@ -580,7 +580,11 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
         pageIndex = totalPage;
-        fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
+        List<PhieuMuon> listPM = listPhieuMuon.get(pageIndex);
+        if (listPM == null) {
+            listPM = phieuMuonDao.selectByPage(Long.valueOf(pageIndex));
+        }
+        fillTablePhieuMuon(listPM);
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -600,7 +604,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-
         if (pageIndex - 1 < 0) {
             JOptionPane.showMessageDialog(this, "Hiện đã là trang đầu tiên!");
             return;
@@ -608,7 +611,6 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             pageIndex--;
             fillTablePhieuMuon(listPhieuMuon.get(pageIndex));
         }
-
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed

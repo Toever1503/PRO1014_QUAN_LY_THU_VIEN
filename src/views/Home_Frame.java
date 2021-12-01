@@ -70,12 +70,12 @@ public class Home_Frame extends javax.swing.JFrame {
 
     public void initPnlQuanLy() {
 
-        new Thread() {
-            @Override
-            public void run() {
-                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
 //
 //        new Thread() {
 //            @Override
