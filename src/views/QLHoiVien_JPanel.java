@@ -55,12 +55,13 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                     hv.getId(),
                     hv.getFullName(),
                     hv.getNgaySinh(),
-                     hv.getSoDienThoai(),
+                    hv.getSoDienThoai(),
                     hv.getEmail(),
                     hv.getDiaChi(), //hv.isTrangThai() ? "Mở" : "Khóa"
                 };
                 model.addRow(row);
             }
+        } catch (Exception e) {
         }
     }
 
@@ -72,7 +73,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        buttonGroup1 = new javax.swing.ButtonGroup();
+
         tabs = new javax.swing.JTabbedPane();
         tabDanhSach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -111,6 +112,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         lblError = new javax.swing.JLabel();
         jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
         jDateChooserNgayHan = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        rdoHoatDong = new javax.swing.JRadioButton();
+        rdoKhoa = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -177,7 +182,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(702, Short.MAX_VALUE)
+                .addContainerGap(946, Short.MAX_VALUE)
                 .addComponent(btnFirst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
@@ -211,12 +216,15 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             }
         });
 
+        txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         btnThemMoi.setText("Thêm Mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
             }
         });
+
         btnChiTiet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnChiTiet.setText("Chi Tiết");
         btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +251,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 .addComponent(btnChiTiet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReload)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 462, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTim)
@@ -271,50 +279,50 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Mã hội viên :");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 68, 25));
+        jPanel3.add(jLabel1);
 
         txtMaTT.setEnabled(false);
-        jPanel3.add(txtMaTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 244, 25));
+        jPanel3.add(txtMaTT);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("CCCD :");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 68, 25));
+        jPanel3.add(jLabel2);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Ngày hạn :");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 68, 25));
+        jPanel3.add(jLabel3);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Họ tên :");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 68, 25));
+        jPanel3.add(jLabel4);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("Ngày sinh :");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 68, 25));
+        jPanel3.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Số điện thoại :");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 100, 25));
+        jPanel3.add(jLabel6);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("Email :");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 77, 25));
-        jPanel3.add(txtCCCD, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 244, 25));
-        jPanel3.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 244, 25));
-        jPanel3.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 244, 25));
-        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 244, 25));
+        jPanel3.add(jLabel7);
+        jPanel3.add(txtCCCD);
+        jPanel3.add(txtHoTen);
+        jPanel3.add(txtSoDienThoai);
+        jPanel3.add(txtEmail);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Địa chỉ :");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 77, 25));
-        jPanel3.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 244, 25));
+        jPanel3.add(jLabel8);
+        jPanel3.add(txtDiaChi);
 
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
         btnClear.setText("Làm Mới");
@@ -323,7 +331,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 btnClearActionPerformed(evt);
             }
         });
-        jPanel3.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 110, -1));
+        jPanel3.add(btnClear);
 
         btnBack.setText("Quay Lại");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -331,7 +339,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel3.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 80, 30));
+        jPanel3.add(btnBack);
 
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
         btnInsert.setText("Thêm");
@@ -340,14 +348,52 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 btnInsertActionPerformed(evt);
             }
         });
-        jPanel3.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
-        jPanel3.add(lblQR_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 170, 160));
+        jPanel3.add(btnInsert);
+        jPanel3.add(lblQR_code);
 
         lblError.setText(" ");
-        jPanel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 300, -1));
-        jPanel3.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 150, -1));
-        jPanel3.add(jDateChooserNgayHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, -1));
+        jPanel3.add(lblError);
+        jPanel3.add(jDateChooserNgaySinh);
+        jPanel3.add(jDateChooserNgayHan);
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Trang thai:");
+
+        rdoHoatDong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rdoHoatDong.setText("Hoat dong");
+
+        rdoKhoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rdoKhoa.setText("Khoa");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(rdoHoatDong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdoHoatDong)
+                    .addComponent(rdoKhoa))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel2);
 
         jPanelCapNhat.add(jPanel3, java.awt.BorderLayout.CENTER);
 
@@ -507,7 +553,6 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
     }
 
-
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -654,82 +699,5 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
-    void setForm(HoiVien model) {
-        txtMaTT.setText(model.getId().toString());
-        txtHoTen.setText(model.getFullName());
-        txtCCCD.setText(model.getCccd());
-        txtDiaChi.setText(model.getDiaChi());
-        txtSoDienThoai.setText(model.getSoDienThoai());
-        txtEmail.setText(model.getEmail());
-        jDateChooserNgaySinh.setDate(model.getNgaySinh());
-        jDateChooserNgayHan.setDate(model.getNgayHan());
-        if (model.getQr_code() != null) {
-            try {
-                lblQR_code.setIcon(new ImageIcon(new ImageIcon(Helper.XImage.USER_UPLOAD.concat("/" + model.getQr_code().split("-")[1]))
-                        .getImage()
-                        .getScaledInstance(170, 160, Image.SCALE_DEFAULT)));
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    HoiVien getForm() {
-        Long maHv = txtMaTT.getText().isEmpty() ? null : Long.valueOf(txtMaTT.getText());
-        Date ngaySinh = jDateChooserNgaySinh.getDate();
-        Date ngayHan = jDateChooserNgayHan.getDate();
-
-        String cccd = txtCCCD.getText();
-        String name = txtHoTen.getText();
-        String address = txtDiaChi.getText();
-        String email = txtEmail.getText();
-        String phone = txtSoDienThoai.getText();
-        HoiVien model = null;
-
-        if (cccd.isEmpty()) {
-            lblError.setText("CCCD không được để trống");
-        } else if (name.isEmpty()) {
-            lblError.setText("Họ Tên không được để trống");
-        } else if (ngaySinh == null) {
-            lblError.setText("Ngày sinh không hợp lệ( địng dạng dd-mm-yyyy)");
-        } else if (phone.isEmpty()) {
-            lblError.setText("Số điện thoại không được để trống");
-        } else if (email.isEmpty()) {
-            lblError.setText("Email không được để trống");
-        } else if (address.isEmpty()) {
-            lblError.setText("Địa chỉ không được để trống");
-        } else if (ngayHan == null) {
-            lblError.setText("Ngày  hạn không hợp lệ( địng dạng dd-mm-yyyy)");
-        } else {
-            model = new HoiVien();
-            model.setId(maHv);
-            model.setNguoiTao(Helper.Auth.user.getMaQL());
-            model.setCccd(cccd);
-            model.setFullName(name);
-            model.setDiaChi(address);
-            model.setNgaySinh(new java.sql.Date(ngaySinh.getTime()));
-            model.setSoDienThoai(phone);
-            model.setEmail(email);
-            Long timeNow = Calendar.getInstance().getTimeInMillis();
-            model.setNgayTao(new java.sql.Date(timeNow));
-            model.setNgayHan(new java.sql.Date(ngayHan.getTime()));
-            if (maHv == null) {
-                model.setQr_code("hoivien-" + timeNow);
-            } else {
-                model.setQr_code(listHV.get(index).get(tblQuanLyNguoiDung.getSelectedRow()).getQr_code());
-            }
-        }
-        return model;
-    }
-
-//    void edit() {
-//        //   HoiVien model = getForm();
-//        String mahv = (String) tblQuanLyNguoiDung.getValueAt(this.index, 0);  //lấy maHV từ bảng theo index
-//        // HoiVien model = dao.selectByID(mahv); //dùng maNV tìm ra đối tượng nhanVien
-//
-//        // this.setForm(model);   //điền thông tin đt nhanVien lên form
-//        tabs.setSelectedIndex(0);
-//        this.updateStatus();  //chuyển sang editable
-//
-//    }
-
+   
 }
