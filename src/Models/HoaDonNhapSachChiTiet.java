@@ -12,14 +12,14 @@ public class HoaDonNhapSachChiTiet {
 
     private Long hoaDonNhap;
     private Long sach;
-    private Float gia;
+    private Double gia;
     private int soLuong;
     private Boolean loaiSach;
 
     public HoaDonNhapSachChiTiet() {
     }
 
-    public HoaDonNhapSachChiTiet(Long hoaDonNhap, Long sach, Float gia, int soLuong, Boolean loaiSach) {
+    public HoaDonNhapSachChiTiet(Long hoaDonNhap, Long sach, Double gia, int soLuong, Boolean loaiSach) {
         this.hoaDonNhap = hoaDonNhap;
         this.sach = sach;
         this.gia = gia;
@@ -43,11 +43,11 @@ public class HoaDonNhapSachChiTiet {
         this.sach = sach;
     }
 
-    public Float getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(Float gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 

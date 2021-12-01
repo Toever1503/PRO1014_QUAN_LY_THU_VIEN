@@ -22,7 +22,9 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
+    private final String UPDATE_GIA_SQL = "UPDATE sach SET giaSach=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
+
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO `sach` (`ID`, `MaQL`, `TenSach`, `ViTri`, `NgayTao`, `NhaXuatBan`, `TrangThai`, `QR_FILE`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
@@ -161,6 +163,15 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
             Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public void updateGia(Long id, Double gia) {
+        try {
+            Helper.Utility.update(this.UPDATE_GIA_SQL,
+                    gia, id);
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Sach> searchByKey(String input) {

@@ -5,6 +5,7 @@
 package DAO;
 
 import Models.HoaDonNhapSach;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,6 +83,24 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
                     entity.getTongTien(),
                     entity.getNgayTao(),
                     entity.getQr_code());
+
+            if (row > 0) {
+                if (entity.getId() == null) {
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            HoaDonNhapSachChiTietDao.getInstance().delete(entity.getId());
+                        }
+                    }.start();
+                    ResultSet rs = Helper.Utility.query("SELECT ID FROM hoa_don_nhap_sach\n"
+                            + "ORDER BY ID DESC\n"
+                            + "LIMIT 0,?", 1);
+                    rs.next();
+                    Long id = rs.getLong("ID");
+                    entity.setId(id);
+                    row = id.intValue();
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -127,7 +146,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
                 HoaDonNhapSach hdns = new HoaDonNhapSach();
                 hdns.setId(rs.getLong("ID"));
                 hdns.setNguoiXuLy(rs.getNString("MaQL"));
-                hdns.setTongTien(rs.getFloat("TongTien"));
+                hdns.setTongTien(rs.getDouble("TongTien"));
                 hdns.setNgayTao(rs.getDate("NgayThem"));
                 hdns.setQr_code(rs.getString("QR_FILE"));
                 list.add(hdns);
@@ -137,6 +156,19 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
             Logger.getLogger(HoaDonNhapSachDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public int getTotal() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM hoa_don_nhap_sach");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
     }
 
 //    public static void main(String[] args) {
