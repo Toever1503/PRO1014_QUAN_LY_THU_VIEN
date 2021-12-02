@@ -12,6 +12,7 @@ import DAO.PhieuMuonChiTietDao;
 import DAO.QuanLyDao;
 import DAO.TacGiaDao;
 import DAO.TheLoaiDao;
+import Helper.QR_SCANNER;
 import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
@@ -44,6 +45,7 @@ public class Home_Frame extends javax.swing.JFrame {
         if (instance == null) {
             instance = new Home_Frame();
         }
+
         return instance;
     }
 
@@ -54,6 +56,7 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
+        
     }
 
     public void initPnlQuanLy() {
@@ -71,25 +74,23 @@ public class Home_Frame extends javax.swing.JFrame {
 //            }
 //        }.start();
 //         
-//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
          jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//         
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(2000);
-//
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
 
-//        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
 
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -189,12 +190,6 @@ public class Home_Frame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLSachMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnQLSachMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnQLSachMouseExited(evt);
-            }
         });
         pnl1.add(btnQLSach, java.awt.BorderLayout.CENTER);
 
@@ -211,12 +206,6 @@ public class Home_Frame extends javax.swing.JFrame {
         btnQLPhieuMuon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLPhieuMuonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnQLPhieuMuonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnQLPhieuMuonMouseExited(evt);
             }
         });
         pnl2.add(btnQLPhieuMuon, java.awt.BorderLayout.CENTER);
@@ -235,12 +224,6 @@ public class Home_Frame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLHoiVienMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnQLHoiVienMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnQLHoiVienMouseExited(evt);
-            }
         });
         pnl3.add(btnQLHoiVien, java.awt.BorderLayout.CENTER);
 
@@ -257,12 +240,6 @@ public class Home_Frame extends javax.swing.JFrame {
         btnHoaDonDenBu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHoaDonDenBuMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnHoaDonDenBuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnHoaDonDenBuMouseExited(evt);
             }
         });
         pnl4.add(btnHoaDonDenBu, java.awt.BorderLayout.CENTER);
@@ -299,11 +276,6 @@ public class Home_Frame extends javax.swing.JFrame {
         btnScanQR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnScanQR.setForeground(new java.awt.Color(255, 255, 255));
         btnScanQR.setText("Scan QR");
-        btnScanQR.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnScanQRMouseClicked(evt);
-            }
-        });
         btnScanQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnScanQRActionPerformed(evt);
@@ -336,6 +308,11 @@ public class Home_Frame extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(51, 153, 255));
         jLabel2.setText("Quản Lý Nhập Sách");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel_QL_NHAPSACH.add(jLabel2, java.awt.BorderLayout.CENTER);
 
         pnlWest.add(jPanel_QL_NHAPSACH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 250, 40));
@@ -513,50 +490,10 @@ public class Home_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnQLSachMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseEntered
-        this.pnl1.setBackground(new java.awt.Color(105, 184, 218));
-        this.btnQLSach.setForeground(new java.awt.Color(0, 0, 153));
-    }//GEN-LAST:event_btnQLSachMouseEntered
-
-    private void btnQLPhieuMuonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseEntered
-        this.pnl2.setBackground(new java.awt.Color(105, 184, 218));
-        this.btnQLPhieuMuon.setForeground(new java.awt.Color(0, 0, 153));
-    }//GEN-LAST:event_btnQLPhieuMuonMouseEntered
-
-    private void btnQLHoiVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseEntered
-        this.pnl3.setBackground(new java.awt.Color(105, 184, 218));
-        this.btnQLHoiVien.setForeground(new java.awt.Color(0, 0, 153));
-    }//GEN-LAST:event_btnQLHoiVienMouseEntered
-
-    private void btnHoaDonDenBuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseEntered
-        this.pnl4.setBackground(new java.awt.Color(105, 184, 218));
-        this.btnHoaDonDenBu.setForeground(new java.awt.Color(0, 0, 153));
-    }//GEN-LAST:event_btnHoaDonDenBuMouseEntered
-
     private void btnThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseEntered
         this.pnl5.setBackground(new java.awt.Color(105, 184, 218));
         this.btnThongKe.setForeground(new java.awt.Color(0, 0, 153));
     }//GEN-LAST:event_btnThongKeMouseEntered
-
-    private void btnQLSachMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseExited
-        this.pnl1.setBackground(new java.awt.Color(6, 143, 202));
-        this.btnQLSach.setForeground(new java.awt.Color(255, 255, 255));
-    }//GEN-LAST:event_btnQLSachMouseExited
-
-    private void btnQLPhieuMuonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseExited
-        this.pnl2.setBackground(new java.awt.Color(6, 143, 202));
-        this.btnQLPhieuMuon.setForeground(new java.awt.Color(255, 255, 255));
-    }//GEN-LAST:event_btnQLPhieuMuonMouseExited
-
-    private void btnQLHoiVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseExited
-        this.pnl3.setBackground(new java.awt.Color(6, 143, 202));
-        this.btnQLHoiVien.setForeground(new java.awt.Color(255, 255, 255));
-    }//GEN-LAST:event_btnQLHoiVienMouseExited
-
-    private void btnHoaDonDenBuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseExited
-        this.pnl4.setBackground(new java.awt.Color(6, 143, 202));
-        this.btnHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
-    }//GEN-LAST:event_btnHoaDonDenBuMouseExited
 
     private void btnThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseExited
         this.pnl5.setBackground(new java.awt.Color(6, 143, 202));
@@ -564,24 +501,23 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeMouseExited
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
-
         cardLayoutMainRight.show(pnlMainRight, "card9");
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseClicked
-        cardLayoutMainRight.show(pnlMainRight, "card3");
+        activePanel("QLSACH");
     }//GEN-LAST:event_btnQLSachMouseClicked
 
     private void btnQLPhieuMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseClicked
-        cardLayoutMainRight.show(pnlMainRight, "card4");
+        activePanel("QLPHIEUMUON");
     }//GEN-LAST:event_btnQLPhieuMuonMouseClicked
 
     private void btnQLHoiVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseClicked
-        cardLayoutMainRight.show(pnlMainRight, "card5");
+        activePanel("QLHOIVIEN");
     }//GEN-LAST:event_btnQLHoiVienMouseClicked
 
     private void btnHoaDonDenBuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseClicked
-        cardLayoutMainRight.show(pnlMainRight, "card7");
+        activePanel("QLHOADONDENBU");
     }//GEN-LAST:event_btnHoaDonDenBuMouseClicked
 
     private void btnThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseClicked
@@ -589,12 +525,8 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeMouseClicked
 
     private void btnScanQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScanQRActionPerformed
-
+        new QR_SCANNER("HOME");
     }//GEN-LAST:event_btnScanQRActionPerformed
-
-    private void btnScanQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScanQRMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnScanQRMouseClicked
 
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
@@ -614,8 +546,36 @@ public class Home_Frame extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        cardLayoutMainRight.show(pnlMainRight, "card9");
+        activePanel("QLNHAPSACH");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        activePanel("QLNHAPSACH");
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    public void activePanel(String panel) {
+        switch (panel) {
+            case "QLSACH":
+                cardLayoutMainRight.show(pnlMainRight, "card3");
+                break;
+            case "QLNHAPSACH":
+                cardLayoutMainRight.show(pnlMainRight, "card9");
+                break;
+            case "QLPHIEUMUON":
+                cardLayoutMainRight.show(pnlMainRight, "card4");
+                break;
+            case "QLHOADONDENBU":
+                cardLayoutMainRight.show(pnlMainRight, "card7");
+                break;
+            case "QLHOIVIEN":
+                cardLayoutMainRight.show(pnlMainRight, "card5");
+                break;
+            default:
+                cardLayoutMainRight.show(pnlMainRight, "card9");
+                break;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -652,11 +612,13 @@ public class Home_Frame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home_Frame().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Home_Frame().setVisible(true);
+//            }
+//        });
+
+        Home_Frame.getInstance().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

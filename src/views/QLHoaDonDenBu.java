@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -205,7 +207,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         );
         pnlTrangLayout.setVerticalGroup(
             pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTrangLayout.createSequentialGroup()
+            .addGroup(pnlTrangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFirst)
@@ -771,6 +773,16 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 }
             }.start();
         });
+    }
+
+    public void showHoaDon(String data) {
+        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.findByQR("sach-".concat(data));
+        if (hoaDonDenBu != null) {
+            btnSave.setText("Lưu");
+            setForm(hoaDonDenBu);
+            activeTabCapNhat();
+            Home_Frame.getInstance().activePanel("QLHOADONDENBU");
+        }
     }
 
 }

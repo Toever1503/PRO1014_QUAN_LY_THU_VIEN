@@ -24,6 +24,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -204,7 +206,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         );
         pnlTrangLayout.setVerticalGroup(
             pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTrangLayout.createSequentialGroup()
+            .addGroup(pnlTrangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFirst)
@@ -660,7 +662,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         hoaDonNhapSach.setNgayTao(new Date(timeNow));
         hoaDonNhapSach.setTongTien(tongTien);
         if (maHoaDonDenBu == null) {
-            hoaDonNhapSach.setQr_code("hoadon-" + timeNow.toString());
+            hoaDonNhapSach.setQr_code("nhapsach-" + timeNow.toString());
         } else {
             hoaDonNhapSach.setQr_code(listHoaDonNhapSach.get(pageIndex).get(tblHoaDonDenBu.getSelectedRow()).getQr_code());
         }
@@ -697,7 +699,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         if (hoaDonNhapSach.getQr_code() != null) {
             try {
                 lblQR_CODE.setIcon(new ImageIcon(
-                        new ImageIcon(Helper.XImage.HOADON_UPLOAD.concat("/" + hoaDonNhapSach.getQr_code().split("-")[1] + ".png"))
+                        new ImageIcon(Helper.XImage.NHAPSACH_UPLOAD.concat("/" + hoaDonNhapSach.getQr_code().split("-")[1] + ".png"))
                                 .getImage()
                                 .getScaledInstance(195, 210,
                                         Image.SCALE_DEFAULT)));
@@ -758,6 +760,16 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
                 }
             }.start();
         });
+    }
+
+    public void showNhapSach(String data) {
+        HoaDonNhapSach hoaDonNhapSach = hoaDonNhapSachDao.findByQR("nhapsach-".concat(data));
+        if (hoaDonNhapSach != null) {
+            btnSave.setText("Lưu");
+            setForm(hoaDonNhapSach);
+            activeTabCapNhat();
+            Home_Frame.getInstance().activePanel("QLNHAPSACH");
+        }
     }
 
 }

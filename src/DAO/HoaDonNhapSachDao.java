@@ -18,6 +18,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach";
     private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach WHERE ID = ?";
+    private final String SELECT_BY_QR_SQL = "SELECT ID, MaQL, TongTien, NgayThem, QR_FILE FROM hoa_don_nhap_sach WHERE QR_FILE = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_nhap_sach(ID, MaQL, TongTien, NgayThem, QR_FILE) VALUES (?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE hoa_don_nhap_sach SET MaQL=?,TongTien=?,NgayThem=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM hoa_don_nhap_sach WHERE ID = ?";
@@ -169,6 +170,14 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
+    }
+
+    public HoaDonNhapSach findByQR(String qr) {
+        List<HoaDonNhapSach> list = this.selectBySql(this.SELECT_BY_QR_SQL, qr);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
 //    public static void main(String[] args) {

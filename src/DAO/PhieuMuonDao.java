@@ -20,6 +20,7 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE From phieu_muon";
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
+    private final String SELECT_BY_QR_SQL = SELECT_ALL_SQL + " WHERE QR_FILE = ?";
     private final String INSERT_SQL = "INSERT INTO phieu_muon(ID, HoiVien, MaQL, NgayMuon, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE phieu_muon SET HoiVien=?,MaQL=?,NgayMuon=?,NgayHan=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM phieu_muon WHERE ID =?";
@@ -195,4 +196,11 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
         return total;
     }
 
+    public PhieuMuon findByQR(String qr) {
+        List<PhieuMuon> list = this.selectBySql(this.SELECT_BY_QR_SQL, qr);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

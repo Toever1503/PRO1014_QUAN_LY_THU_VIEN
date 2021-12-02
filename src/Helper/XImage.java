@@ -16,6 +16,7 @@ public class XImage {
     public static final String SACH_UPLOAD = "upload/sach";
     public static final String PHIEUMUON_UPLOAD = "upload/phieumuon";
     public static final String HOADON_UPLOAD = "upload/hoadon";
+    public static final String NHAPSACH_UPLOAD = "upload/nhapsach";
 
     public static void init() {
         File userUpload = new File(USER_UPLOAD);

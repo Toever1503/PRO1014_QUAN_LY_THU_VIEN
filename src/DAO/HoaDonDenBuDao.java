@@ -20,6 +20,7 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach";
     private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach WHERE ID = ?";
+    private final String SELECT_BY_QR_SQL = "SELECT ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE FROM hoa_don_den_bu_sach WHERE QR_FILE = ?";
     private final String INSERT_SQL = "INSERT INTO hoa_don_den_bu_sach(ID, HoiVien, MaQL, TongTien, NgayTao, QR_FILE) VALUES (?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE hoa_don_den_bu_sach SET HoiVien=?,MaQL=?,TongTien=?,NgayTao=?,QR_FILE=? WHERE ID= ?";
     private final String DELETE_SQL = "DELETE FROM hoa_don_den_bu_sach WHERE ID = ?";
@@ -176,5 +177,13 @@ public class HoaDonDenBuDao extends LibrarianDAO<HoaDonDenBu, Long> {
             Logger.getLogger(HoaDonDenBuDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public HoaDonDenBu findByQR(String qr) {
+        List<HoaDonDenBu> list = this.selectBySql(this.SELECT_BY_QR_SQL, qr);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

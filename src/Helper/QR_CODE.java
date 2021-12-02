@@ -54,7 +54,8 @@ public class QR_CODE {
         return false;
     }
     public static void main(String[] args) {
-        QR_CODE.generateQRcode("14afa", "14.png");
+        String[] a = {};
+        System.out.println(a.length);
     }
 
 }
