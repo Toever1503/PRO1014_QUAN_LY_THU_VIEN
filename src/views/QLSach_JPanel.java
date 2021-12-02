@@ -729,16 +729,16 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNhaXuatBanActionPerformed
    
     void updateTacGia() {
-        String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
-        if(tenTg.isEmpty()){
+        String tenNxXB = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
+        if(tenNxXB.isEmpty()){
             MsgBox.alert_WARNING(this, "Không được để trống");
             return;
         }
-        if(!this.nhaXuatBanDao.selectByKeyWorld(tenTg).isEmpty()){
+        if(!this.nhaXuatBanDao.selectByKeyWorld(tenNxXB).isEmpty()){
             MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
             return;
         }
-        NhaXuatBan nxb = new NhaXuatBan(null, tenTg);
+        NhaXuatBan nxb = new NhaXuatBan(null, tenNxXB);
         int row = this.nhaXuatBanDao.insert(nxb);
         if(row>0){
             MsgBox.alert_INFORMATION(this, "Update thành công!");

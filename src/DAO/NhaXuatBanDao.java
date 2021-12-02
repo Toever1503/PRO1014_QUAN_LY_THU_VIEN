@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, TenNhaXuatBan FROM nha_xuat_ban";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, TenNhaXuatBan FROM nha_xuat_ban WHERE ID = ?";
+    private final String SELECT_BY_ID_SQL = this.SELECT_ALL_SQL + " WHERE ID = ?";
     private final String INSERT_SQL = "INSERT INTO nha_xuat_ban(TenNhaXuatBan) VALUES (?)";
     private final String UPDATE_SQL = "UPDATE nha_xuat_ban SET TenNhaXuatBan= ? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM nha_xuat_ban WHERE ID = ?";
@@ -40,9 +40,7 @@ public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, Long> {
     public int insert(NhaXuatBan entity) {
         int row = 0;
         try {
-            row = Helper.Utility.update(this.INSERT_SQL,
-//                    entity.getId(),
-                    entity.getTenNhaXuatBan());
+            row = Helper.Utility.update(this.INSERT_SQL, entity.getTenNhaXuatBan());
         } catch (Exception ex) {
             Logger.getLogger(NhaXuatBanDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,10 +103,10 @@ public class NhaXuatBanDao extends LibrarianDAO<NhaXuatBan, Long> {
         return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
-    public List<NhaXuatBan> selectByKeyWorld(String keyWorld){
+    public List<NhaXuatBan> selectByKeyWorld(String keyWorld) {
         return this.selectBySql(this.SELECT_BY_KEY_SQL, keyWorld);
     }
-    
+
     @Override
     protected List<NhaXuatBan> selectBySql(String sql, Object... args) {
         List<NhaXuatBan> list = new java.util.ArrayList<>();
