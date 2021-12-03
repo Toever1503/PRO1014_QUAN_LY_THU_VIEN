@@ -410,20 +410,20 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 }
             } else { //for nhap sach
                 HoaDonNhapSachChiTiet hdct = getFormHdct();
-                System.out.println("nhapSach->"+hdct);
+                System.out.println("nhapSach->" + hdct);
                 if (hdct != null) {
                     if (hdct.getLoaiSach()) {
                         if (hdct.getGia() < sach.getGia()) {
                             JOptionPane.showMessageDialog(this, "Giá sách mới phải lớn hơn hoặc bằng giá ban đầu!");
-                        }else {
-                            hdct.setSach(sach.getId());
-                            if (QLHoaDonNhapSach.getInstance().addSach(hdct, sach.getTenSach())) {
-                                JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                            } else {
-                                JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
-                            }
                         }
-                    } 
+                    } else {
+                        hdct.setSach(sach.getId());
+                        if (QLHoaDonNhapSach.getInstance().addSach(hdct, sach.getTenSach())) {
+                            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
+                        }
+                    }
                 }
             }
         }

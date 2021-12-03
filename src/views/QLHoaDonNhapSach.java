@@ -552,6 +552,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn 1 hóa đơn cần xem!");
         } else {
+            listHoaDonNhapSachChiTiet.clear();
             setForm(listHoaDonNhapSach.get(pageIndex).get(row));
             activeTabCapNhat();
         }

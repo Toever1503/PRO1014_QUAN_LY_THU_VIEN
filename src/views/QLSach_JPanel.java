@@ -130,6 +130,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         btnAddNew = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         cmbTheLoaiFilter = new javax.swing.JComboBox<>();
+        btnNhapSach = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnLast = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
@@ -238,6 +239,13 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         });
 
+        btnNhapSach.setText("Nhập Sách");
+        btnNhapSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhapSachActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -248,8 +256,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addComponent(btnDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(cmbTheLoaiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
@@ -265,7 +275,8 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                         .addComponent(btnAddNew)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDetails)
-                            .addComponent(cmbTheLoaiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbTheLoaiFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNhapSach)))
                     .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -314,7 +325,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLamMoi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 648, Short.MAX_VALUE)
                 .addComponent(btnFirst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
@@ -495,7 +506,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         });
         jPanel4.add(btnXoaTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
 
-        btnNhaXuatBan.setText("Update");
+        btnNhaXuatBan.setText("Thêm mới");
         btnNhaXuatBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhaXuatBanActionPerformed(evt);
@@ -507,7 +518,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanelCapNhat.setLayout(jPanelCapNhatLayout);
         jPanelCapNhatLayout.setHorizontalGroup(
             jPanelCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
         );
         jPanelCapNhatLayout.setVerticalGroup(
             jPanelCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -730,6 +741,11 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         this.updateTacGia();
     }//GEN-LAST:event_btnNhaXuatBanActionPerformed
 
+    private void btnNhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapSachActionPerformed
+        // TODO add your handling code here:
+        Home_Frame.getInstance().activePanel("QLNHAPSACH");
+    }//GEN-LAST:event_btnNhapSachActionPerformed
+
     void updateTacGia() {
         String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
         if (tenTg.isEmpty()) {
@@ -740,10 +756,11 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
             return;
         }
-        NhaXuatBan nxb = new NhaXuatBan(null, tenNxXB);
+        
+        NhaXuatBan nxb = new NhaXuatBan(null, tenTg);
         int row = this.nhaXuatBanDao.insert(nxb);
         if (row > 0) {
-            MsgBox.alert_INFORMATION(this, "Update thành công!");
+            MsgBox.alert_INFORMATION(this, "Thêm thành công!");
             this.fillCmbNhaXuatBan();
         } else {
             MsgBox.alert_ERROR(this, "Update thất bại!");
@@ -768,6 +785,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNhaXuatBan;
+    private javax.swing.JButton btnNhapSach;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSearch;

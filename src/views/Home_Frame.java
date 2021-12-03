@@ -17,6 +17,8 @@ import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,7 +83,6 @@ public class Home_Frame extends javax.swing.JFrame {
             public void run() {
                 try {
                     Thread.sleep(2000);
-
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -129,8 +130,6 @@ public class Home_Frame extends javax.swing.JFrame {
         btnScanQR = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
-        jPanel_QL_NHAPSACH = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
@@ -191,7 +190,7 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl1.add(btnQLSach, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 185, 250, 40));
+        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 225, 250, 40));
 
         pnl2.setBackground(new java.awt.Color(6, 143, 202));
         pnl2.setLayout(new java.awt.BorderLayout());
@@ -300,20 +299,6 @@ public class Home_Frame extends javax.swing.JFrame {
         jSeparator5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jSeparator5.setPreferredSize(new java.awt.Dimension(40, 2));
         pnlWest.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 120, 200, -1));
-
-        jPanel_QL_NHAPSACH.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel_QL_NHAPSACH.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setBackground(new java.awt.Color(51, 153, 255));
-        jLabel2.setText("Quản Lý Nhập Sách");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        jPanel_QL_NHAPSACH.add(jLabel2, java.awt.BorderLayout.CENTER);
-
-        pnlWest.add(jPanel_QL_NHAPSACH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 250, 40));
 
         pnlMain.add(pnlWest, java.awt.BorderLayout.WEST);
 
@@ -547,11 +532,6 @@ public class Home_Frame extends javax.swing.JFrame {
         activePanel("QLNHAPSACH");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-        activePanel("QLNHAPSACH");
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     public void activePanel(String panel) {
         switch (panel) {
             case "QLSACH":
@@ -628,11 +608,9 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btnScanQR;
     private javax.swing.JLabel btnThongKe;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel_QL_NHAPSACH;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
