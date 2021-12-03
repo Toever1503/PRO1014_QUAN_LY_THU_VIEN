@@ -22,6 +22,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -727,23 +729,23 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private void btnNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaXuatBanActionPerformed
         this.updateTacGia();
     }//GEN-LAST:event_btnNhaXuatBanActionPerformed
-   
+
     void updateTacGia() {
-        String tenNxXB = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
-        if(tenNxXB.isEmpty()){
+        String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
+        if (tenTg.isEmpty()) {
             MsgBox.alert_WARNING(this, "Không được để trống");
             return;
         }
-        if(!this.nhaXuatBanDao.selectByKeyWorld(tenNxXB).isEmpty()){
+        if (!this.nhaXuatBanDao.selectByKeyWorld(tenTg).isEmpty()) {
             MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
             return;
         }
         NhaXuatBan nxb = new NhaXuatBan(null, tenNxXB);
         int row = this.nhaXuatBanDao.insert(nxb);
-        if(row>0){
+        if (row > 0) {
             MsgBox.alert_INFORMATION(this, "Update thành công!");
             this.fillCmbNhaXuatBan();
-        }else{
+        } else {
             MsgBox.alert_ERROR(this, "Update thất bại!");
         }
     }
@@ -986,5 +988,15 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         }
         return sach;
+    }
+
+    public void showSach(String data) {
+        Sach sach = sachDAO.findByQR("sach-".concat(data));
+        if (sach != null) {
+            btnAdd.setText("Lưu");
+            setForm(sach);
+            activeTabCapNhat();
+            Home_Frame.getInstance().activePanel("QLSACH");
+        }
     }
 }

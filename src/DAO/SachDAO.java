@@ -20,6 +20,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
 
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach FROM sach";
     private final String SELECT_BY_ID_SQL = SELECT_ALL_SQL + " WHERE ID = ?";
+    private final String SELECT_BY_QR_SQL = SELECT_ALL_SQL + " WHERE QR_FILE = ?";
     private final String INSERT_SQL = "INSERT INTO sach(ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, giaSach) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
     private final String UPDATE_GIA_SQL = "UPDATE sach SET giaSach=? WHERE ID=?";
@@ -196,9 +197,18 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
         return total;
     }
 
+    public Sach findByQR(String qr) {
+        List<Sach> list = this.selectBySql(this.SELECT_BY_QR_SQL, qr);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
     public static void main(String[] args) {
         SachDAO sachDAO = SachDAO.getInstance();
 
         System.out.println(sachDAO.selectByPage(Long.valueOf(0)).size());
     }
+    
 }

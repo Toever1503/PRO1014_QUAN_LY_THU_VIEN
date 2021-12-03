@@ -20,6 +20,7 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
     private static HoiVienDao insttanceDao;
     private final String SELECT_ALL_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien";
     private final String SELECT_BY_ID_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien WHERE ID = ?";
+    private final String SELECT_BY_QR_SQL = "SELECT ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE FROM hoi_vien WHERE QR_FILE = ?";
     private final String INSERT_SQL = "INSERT INTO hoi_vien(ID, MaQL, CCCD, HoTen, DiaChi, NgaySinh, SoDienThoai, Email, NgayTao, NgayHan, QR_FILE) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private final String UPDATE_SQL = "UPDATE hoi_vien SET MaQL=?,CCCD=?,HoTen=?,DiaChi=?,NgaySinh=?,SoDienThoai=?,Email=?,NgayTao=?,NgayHan=?,QR_FILE=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM hoi_vien WHERE ID = ?";
@@ -180,5 +181,13 @@ public class HoiVienDao extends LibrarianDAO<HoiVien, Long> {
             Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
+    }
+
+    public HoiVien findByQR(String qr) {
+        List<HoiVien> list = this.selectBySql(this.SELECT_BY_QR_SQL, qr);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

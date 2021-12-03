@@ -8,7 +8,7 @@ import DAO.HoiVienDao;
 import DAO.PhieuMuonChiTietDao;
 import DAO.PhieuMuonDao;
 import DAO.SachDAO;
-import Helper.QrCapture;
+import Helper.QR_SCANNER;
 import Helper.XImage;
 import Models.HoiVien;
 import Models.PhieuMuon;
@@ -282,7 +282,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         );
         jPanelPhanTrangLayout.setVerticalGroup(
             jPanelPhanTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPhanTrangLayout.createSequentialGroup()
+            .addGroup(jPanelPhanTrangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPhanTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFirst)
@@ -646,7 +646,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
             @Override
             public void run() {
-                Helper.QrCapture.getInsance("PHIEU_MUON").show();
+                new QR_SCANNER("PHIEU_MUON");
             }
         });
         thread.start();
@@ -836,7 +836,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
             if (maPhieuMuon == null) {
                 Long timeNow = Calendar.getInstance().getTimeInMillis();
-                phieuMuon.setQr_code("sach-" + timeNow);
+                phieuMuon.setQr_code("phieumuon-" + timeNow);
             } else {
                 int row = tblPhieuMuon.getSelectedRow();
                 phieuMuon.setQr_code(listPhieuMuon.get(pageIndex).get(row).getQr_code());
@@ -938,5 +938,15 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
             return sach.getTenSach();
         }
         return null;
+    }
+
+    public void showPhieuMuon(String data) {
+        PhieuMuon phieuMuon = phieuMuonDao.findByQR("phieumuon-".concat(data));
+        if (phieuMuon != null) {
+            btnSave.setText("Lưu");
+            setForm(phieuMuon);
+            activeTabCapNhat();
+            Home_Frame.getInstance().activePanel("QLPHIEUMUON");
+        }
     }
 }

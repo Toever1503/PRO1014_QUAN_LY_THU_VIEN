@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dung
  */
 public class QLHoiVien_JPanel extends javax.swing.JPanel {
-    
+
     private static QLHoiVien_JPanel instance;
     private DefaultTableModel model;
     private HoiVienDao dao = new HoiVienDao();
@@ -34,11 +36,11 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private Map<Integer, List<HoiVien>> listHV;
     private DefaultTableModel tableModel;
     private int total;
-    
+
     public QLHoiVien_JPanel() {
         initComponents();
         tabs.remove(jPanelCapNhat);
-        
+
         listHV = new HashMap<Integer, List<HoiVien>>();
         dao = HoiVienDao.getInstance();
         total = dao.getTotal();
@@ -46,14 +48,14 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         model = (DefaultTableModel) tblQuanLyNguoiDung.getModel();
         fillTable(listHV.get(index));
     }
-    
+
     public static QLHoiVien_JPanel getInstance() {
         if (instance == null) {
             instance = new QLHoiVien_JPanel();
         }
         return instance;
     }
-    
+
     void fillTable(List<HoiVien> list) {
         model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
         try {
@@ -202,7 +204,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFirst)
@@ -524,7 +526,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         tabs.add(jPanelCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
-    
+
     void insert() {
         //getModel() viết ở dưới, lấy thông tin trên form điền vào đt model
         HoiVien model = getForm();
@@ -545,7 +547,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                     }.start();
                     String keyData = model.getQr_code().split("-")[1];
                     String past = Helper.XImage.USER_UPLOAD.concat("/" + keyData + ".png");
-                    
+
                     if (!Helper.QR_CODE.generateQRcode(keyData, past)) {
                         JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
                     }
@@ -554,7 +556,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    
+
                     JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
                     txtMaTT.setText(id.toString());
                     total = dao.getTotal();
@@ -576,7 +578,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     void updateStatus() {
         boolean edit = (this.index >= 0);
         boolean first = (this.index == 0);
@@ -591,9 +593,9 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
-        
+
     }
-    
+
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -605,7 +607,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jDateChooserNgayHan.setDate(null);
         jDateChooserNgaySinh.setDate(null);
     }
-    
+
     void setForm(HoiVien model) {
         txtMaTT.setText(model.getId().toString());
         model.setNguoiTao(model.getNguoiTao());
@@ -634,13 +636,13 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 e.printStackTrace();
             }
         }
-        
+
     }
-    
+
     HoiVien getForm() {
         Long timeNow = Calendar.getInstance().getTimeInMillis();
         HoiVien model = new HoiVien();
-        Long id = txtMaTT.getText().isEmpty() ? null: Long.valueOf(txtMaTT.getText());
+        Long id = txtMaTT.getText().isEmpty() ? null : Long.valueOf(txtMaTT.getText());
         model.setId(id);
         model.setNguoiTao(Helper.Auth.user.getMaQL());
         model.setCccd(txtCCCD.getText());
@@ -653,15 +655,15 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         model.setNgayHan(jDateChooserNgayHan.getDate() == null ? null : new java.sql.Date(jDateChooserNgayHan.getDate().getTime()));
         model.setTrangThai(rdoHoatDong.isSelected());
         if (model.getId() == null) {
-            model.setQr_code("HoiVien-" + timeNow.toString());
-            
+            model.setQr_code("hoivien-" + timeNow.toString());
+
         } else {
             int row = tblQuanLyNguoiDung.getSelectedRow();
             model.setQr_code(listHV.get(index).get(row).getQr_code());
         }
         return model;
     }
-    
+
     boolean check() {
         if (txtCCCD.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Căn cước công dân trống!");
@@ -687,6 +689,17 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         }
         return true;
     }
+
+    public void showHoiVien(String data) {
+        HoiVien hoivien = dao.findByQR("hoivien-".concat(data));
+        if (hoivien != null) {
+            btnInsert.setText("Lưu");
+            setForm(hoivien);
+            activeTabCapNhat();
+            Home_Frame.getInstance().activePanel("QLHOIVIEN");
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnChiTiet;
