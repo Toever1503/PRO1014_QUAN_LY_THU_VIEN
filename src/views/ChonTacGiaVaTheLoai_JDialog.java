@@ -4,6 +4,9 @@
  */
 package views;
 
+import DAO.TacGiaDao;
+import DAO.TheLoaiDao;
+import Helper.MsgBox;
 import Models.TacGia;
 import Models.TheLoai;
 import java.util.Map;
@@ -108,6 +111,11 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
         getContentPane().add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         pack();
@@ -139,6 +147,47 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        this.updateTacGiaVaTheLoai();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    void updateTacGiaVaTheLoai() {
+        int row = 0;
+        if (this.actionType.equals("TAC_GIA")) {
+            String tenTg = MsgBox.prompt(this, "Nhập tên tác giả muốn thêm :0");
+            if (tenTg.isEmpty()) {
+                MsgBox.alert_WARNING(this, "Không được để trống");
+                return;
+            }
+            TacGiaDao tgDao = TacGiaDao.getInstance();
+            if (!tgDao.selectByKeyWorld(tenTg).isEmpty()) {
+                MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
+                return;
+            }
+            TacGia tg = new TacGia(null, tenTg);
+            row = tgDao.insert(tg);
+        } else {
+            String tenTl = MsgBox.prompt(this, "Nhập tên thể loại muốn thêm :0");
+            if (tenTl.isEmpty()) {
+                MsgBox.alert_WARNING(this, "Không được để trống");
+                return;
+            }
+            TheLoaiDao tlDao = TheLoaiDao.getInstance();
+            if (!tlDao.selectByKeyWorld(tenTl).isEmpty()) {
+                MsgBox.alert_WARNING(this, "Tên thể loại đã tồn tại");
+                return;
+            }
+            TheLoai tg = new TheLoai(null, tenTl.trim());
+            row = tlDao.insert(tg);
+        }
+        if (row > 0) {
+            MsgBox.alert_INFORMATION(this, "Update thành công!");
+            this.dispose();
+        } else {
+            MsgBox.alert_ERROR(this, "Update thất bại!");
+        }
+    }
 
     /**
      * @param args the command line arguments

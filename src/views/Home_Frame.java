@@ -17,8 +17,6 @@ import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

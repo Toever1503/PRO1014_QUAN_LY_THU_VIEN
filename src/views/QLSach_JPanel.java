@@ -740,7 +740,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
             return;
         }
-        NhaXuatBan nxb = new NhaXuatBan(null, tenTg);
+        NhaXuatBan nxb = new NhaXuatBan(null, tenNxXB);
         int row = this.nhaXuatBanDao.insert(nxb);
         if (row > 0) {
             MsgBox.alert_INFORMATION(this, "Update thành công!");
