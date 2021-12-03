@@ -52,7 +52,7 @@ public class ThongKeDAO {
 
     public List<Object[]> getSachTreHan() {
         String sql = "{CALL sp_sach_tre_han}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan", "HoTen", "Email", "SoDienThoai", "sendMailDate" };
         return this.getListOfArray(sql, cols);
     }
 

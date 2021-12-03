@@ -9,6 +9,8 @@ import DAO.ThongKeDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Helper.MsgBox;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -18,6 +20,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 
     private ThongKeDAO thongKeDAO;
     private SachDAO sachDAO;
+    private List<Object[]> listTreHan;
 
     private static ThongKe_JPanel instance;
 
@@ -35,6 +38,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         this.fillTableSachDaMuon();
         this.fillTableSachBiLoai();
         this.fillTableSachConLai();
+        fillTableSachTreHan();
     }
 
     void fillTableDaMuon() {
@@ -74,6 +78,8 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         pnlTreHan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSachTreHan = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnSendMail = new javax.swing.JButton();
         pnlConLai = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblSachConLai = new javax.swing.JTable();
@@ -130,7 +136,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
             pnlDaMuonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDaMuonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -179,6 +185,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         jTabbedPane1.addTab("Bị loại", pnlBiloai);
 
         pnlTreHan.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTreHan.setLayout(new java.awt.BorderLayout());
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -190,11 +197,11 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã sách", "Tên sách", "Tách giả", "Thể loại", "Nhà xuất bản", "Ngày hạn"
+                "STT", "Người Mượn", "Email", "Số Điện Thoại", "Mã sách", "Tên sách", "Tách giả", "Thể loại", "Nhà xuất bản", "Ngày hạn"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, true, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -208,24 +215,39 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblSachTreHan);
         if (tblSachTreHan.getColumnModel().getColumnCount() > 0) {
             tblSachTreHan.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblSachTreHan.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblSachTreHan.getColumnModel().getColumn(4).setMaxWidth(100);
+            tblSachTreHan.getColumnModel().getColumn(7).setResizable(false);
+            tblSachTreHan.getColumnModel().getColumn(9).setResizable(false);
         }
 
-        javax.swing.GroupLayout pnlTreHanLayout = new javax.swing.GroupLayout(pnlTreHan);
-        pnlTreHan.setLayout(pnlTreHanLayout);
-        pnlTreHanLayout.setHorizontalGroup(
-            pnlTreHanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTreHanLayout.createSequentialGroup()
+        pnlTreHan.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        btnSendMail.setText("Gửi mail thông báo");
+        btnSendMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendMailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnSendMail)
+                .addContainerGap(689, Short.MAX_VALUE))
         );
-        pnlTreHanLayout.setVerticalGroup(
-            pnlTreHanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTreHanLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnSendMail)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlTreHan.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jTabbedPane1.addTab("Trễ hạn", pnlTreHan);
 
@@ -274,7 +296,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
             pnlConLaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlConLaiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -289,6 +311,19 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(95, 100));
         add(jLabel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSendMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMailActionPerformed
+        // TODO add your handling code here:
+        Long timeNow = Calendar.getInstance().getTimeInMillis();
+        // date now 3/4
+        //date send 3/4
+        listTreHan.forEach(row -> {
+            Date dateSend = ((Date) row[9]);
+            if (dateSend != null && dateSend.getTime() < timeNow) {
+                System.out.println(dateSend);
+            }
+        });
+    }//GEN-LAST:event_btnSendMailActionPerformed
 
     void fillTableSachDaMuon() {
         DefaultTableModel model = (DefaultTableModel) this.tblSachDaMuon.getModel();
@@ -311,9 +346,10 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
     void fillTableSachTreHan() {
         DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
         model.setRowCount(0);
-        List<Object[]> list = this.thongKeDAO.getSachTreHan();
-        for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+        listTreHan = this.thongKeDAO.getSachTreHan();
+        System.out.println("size->" + listTreHan.size());
+        for (int i = 0; i < listTreHan.size(); i++) {
+            model.addRow(new Object[]{i + 1, listTreHan.get(i)[6], listTreHan.get(i)[7], listTreHan.get(i)[8], listTreHan.get(i)[0], listTreHan.get(i)[1], listTreHan.get(i)[2], listTreHan.get(i)[3], listTreHan.get(i)[4], listTreHan.get(i)[5]});
         }
     }
 
@@ -345,8 +381,10 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //        frame.setVisible(true);
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSendMail;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
