@@ -21,6 +21,8 @@ import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 /**
  *
@@ -69,6 +71,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     public void initPnlQuanLy() {
+<<<<<<< Updated upstream
 
         new Thread() {
             @Override
@@ -85,11 +88,15 @@ public class Home_Frame extends javax.swing.JFrame {
         }.start();
 
         new Thread() {
+=======
+         new Thread() {
+>>>>>>> Stashed changes
             @Override
             public void run() {
                 jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
             }
         }.start();
+<<<<<<< Updated upstream
 
         new Thread() {
             @Override
@@ -111,6 +118,33 @@ public class Home_Frame extends javax.swing.JFrame {
 //                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
 //            }
 //        }.start();
+=======
+         
+         new Thread() {
+            @Override
+            public void run() {
+                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
+         
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+         
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//            }
+//        }.start();
+        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+
+>>>>>>> Stashed changes
     }
 
     //Đồng hồ

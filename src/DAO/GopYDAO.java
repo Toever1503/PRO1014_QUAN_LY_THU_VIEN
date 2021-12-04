@@ -1,6 +1,7 @@
 package DAO;
 
 import Models.GopY;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -128,6 +129,10 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
             Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public void txtCCCDActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
 }

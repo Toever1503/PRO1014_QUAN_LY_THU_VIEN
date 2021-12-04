@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
+<<<<<<< Updated upstream
     HoiVienDao dao = new HoiVienDao();
     int index = 0;
 
@@ -34,10 +35,20 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private int total;
     private HoiVienDao hvDao;
+=======
+    private static QLHoiVien_JPanel instance;
+    private DefaultTableModel model;
+    private HoiVienDao dao;
+    private int index = 0;
+    private Map<Integer, List<HoiVien>> listHV;
+    private DefaultTableModel tableModel;
+    private int total;
+>>>>>>> Stashed changes
 
     public QLHoiVien_JPanel() {
         initComponents();
         tabs.remove(jPanelCapNhat);
+<<<<<<< Updated upstream
         hvDao = HoiVienDao.getInstance();
         listHV = new HashMap<>();
         listHV.put(index, hvDao.selectByPage(Long.valueOf(index)));
@@ -62,6 +73,35 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
+=======
+        listHV = new HashMap<Integer, List<HoiVien>>();
+        dao = HoiVienDao.getInstance();
+        total = dao.getTotal();
+        listHV.put(index, dao.selectByPage(Long.valueOf(index)));
+        model = (DefaultTableModel) tblQuanLyNguoiDung.getModel();
+        fillTable(listHV.get(index));
+    }
+
+    public static QLHoiVien_JPanel getInstance() {
+        if (instance == null) {
+            instance = new QLHoiVien_JPanel();
+        }
+        return instance;
+    }
+
+    void fillTable(List<HoiVien> list) {
+        model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
+        try {
+            for (HoiVien hv : list) {
+                Object[] row = {
+                    hv.getId(),
+                    hv.getFullName(),
+                    hv.getNgaySinh(),
+                    hv.getSoDienThoai(),
+                    hv.getEmail(),
+                    hv.getDiaChi(),};
+                model.addRow(row);
+>>>>>>> Stashed changes
             }
         }
     }
@@ -229,23 +269,49 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnCapNhat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< Updated upstream
                 .addComponent(btnChiTiet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTim)
                 .addGap(152, 152, 152))
+=======
+                .addComponent(btnReload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 589, Short.MAX_VALUE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTim)
+                .addGap(14, 14, 14))
+>>>>>>> Stashed changes
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< Updated upstream
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChiTiet)
                     .addComponent(btnCapNhat))
                 .addContainerGap(14, Short.MAX_VALUE))
+=======
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtTimKiem))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(btnReload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnThemMoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap())
+>>>>>>> Stashed changes
         );
 
         tabDanhSach.add(jPanel4, java.awt.BorderLayout.PAGE_START);
@@ -488,7 +554,12 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         if (index + 1 > total) {
+<<<<<<< Updated upstream
             JOptionPane.showMessageDialog(this, "Bạn đã ở trang cuối!");
+=======
+            JOptionPane.showMessageDialog(this, "Hiện đã là trang cuối cùng!");
+            return;
+>>>>>>> Stashed changes
         } else {
             index++;
             List<HoiVien> list = listHV.get(index);
@@ -523,6 +594,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         int row = tblQuanLyNguoiDung.getSelectedRow();
+<<<<<<< Updated upstream
         activeTabCapNhat();
         setForm(listHV.get(index).get(row));
     }//GEN-LAST:event_btnChiTietActionPerformed
@@ -530,11 +602,58 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private void tblQuanLyNguoiDungMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyNguoiDungMousePressed
 
     }//GEN-LAST:event_tblQuanLyNguoiDungMousePressed
+=======
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn 1 người dùng cần xem!");
+        } else {
+            btnInsert.setText("Lưu");
+            setForm(listHV.get(index).get(row));
+            activeTabCapNhat();
+        }
+    }//GEN-LAST:event_btnChiTietActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        String search = txtTimKiem.getText();
+        if (search.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập thông tin cần tìm kiếm");
+        } else {
+            search = "%" + search + "%";
+            List<HoiVien> listhv = dao.searchByKey(search);
+            if (listhv == null) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy hội viên nào!");
+            } else {
+                fillTable(listhv);
+            }
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        tabs.remove(jPanelCapNhat);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clearForm();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        index = 0;
+        fillTable(listHV.get(index));
+    }//GEN-LAST:event_btnReloadActionPerformed
+
+    private void txtCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCCCDActionPerformed
+
+    }//GEN-LAST:event_txtCCCDActionPerformed
+>>>>>>> Stashed changes
     public void activeTabCapNhat() {
         tabs.add(jPanelCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
     }
 
+<<<<<<< Updated upstream
     void insertOnUpdate() {
         if (listHV.size() == 0) {
             JOptionPane.showMessageDialog(this, "Hãy thêm hội viên! ");
@@ -553,12 +672,44 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 if (!Helper.QR_CODE.generateQRcode(keyData, path)) {
                     JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code!");
                 } else {
+=======
+    void insert() {
+        HoiVien model = getForm();
+        System.out.println(model == null);
+        if (model != null) {
+            if (model.getId() == null) {
+                Long id = Long.valueOf(dao.insertOnUpdate(model));
+                if (id <= 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
+                } else {
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            index = 0;
+                            listHV.clear();
+                            listHV.put(index, dao.selectByPage(Long.valueOf(index)));
+                        }
+                    }.start();
+                    String keyData = model.getQr_code().split("-")[1];
+                    String past = Helper.XImage.USER_UPLOAD.concat("/" + keyData + ".png");
+
+                    if (!Helper.QR_CODE.generateQRcode(keyData, past)) {
+                        JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
+                    }
+>>>>>>> Stashed changes
                     try {
                         lblQR_code.setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(200, 200, 1)));
                     } catch (Exception e) {
                         e.printStackTrace();
                         JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code!");
                     }
+<<<<<<< Updated upstream
+=======
+
+                    JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
+                    txtMaTT.setText(id.toString());
+                    total = dao.getTotal();
+>>>>>>> Stashed changes
                 }
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 hoiVien.setId(id);
@@ -586,6 +737,10 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
             }
         }
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     void clearForm() {
         txtCCCD.setText("");
         txtHoTen.setText("");
@@ -624,7 +779,12 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     HoiVien getForm() {
         Long timeNow = Calendar.getInstance().getTimeInMillis();
         HoiVien model = new HoiVien();
+<<<<<<< Updated upstream
         model.setId(Long.parseLong(txtMaTT.getText()));
+=======
+        Long id = txtMaTT.getText().isEmpty() ? null : Long.valueOf(txtMaTT.getText());
+        model.setId(id);
+>>>>>>> Stashed changes
         model.setNguoiTao(Helper.Auth.user.getMaQL());
         model.setCccd(txtCCCD.getText());
         model.setFullName(txtHoTen.getText());
@@ -637,6 +797,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         if (model.getId() == null) {
             model.setQr_code("HoiVien-" + timeNow.toString());
 
+<<<<<<< Updated upstream
             String keyData = model.getQr_code().split("-")[1];
             String past = Helper.XImage.USER_UPLOAD.concat("/" + keyData + ".png");
             if (!Helper.QR_CODE.generateQRcode(keyData, past)) {
@@ -651,6 +812,11 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
                 e.printStackTrace();
             }
             return model;
+=======
+        } else {
+            int row = tblQuanLyNguoiDung.getSelectedRow();
+            model.setQr_code(listHV.get(index).get(row).getQr_code());
+>>>>>>> Stashed changes
         }
         return null;
     }
@@ -683,6 +849,8 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         }
         return true;
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnChiTiet;
