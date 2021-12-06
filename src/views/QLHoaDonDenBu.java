@@ -776,7 +776,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     }
 
     public void showHoaDon(String data) {
-        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.findByQR("sach-".concat(data));
+        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.findByQR("hoadon-".concat(data));
         if (hoaDonDenBu != null) {
             btnSave.setText("Lưu");
             setForm(hoaDonDenBu);

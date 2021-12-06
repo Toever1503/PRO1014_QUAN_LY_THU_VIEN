@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import views.QLHoaDonDenBu;
 import views.QLHoaDonNhapSach;
 import views.QLHoiVien_JPanel;
@@ -129,11 +130,11 @@ public class QR_SCANNER extends javax.swing.JDialog implements Closeable {
 
             if (data.length == 2) {
                 String key = data[0];
-                
+
                 if (ACTION_TYPE.equalsIgnoreCase("HOME")) {
                     if (key.equalsIgnoreCase("sach")) {
                         QLSach_JPanel.getInstance().showSach(data[1]);
-                         System.out.println("sach");
+                        System.out.println("sach");
                     } else if (key.equalsIgnoreCase("hoivien")) {
                         QLHoiVien_JPanel.getInstance().showHoiVien(data[1]);
                     } else if (key.equalsIgnoreCase("phieumuon")) {
@@ -149,7 +150,10 @@ public class QR_SCANNER extends javax.swing.JDialog implements Closeable {
                         Logger.getLogger(QR_SCANNER.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (ACTION_TYPE.equalsIgnoreCase("PHIEU_MUON")) {
-
+                    String result = QLPhieuMuon_JPanel.getInstance().addSachFromSacanner(data[1]);
+                    if (result != null) {
+                        JOptionPane.showMessageDialog(null, "Sách " + result);
+                    }
                 } else if (ACTION_TYPE.equalsIgnoreCase("HOA_DON")) {
                 }
             }

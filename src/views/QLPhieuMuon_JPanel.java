@@ -930,12 +930,15 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         }
     }
 
-    public String addSachFromSacanner(String key) {
-        Sach sach = null; //use key find sach
-
+    public String addSachFromSacanner(String data) {
+        Sach sach = sachDAO.findByQR("sach-" + data); //use key find sach
         if (sach != null) {
-            tableModelSachMuon.addRow(new Object[]{sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()});
-            return sach.getTenSach();
+            if (!listSachMuon.containsKey(sach.getId())) {
+                listSachMuon.put(sach.getId(), new PhieuMuonChiTiet(0, sach.getId(), Helper.Auth.user.getMaQL(), null, false));
+                tableModelSachMuon.addRow(new Object[]{sach.getId(), sach.getTenSach(), sach.getNhaXuatBan()});
+                System.out.println(listSachMuon.size());
+                return sach.getTenSach();
+            }
         }
         return null;
     }

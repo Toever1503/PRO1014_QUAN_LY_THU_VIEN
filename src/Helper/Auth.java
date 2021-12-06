@@ -4,6 +4,8 @@
  */
 package Helper;
 
+import Models.QuanLy;
+
 /**
  *
  * @author NguyenHoan

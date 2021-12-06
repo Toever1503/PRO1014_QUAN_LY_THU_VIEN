@@ -11,9 +11,9 @@ import java.util.logging.Logger;
  */
 public class GopYDAO extends LibrarianDAO<GopY, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?,?,?,?,?)";
+    private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai, soLuot FROM gop_y";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai, soLuot FROM gop_y WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai, soLuot) VALUES (?,?,?,?,?, ?)";
     private final String UPDATE_SQL = "UPDATE gop_y SET HoiVien = ?, NgayTao = ?, NoiDung = ?, TrangThai = ? WHERE ID = ?";
     private final String DELETE_SQL = "DELETE FROM gop_y WHERE ID = ?";
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"

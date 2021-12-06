@@ -14,11 +14,14 @@ import DAO.TacGiaDao;
 import DAO.TheLoaiDao;
 import Helper.QR_SCANNER;
 import Helper.XImage;
+import Models.GopY;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,20 +36,22 @@ public class Home_Frame extends javax.swing.JFrame {
      * Creates new form main_frame
      */
     public Home_Frame() {
-        QuanLy user = new QuanLy();
-        user.setMaQL("admin");
-        Helper.Auth.user = user;
         this.init();
-
-        this.initPnlQuanLy();
+//        this.initPnlQuanLy();
+//        fillTableDeXuat();
     }
 
     public static Home_Frame getInstance() {
         if (instance == null) {
             instance = new Home_Frame();
         }
-
         return instance;
+    }
+
+    public void show() {
+//        System.out.println(Helper.Auth.user);
+//        lblWelcome1.setText("Xin chào " + Helper.Auth.user.getFullName()+"!");
+//        setVisible(true);
     }
 
     public void init() {
@@ -56,39 +61,23 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
-        
+//        cardLayoutMainRight.removeLayoutComponent(jPanel2Home);
+//        cardLayoutMainRight.addLayoutComponent(jPanel2Home, "card10");
+//        cardLayoutMainRight.show(pnlMainRight, "card10");
     }
 
     public void initPnlQuanLy() {
-         new Thread() {
-            @Override
-            public void run() {
-                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-            }
-        }.start();
-//         
-//         new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
-//         
-//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-
         new Thread() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Home_Frame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+                jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
             }
         }.start();
+//        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
     }
 
@@ -133,8 +122,6 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
-        jPanel_home = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
@@ -142,6 +129,14 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
         jPanel_ThongKe = new javax.swing.JPanel();
         jPanel_Ql_Nhap_Sach = new javax.swing.JPanel();
+        jPanel2Home = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDeXuat = new javax.swing.JTable();
+        btnThemDeXuat = new javax.swing.JButton();
+        btnIangDeXuat = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblWelcome1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -319,13 +314,6 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainRight.setLayout(new java.awt.CardLayout());
 
-        jPanel_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Home");
-        jPanel_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
-
-        pnlMainRight.add(jPanel_home, "card9");
-
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlSach, "card3");
 
@@ -346,6 +334,51 @@ public class Home_Frame extends javax.swing.JFrame {
 
         jPanel_Ql_Nhap_Sach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_Ql_Nhap_Sach, "card9");
+
+        jPanel2Home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblDeXuat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã", "Đề xuất", "Số Lượt", "Ngày Tạo"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDeXuat);
+        if (tblDeXuat.getColumnModel().getColumnCount() > 0) {
+            tblDeXuat.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
+
+        jPanel2Home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 350, 550, 230));
+
+        btnThemDeXuat.setText("Thêm đề xuất Mới");
+        btnThemDeXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDeXuatActionPerformed(evt);
+            }
+        });
+        jPanel2Home.add(btnThemDeXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        btnIangDeXuat.setText("Tăng Lượt Đề Xuất");
+        jPanel2Home.add(btnIangDeXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
+
+        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblWelcome.setText("Xin chào");
+        jPanel2Home.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 130, 30));
+
+        pnlMainRight.add(jPanel2Home, "card10");
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblWelcome1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblWelcome1.setText("Xin chào");
+        jPanel1.add(lblWelcome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 130, 30));
+
+        pnlMainRight.add(jPanel1, "card10");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -409,6 +442,7 @@ public class Home_Frame extends javax.swing.JFrame {
         mnQuanLy.add(mniQLHoaDon);
         mnQuanLy.add(jSeparator1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Quản Lý Nhập Sách");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,6 +450,7 @@ public class Home_Frame extends javax.swing.JFrame {
             }
         });
         mnQuanLy.add(jMenuItem2);
+        jMenuItem2.getAccessibleContext().setAccessibleDescription("");
 
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
@@ -484,7 +519,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThongKeMouseExited
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
-        cardLayoutMainRight.show(pnlMainRight, "card9");
+        cardLayoutMainRight.show(pnlMainRight, "card10");
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseClicked
@@ -532,6 +567,10 @@ public class Home_Frame extends javax.swing.JFrame {
         activePanel("QLNHAPSACH");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void btnThemDeXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDeXuatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemDeXuatActionPerformed
+
     public void activePanel(String panel) {
         switch (panel) {
             case "QLSACH":
@@ -553,6 +592,14 @@ public class Home_Frame extends javax.swing.JFrame {
                 cardLayoutMainRight.show(pnlMainRight, "card9");
                 break;
         }
+    }
+    private void fillTableDeXuat() {
+        DefaultTableModel tableModel = (DefaultTableModel)tblDeXuat.getModel();
+        tableModel.setRowCount(0);
+        List<GopY> list = GopYDAO.getInstance().selectALL();
+        list.forEach(gopY->{
+        tableModel.addRow(new Object[]{gopY.getId(), gopY.getNoiDung(), gopY.getNgayTao()});
+        });
     }
 
     /**
@@ -595,22 +642,25 @@ public class Home_Frame extends javax.swing.JFrame {
 //                new Home_Frame().setVisible(true);
 //            }
 //        });
-
-        Home_Frame.getInstance().setVisible(true);
+//        Home_Frame.getInstance();
+        new Home_Frame().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnHoaDonDenBu;
     private javax.swing.JLabel btnHome;
+    private javax.swing.JButton btnIangDeXuat;
     private javax.swing.JLabel btnQLHoiVien;
     private javax.swing.JLabel btnQLPhieuMuon;
     private javax.swing.JLabel btnQLSach;
     private javax.swing.JButton btnScanQR;
+    private javax.swing.JButton btnThemDeXuat;
     private javax.swing.JLabel btnThongKe;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2Home;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
@@ -618,13 +668,15 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_QlThuThu;
     private javax.swing.JPanel jPanel_Ql_Nhap_Sach;
     private javax.swing.JPanel jPanel_ThongKe;
-    private javax.swing.JPanel jPanel_home;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lblClock;
+    private javax.swing.JLabel lblWelcome;
+    private javax.swing.JLabel lblWelcome1;
     private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenu mnQuanLy;
     private javax.swing.JMenu mnThongKe;
@@ -651,5 +703,6 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMainRight;
     private javax.swing.JPanel pnlWest;
+    private javax.swing.JTable tblDeXuat;
     // End of variables declaration//GEN-END:variables
 }

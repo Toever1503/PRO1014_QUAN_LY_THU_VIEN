@@ -22,6 +22,11 @@ public class QuanLy {
     public QuanLy() {
     }
 
+    public QuanLy(String maQL) {
+        this.maQL = maQL;
+        this.fullName ="Admin";
+    }
+
     public QuanLy(String maQL, String matKhau, String cccd, String fullName, String diaChi, Date ngaySinh, String soDienThoai, String email, boolean vaiTro, boolean trangThai) {
         this.maQL = maQL;
         this.matKhau = matKhau;

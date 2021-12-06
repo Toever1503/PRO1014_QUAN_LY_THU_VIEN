@@ -74,7 +74,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         pnlBiloai = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblSachBiLoai = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         pnlTreHan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSachTreHan = new javax.swing.JTable();
@@ -176,11 +175,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         }
 
         pnlBiloai.add(jScrollPane4, java.awt.BorderLayout.CENTER);
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Thu hồi");
-        pnlBiloai.add(jButton1, java.awt.BorderLayout.PAGE_END);
 
         jTabbedPane1.addTab("Bị loại", pnlBiloai);
 
@@ -382,7 +376,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendMail;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

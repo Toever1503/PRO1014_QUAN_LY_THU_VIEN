@@ -4,13 +4,17 @@
  */
 package views;
 
+import DAO.GopYDAO;
 import DAO.QuanLyDao;
 import Helper.PasswordEncoder;
+import Models.GopY;
 import Models.QuanLy;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,7 +23,6 @@ import javax.swing.JOptionPane;
 public class Login_JFrame extends javax.swing.JFrame {
 
     private QuanLyDao quanLyDao;
-
     /**
      * Creates new form JFrame_Login
      */
@@ -282,7 +285,7 @@ public class Login_JFrame extends javax.swing.JFrame {
             if (password.equals(user.getMatKhau())) {
                 Helper.Auth.user = user;
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-                new Home_Frame().setVisible(true);
+                Home_Frame.getInstance().show();
                 this.dispose();
             } else {
                 lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
