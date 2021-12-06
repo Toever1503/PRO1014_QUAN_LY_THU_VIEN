@@ -52,7 +52,7 @@ public class ThongKeDAO {
 
     public List<Object[]> getSachTreHan() {
         String sql = "{CALL sp_sach_tre_han}";
-        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan"};
+        String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "NgayHan", "HoTen", "Email", "SoDienThoai", "sendMailDate"};
         return this.getListOfArray(sql, cols);
     }
 
@@ -60,5 +60,16 @@ public class ThongKeDAO {
         String sql = "{CALL sp_sach_con_lai}";
         String[] cols = {"ID", "TenSach", "TenTacGia", "TenTheLoai", "TenNhaXuatBan", "ViTri"};
         return this.getListOfArray(sql, cols);
+    }
+
+    public List<Object[]> getEmailLate() {
+        String sql = "{CALL sp_email_late}";
+        String[] cols = {"ID", "HoTen", "Email", "NgayHan", "SLNgayTre", "MaPM"};
+        return this.getListOfArray(sql, cols);
+    }
+
+    public static void main(String[] args) {
+        ThongKeDAO tk = new ThongKeDAO();
+        System.out.println(tk.getEmailLate().get(0)[0].toString());
     }
 }

@@ -4,21 +4,18 @@
  */
 package views;
 
-import DAO.GopYDAO;
-import DAO.HoaDonDenBuChiTietDao;
-import DAO.HoiVienDao;
-import DAO.NhaXuatBanDao;
 import DAO.PhieuMuonChiTietDao;
-import DAO.QuanLyDao;
-import DAO.TacGiaDao;
-import DAO.TheLoaiDao;
+import DAO.ThongKeDAO;
 import Helper.QR_SCANNER;
 import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -37,7 +34,6 @@ public class Home_Frame extends javax.swing.JFrame {
         user.setMaQL("admin");
         Helper.Auth.user = user;
         this.init();
-
         this.initPnlQuanLy();
     }
 
@@ -56,16 +52,16 @@ public class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
-        
+
     }
 
     public void initPnlQuanLy() {
-//         new Thread() {
-//            @Override
-//            public void run() {
-//                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-//            }
-//        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+            }
+        }.start();
 //         
 //         new Thread() {
 //            @Override
@@ -187,6 +183,12 @@ public class Home_Frame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLSachMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnQLSachMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnQLSachMouseExited(evt);
+            }
         });
         pnl1.add(btnQLSach, java.awt.BorderLayout.CENTER);
 
@@ -203,6 +205,12 @@ public class Home_Frame extends javax.swing.JFrame {
         btnQLPhieuMuon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLPhieuMuonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnQLPhieuMuonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnQLPhieuMuonMouseExited(evt);
             }
         });
         pnl2.add(btnQLPhieuMuon, java.awt.BorderLayout.CENTER);
@@ -221,6 +229,12 @@ public class Home_Frame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQLHoiVienMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnQLHoiVienMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnQLHoiVienMouseExited(evt);
+            }
         });
         pnl3.add(btnQLHoiVien, java.awt.BorderLayout.CENTER);
 
@@ -237,6 +251,12 @@ public class Home_Frame extends javax.swing.JFrame {
         btnHoaDonDenBu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHoaDonDenBuMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnHoaDonDenBuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnHoaDonDenBuMouseExited(evt);
             }
         });
         pnl4.add(btnHoaDonDenBu, java.awt.BorderLayout.CENTER);
@@ -364,6 +384,11 @@ public class Home_Frame extends javax.swing.JFrame {
 
         mniTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/user.png"))); // NOI18N
         mniTaiKhoan.setText("Tài khoản");
+        mniTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTaiKhoanActionPerformed(evt);
+            }
+        });
         mnHeThong.add(mniTaiKhoan);
 
         jMenuItem1.setText("Đổi Mật Khẩu");
@@ -444,6 +469,11 @@ public class Home_Frame extends javax.swing.JFrame {
         mniSachTreHan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
         mniSachTreHan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/overdue.png"))); // NOI18N
         mniSachTreHan.setText("Sách trễ hạn");
+        mniSachTreHan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSachTreHanActionPerformed(evt);
+            }
+        });
         mnThongKe.add(mniSachTreHan);
 
         mniSachConLai.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -512,9 +542,7 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnScanQRActionPerformed
 
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
-        // TODO add your handling code here:
         this.dispose();
-//        new Login_JFrame().setVisible(true);
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
@@ -531,6 +559,79 @@ public class Home_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         activePanel("QLNHAPSACH");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnQLSachMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseEntered
+        this.pnl1.setBackground(new java.awt.Color(105, 184, 218));
+        this.btnQLSach.setForeground(new java.awt.Color(0, 0, 153));
+    }//GEN-LAST:event_btnQLSachMouseEntered
+
+    private void btnQLSachMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLSachMouseExited
+        this.pnl1.setBackground(new java.awt.Color(6, 143, 202));
+        this.btnQLSach.setForeground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_btnQLSachMouseExited
+
+    private void btnQLPhieuMuonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseEntered
+        this.pnl2.setBackground(new java.awt.Color(105, 184, 218));
+        this.btnQLPhieuMuon.setForeground(new java.awt.Color(0, 0, 153));
+    }//GEN-LAST:event_btnQLPhieuMuonMouseEntered
+
+    private void btnQLPhieuMuonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLPhieuMuonMouseExited
+        this.pnl2.setBackground(new java.awt.Color(6, 143, 202));
+        this.btnQLPhieuMuon.setForeground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_btnQLPhieuMuonMouseExited
+
+    private void btnQLHoiVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseEntered
+        this.pnl3.setBackground(new java.awt.Color(105, 184, 218));
+        this.btnQLHoiVien.setForeground(new java.awt.Color(0, 0, 153));
+    }//GEN-LAST:event_btnQLHoiVienMouseEntered
+
+    private void btnQLHoiVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQLHoiVienMouseExited
+        this.pnl3.setBackground(new java.awt.Color(6, 143, 202));
+        this.btnQLHoiVien.setForeground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_btnQLHoiVienMouseExited
+
+    private void btnHoaDonDenBuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseEntered
+        this.pnl4.setBackground(new java.awt.Color(105, 184, 218));
+        this.btnHoaDonDenBu.setForeground(new java.awt.Color(0, 0, 153));
+    }//GEN-LAST:event_btnHoaDonDenBuMouseEntered
+
+    private void btnHoaDonDenBuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonDenBuMouseExited
+        this.pnl4.setBackground(new java.awt.Color(6, 143, 202));
+        this.btnHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_btnHoaDonDenBuMouseExited
+
+    private void mniTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTaiKhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniTaiKhoanActionPerformed
+
+    private void mniSachTreHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachTreHanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniSachTreHanActionPerformed
+
+    void sendMail() {
+        ThongKeDAO tkdao = ThongKeDAO.getInstance();
+        java.util.List<Object[]> list = tkdao.getEmailLate();
+        PhieuMuonChiTietDao pmct = PhieuMuonChiTietDao.getInstance();
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < list.size(); i++) {
+                    String maHV = (String) list.get(i)[0];
+                    String hoTen = (String) list.get(i)[1];
+                    String email = (String) list.get(i)[2];
+                    String ngayHan = (String) list.get(i)[3];
+                    String SLNgayTre = (String) list.get(i)[4];
+                    String maPM = (String) list.get(i)[5];
+                    System.out.println(maHV + hoTen);
+                    String content = "  Xin chào hội viên " + hoTen + " - " + maHV + " ! \n"
+                            + "Phiếu mượn sách mã số " + maPM + " của quý khách đã trễ hạn ngày " + ngayHan + "( " + SLNgayTre + " ) \n";
+                    if (Helper.Networking.sendMail(email, "THÔNG BÁO THƯ VIỆN", content)) {
+                        pmct.resetDateSend(maPM);
+                    }
+                }
+            }
+        }.start();
+    }
 
     public void activePanel(String panel) {
         switch (panel) {
@@ -595,7 +696,6 @@ public class Home_Frame extends javax.swing.JFrame {
 //                new Home_Frame().setVisible(true);
 //            }
 //        });
-
         Home_Frame.getInstance().setVisible(true);
     }
 

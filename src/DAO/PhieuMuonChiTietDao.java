@@ -23,6 +23,7 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO phieu_muon_chi_tiet (PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE NguoiTiepNhan=VALUES(NguoiTiepNhan), NgayTra=VALUES(NgayTra), TrangThai=VALUES(TrangThai)";
     private final String SELECT_BY_PAGE_SQL = "SELECT PhieuMuon, Sach, NguoiTiepNhan, NgayTra, TrangThai FROM phieu_muon_chi_tiet LIMIT ?, 30";
+    private final String RESET_DATE_SEND_SQL = "UPDATE phieu_muon_chi_tiet SET sendMailDate = NOW() WHERE PhieuMuon = ?";
     private SachDAO sachDao;
     private static PhieuMuonChiTietDao instance;
 
@@ -92,6 +93,16 @@ public class PhieuMuonChiTietDao extends LibrarianDAO<PhieuMuonChiTiet, Long> {
         int row = 0;
         try {
             row = Helper.Utility.update(this.DELETE_BY_SACH_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+
+    public int resetDateSend(String maPM) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.UPDATE_BY_PM_SACH_SQL, maPM);
         } catch (Exception ex) {
             Logger.getLogger(PhieuMuonChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
         }
