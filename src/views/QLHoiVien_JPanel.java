@@ -5,20 +5,11 @@
 package views;
 
 import DAO.HoiVienDao;
-import Helper.Auth;
-import Helper.XImage;
 import Models.HoiVien;
-import static java.awt.Color.pink;
-import static java.awt.Color.white;
-import java.awt.Image;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
