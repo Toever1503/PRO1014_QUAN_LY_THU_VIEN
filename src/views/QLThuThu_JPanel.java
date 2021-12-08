@@ -90,7 +90,7 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         listQLTT.clear();
         listQLTT.put(row, QLDao.selectByPage(String.valueOf(row)));
         fillTable(listQLTT.get(row)); 
-        JOptionPane.showMessageDialog(this, "thêm thành công");
+        JOptionPane.showMessageDialog(this,btnInsert.getText()+ " Thành công");
         }
         
     }
@@ -186,7 +186,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
         jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
         txtMatKhau = new javax.swing.JPasswordField();
@@ -239,6 +238,15 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         });
 
         btnThemMoi.setText("Thêm Mới");
+        btnThemMoi.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnThemMoiAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
@@ -459,23 +467,16 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
                 btnClearActionPerformed(evt);
             }
         });
-        jPanel1.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 62, -1));
-
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/update.png"))); // NOI18N
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 62, -1));
+        jPanel1.add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 62, -1));
 
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
+        btnInsert.setText("Thêm");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
             }
         });
-        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 62, -1));
+        jPanel1.add(btnInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 130, -1));
         jPanel1.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
         jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 240, -1));
 
@@ -505,10 +506,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clearForm();
     }//GEN-LAST:event_btnClearActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        insert();
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -569,16 +566,19 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
+        btnInsert.setText("Thêm");
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         // TODO add your handling code here:
+        
         int i = tblQuanLyThuThu.getSelectedRow();
         if (i == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn phiếu mượn cần xem!");
         } else {
             activeTabCapNhat();
             setForm(listQLTT.get(row).get(i));
+            btnInsert.setText("Cập nhật");
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
 
@@ -596,6 +596,10 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnThemMoiAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnThemMoiAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemMoiAncestorAdded
     public void activeTabCapNhat() {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
@@ -720,7 +724,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPrev1;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
