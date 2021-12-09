@@ -96,21 +96,34 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDonDenBu = new javax.swing.JTable();
         pnlTrang = new javax.swing.JPanel();
-        btnLast = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnPrev = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         btnFirst = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
         pnlActionHoaDon = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        btnReload = new javax.swing.JButton();
+        btnChiTiet = new javax.swing.JButton();
+        btnThemMoi = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
-        btnThemMoi = new javax.swing.JButton();
-        btnChiTiet = new javax.swing.JButton();
-        btnReload = new javax.swing.JButton();
         tabCapNhat = new javax.swing.JPanel();
-        pnlQrCode = new javax.swing.JPanel();
-        btnDownloadQr = new javax.swing.JButton();
-        lblQR_CODE = new javax.swing.JLabel();
         pnlLeftTabCapNhat = new javax.swing.JPanel();
+        pnlAction = new javax.swing.JPanel();
+        lblErrorAction = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnChonSach = new javax.swing.JButton();
+        btnXoaSach = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnQuayLai = new javax.swing.JButton();
+        jScrollPaneTableSachMuon = new javax.swing.JScrollPane();
+        tblHoaDonChiTiet = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
         pnlDetail = new javax.swing.JPanel();
         lblMaHoaDonDenBu = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,21 +134,19 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         lblErrorNguoiMuon = new javax.swing.JLabel();
         lblErrorTongTien = new javax.swing.JLabel();
         txtMaHoaDonDenBu = new javax.swing.JTextField();
-        pnlAction = new javax.swing.JPanel();
-        btnChonSach = new javax.swing.JButton();
-        btnQuayLai = new javax.swing.JButton();
-        btnXoaSach = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
-        lblErrorAction = new javax.swing.JLabel();
-        btnReset = new javax.swing.JButton();
-        jScrollPaneTableSachMuon = new javax.swing.JScrollPane();
-        tblHoaDonChiTiet = new javax.swing.JTable();
+        pnlQrCode = new javax.swing.JPanel();
+        btnDownloadQr = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblQR_CODE = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
-        tabDanhSach.setLayout(new java.awt.BorderLayout());
+        tabDanhSach.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tabDanhSach.setLayout(new java.awt.BorderLayout(0, 10));
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblHoaDonDenBu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,28 +171,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tabDanhSach.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        pnlTrang.setPreferredSize(new java.awt.Dimension(100, 100));
+        pnlTrang.setPreferredSize(new java.awt.Dimension(100, 54));
+        pnlTrang.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
 
-        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/Last_button.png"))); // NOI18N
-        btnLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLastActionPerformed(evt);
-            }
-        });
-
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/next_button.png"))); // NOI18N
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/back_button.png"))); // NOI18N
-        btnPrev.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrevActionPerformed(evt);
-            }
-        });
+        jPanel4.setPreferredSize(new java.awt.Dimension(330, 35));
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
@@ -189,53 +183,46 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 btnFirstActionPerformed(evt);
             }
         });
+        jPanel4.add(btnFirst);
 
-        javax.swing.GroupLayout pnlTrangLayout = new javax.swing.GroupLayout(pnlTrang);
-        pnlTrang.setLayout(pnlTrangLayout);
-        pnlTrangLayout.setHorizontalGroup(
-            pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTrangLayout.createSequentialGroup()
-                .addContainerGap(519, Short.MAX_VALUE)
-                .addComponent(btnFirst)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrev)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNext)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLast)
-                .addContainerGap())
-        );
-        pnlTrangLayout.setVerticalGroup(
-            pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTrangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlTrangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFirst)
-                    .addComponent(btnPrev)
-                    .addComponent(btnNext)
-                    .addComponent(btnLast))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/back_button.png"))); // NOI18N
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnPrev);
+
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/next_button.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnNext);
+
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/Last_button.png"))); // NOI18N
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnLast);
+
+        pnlTrang.add(jPanel4);
 
         tabDanhSach.add(pnlTrang, java.awt.BorderLayout.PAGE_END);
 
-        pnlActionHoaDon.setPreferredSize(new java.awt.Dimension(648, 50));
+        pnlActionHoaDon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlActionHoaDon.setPreferredSize(new java.awt.Dimension(648, 85));
+        pnlActionHoaDon.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 15));
 
-        btnSearch.setText("Tìm kiếm");
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel8.setPreferredSize(new java.awt.Dimension(268, 52));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
-        btnThemMoi.setText("Thêm Mới");
-        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemMoiActionPerformed(evt);
-            }
-        });
-
-        btnChiTiet.setText("Chi Tiết");
-        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChiTietActionPerformed(evt);
-            }
-        });
+        jPanel5.setPreferredSize(new java.awt.Dimension(254, 28));
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0, 10, 10));
 
         btnReload.setText("Làm Mới");
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -243,36 +230,68 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 btnReloadActionPerformed(evt);
             }
         });
+        jPanel5.add(btnReload);
 
-        javax.swing.GroupLayout pnlActionHoaDonLayout = new javax.swing.GroupLayout(pnlActionHoaDon);
-        pnlActionHoaDon.setLayout(pnlActionHoaDonLayout);
-        pnlActionHoaDonLayout.setHorizontalGroup(
-            pnlActionHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlActionHoaDonLayout.createSequentialGroup()
+        btnChiTiet.setText("Chi Tiết");
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnChiTiet);
+
+        btnThemMoi.setText("Thêm Mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnThemMoi);
+
+        jPanel8.add(jPanel5);
+
+        pnlActionHoaDon.add(jPanel8);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 53, Short.MAX_VALUE)
+        );
+
+        pnlActionHoaDon.add(jPanel7);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setPreferredSize(new java.awt.Dimension(271, 53));
+
+        btnSearch.setText("Tìm kiếm");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnThemMoi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnChiTiet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReload)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlActionHoaDonLayout.setVerticalGroup(
-            pnlActionHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlActionHoaDonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlActionHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChiTiet)
-                    .addComponent(btnThemMoi)
-                    .addComponent(btnReload))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlActionHoaDon.add(jPanel6);
 
         tabDanhSach.add(pnlActionHoaDon, java.awt.BorderLayout.PAGE_START);
 
@@ -280,125 +299,70 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         tabCapNhat.setLayout(new java.awt.BorderLayout());
 
-        btnDownloadQr.setText("print");
-        btnDownloadQr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDownloadQrActionPerformed(evt);
-            }
-        });
-
-        lblQR_CODE.setText(" ");
-
-        javax.swing.GroupLayout pnlQrCodeLayout = new javax.swing.GroupLayout(pnlQrCode);
-        pnlQrCode.setLayout(pnlQrCodeLayout);
-        pnlQrCodeLayout.setHorizontalGroup(
-            pnlQrCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQrCodeLayout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(btnDownloadQr)
-                .addGap(65, 65, 65))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQrCodeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblQR_CODE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlQrCodeLayout.setVerticalGroup(
-            pnlQrCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQrCodeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblQR_CODE, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDownloadQr)
-                .addContainerGap(315, Short.MAX_VALUE))
-        );
-
-        tabCapNhat.add(pnlQrCode, java.awt.BorderLayout.LINE_END);
-
+        pnlLeftTabCapNhat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlLeftTabCapNhat.setPreferredSize(new java.awt.Dimension(400, 400));
         pnlLeftTabCapNhat.setLayout(new java.awt.BorderLayout(10, 10));
 
-        pnlDetail.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlAction.setPreferredSize(new java.awt.Dimension(392, 65));
+        pnlAction.setLayout(new java.awt.BorderLayout(0, 10));
 
-        lblMaHoaDonDenBu.setText("Hóa Đơn");
-        pnlDetail.add(lblMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+        lblErrorAction.setText(" ");
+        pnlAction.add(lblErrorAction, java.awt.BorderLayout.PAGE_START);
 
-        jLabel2.setText("Hội viên");
-        pnlDetail.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
-
-        txtTongTien.setEnabled(false);
-        pnlDetail.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 190, -1));
-
-        jLabel3.setText("Tổng tiền");
-        pnlDetail.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        cmbNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlDetail.add(cmbNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 230, 20));
-
-        lblErrorMaHoaDonDenBu.setText(" ");
-        pnlDetail.add(lblErrorMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, -1));
-
-        lblErrorNguoiMuon.setText(" ");
-        pnlDetail.add(lblErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 180, -1));
-
-        lblErrorTongTien.setText(" ");
-        pnlDetail.add(lblErrorTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 190, -1));
-
-        txtMaHoaDonDenBu.setEnabled(false);
-        pnlDetail.add(txtMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 190, -1));
-
-        pnlLeftTabCapNhat.add(pnlDetail, java.awt.BorderLayout.PAGE_START);
-
-        pnlAction.setPreferredSize(new java.awt.Dimension(392, 60));
-        pnlAction.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setPreferredSize(new java.awt.Dimension(634, 50));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0, 10, 10));
 
         btnChonSach.setText("Chọn Sách");
-        btnChonSach.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnChonSach.setPreferredSize(new java.awt.Dimension(100, 40));
         btnChonSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonSachActionPerformed(evt);
             }
         });
-        pnlAction.add(btnChonSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 30));
-
-        btnQuayLai.setText("Quay Lại");
-        btnQuayLai.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuayLaiActionPerformed(evt);
-            }
-        });
-        pnlAction.add(btnQuayLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, 30));
+        jPanel1.add(btnChonSach);
 
         btnXoaSach.setText("Xóa Sách");
-        btnXoaSach.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnXoaSach.setPreferredSize(new java.awt.Dimension(100, 40));
         btnXoaSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaSachActionPerformed(evt);
             }
         });
-        pnlAction.add(btnXoaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 30));
-
-        btnSave.setText("Lưu");
-        btnSave.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-        pnlAction.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 30));
-
-        lblErrorAction.setText(" ");
-        pnlAction.add(lblErrorAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 370, 10));
+        jPanel1.add(btnXoaSach);
 
         btnReset.setText("Làm Mới");
+        btnReset.setPreferredSize(new java.awt.Dimension(100, 40));
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
             }
         });
-        pnlAction.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, 30));
+        jPanel1.add(btnReset);
+
+        btnSave.setText("Lưu");
+        btnSave.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSave);
+
+        btnQuayLai.setText("Quay Lại");
+        btnQuayLai.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnQuayLai);
+
+        pnlAction.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pnlLeftTabCapNhat.add(pnlAction, java.awt.BorderLayout.PAGE_END);
+
+        jScrollPaneTableSachMuon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -419,6 +383,65 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jScrollPaneTableSachMuon.setViewportView(tblHoaDonChiTiet);
 
         pnlLeftTabCapNhat.add(jScrollPaneTableSachMuon, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 10));
+
+        pnlDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlDetail.setPreferredSize(new java.awt.Dimension(450, 200));
+        pnlDetail.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMaHoaDonDenBu.setText("Hóa Đơn");
+        pnlDetail.add(lblMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 20));
+
+        jLabel2.setText("Hội viên");
+        pnlDetail.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 70, -1));
+
+        txtTongTien.setEnabled(false);
+        pnlDetail.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 290, -1));
+
+        jLabel3.setText("Tổng tiền");
+        pnlDetail.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        cmbNguoiMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pnlDetail.add(cmbNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 290, 25));
+
+        lblErrorMaHoaDonDenBu.setText(" ");
+        pnlDetail.add(lblErrorMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 290, -1));
+
+        lblErrorNguoiMuon.setText(" ");
+        pnlDetail.add(lblErrorNguoiMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 290, -1));
+
+        lblErrorTongTien.setText(" ");
+        pnlDetail.add(lblErrorTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 290, -1));
+
+        txtMaHoaDonDenBu.setEnabled(false);
+        pnlDetail.add(txtMaHoaDonDenBu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 290, -1));
+
+        jPanel3.add(pnlDetail);
+
+        pnlQrCode.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlQrCode.setLayout(new java.awt.BorderLayout(0, 10));
+
+        btnDownloadQr.setText("print");
+        btnDownloadQr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadQrActionPerformed(evt);
+            }
+        });
+        pnlQrCode.add(btnDownloadQr, java.awt.BorderLayout.SOUTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        lblQR_CODE.setText(" ");
+        jPanel2.add(lblQR_CODE, java.awt.BorderLayout.CENTER);
+
+        pnlQrCode.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(pnlQrCode);
+
+        pnlLeftTabCapNhat.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
         tabCapNhat.add(pnlLeftTabCapNhat, java.awt.BorderLayout.CENTER);
 
@@ -620,6 +643,14 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneTableSachMuon;
     private javax.swing.JLabel lblErrorAction;

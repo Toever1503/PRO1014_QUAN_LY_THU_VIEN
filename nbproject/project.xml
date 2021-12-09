@@ -4,6 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>PRO1014_QUAN_LY_THU_VIEN</name>
+            <explicit-platform explicit-source-supported="true"/>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

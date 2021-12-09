@@ -148,7 +148,9 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
 
         jPanelDanhSach.setLayout(new java.awt.BorderLayout(0, 10));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(648, 65));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setPreferredSize(new java.awt.Dimension(648, 85));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 15));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
@@ -263,7 +265,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanelDanhSach.add(jScrollPane, java.awt.BorderLayout.CENTER);
 
         jPanelPhanTrang.setPreferredSize(new java.awt.Dimension(812, 54));
-        jPanelPhanTrang.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 10));
+        jPanelPhanTrang.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
 
         jPanel8.setPreferredSize(new java.awt.Dimension(330, 35));
         jPanel8.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
@@ -875,6 +877,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         }
         //check list sachMuon exist?
         if (listSachMuon.size() == 0) {
+            Helper.MsgBox.alert_WARNING(this, "Hãy chọn sách cần mượn!");
 //            jLabelErrorAction.setText("Hãy chọn sách cần mượn!");
         } else {
             check++;
