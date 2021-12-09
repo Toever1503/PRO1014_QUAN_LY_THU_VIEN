@@ -268,7 +268,7 @@ public class QLPhieuMuon_JPanel extends javax.swing.JPanel {
         jPanelPhanTrang.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
 
         jPanel8.setPreferredSize(new java.awt.Dimension(330, 35));
-        jPanel8.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        jPanel8.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
