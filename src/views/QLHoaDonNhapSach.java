@@ -494,11 +494,20 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
                     return;
                 } else {
                     String keyData = hoaDonNhapSach.getQr_code().split("-")[1];
-                    if (!Helper.QR_CODE.generateQRcode(keyData, Helper.XImage.HOADON_UPLOAD.concat("/" + keyData + ".png"))) {
+                    if (!Helper.QR_CODE.generateQRcode(keyData, Helper.XImage.NHAPSACH_UPLOAD.concat("/" + keyData + ".png"))) {
                         JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã Qr-code");
                     }
                     InsertOnUpdateListHoaNhapChiTiet(hoaDonNhapSach.getId());
                     JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                    try {
+                        lblQR_CODE.setIcon(new ImageIcon(
+                                new ImageIcon(Helper.XImage.NHAPSACH_UPLOAD.concat("/" + hoaDonNhapSach.getQr_code().split("-")[1] + ".png"))
+                                        .getImage()
+                                        .getScaledInstance(195, 210,
+                                                Image.SCALE_DEFAULT)));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     hoaDonNhapSach.setId(id);
                     txtMaHoaDonDenBu.setText(id.toString());
                     pageIndex = 0;
@@ -759,6 +768,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
                                 .getImage()
                                 .getScaledInstance(195, 210,
                                         Image.SCALE_DEFAULT)));
+                System.out.println(hoaDonNhapSach.getQr_code());
             } catch (Exception e) {
                 e.printStackTrace();
             }
