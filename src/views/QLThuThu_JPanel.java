@@ -82,11 +82,17 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
 
     void insert() {
         QuanLy model = getForm();
-        QLDao.insertOnUpdate(model);
+        if(QLDao.insertOnUpdate(model)==0){
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }else{
+           QLDao.insertOnUpdate(model);
         row = 0;
         listQLTT.clear();
         listQLTT.put(row, QLDao.selectByPage(String.valueOf(row)));
-        fillTable(listQLTT.get(row));
+        fillTable(listQLTT.get(row)); 
+        JOptionPane.showMessageDialog(this,btnInsert.getText()+ " Thành công");
+        }
+        
     }
 
     void clearForm() {
@@ -590,10 +596,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         clearForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        insert();
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         if (checkNullText(txtMaTT) && checkNullPass(txtMatKhau) && checkNullText(txtCCCD)
@@ -653,15 +655,19 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         // TODO add your handling code here:
         activeTabCapNhat();
+        btnInsert.setText("Thêm");
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
         // TODO add your handling code here:
-        activeTabCapNhat();
+        
         int i = tblQuanLyThuThu.getSelectedRow();
         if (i == -1) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn phiếu mượn cần xem!");
         } else {
+            activeTabCapNhat();
             setForm(listQLTT.get(row).get(i));
+            btnInsert.setText("Cập nhật");
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
 
@@ -679,6 +685,10 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnThemMoiAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnThemMoiAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemMoiAncestorAdded
     public void activeTabCapNhat() {
         tabs.add(tabCapNhat, "Cập Nhật");
         tabs.setSelectedIndex(1);
@@ -799,7 +809,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPrev1;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private com.toedter.calendar.JDateChooser jDateChooserNgaySinh;
