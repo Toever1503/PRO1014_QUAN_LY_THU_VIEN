@@ -504,7 +504,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
                     pageIndex = 0;
                     listHoaDonNhapSach.clear();
                     listHoaDonNhapSach.put(pageIndex, hoaDonNhapSachDao.selectByPage(Long.valueOf(pageIndex)));
-
                 }
             } else {
                 if (hoaDonNhapSachDao.insertOnUpdate(hoaDonNhapSach) <= 0) {
@@ -583,8 +582,12 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         // TODO add your handling code here:
         resetForm();
         activeTabCapNhat();
-        if (listHoaDonNhapSachChiTiet.size() > 0)
+        if (listHoaDonNhapSachChiTiet.size() > 0) {
             listHoaDonNhapSachChiTiet.clear();
+        }
+        btnSave.setEnabled(true);
+        btnXoaSach.setEnabled(true);
+        btnChonSach.setEnabled(true);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
@@ -595,6 +598,9 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         } else {
             listHoaDonNhapSachChiTiet.clear();
             setForm(listHoaDonNhapSach.get(pageIndex).get(row));
+            btnSave.setEnabled(false);
+            btnXoaSach.setEnabled(false);
+            btnChonSach.setEnabled(false);
             activeTabCapNhat();
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
@@ -794,6 +800,9 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         lblQR_CODE.setIcon(null);
         btnDownloadQr.setVisible(false);
         btnSave.setText("Thêm");
+        btnSave.setEnabled(true);
+        btnXoaSach.setEnabled(true);
+        btnChonSach.setEnabled(true);
     }
 
     private void InsertOnUpdateListHoaNhapChiTiet(Long id) {
@@ -803,9 +812,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
             new Thread() {
                 @Override
                 public void run() {
-                    if (hdct.getLoaiSach()) {
-                        sachDao.updateGia(hdct.getSach(), hdct.getGia());
-                    }
                     hoaDonNhapSachDaoChiTietDao.insert(hdct);
                 }
             }.start();

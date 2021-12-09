@@ -15,6 +15,7 @@ public class HoaDonNhapSachChiTiet {
     private Double gia;
     private int soLuong;
     private Boolean loaiSach;
+    private String tenSach;
 
     public HoaDonNhapSachChiTiet() {
     }
@@ -66,6 +67,15 @@ public class HoaDonNhapSachChiTiet {
     public void setLoaiSach(Boolean loaiSach) {
         this.loaiSach = loaiSach;
     }
+
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
+    }
+    
 
     @Override
     public String toString() {

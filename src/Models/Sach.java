@@ -21,6 +21,7 @@ public class Sach {
     private long nhaXuatBan;
     private boolean trangThai;
     private Double gia;
+    private Long hdns;
 
     public Sach() {
     }
@@ -34,7 +35,7 @@ public class Sach {
         this.nguoiTao = nguoiTao;
     }
 
-    public Sach(Long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai, Double gia) {
+    public Sach(Long id, String nguoiTao, String tenSach, String viTri, Date ngayTao, String qr_code, long nhaXuatBan, boolean trangThai, Double gia, Long hdns) {
         this.id = id;
         this.nguoiTao = nguoiTao;
         this.tenSach = tenSach;
@@ -44,6 +45,7 @@ public class Sach {
         this.nhaXuatBan = nhaXuatBan;
         this.trangThai = trangThai;
         this.gia = gia;
+        this.hdns = hdns;
     }
 
     public Long getId() {
@@ -118,9 +120,17 @@ public class Sach {
         this.gia = gia;
     }
 
+    public Long getHdns() {
+        return hdns;
+    }
+
+    public void setHdns(Long hdns) {
+        this.hdns = hdns;
+    }
+
     @Override
     public String toString() {
-        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", gia=" + gia + '}';
+        return "Sach{" + "id=" + id + ", nguoiTao=" + nguoiTao + ", tenSach=" + tenSach + ", viTri=" + viTri + ", ngayTao=" + ngayTao + ", qr_code=" + qr_code + ", nhaXuatBan=" + nhaXuatBan + ", trangThai=" + trangThai + ", gia=" + gia + ", hdns=" + hdns + '}';
     }
 
 }
