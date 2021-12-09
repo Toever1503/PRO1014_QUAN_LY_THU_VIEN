@@ -5,6 +5,10 @@
 package DAO;
 
 import Models.HoaDonNhapSachChiTiet;
+import Models.Sach;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +27,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO hoa_don_nhap_sach_chi_tiet (HD_Sach, Sach, GiaSach, SoLuong, LoaiSach) VALUES (?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE GiaSach=VALUES(GiaSach), SoLuong=VALUES(SoLuong), LoaiSach=VALUES(LoaiSach)";
     private final String SELECT_BY_PAGE_SQL = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet LIMIT ?, 30";
-    private final String SELECT_BY_SACH ="SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ? LIMIT 1, 1";
+    private final String SELECT_BY_SACH = "SELECT HD_Sach, Sach, GiaSach, SoLuong, LoaiSach FROM hoa_don_nhap_sach_chi_tiet WHERE Sach = ? LIMIT 1, 1";
 
     private SachDAO sachDAO;
     private static HoaDonNhapSachChiTietDao instance;
@@ -49,6 +53,26 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
                     entity.getGia(),
                     entity.getSoLuong(),
                     entity.getLoaiSach());
+            ResultSet rs = Helper.Utility.query("SELECT ID FROM hoa_don_nhap_sach_chi_tiet\n"
+                    + "ORDER BY ID DESC\n"
+                    + "LIMIT 0,?", 1);
+            rs.next();
+            Long id = rs.getLong("ID");
+            System.out.println("qunatity: "+entity.getSoLuong());
+            System.out.println("gia: "+entity.getGia());
+            for (int i = 0; i < entity.getSoLuong(); i++) {
+                Long timeNow = Calendar.getInstance().getTimeInMillis();
+                Sach sach = new Sach();
+                sach.setHdns(id);
+                sach.setGia(entity.getGia());
+                sach.setNgayTao(new Date(timeNow));
+                sach.setTrangThai(true);
+                sach.setNguoiTao(Helper.Auth.user.getMaQL());
+                sach.setQr_code("sach-"+timeNow);
+                sach.setTenSach(entity.getTenSach());
+                Helper.QR_CODE.generateQRcode(sach.getQr_code(), Helper.XImage.SACH_UPLOAD.concat("/"+timeNow+".png"));
+                System.out.println(sachDAO.insertOnUpdate(sach));;
+            }
         } catch (Exception ex) {
             Logger.getLogger(HoaDonNhapSachChiTietDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +140,7 @@ public class HoaDonNhapSachChiTietDao extends LibrarianDAO<HoaDonNhapSachChiTiet
     public List<HoaDonNhapSachChiTiet> selectALL() {
         return this.selectBySql(this.SELECT_ALL_SQL);
     }
-    
+
     public List<HoaDonNhapSachChiTiet> selectALLByHoaDon(Long id) {
         return this.selectBySql(this.SELECT_ALL_SQL, id);
     }

@@ -26,9 +26,9 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     private final String UPDATE_GIA_SQL = "UPDATE sach SET giaSach=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
 
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO `sach` (`ID`, `MaQL`, `TenSach`, `ViTri`, `NgayTao`, `NhaXuatBan`, `TrangThai`, `QR_FILE`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\n"
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO sach (ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, hdctnsct, giaSach) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
-    private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " LIMIT ?, 30";
+    private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " where hdctnsct = 0  LIMIT ?, 30";
     private final String SELECT_BY_KEY = SELECT_ALL_SQL + " WHERE ID like ? or TenSach like ? or ViTri like ?";
     private final String SELECT_ALL_BY_TL = SELECT_ALL_SQL + " as s JOIN the_loai_va_sach AS tlvs\n"
             + "ON\n"
@@ -89,7 +89,9 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
                     entity.getNgayTao(),
                     entity.getNhaXuatBan(),
                     entity.isTrangThai(),
-                    entity.getQr_code());
+                    entity.getQr_code(),
+                    entity.getHdns(),
+                    entity.getGia());
             if (row > 0) {
                 if (entity.getId() == null) {
                     ResultSet rs = Helper.Utility.query("SELECT ID FROM sach\n"
@@ -130,6 +132,10 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     @Override
     public List<Sach> selectByPage(Long page) {
         return this.selectBySql(this.SELECT_BY_PAGE_SQL, page * 30);
+    }
+
+    public List<Sach> selectByPage(Long page, int type) {
+        return this.selectBySql(SELECT_ALL_SQL + " where hdctnsct != 0  LIMIT ?, 30", page * 30);
     }
 
     public List<Sach> selectByKey(String key) {
@@ -204,11 +210,11 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
         }
         return list.get(0);
     }
-    
+
     public static void main(String[] args) {
         SachDAO sachDAO = SachDAO.getInstance();
 
         System.out.println(sachDAO.selectByPage(Long.valueOf(0)).size());
     }
-    
+
 }
