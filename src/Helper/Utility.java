@@ -70,7 +70,7 @@ public class Utility {
                 ps.getConnection().close();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 

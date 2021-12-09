@@ -37,7 +37,7 @@ public class Home_Frame extends javax.swing.JFrame {
      */
     public Home_Frame() {
         this.init();
-//        this.initPnlQuanLy();
+        this.initPnlQuanLy();
 //        fillTableDeXuat();
     }
 
@@ -46,12 +46,6 @@ public class Home_Frame extends javax.swing.JFrame {
             instance = new Home_Frame();
         }
         return instance;
-    }
-
-    public void show() {
-//        System.out.println(Helper.Auth.user);
-//        lblWelcome1.setText("Xin chào " + Helper.Auth.user.getFullName()+"!");
-//        setVisible(true);
     }
 
     public void init() {
@@ -73,12 +67,12 @@ public class Home_Frame extends javax.swing.JFrame {
                 jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
             }
         }.start();
-//        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
