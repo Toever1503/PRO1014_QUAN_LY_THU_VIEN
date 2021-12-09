@@ -158,7 +158,7 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlWest.setBackground(new java.awt.Color(6, 143, 202));
-        pnlWest.setPreferredSize(new java.awt.Dimension(250, 397));
+        pnlWest.setPreferredSize(new java.awt.Dimension(300, 397));
         pnlWest.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnl1.setBackground(new java.awt.Color(6, 143, 202));
@@ -166,7 +166,7 @@ public class Home_Frame extends javax.swing.JFrame {
 
         btnQLSach.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnQLSach.setForeground(new java.awt.Color(255, 255, 255));
-        btnQLSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnQLSach.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnQLSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/book0.png"))); // NOI18N
         btnQLSach.setText("Quản lý sách");
         btnQLSach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,14 +182,14 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl1.add(btnQLSach, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 225, 250, 40));
+        pnlWest.add(pnl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 225, 300, 40));
 
         pnl2.setBackground(new java.awt.Color(6, 143, 202));
         pnl2.setLayout(new java.awt.BorderLayout());
 
         btnQLPhieuMuon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnQLPhieuMuon.setForeground(new java.awt.Color(255, 255, 255));
-        btnQLPhieuMuon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnQLPhieuMuon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnQLPhieuMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/loan_slip0.png"))); // NOI18N
         btnQLPhieuMuon.setText("Quản lý phiếu mượn");
         btnQLPhieuMuon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,14 +205,14 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl2.add(btnQLPhieuMuon, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 250, 45));
+        pnlWest.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 300, 45));
 
         pnl3.setBackground(new java.awt.Color(6, 143, 202));
         pnl3.setLayout(new java.awt.BorderLayout());
 
         btnQLHoiVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnQLHoiVien.setForeground(new java.awt.Color(255, 255, 255));
-        btnQLHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnQLHoiVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnQLHoiVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/members 0.png"))); // NOI18N
         btnQLHoiVien.setText("Quản lý hội viên");
         btnQLHoiVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -228,14 +228,14 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl3.add(btnQLHoiVien, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, 45));
+        pnlWest.add(pnl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 300, 45));
 
         pnl4.setBackground(new java.awt.Color(6, 143, 202));
         pnl4.setLayout(new java.awt.BorderLayout());
 
         btnHoaDonDenBu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
-        btnHoaDonDenBu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnHoaDonDenBu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnHoaDonDenBu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/receipt.png"))); // NOI18N
         btnHoaDonDenBu.setText("Hóa đơn đền bù");
         btnHoaDonDenBu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -251,14 +251,14 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl4.add(btnHoaDonDenBu, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 250, 45));
+        pnlWest.add(pnl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 300, 45));
 
         pnl5.setBackground(new java.awt.Color(6, 143, 202));
         pnl5.setLayout(new java.awt.BorderLayout());
 
         btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnThongKe.setForeground(new java.awt.Color(255, 255, 255));
-        btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/trend0.png"))); // NOI18N
         btnThongKe.setText("Thống kê");
         btnThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -274,10 +274,10 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         pnl5.add(btnThongKe, java.awt.BorderLayout.CENTER);
 
-        pnlWest.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 250, 45));
+        pnlWest.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 300, 45));
 
         jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
-        pnlWest.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 250, -1));
+        pnlWest.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 300, -1));
 
         btnScanQR.setBackground(new java.awt.Color(0, 153, 0));
         btnScanQR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -288,7 +288,7 @@ public class Home_Frame extends javax.swing.JFrame {
                 btnScanQRActionPerformed(evt);
             }
         });
-        pnlWest.add(btnScanQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 170, 50));
+        pnlWest.add(btnScanQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 220, 50));
 
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library.png"))); // NOI18N
@@ -297,7 +297,7 @@ public class Home_Frame extends javax.swing.JFrame {
                 btnHomeMouseClicked(evt);
             }
         });
-        pnlWest.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 250, 100));
+        pnlWest.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 100));
 
         jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator5.setAlignmentX(0.0F);
@@ -308,7 +308,7 @@ public class Home_Frame extends javax.swing.JFrame {
         jSeparator5.setFocusTraversalPolicy(null);
         jSeparator5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jSeparator5.setPreferredSize(new java.awt.Dimension(40, 2));
-        pnlWest.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 120, 200, -1));
+        pnlWest.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 120, 250, -1));
 
         pnlMain.add(pnlWest, java.awt.BorderLayout.WEST);
 
