@@ -53,9 +53,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoai.getModel();
 //
         listSach = new HashMap<Integer, List<Sach>>();
-        listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
         fillComboboxTheLoai();
-        fillTableSach(listSach.get(0));
     }
 
     public static Chon_Sach_JDialog getInstance() {
@@ -67,13 +65,16 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
 
     public void show(String type) {
         setVisible(true);
-        fillTableSach(listSach.get(0));
         ACTION_TYPE = type;
+        listSach.clear();
+        pageIndex = 0;
 
         if (ACTION_TYPE == "PHIEU_MUON") {
+            listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex), 1));
             btnReset.setVisible(false);
             jPanelDetailSach.setVisible(false);
         } else if (ACTION_TYPE == "HOA_DON") {
+            listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex), 1));
             btnReset.setVisible(false);
             jPanelDetailSach.setVisible(true);
 
@@ -84,6 +85,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             radMoi.setVisible(false);
             radCu.setVisible(false);
         } else {
+            listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
             btnReset.setVisible(false);
             jPanelDetailSach.setVisible(true);
 
@@ -95,6 +97,7 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             radMoi.setVisible(true);
             radCu.setVisible(true);
         }
+        fillTableSach(listSach.get(pageIndex));
     }
 
     /**
@@ -353,7 +356,11 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             pageIndex++;
             List<Sach> list = listSach.get(pageIndex);
             if (list == null) {
-                list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+                if (ACTION_TYPE == "NHAP_SACH") {
+                    list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+                } else {
+                    list = sachDAO.selectByPage(Long.valueOf(pageIndex), 1);
+                }
             }
             fillTableSach(list);
         }
@@ -365,7 +372,14 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Bạn đang ở trang đầu!");
         } else {
             pageIndex--;
-            fillTableSach(listSach.get(pageIndex));
+            List<Sach> list = listSach.get(pageIndex);
+            if (list == null) {
+                if (ACTION_TYPE == "NHAP_SACH") {
+                    list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+                } else {
+                    list = sachDAO.selectByPage(Long.valueOf(pageIndex), 1);
+                }
+            }
         }
     }//GEN-LAST:event_btnPrevActionPerformed
 
@@ -412,17 +426,12 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
                 HoaDonNhapSachChiTiet hdct = getFormHdct();
                 System.out.println("nhapSach->" + hdct);
                 if (hdct != null) {
-                    if (hdct.getLoaiSach()) {
-                        if (hdct.getGia() < sach.getGia()) {
-                            JOptionPane.showMessageDialog(this, "Giá sách mới phải lớn hơn hoặc bằng giá ban đầu!");
-                        }
+                    hdct.setSach(sach.getId());
+                    hdct.setTenSach(sach.getTenSach());
+                    if (QLHoaDonNhapSach.getInstance().addSach(hdct, sach.getTenSach())) {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công!");
                     } else {
-                        hdct.setSach(sach.getId());
-                        if (QLHoaDonNhapSach.getInstance().addSach(hdct, sach.getTenSach())) {
-                            JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
-                        }
+                        JOptionPane.showMessageDialog(this, "Sách hiện đã được thêm!");
                     }
                 }
             }
