@@ -91,6 +91,7 @@ public class HoaDonNhapSachDao extends LibrarianDAO<HoaDonNhapSach, Long> {
                         @Override
                         public void run() {
                             HoaDonNhapSachChiTietDao.getInstance().delete(entity.getId());
+                            System.out.println("hdns deleted");
                         }
                     }.start();
                     ResultSet rs = Helper.Utility.query("SELECT ID FROM hoa_don_nhap_sach\n"
