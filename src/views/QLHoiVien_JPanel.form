@@ -235,7 +235,7 @@
                       </Border>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[268, 52]"/>
+                      <Dimension value="[320, 52]"/>
                     </Property>
                   </Properties>
 

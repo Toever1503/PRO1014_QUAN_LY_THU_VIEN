@@ -210,7 +210,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 15));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setPreferredSize(new java.awt.Dimension(268, 52));
+        jPanel8.setPreferredSize(new java.awt.Dimension(320, 52));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 10));
 
         jPanel7.setLayout(new java.awt.GridLayout(1, 0, 10, 10));
