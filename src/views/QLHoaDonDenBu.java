@@ -134,6 +134,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         lblErrorNguoiMuon = new javax.swing.JLabel();
         lblErrorTongTien = new javax.swing.JLabel();
         txtMaHoaDonDenBu = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
         pnlQrCode = new javax.swing.JPanel();
         btnDownloadQr = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -144,7 +145,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         tabDanhSach.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tabDanhSach.setLayout(new java.awt.BorderLayout(0, 10));
+        tabDanhSach.setLayout(new java.awt.BorderLayout(10, 10));
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -175,7 +176,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlTrang.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
 
         jPanel4.setPreferredSize(new java.awt.Dimension(330, 35));
-        jPanel4.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +285,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -388,7 +389,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 10));
 
         pnlDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlDetail.setPreferredSize(new java.awt.Dimension(450, 200));
+        pnlDetail.setPreferredSize(new java.awt.Dimension(450, 228));
         pnlDetail.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblMaHoaDonDenBu.setText("Hóa Đơn");
@@ -420,6 +421,8 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         jPanel3.add(pnlDetail);
 
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         pnlQrCode.setPreferredSize(new java.awt.Dimension(200, 200));
         pnlQrCode.setLayout(new java.awt.BorderLayout(0, 10));
 
@@ -439,7 +442,24 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
 
         pnlQrCode.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel3.add(pnlQrCode);
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlQrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlQrCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel9);
 
         pnlLeftTabCapNhat.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -651,6 +671,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneTableSachMuon;
     private javax.swing.JLabel lblErrorAction;
