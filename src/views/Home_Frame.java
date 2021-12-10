@@ -130,8 +130,9 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLPhieuMuon = new javax.swing.JMenuItem();
         mniQuanLyHoiVien = new javax.swing.JMenuItem();
         mniQLHoaDon = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mniQLThuThu = new javax.swing.JMenuItem();
         mnItemGopY = new javax.swing.JMenuItem();
         mnThongKe = new javax.swing.JMenu();
@@ -139,6 +140,8 @@ public class Home_Frame extends javax.swing.JFrame {
         mniSachBiLoai = new javax.swing.JMenuItem();
         mniSachTreHan = new javax.swing.JMenuItem();
         mniSachConLai = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
         mnTroDiup = new javax.swing.JMenu();
         mniHuongDanSuDung = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -147,6 +150,7 @@ public class Home_Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
 
+        pnlMain.setBackground(java.awt.Color.white);
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlWest.setBackground(new java.awt.Color(6, 143, 202));
@@ -305,6 +309,7 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMain.add(pnlWest, java.awt.BorderLayout.WEST);
 
         pnlLast.setBackground(new java.awt.Color(255, 255, 255));
+        pnlLast.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlLast.setPreferredSize(new java.awt.Dimension(826, 30));
         pnlLast.setLayout(new java.awt.BorderLayout());
 
@@ -318,27 +323,43 @@ public class Home_Frame extends javax.swing.JFrame {
 
         pnlMain.add(pnlLast, java.awt.BorderLayout.PAGE_END);
 
-        pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainRight.setBackground(java.awt.Color.white);
         pnlMainRight.setLayout(new java.awt.CardLayout());
 
+        jPanel_home.setBackground(java.awt.Color.white);
+        jPanel_home.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/library_1.png"))); // NOI18N
+        jPanel_home.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        pnlMainRight.add(jPanel_home, "card9");
+
+        jPanel_QlSach.setBackground(java.awt.Color.white);
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlSach, "card3");
 
+        jPanel_QlPhieuMuon.setBackground(java.awt.Color.white);
         jPanel_QlPhieuMuon.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlPhieuMuon, "card4");
 
+        jPanel_QlHoiVien.setBackground(java.awt.Color.white);
         jPanel_QlHoiVien.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlHoiVien, "card5");
 
+        jPanel_QlThuThu.setBackground(java.awt.Color.white);
         jPanel_QlThuThu.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlThuThu, "card6");
 
+        jPanel_QlHoaDonDenBu.setBackground(java.awt.Color.white);
         jPanel_QlHoaDonDenBu.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlHoaDonDenBu, "card7");
 
+        jPanel_ThongKe.setBackground(java.awt.Color.white);
         jPanel_ThongKe.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_ThongKe, "card8");
 
+        jPanel_Ql_Nhap_Sach.setBackground(java.awt.Color.white);
         jPanel_Ql_Nhap_Sach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_Ql_Nhap_Sach, "card9");
 
@@ -358,7 +379,7 @@ public class Home_Frame extends javax.swing.JFrame {
         getContentPane().add(pnlMain, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuBar1.setBorder(null);
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenuBar1.setBorderPainted(false);
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar1.setMinimumSize(new java.awt.Dimension(234, 25));
@@ -377,6 +398,7 @@ public class Home_Frame extends javax.swing.JFrame {
         });
         mnHeThong.add(mniTaiKhoan);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/rotation-lock.png"))); // NOI18N
         jMenuItem1.setText("Đổi Mật Khẩu");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,24 +424,46 @@ public class Home_Frame extends javax.swing.JFrame {
         mniQLSach.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/book.png"))); // NOI18N
         mniQLSach.setText("Quản lý sách");
+        mniQLSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLSachActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLSach);
 
         mniQLPhieuMuon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLPhieuMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/loan_slip.png"))); // NOI18N
         mniQLPhieuMuon.setText("Quản lý phiếu mượn");
+        mniQLPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLPhieuMuonActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLPhieuMuon);
 
         mniQuanLyHoiVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQuanLyHoiVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/members .png"))); // NOI18N
         mniQuanLyHoiVien.setText("Quản lý hội viên");
+        mniQuanLyHoiVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQuanLyHoiVienActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQuanLyHoiVien);
 
         mniQLHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/receipt.png"))); // NOI18N
         mniQLHoaDon.setText("Hóa đơn đề bù");
+        mniQLHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLHoaDonActionPerformed(evt);
+            }
+        });
         mnQuanLy.add(mniQLHoaDon);
-        mnQuanLy.add(jSeparator1);
+        mnQuanLy.add(jSeparator6);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/importBook.png"))); // NOI18N
         jMenuItem2.setText("Quản Lý Nhập Sách");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,6 +471,7 @@ public class Home_Frame extends javax.swing.JFrame {
             }
         });
         mnQuanLy.add(jMenuItem2);
+        mnQuanLy.add(jSeparator1);
 
         mniQLThuThu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniQLThuThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/librarian.png"))); // NOI18N
@@ -474,6 +519,17 @@ public class Home_Frame extends javax.swing.JFrame {
         mniSachConLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/available.png"))); // NOI18N
         mniSachConLai.setText("Sách còn lại");
         mnThongKe.add(mniSachConLai);
+        mnThongKe.add(jSeparator7);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/message.png"))); // NOI18N
+        jMenuItem3.setText("Thông báo trễ hạn");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnThongKe.add(jMenuItem3);
 
         jMenuBar1.add(mnThongKe);
 
@@ -482,12 +538,22 @@ public class Home_Frame extends javax.swing.JFrame {
         mniHuongDanSuDung.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         mniHuongDanSuDung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/instructions.png"))); // NOI18N
         mniHuongDanSuDung.setText("Hướng dẫn sử dụng");
+        mniHuongDanSuDung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniHuongDanSuDungActionPerformed(evt);
+            }
+        });
         mnTroDiup.add(mniHuongDanSuDung);
         mnTroDiup.add(jSeparator2);
 
         mniGioiThieu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         mniGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/idea.png"))); // NOI18N
         mniGioiThieu.setText("Giới thiệu sản phẩm");
+        mniGioiThieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGioiThieuActionPerformed(evt);
+            }
+        });
         mnTroDiup.add(mniGioiThieu);
 
         jMenuBar1.add(mnTroDiup);
@@ -550,7 +616,6 @@ public class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
         activePanel("QLNHAPSACH");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -602,6 +667,34 @@ public class Home_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mniSachTreHanActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.sendMail();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void mniQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLHoaDonActionPerformed
+        activePanel("QLHOADONDENBU");
+    }//GEN-LAST:event_mniQLHoaDonActionPerformed
+
+    private void mniQuanLyHoiVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuanLyHoiVienActionPerformed
+        activePanel("QLHOIVIEN");
+    }//GEN-LAST:event_mniQuanLyHoiVienActionPerformed
+
+    private void mniQLPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLPhieuMuonActionPerformed
+        activePanel("QLPHIEUMUON");
+    }//GEN-LAST:event_mniQLPhieuMuonActionPerformed
+
+    private void mniQLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLSachActionPerformed
+        activePanel("QLSACH");
+    }//GEN-LAST:event_mniQLSachActionPerformed
+
+    private void mniHuongDanSuDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHuongDanSuDungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniHuongDanSuDungActionPerformed
+
+    private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniGioiThieuActionPerformed
+
     private void mnItemGopYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemGopYActionPerformed
         // TODO add your handling code here:
         activePanel("GOPY");
@@ -611,16 +704,18 @@ public class Home_Frame extends javax.swing.JFrame {
         ThongKeDAO tkdao = ThongKeDAO.getInstance();
         java.util.List<Object[]> list = tkdao.getEmailLate();
         PhieuMuonChiTietDao pmct = PhieuMuonChiTietDao.getInstance();
+        Home_Frame that = this;
         new Thread() {
             @Override
             public void run() {
                 for (int i = 0; i < list.size(); i++) {
-                    String maHV = (String) list.get(i)[0];
-                    String hoTen = (String) list.get(i)[1];
-                    String email = (String) list.get(i)[2];
-                    String ngayHan = (String) list.get(i)[3];
-                    String SLNgayTre = (String) list.get(i)[4];
-                    String maPM = (String) list.get(i)[5];
+                    System.out.println((Long) list.get(i)[0]);
+                    String maHV = String.valueOf(list.get(i)[0]);
+                    String hoTen = String.valueOf(list.get(i)[1]);
+                    String email = String.valueOf(list.get(i)[2]);
+                    String ngayHan = String.valueOf(list.get(i)[3]);
+                    String SLNgayTre = String.valueOf(list.get(i)[4]);
+                    String maPM = String.valueOf(list.get(i)[5]);
                     System.out.println(maHV + hoTen);
                     String content = "  Xin chào hội viên " + hoTen + " - " + maHV + " ! \n"
                             + "Phiếu mượn sách mã số " + maPM + " của quý khách đã trễ hạn ngày " + ngayHan + "( " + SLNgayTre + " ) \n";
@@ -628,6 +723,7 @@ public class Home_Frame extends javax.swing.JFrame {
                         pmct.resetDateSend(maPM);
                     }
                 }
+                Helper.MsgBox.alert_INFORMATION(that, "Đã gửi mail thông báo trả sách!");
             }
         }.start();
     }
@@ -713,6 +809,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel_GOP_y;
     private javax.swing.JPanel jPanel_Home;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
@@ -728,6 +825,8 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel lblClock;
     private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenuItem mnItemGopY;

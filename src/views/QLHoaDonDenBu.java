@@ -219,7 +219,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlActionHoaDon.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 15));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setPreferredSize(new java.awt.Dimension(268, 52));
+        jPanel8.setPreferredSize(new java.awt.Dimension(280, 52));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         jPanel5.setPreferredSize(new java.awt.Dimension(254, 28));
