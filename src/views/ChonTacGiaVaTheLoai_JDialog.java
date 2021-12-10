@@ -156,7 +156,10 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
         int row = 0;
         if (this.actionType.equals("TAC_GIA")) {
             String tenTg = MsgBox.prompt(this, "Nhập tên tác giả muốn thêm :0");
-            if (tenTg.isEmpty()) {
+            if (tenTg == null) {
+                return;
+            }
+            if (tenTg.equals("")) {
                 MsgBox.alert_WARNING(this, "Không được để trống");
                 return;
             }
@@ -165,11 +168,14 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
                 MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
                 return;
             }
-            TacGia tg = new TacGia(null, tenTg);
+            TacGia tg = new TacGia(null, tenTg.trim());
             row = tgDao.insert(tg);
         } else {
             String tenTl = MsgBox.prompt(this, "Nhập tên thể loại muốn thêm :0");
-            if (tenTl.isEmpty()) {
+            if (tenTl == null) {
+                return;
+            }
+            if (tenTl.equals("")) {
                 MsgBox.alert_WARNING(this, "Không được để trống");
                 return;
             }
