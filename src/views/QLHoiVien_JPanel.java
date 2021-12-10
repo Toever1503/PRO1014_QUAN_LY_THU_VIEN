@@ -566,6 +566,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         clearForm();
         activeTabCapNhat();
+        btnInsert.setText("Thêm");
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
@@ -573,7 +574,7 @@ public class QLHoiVien_JPanel extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn 1 người dùng cần xem!");
         } else {
-            btnInsert.setText("Lưu");
+            btnInsert.setText("Cập nhật");
             setForm(listHV.get(index).get(row));
             activeTabCapNhat();
         }

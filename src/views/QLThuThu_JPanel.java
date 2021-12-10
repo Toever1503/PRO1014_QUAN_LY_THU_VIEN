@@ -173,7 +173,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         jPanel17 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         btnInsert = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -443,14 +442,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
             }
         });
         jPanel11.add(btnInsert);
-
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/update.png"))); // NOI18N
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        jPanel11.add(btnUpdate);
 
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {
