@@ -12,37 +12,29 @@ import java.sql.Date;
  */
 public class GopY {
 
-    private long id;
-    private long hoiVien;
+    private Long id;
     private Date ngayTao;
     private String noiDung;
-    private boolean trangThai;
+    private Boolean trangThai;
+    private Integer soLuot;
 
     public GopY() {
     }
 
-    public GopY(long id, long hoiVien, Date ngayTao, String noiDung, boolean trangThai) {
+    public GopY(Long id, Date ngayTao, String noiDung, Boolean trangThai, Integer soLuot) {
         this.id = id;
-        this.hoiVien = hoiVien;
         this.ngayTao = ngayTao;
         this.noiDung = noiDung;
         this.trangThai = trangThai;
+        this.soLuot = soLuot;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getHoiVien() {
-        return hoiVien;
-    }
-
-    public void setHoiVien(long hoiVien) {
-        this.hoiVien = hoiVien;
     }
 
     public Date getNgayTao() {
@@ -61,17 +53,25 @@ public class GopY {
         this.noiDung = noiDung;
     }
 
-    public boolean isTrangThai() {
+    public Boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(Boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public Integer getSoLuot() {
+        return soLuot;
+    }
+
+    public void setSoLuot(Integer soLuot) {
+        this.soLuot = soLuot;
     }
 
     @Override
     public String toString() {
-        return "GopY{" + "id=" + id + ", hoiVien=" + hoiVien + ", ngayTao=" + ngayTao + ", noiDung=" + noiDung + ", trangThai=" + trangThai + '}';
+        return "GopY{" + "id=" + id + ", ngayTao=" + ngayTao + ", noiDung=" + noiDung + ", trangThai=" + trangThai + ", soLuot=" + soLuot + '}';
     }
 
 }

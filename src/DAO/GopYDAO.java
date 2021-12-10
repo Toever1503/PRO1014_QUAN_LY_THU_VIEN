@@ -11,14 +11,14 @@ import java.util.logging.Logger;
  */
 public class GopYDAO extends LibrarianDAO<GopY, Long> {
 
-    private final String SELECT_ALL_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y";
-    private final String SELECT_BY_ID_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM gop_y WHERE ID = ?";
-    private final String INSERT_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?,?,?,?,?)";
-    private final String UPDATE_SQL = "UPDATE gop_y SET HoiVien = ?, NgayTao = ?, NoiDung = ?, TrangThai = ? WHERE ID = ?";
+    private final String SELECT_ALL_SQL = "SELECT ID, NgayTao, NoiDung, TrangThai, soLuot FROM gop_y";
+    private final String SELECT_BY_ID_SQL = "SELECT ID, NgayTao, NoiDung, TrangThai, soLuot FROM gop_y WHERE ID = ?";
+    private final String INSERT_SQL = "INSERT INTO gop_y (ID, NgayTao, NoiDung, TrangThai, soLuot) VALUES (?,?,?,?,?)";
+    private final String UPDATE_SQL = "";
     private final String DELETE_SQL = "DELETE FROM gop_y WHERE ID = ?";
-    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, HoiVien, NgayTao, NoiDung, TrangThai) VALUES (?, ?, ?, ?, ?)\n"
-            + "ON DUPLICATE KEY UPDATE HoiVien=VALUES(HoiVien), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai = VALUES(TrangThai)";
-    private final String SELECT_BY_PAGE_SQL = "SELECT ID, HoiVien, NgayTao, NoiDung, TrangThai FROM the_loai LIMIT ?, 30";
+    private final String INSERT_ON_UPDATE_SQL = "INSERT INTO gop_y (ID, NgayTao, NoiDung, TrangThai, soLuot) VALUES (?, ?, ?, ?, ?)\n"
+            + "ON DUPLICATE KEY UPDATE soLuot=VALUES(soLuot), NgayTao=VALUES(NgayTao), NoiDung=VALUES(NoiDung), TrangThai = VALUES(TrangThai)";
+    private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL.concat(" WHERE TrangThai = 1 ORDER BY soLuot DESC LIMIT ?, 30");
     private static GopYDAO instance;
 
     private GopYDAO() {
@@ -37,10 +37,10 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
         try {
             row = Helper.Utility.update(this.INSERT_SQL,
                     entity.getId(),
-                    entity.getHoiVien(),
                     entity.getNgayTao(),
                     entity.getNoiDung(),
-                    entity.isTrangThai());
+                    entity.getTrangThai(),
+                    entity.getSoLuot());
         } catch (Exception ex) {
             Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,18 +49,7 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
 
     @Override
     public int update(GopY entity) {
-        int row = 0;
-        try {
-            row = Helper.Utility.update(this.UPDATE_SQL,
-                    entity.getHoiVien(),
-                    entity.getNgayTao(),
-                    entity.getNoiDung(),
-                    entity.isTrangThai(),
-                    entity.getId());
-        } catch (Exception ex) {
-            Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return row;
+        return 0;
     }
 
     @Override
@@ -69,10 +58,10 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
         try {
             row = Helper.Utility.update(this.INSERT_ON_UPDATE_SQL,
                     entity.getId(),
-                    entity.getHoiVien(),
                     entity.getNgayTao(),
                     entity.getNoiDung(),
-                    entity.isTrangThai());
+                    entity.getTrangThai(),
+                    entity.getSoLuot());
         } catch (Exception ex) {
             Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,6 +98,23 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
         return this.selectBySql(this.SELECT_ALL_SQL);
     }
 
+    public int getTotalPage() {
+        int total = 0;
+        try {
+            java.sql.ResultSet rs = Helper.Utility.query("SELECT COUNT(ID)/30 as total FROM gop_y");
+            while (rs.next()) {
+                total = (int) rs.getDouble("total");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PhieuMuonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
+    public List<GopY> selectByKeyword(String key) {
+        return this.selectBySql(this.SELECT_ALL_SQL + " WHERE NoiDung LIKE ? and TrangThai = 1", key);
+    }
+
     @Override
     protected List<GopY> selectBySql(String sql, Object... args) {
         List<GopY> list = new java.util.ArrayList<>();
@@ -117,10 +123,10 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
             while (rs.next()) {
                 GopY gy = new GopY();
                 gy.setId(rs.getLong("ID"));
-                gy.setHoiVien(rs.getLong("HoiVien"));
                 gy.setNgayTao(rs.getDate("NgayTao"));
                 gy.setNoiDung(rs.getString("NoiDung"));
                 gy.setTrangThai(rs.getBoolean("TrangThai"));
+                gy.setSoLuot(rs.getInt("soLuot"));
                 list.add(gy);
             }
             rs.getStatement().getConnection().close();
@@ -128,6 +134,10 @@ public class GopYDAO extends LibrarianDAO<GopY, Long> {
             Logger.getLogger(GopYDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(GopYDAO.getInstance().selectByKeyword("%harry%"));
     }
 
 }
