@@ -59,11 +59,12 @@ public class Home_Frame extends javax.swing.JFrame {
 //        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
 //        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
 //
-        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -107,8 +108,6 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
-        jPanel_home = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
@@ -116,6 +115,9 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
         jPanel_ThongKe = new javax.swing.JPanel();
         jPanel_Ql_Nhap_Sach = new javax.swing.JPanel();
+        jPanel_home = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel_GOP_y = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -130,6 +132,7 @@ public class Home_Frame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         mniQLThuThu = new javax.swing.JMenuItem();
+        mnItemGopY = new javax.swing.JMenuItem();
         mnThongKe = new javax.swing.JMenu();
         mniSachDaMuon = new javax.swing.JMenuItem();
         mniSachBiLoai = new javax.swing.JMenuItem();
@@ -317,13 +320,6 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlMainRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainRight.setLayout(new java.awt.CardLayout());
 
-        jPanel_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Home");
-        jPanel_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
-
-        pnlMainRight.add(jPanel_home, "card9");
-
         jPanel_QlSach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_QlSach, "card3");
 
@@ -344,6 +340,16 @@ public class Home_Frame extends javax.swing.JFrame {
 
         jPanel_Ql_Nhap_Sach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_Ql_Nhap_Sach, "card9");
+
+        jPanel_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Home");
+        jPanel_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
+
+        pnlMainRight.add(jPanel_home, "card9");
+
+        jPanel_GOP_y.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_GOP_y, "card10");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -429,6 +435,14 @@ public class Home_Frame extends javax.swing.JFrame {
             }
         });
         mnQuanLy.add(mniQLThuThu);
+
+        mnItemGopY.setText("Góp Ý");
+        mnItemGopY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnItemGopYActionPerformed(evt);
+            }
+        });
+        mnQuanLy.add(mnItemGopY);
 
         jMenuBar1.add(mnQuanLy);
 
@@ -586,6 +600,11 @@ public class Home_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mniSachTreHanActionPerformed
 
+    private void mnItemGopYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemGopYActionPerformed
+        // TODO add your handling code here:
+        activePanel("GOPY");
+    }//GEN-LAST:event_mnItemGopYActionPerformed
+
     void sendMail() {
         ThongKeDAO tkdao = ThongKeDAO.getInstance();
         java.util.List<Object[]> list = tkdao.getEmailLate();
@@ -627,6 +646,9 @@ public class Home_Frame extends javax.swing.JFrame {
                 break;
             case "QLHOIVIEN":
                 cardLayoutMainRight.show(pnlMainRight, "card5");
+                break;
+            case "GOPY":
+                cardLayoutMainRight.show(pnlMainRight, "card10");
                 break;
             default:
                 cardLayoutMainRight.show(pnlMainRight, "card9");
@@ -689,6 +711,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel_GOP_y;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
@@ -704,6 +727,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lblClock;
     private javax.swing.JMenu mnHeThong;
+    private javax.swing.JMenuItem mnItemGopY;
     private javax.swing.JMenu mnQuanLy;
     private javax.swing.JMenu mnThongKe;
     private javax.swing.JMenu mnTroDiup;
