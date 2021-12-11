@@ -248,14 +248,15 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
         jPanelMainContent.add(jPanelPage, java.awt.BorderLayout.PAGE_END);
 
         jPanelAction.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanelAction.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 20));
+        jPanelAction.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 20));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setPreferredSize(new java.awt.Dimension(350, 73));
+        jPanel3.setPreferredSize(new java.awt.Dimension(400, 73));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         btnThemMoi.setText("Thêm mới");
-        btnThemMoi.setPreferredSize(new java.awt.Dimension(78, 30));
+        btnThemMoi.setPreferredSize(new java.awt.Dimension(100, 30));
+
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
@@ -263,23 +264,26 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
         });
         jPanel3.add(btnThemMoi, new java.awt.GridBagConstraints());
 
-        jPanel12.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel12.setPreferredSize(new java.awt.Dimension(15, 30));
+
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 15, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+
         );
 
         jPanel3.add(jPanel12, new java.awt.GridBagConstraints());
 
         btnIangDeXuat.setText("Tăng Lượt Góp Ý");
-        btnIangDeXuat.setPreferredSize(new java.awt.Dimension(123, 30));
+        btnIangDeXuat.setPreferredSize(new java.awt.Dimension(140, 30));
+
         btnIangDeXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIangDeXuatActionPerformed(evt);
@@ -287,23 +291,26 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
         });
         jPanel3.add(btnIangDeXuat, new java.awt.GridBagConstraints());
 
-        jPanel14.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel14.setPreferredSize(new java.awt.Dimension(15, 30));
+
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 15, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+
         );
 
         jPanel3.add(jPanel14, new java.awt.GridBagConstraints());
 
         btnInactive.setText("Inactive");
-        btnInactive.setPreferredSize(new java.awt.Dimension(63, 30));
+        btnInactive.setPreferredSize(new java.awt.Dimension(100, 30));
+
         btnInactive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInactiveActionPerformed(evt);
@@ -314,20 +321,23 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
         jPanelAction.add(jPanel3);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10.setPreferredSize(new java.awt.Dimension(300, 73));
+        jPanel10.setPreferredSize(new java.awt.Dimension(280, 73));
+
         jPanel10.setLayout(new java.awt.GridBagLayout());
 
         txtSearch.setText("Nhập nội dung tìm");
         txtSearch.setPreferredSize(new java.awt.Dimension(149, 30));
         jPanel10.add(txtSearch, new java.awt.GridBagConstraints());
 
-        jPanel11.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel11.setPreferredSize(new java.awt.Dimension(15, 30));
+
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 15, Short.MAX_VALUE)
+
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,7 +511,6 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
