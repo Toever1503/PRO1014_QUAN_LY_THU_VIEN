@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -58,14 +59,14 @@ public final class Home_Frame extends javax.swing.JFrame {
 
     public void initPnlQuanLy() {
         jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-
-        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
-        jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+//
+//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+//        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+//        jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -139,10 +140,7 @@ public final class Home_Frame extends javax.swing.JFrame {
         mniQLThuThu = new javax.swing.JMenuItem();
         mnThongKe = new javax.swing.JMenu();
         mniSachDaMuon = new javax.swing.JMenuItem();
-        mniSachTreHan = new javax.swing.JMenuItem();
-        mniSachConLai = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý thư viện");
@@ -485,38 +483,18 @@ public final class Home_Frame extends javax.swing.JFrame {
 
         jMenuBar1.add(mnQuanLy);
 
-        mnThongKe.setText("Thống kê");
+        mnThongKe.setText("Trợ giúp");
 
         mniSachDaMuon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        mniSachDaMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/borrow.png"))); // NOI18N
-        mniSachDaMuon.setText("Sách đã mượn");
+        mniSachDaMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/idea.png"))); // NOI18N
+        mniSachDaMuon.setText("Giới Thiệu");
+        mniSachDaMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSachDaMuonActionPerformed(evt);
+            }
+        });
         mnThongKe.add(mniSachDaMuon);
-
-        mniSachTreHan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        mniSachTreHan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/overdue.png"))); // NOI18N
-        mniSachTreHan.setText("Hội viên trễ hạn");
-        mniSachTreHan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSachTreHanActionPerformed(evt);
-            }
-        });
-        mnThongKe.add(mniSachTreHan);
-
-        mniSachConLai.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        mniSachConLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/available.png"))); // NOI18N
-        mniSachConLai.setText("Sách còn lại");
-        mnThongKe.add(mniSachConLai);
         mnThongKe.add(jSeparator7);
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/message.png"))); // NOI18N
-        jMenuItem3.setText("Thông báo trễ hạn");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        mnThongKe.add(jMenuItem3);
 
         jMenuBar1.add(mnThongKe);
 
@@ -621,14 +599,6 @@ public final class Home_Frame extends javax.swing.JFrame {
         this.btnHoaDonDenBu.setForeground(new java.awt.Color(255, 255, 255));
     }//GEN-LAST:event_btnHoaDonDenBuMouseExited
 
-    private void mniSachTreHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachTreHanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mniSachTreHanActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        this.sendMail();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void mniQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLHoaDonActionPerformed
         activePanel("QLHOADONDENBU");
     }//GEN-LAST:event_mniQLHoaDonActionPerformed
@@ -649,6 +619,11 @@ public final class Home_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         activePanel("GOPY");
     }//GEN-LAST:event_mnItemGopYActionPerformed
+
+    private void mniSachDaMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachDaMuonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Library Management System Version 1.1");
+    }//GEN-LAST:event_mniSachDaMuonActionPerformed
 
     void sendMail() {
         ThongKeDAO tkdao = ThongKeDAO.getInstance();
@@ -761,7 +736,6 @@ public final class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel_GOP_y;
     private javax.swing.JPanel jPanel_NhapSach;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
@@ -790,9 +764,7 @@ public final class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniQLSach;
     private javax.swing.JMenuItem mniQLThuThu;
     private javax.swing.JMenuItem mniQuanLyHoiVien;
-    private javax.swing.JMenuItem mniSachConLai;
     private javax.swing.JMenuItem mniSachDaMuon;
-    private javax.swing.JMenuItem mniSachTreHan;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     private javax.swing.JPanel pnl3;

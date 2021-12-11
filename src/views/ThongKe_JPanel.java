@@ -35,6 +35,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //        this.fillTableSachBiLoai();
 
         this.fillTableSachConLai();
+        fillTableSachTreHan();
     }
 
     void fillTableDaMuon() {
@@ -263,7 +264,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //    }
 
     void fillTableSachTreHan() {
-        DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.tblHoiVienTreHan.getModel();
 
         model.setRowCount(0);
         List<Object[]> list = this.thongKeDAO.getHoiVienTreHan();
@@ -309,6 +310,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlConLai;
     private javax.swing.JPanel pnlDaMuon;
     private javax.swing.JPanel pnlTreHan;
+    private javax.swing.JTable tblHoiVienTreHan;
     private javax.swing.JTable tblSachConLai;
     private javax.swing.JTable tblSachDaMuon;
     // End of variables declaration//GEN-END:variables

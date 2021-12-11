@@ -172,7 +172,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lblQr_Code = new javax.swing.JLabel();
-        btnDownload = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
@@ -483,7 +482,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel13.add(jPanel15);
 
-        jPanel14.setBorder(null);
         jPanel14.setLayout(new java.awt.BorderLayout(10, 10));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -492,14 +490,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel5.add(lblQr_Code, java.awt.BorderLayout.CENTER);
 
         jPanel14.add(jPanel5, java.awt.BorderLayout.CENTER);
-
-        btnDownload.setText("Download");
-        btnDownload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDownloadActionPerformed(evt);
-            }
-        });
-        jPanel14.add(btnDownload, java.awt.BorderLayout.PAGE_END);
 
         jPanel13.add(jPanel14);
 
@@ -978,7 +968,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                             lblQr_Code.setIcon(new ImageIcon(
                                     new ImageIcon(path).getImage().getScaledInstance(185, 200, 1)
                             ));
-                            btnDownload.setVisible(true);
+//                            btnDownload.setVisible(true);
                         } catch (Exception e) {
                             e.printStackTrace();
                             JOptionPane.showMessageDialog(this, "Không thể khởi tạo mã QR_CODE!");
@@ -1106,7 +1096,6 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnChonTheLoai;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDetails;
-    private javax.swing.JButton btnDownload;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLast;
@@ -1183,7 +1172,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         cmbKhuVuc.setSelectedIndex(0);
         cmbNhaXuatBan.setSelectedIndex(0);
         lblQr_Code.setIcon(null);
-        btnDownload.setVisible(false);
+//        btnDownload.setVisible(false);
         
         tacGiaAdd.clear();
         theLoaiAdd.clear();
@@ -1271,7 +1260,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                         new ImageIcon(Helper.XImage.SACH_UPLOAD.concat("/" + sach.getQr_code().split("-")[1] + ".png")).
                                 getImage().
                                 getScaledInstance(185, 200, 1)));
-                btnDownload.setVisible(true);
+//                btnDownload.setVisible(true);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy qr_code");
             }
