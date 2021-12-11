@@ -42,7 +42,10 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
             + "VALUES(NgayHan), QR_FILE =\n"
             + "VALUES(QR_FILE)";
     private final String SELECT_BY_PAGE_SQL = SELECT_ALL_SQL + " ORDER BY NgayMuon DESC LIMIT ?, 30";
-    private final String SELECT_ALL_BY_KEY = SELECT_ALL_SQL + " WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
+    private final String SELECT_ALL_BY_KEY = "SELECT pm.ID, pm.HoiVien, pm.MaQL, pm.NgayMuon, pm.NgayHan, pm.QR_FILE \n"
+            + "From phieu_muon as pm \n"
+            + "JOIN quan_ly on quan_ly.MaQL = pm.MaQL\n"
+            + "JOIN hoi_vien as hv on hv.ID = pm.HoiVien WHERE pm.ID LIKE ? OR hv.HoTen LIKE ? OR pm.MaQL LIKE ?";
 
     private PhieuMuonChiTietDao phieuMuonChiTietDao;
     private static PhieuMuonDao instance;
@@ -168,7 +171,6 @@ public class PhieuMuonDao extends LibrarianDAO<PhieuMuon, Long> {
                 pm.setNgayMuon(rs.getDate("NgayMuon"));
                 pm.setHanTra(rs.getDate("NgayHan"));
                 pm.setQr_code(rs.getString("QR_FILE"));
-//                pm.setListPhieuMuonChiTiets(phieuMuonChiTietDao.selectALL(rs.getLong("ID")));
                 list.add(pm);
             }
             rs.getStatement().getConnection().close();

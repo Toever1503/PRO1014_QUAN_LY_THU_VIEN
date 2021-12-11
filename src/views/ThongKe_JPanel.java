@@ -32,7 +32,8 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         this.thongKeDAO = ThongKeDAO.getInstance();
         this.sachDAO = SachDAO.getInstance();
         this.fillTableSachDaMuon();
-        this.fillTableHoiVienTreHan();
+//        this.fillTableSachBiLoai();
+
         this.fillTableSachConLai();
     }
 
@@ -252,8 +253,18 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         }
     }
 
-    void fillTableHoiVienTreHan() {
-        DefaultTableModel model = (DefaultTableModel) this.tblHoiVienTreHan.getModel();
+//    void fillTableSachBiLoai() {
+//        DefaultTableModel model = (DefaultTableModel) this.tblSachBiLoai.getModel();
+//        model.setRowCount(0);
+//        List<Object[]> list = this.thongKeDAO.getSachBiLoai();
+//        for (int i = 0; i < list.size(); i++) {
+//            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+//        }
+//    }
+
+    void fillTableSachTreHan() {
+        DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
+
         model.setRowCount(0);
         List<Object[]> list = this.thongKeDAO.getHoiVienTreHan();
         for (int i = 0; i < list.size(); i++) {
@@ -269,6 +280,26 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
         }
     }
+
+//    void thuHoi() {
+//        if (!Helper.Auth.isManager()) {
+//            MsgBox.alert_WARNING(this, "Bạn không có quyền cho thao tác này!");
+//            return;
+//        }
+//        for (int row : this.tblSachBiLoai.getSelectedRows()) {
+//            Long maSach = (Long) this.tblSachBiLoai.getValueAt(row, 2);
+//            this.sachDAO.delete(maSach);
+//        }
+//        MsgBox.alert_INFORMATION(this, "Thu hồi thành cống!");
+//    }
+
+//    public static void main(String[] args) {
+//        javax.swing.JFrame frame = new javax.swing.JFrame();
+//        frame.setSize(900, 800);
+//        frame.add(new ThongKe_JPanel());
+//        frame.setVisible(true);
+//    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -278,7 +309,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlConLai;
     private javax.swing.JPanel pnlDaMuon;
     private javax.swing.JPanel pnlTreHan;
-    private javax.swing.JTable tblHoiVienTreHan;
     private javax.swing.JTable tblSachConLai;
     private javax.swing.JTable tblSachDaMuon;
     // End of variables declaration//GEN-END:variables

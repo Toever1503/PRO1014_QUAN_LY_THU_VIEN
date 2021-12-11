@@ -18,6 +18,7 @@ import Models.HoaDonNhapSachChiTiet;
 import Models.HoiVien;
 import Models.Sach;
 import java.awt.Image;
+import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -124,7 +125,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         lblErrorTongTien = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnlQrCode = new javax.swing.JPanel();
-        btnDownloadQr = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblQR_CODE = new javax.swing.JLabel();
         pnlAction = new javax.swing.JPanel();
@@ -337,14 +337,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
 
         pnlQrCode.setLayout(new java.awt.BorderLayout(0, 10));
 
-        btnDownloadQr.setText("print");
-        btnDownloadQr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDownloadQrActionPerformed(evt);
-            }
-        });
-        pnlQrCode.add(btnDownloadQr, java.awt.BorderLayout.SOUTH);
-
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 200));
         jPanel3.setLayout(new java.awt.BorderLayout());
@@ -470,11 +462,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         jLabel9.setPreferredSize(new java.awt.Dimension(95, 100));
         add(jLabel9, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDownloadQrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadQrActionPerformed
-        // TODO add your handling code here:
-//        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.selectByID(Long.valueOf(txtMaHoaDonDenBu.getText()));
-    }//GEN-LAST:event_btnDownloadQrActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
@@ -621,6 +608,9 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hãy chọn sách cần xóa!");
         } else {
             long maSach = Long.valueOf(tblHoaDonChiTiet.getValueAt(row, 0).toString());
+            listHoaDonNhapSach.get(maSach).forEach(hdns -> {
+                sachDao.deleteByHDNS(hdns.getId());
+            });
             listHoaDonNhapSachChiTiet.remove(maSach);
             tableModelHoaDonNhapSachChiTiet.removeRow(row);
             tinhTongTien();;
@@ -659,7 +649,6 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnChonSach;
-    private javax.swing.JButton btnDownloadQr;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
@@ -773,7 +762,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
                 e.printStackTrace();
             }
         }
-        btnDownloadQr.setVisible(true);
+//        btnDownloadQr.setVisible(true);
     }
 
     public boolean addSach(HoaDonNhapSachChiTiet hdct, String tenSach) {
@@ -808,7 +797,7 @@ public class QLHoaDonNhapSach extends javax.swing.JPanel {
         txtMaHoaDonDenBu.setText(null);
         txtTongTien.setText(null);
         lblQR_CODE.setIcon(null);
-        btnDownloadQr.setVisible(false);
+//        btnDownloadQr.setVisible(false);
         btnSave.setText("Thêm");
         btnSave.setEnabled(true);
         btnXoaSach.setEnabled(true);

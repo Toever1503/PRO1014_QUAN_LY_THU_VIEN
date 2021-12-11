@@ -64,7 +64,7 @@ public final class Home_Frame extends javax.swing.JFrame {
         jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
 
         jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
         jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
     }
 
@@ -121,7 +121,7 @@ public final class Home_Frame extends javax.swing.JFrame {
         jPanel_home1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel_GOP_y = new javax.swing.JPanel();
-        jPanel_Home = new javax.swing.JPanel();
+        jPanel_NhapSach = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -369,7 +369,9 @@ public final class Home_Frame extends javax.swing.JFrame {
 
         jPanel_GOP_y.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_GOP_y, "card10");
-        pnlMainRight.add(jPanel_Home, "card11");
+
+        jPanel_NhapSach.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_NhapSach, "card11");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -683,7 +685,7 @@ public final class Home_Frame extends javax.swing.JFrame {
                 cardLayoutMainRight.show(pnlMainRight, "card3");
                 break;
             case "QLNHAPSACH":
-                cardLayoutMainRight.show(pnlMainRight, "card9");
+                cardLayoutMainRight.show(pnlMainRight, "card11");
                 break;
             case "QLPHIEUMUON":
                 cardLayoutMainRight.show(pnlMainRight, "card4");
@@ -761,7 +763,7 @@ public final class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel_GOP_y;
-    private javax.swing.JPanel jPanel_Home;
+    private javax.swing.JPanel jPanel_NhapSach;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
