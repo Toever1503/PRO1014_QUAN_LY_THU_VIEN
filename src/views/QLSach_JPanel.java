@@ -834,18 +834,49 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
+        pageIndex = total;
+        List<Sach> list = listSach.get(pageIndex);
+        if (list == null) {
+            list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+            listSach.put(pageIndex, list);
+        }
+        fillTableSach(listSach.get(pageIndex));
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
+        if (pageIndex + 1 > total) {
+            JOptionPane.showMessageDialog(this, "Bạn hiện đã ở trang cuối!");
+        } else {
+            pageIndex++;
+            List<Sach> list = listSach.get(pageIndex);
+            if (list == null) {
+                list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+                listSach.put(pageIndex, list);
+            }
+            fillTableSach(listSach.get(pageIndex));
+        }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
+        if (pageIndex - 1 < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn hiện đã ở trang đầu!");
+        } else {
+            pageIndex--;
+            List<Sach> list = listSach.get(pageIndex);
+            if (list == null) {
+                list = sachDAO.selectByPage(Long.valueOf(pageIndex));
+                listSach.put(pageIndex, list);
+            }
+            fillTableSach(listSach.get(pageIndex));
+        }
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
+        pageIndex = 0;
+        fillTableSach(listSach.get(pageIndex));
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void cmbTheLoaiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTheLoaiFilterActionPerformed
@@ -1010,8 +1041,9 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         // TODO add your handling code here:
         pageIndex = 0;
-        fillTableSach(listSach.get(pageIndex));
         cmbNhaXuatBan.setSelectedIndex(0);
+        fillTableSach(listSach.get(pageIndex));
+
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void txtTenSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSachActionPerformed
