@@ -30,8 +30,7 @@ public class Networking {
         Properties props = new Properties();
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.smtp.host", mailConfig.get("MAILTRAP_HOST"));
-        props.setProperty("mail.smtp.port",  mailConfig.get("MAILTRAP_PORT"));
-
+        props.setProperty("mail.smtp.port", mailConfig.get("MAILTRAP_PORT"));
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -53,7 +52,12 @@ public class Networking {
         }
         return true;
     }
-     public static boolean sendMail(String mailAddress, String subject, String content){
-         return mail_net(mailAddress, subject, content);
-     }
+
+    public static boolean sendMail(String mailAddress, String subject, String content) {
+        return mail_net(mailAddress, subject, content);
+    }
+
+    public static void main(String[] args) {
+        sendMail("haunv1503@gmail.com", "hello", "acc");
+    }
 }
