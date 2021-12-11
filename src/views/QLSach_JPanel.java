@@ -200,6 +200,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel25 = new javax.swing.JPanel();
         btnXoaTacGia = new javax.swing.JButton();
         btnChonTacGia = new javax.swing.JButton();
+        jPanel32 = new javax.swing.JPanel();
+        jPanel33 = new javax.swing.JPanel();
+        jPanel34 = new javax.swing.JPanel();
+        jPanel35 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -415,16 +419,16 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Danh sách", jPanel2);
 
-        jPanelCapNhat.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 30));
+        jPanelCapNhat.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setPreferredSize(new java.awt.Dimension(800, 700));
-        jPanel4.setLayout(new java.awt.BorderLayout(20, 20));
+        jPanel4.setLayout(new java.awt.BorderLayout(10, 10));
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 15));
 
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel15.setPreferredSize(new java.awt.Dimension(470, 262));
+        jPanel15.setPreferredSize(new java.awt.Dimension(470, 210));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnNhaXuatBan.setText("Thêm mới");
@@ -433,18 +437,18 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 btnNhaXuatBanActionPerformed(evt);
             }
         });
-        jPanel15.add(btnNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+        jPanel15.add(btnNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, -1));
 
         cmbNhaXuatBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel15.add(cmbNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 236, 30));
+        jPanel15.add(cmbNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 236, 30));
 
         lblNhaXuatBan1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNhaXuatBan1.setText("Nhà xuất bản:");
-        jPanel15.add(lblNhaXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 30));
+        jPanel15.add(lblNhaXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 30));
 
         lblViTri.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblViTri.setText("Vị trí:");
-        jPanel15.add(lblViTri, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 70, 30));
+        jPanel15.add(lblViTri, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 70, 30));
 
         cmbKhuVuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbKhuVuc.addActionListener(new java.awt.event.ActionListener() {
@@ -452,10 +456,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 cmbKhuVucActionPerformed(evt);
             }
         });
-        jPanel15.add(cmbKhuVuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 236, 30));
+        jPanel15.add(cmbKhuVuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 236, 30));
 
         lblErrorTenSach.setText(" ");
-        jPanel15.add(lblErrorTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 236, -1));
+        jPanel15.add(lblErrorTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 236, -1));
 
         txtTenSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTenSach.addActionListener(new java.awt.event.ActionListener() {
@@ -463,57 +467,46 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 txtTenSachActionPerformed(evt);
             }
         });
-        jPanel15.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 236, 30));
+        jPanel15.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 236, 30));
 
         txtMaSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtMaSach.setEnabled(false);
-        jPanel15.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 236, 30));
+        jPanel15.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 236, 30));
 
         lblMaSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblMaSach.setText("Mã sách:");
-        jPanel15.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 30));
+        jPanel15.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 30));
 
         lblTenSach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTenSach.setText("Tên sách:");
-        jPanel15.add(lblTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
+        jPanel15.add(lblTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 30));
 
         jPanel13.add(jPanel15);
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel14.setBorder(null);
+        jPanel14.setLayout(new java.awt.BorderLayout(10, 10));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel5.setPreferredSize(new java.awt.Dimension(200, 200));
         jPanel5.setLayout(new java.awt.BorderLayout());
         jPanel5.add(lblQr_Code, java.awt.BorderLayout.CENTER);
 
-        btnDownload.setText("Download");
+        jPanel14.add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDownload, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDownload)
-                .addContainerGap())
-        );
+        btnDownload.setText("Download");
+        btnDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadActionPerformed(evt);
+            }
+        });
+        jPanel14.add(btnDownload, java.awt.BorderLayout.PAGE_END);
 
         jPanel13.add(jPanel14);
 
         jPanel4.add(jPanel13, java.awt.BorderLayout.PAGE_START);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel17.setPreferredSize(new java.awt.Dimension(910, 70));
+        jPanel17.setPreferredSize(new java.awt.Dimension(910, 60));
         jPanel17.setLayout(new java.awt.BorderLayout(20, 0));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -542,32 +535,32 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel17.add(jPanel20, java.awt.BorderLayout.LINE_END);
 
-        jPanel21.setPreferredSize(new java.awt.Dimension(70, 15));
+        jPanel21.setPreferredSize(new java.awt.Dimension(70, 10));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addGap(0, 946, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
         jPanel17.add(jPanel21, java.awt.BorderLayout.PAGE_START);
 
-        jPanel22.setPreferredSize(new java.awt.Dimension(906, 15));
+        jPanel22.setPreferredSize(new java.awt.Dimension(906, 10));
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addGap(0, 946, Short.MAX_VALUE)
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
         jPanel17.add(jPanel22, java.awt.BorderLayout.PAGE_END);
@@ -575,6 +568,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel16.setPreferredSize(new java.awt.Dimension(600, 40));
         jPanel16.setLayout(new java.awt.GridLayout(1, 0, 30, 0));
 
+        btnQuayLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/arrow-left.png"))); // NOI18N
         btnQuayLai.setText("Quay Lại");
         btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -618,22 +612,22 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel28.add(jPanel23, java.awt.BorderLayout.LINE_START);
 
-        jPanel29.setPreferredSize(new java.awt.Dimension(876, 20));
+        jPanel29.setPreferredSize(new java.awt.Dimension(876, 10));
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addGap(0, 946, Short.MAX_VALUE)
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
         jPanel28.add(jPanel29, java.awt.BorderLayout.PAGE_START);
@@ -648,22 +642,22 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel28.add(jPanel30, java.awt.BorderLayout.LINE_END);
 
-        jPanel31.setPreferredSize(new java.awt.Dimension(876, 20));
+        jPanel31.setPreferredSize(new java.awt.Dimension(876, 10));
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addGap(0, 946, Short.MAX_VALUE)
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
         jPanel28.add(jPanel31, java.awt.BorderLayout.PAGE_END);
@@ -671,7 +665,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         jPanel27.setLayout(new java.awt.GridLayout(1, 0, 40, 0));
 
         jPanel18.setPreferredSize(new java.awt.Dimension(300, 301));
-        jPanel18.setLayout(new java.awt.BorderLayout(15, 10));
+        jPanel18.setLayout(new java.awt.BorderLayout(15, 5));
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 200));
 
@@ -715,7 +709,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel27.add(jPanel18);
 
-        jPanel24.setLayout(new java.awt.BorderLayout(0, 10));
+        jPanel24.setLayout(new java.awt.BorderLayout(0, 5));
 
         tblTacGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -761,7 +755,67 @@ public class QLSach_JPanel extends javax.swing.JPanel {
 
         jPanel4.add(jPanel28, java.awt.BorderLayout.CENTER);
 
-        jPanelCapNhat.add(jPanel4);
+        jPanelCapNhat.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jPanel32.setPreferredSize(new java.awt.Dimension(990, 10));
+
+        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
+        jPanel32.setLayout(jPanel32Layout);
+        jPanel32Layout.setHorizontalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 990, Short.MAX_VALUE)
+        );
+        jPanel32Layout.setVerticalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        jPanelCapNhat.add(jPanel32, java.awt.BorderLayout.PAGE_START);
+
+        jPanel33.setPreferredSize(new java.awt.Dimension(990, 10));
+
+        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
+        jPanel33.setLayout(jPanel33Layout);
+        jPanel33Layout.setHorizontalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 990, Short.MAX_VALUE)
+        );
+        jPanel33Layout.setVerticalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        jPanelCapNhat.add(jPanel33, java.awt.BorderLayout.PAGE_END);
+
+        jPanel34.setPreferredSize(new java.awt.Dimension(20, 797));
+
+        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
+        jPanel34.setLayout(jPanel34Layout);
+        jPanel34Layout.setHorizontalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel34Layout.setVerticalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 797, Short.MAX_VALUE)
+        );
+
+        jPanelCapNhat.add(jPanel34, java.awt.BorderLayout.LINE_END);
+
+        jPanel35.setPreferredSize(new java.awt.Dimension(20, 797));
+
+        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+        jPanel35.setLayout(jPanel35Layout);
+        jPanel35Layout.setHorizontalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel35Layout.setVerticalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 797, Short.MAX_VALUE)
+        );
+
+        jPanelCapNhat.add(jPanel35, java.awt.BorderLayout.LINE_START);
 
         jTabbedPane1.addTab("Cập nhật", jPanelCapNhat);
 
@@ -1015,7 +1069,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         Home_Frame.getInstance().activePanel("QLNHAPSACH");
     }//GEN-LAST:event_btnNhapSachActionPerformed
-    
+
     void updateTacGia() {
         String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
         if (tenTg == null) {
@@ -1093,6 +1147,10 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

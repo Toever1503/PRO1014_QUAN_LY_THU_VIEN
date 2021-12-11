@@ -8,7 +8,6 @@ import DAO.SachDAO;
 import DAO.ThongKeDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import Helper.MsgBox;
 
 /**
  *
@@ -34,6 +33,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         this.sachDAO = SachDAO.getInstance();
         this.fillTableSachDaMuon();
 //        this.fillTableSachBiLoai();
+
         this.fillTableSachConLai();
     }
 
@@ -69,7 +69,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         tblSachDaMuon = new javax.swing.JTable();
         pnlTreHan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblSachTreHan = new javax.swing.JTable();
+        tblHoiVienTreHan = new javax.swing.JTable();
         pnlConLai = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblSachConLai = new javax.swing.JTable();
@@ -137,14 +137,14 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        tblSachTreHan.setAutoCreateRowSorter(true);
-        tblSachTreHan.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        tblSachTreHan.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoiVienTreHan.setAutoCreateRowSorter(true);
+        tblHoiVienTreHan.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblHoiVienTreHan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "Mã sách", "Tên sách", "Tách giả", "Thể loại", "Nhà xuất bản", "Ngày hạn"
+                "STT", "Mã hội viên", "Tên hội viên", "Mã phiếu mượn", "Ngày mượn", "Ngày trả", "Số ngày trễ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -155,13 +155,13 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblSachTreHan.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSachTreHan.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblSachTreHan.setRowHeight(25);
-        tblSachTreHan.setSelectionBackground(new java.awt.Color(6, 143, 202));
-        jScrollPane2.setViewportView(tblSachTreHan);
-        if (tblSachTreHan.getColumnModel().getColumnCount() > 0) {
-            tblSachTreHan.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblHoiVienTreHan.setGridColor(new java.awt.Color(255, 255, 255));
+        tblHoiVienTreHan.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblHoiVienTreHan.setRowHeight(25);
+        tblHoiVienTreHan.setSelectionBackground(new java.awt.Color(6, 143, 202));
+        jScrollPane2.setViewportView(tblHoiVienTreHan);
+        if (tblHoiVienTreHan.getColumnModel().getColumnCount() > 0) {
+            tblHoiVienTreHan.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
         javax.swing.GroupLayout pnlTreHanLayout = new javax.swing.GroupLayout(pnlTreHan);
@@ -181,7 +181,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Trễ hạn", pnlTreHan);
+        jTabbedPane1.addTab("Hội viên trễ hạn", pnlTreHan);
 
         pnlConLai.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -264,8 +264,9 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 
     void fillTableSachTreHan() {
         DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
+
         model.setRowCount(0);
-        List<Object[]> list = this.thongKeDAO.getSachTreHan();
+        List<Object[]> list = this.thongKeDAO.getHoiVienTreHan();
         for (int i = 0; i < list.size(); i++) {
             model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
         }
@@ -298,6 +299,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //        frame.add(new ThongKe_JPanel());
 //        frame.setVisible(true);
 //    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -309,6 +311,5 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlTreHan;
     private javax.swing.JTable tblSachConLai;
     private javax.swing.JTable tblSachDaMuon;
-    private javax.swing.JTable tblSachTreHan;
     // End of variables declaration//GEN-END:variables
 }

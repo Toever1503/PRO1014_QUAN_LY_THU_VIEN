@@ -171,8 +171,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Tr&#x1ec5; h&#x1ea1;n">
-                <Property name="tabTitle" type="java.lang.String" value="Tr&#x1ec5; h&#x1ea1;n"/>
+              <JTabbedPaneConstraints tabName="H&#x1ed9;i vi&#xea;n tr&#x1ec5; h&#x1ea1;n">
+                <Property name="tabTitle" type="java.lang.String" value="H&#x1ed9;i vi&#xea;n tr&#x1ec5; h&#x1ea1;n"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -213,7 +213,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblSachTreHan">
+                <Component class="javax.swing.JTable" name="tblHoiVienTreHan">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -222,12 +222,12 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="7" rowCount="0">
                         <Column editable="false" title="STT" type="java.lang.Object"/>
-                        <Column editable="false" title="M&#xe3; s&#xe1;ch" type="java.lang.Object"/>
-                        <Column editable="false" title="T&#xea;n s&#xe1;ch" type="java.lang.Object"/>
-                        <Column editable="false" title="T&#xe1;ch gi&#x1ea3;" type="java.lang.Object"/>
-                        <Column editable="false" title="Th&#x1ec3; lo&#x1ea1;i" type="java.lang.Object"/>
-                        <Column editable="false" title="Nh&#xe0; xu&#x1ea5;t b&#x1ea3;n" type="java.lang.Object"/>
-                        <Column editable="false" title="Ng&#xe0;y h&#x1ea1;n" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; h&#x1ed9;i vi&#xea;n" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n h&#x1ed9;i vi&#xea;n" type="java.lang.Object"/>
+                        <Column editable="false" title="M&#xe3; phi&#x1ebf;u m&#x1b0;&#x1ee3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="Ng&#xe0;y m&#x1b0;&#x1ee3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="Ng&#xe0;y tr&#x1ea3;" type="java.lang.Object"/>
+                        <Column editable="false" title="S&#x1ed1; ng&#xe0;y tr&#x1ec5;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
