@@ -56,14 +56,13 @@ public class Home_Frame extends javax.swing.JFrame {
     }
 
     public void initPnlQuanLy() {
-//        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//
+        jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
         jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-        jPanel_Ql_Nhap_Sach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
         jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
     }
 
@@ -108,6 +107,8 @@ public class Home_Frame extends javax.swing.JFrame {
         pnlLast = new javax.swing.JPanel();
         lblClock = new javax.swing.JLabel();
         pnlMainRight = new javax.swing.JPanel();
+        jPanel_home = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel_QlSach = new javax.swing.JPanel();
         jPanel_QlPhieuMuon = new javax.swing.JPanel();
         jPanel_QlHoiVien = new javax.swing.JPanel();
@@ -115,10 +116,10 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_QlHoaDonDenBu = new javax.swing.JPanel();
         jPanel_ThongKe = new javax.swing.JPanel();
         jPanel_Ql_Nhap_Sach = new javax.swing.JPanel();
-        jPanel_home = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel_home1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel_GOP_y = new javax.swing.JPanel();
-        jPanel_Home = new javax.swing.JPanel();
+        jPanel_NhapSach = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnHeThong = new javax.swing.JMenu();
         mniTaiKhoan = new javax.swing.JMenuItem();
@@ -363,16 +364,18 @@ public class Home_Frame extends javax.swing.JFrame {
         jPanel_Ql_Nhap_Sach.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_Ql_Nhap_Sach, "card9");
 
-        jPanel_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_home1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Home");
-        jPanel_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
+        jLabel2.setText("Home");
+        jPanel_home1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 230, 90));
 
-        pnlMainRight.add(jPanel_home, "card9");
+        pnlMainRight.add(jPanel_home1, "card9");
 
         jPanel_GOP_y.setLayout(new java.awt.BorderLayout());
         pnlMainRight.add(jPanel_GOP_y, "card10");
-        pnlMainRight.add(jPanel_Home, "card11");
+
+        jPanel_NhapSach.setLayout(new java.awt.BorderLayout());
+        pnlMainRight.add(jPanel_NhapSach, "card11");
 
         pnlMain.add(pnlMainRight, java.awt.BorderLayout.CENTER);
 
@@ -734,7 +737,7 @@ public class Home_Frame extends javax.swing.JFrame {
                 cardLayoutMainRight.show(pnlMainRight, "card3");
                 break;
             case "QLNHAPSACH":
-                cardLayoutMainRight.show(pnlMainRight, "card9");
+                cardLayoutMainRight.show(pnlMainRight, "card11");
                 break;
             case "QLPHIEUMUON":
                 cardLayoutMainRight.show(pnlMainRight, "card4");
@@ -806,12 +809,13 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btnScanQR;
     private javax.swing.JLabel btnThongKe;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel_GOP_y;
-    private javax.swing.JPanel jPanel_Home;
+    private javax.swing.JPanel jPanel_NhapSach;
     private javax.swing.JPanel jPanel_QlHoaDonDenBu;
     private javax.swing.JPanel jPanel_QlHoiVien;
     private javax.swing.JPanel jPanel_QlPhieuMuon;
@@ -820,6 +824,7 @@ public class Home_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Ql_Nhap_Sach;
     private javax.swing.JPanel jPanel_ThongKe;
     private javax.swing.JPanel jPanel_home;
+    private javax.swing.JPanel jPanel_home1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

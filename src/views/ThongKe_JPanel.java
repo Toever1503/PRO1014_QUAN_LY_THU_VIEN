@@ -33,7 +33,7 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         this.thongKeDAO = ThongKeDAO.getInstance();
         this.sachDAO = SachDAO.getInstance();
         this.fillTableSachDaMuon();
-        this.fillTableSachBiLoai();
+//        this.fillTableSachBiLoai();
         this.fillTableSachConLai();
     }
 
@@ -67,10 +67,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         pnlDaMuon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSachDaMuon = new javax.swing.JTable();
-        pnlBiloai = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblSachBiLoai = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         pnlTreHan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSachTreHan = new javax.swing.JTable();
@@ -135,48 +131,6 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Đã mượn", pnlDaMuon);
-
-        pnlBiloai.setBackground(new java.awt.Color(255, 255, 255));
-        pnlBiloai.setLayout(new java.awt.BorderLayout());
-
-        jScrollPane4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        tblSachBiLoai.setAutoCreateRowSorter(true);
-        tblSachBiLoai.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        tblSachBiLoai.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "STT", "Mã sách", "Tên sách", "Tách giả", "Thể loại", "Nhà xuất bản", "Vị trí"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblSachBiLoai.setGridColor(new java.awt.Color(255, 255, 255));
-        tblSachBiLoai.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblSachBiLoai.setRowHeight(25);
-        tblSachBiLoai.setSelectionBackground(new java.awt.Color(6, 143, 202));
-        jScrollPane4.setViewportView(tblSachBiLoai);
-        if (tblSachBiLoai.getColumnModel().getColumnCount() > 0) {
-            tblSachBiLoai.getColumnModel().getColumn(0).setPreferredWidth(30);
-        }
-
-        pnlBiloai.add(jScrollPane4, java.awt.BorderLayout.CENTER);
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Thu hồi");
-        pnlBiloai.add(jButton1, java.awt.BorderLayout.PAGE_END);
-
-        jTabbedPane1.addTab("Bị loại", pnlBiloai);
 
         pnlTreHan.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -299,14 +253,14 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         }
     }
 
-    void fillTableSachBiLoai() {
-        DefaultTableModel model = (DefaultTableModel) this.tblSachBiLoai.getModel();
-        model.setRowCount(0);
-        List<Object[]> list = this.thongKeDAO.getSachBiLoai();
-        for (int i = 0; i < list.size(); i++) {
-            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
-        }
-    }
+//    void fillTableSachBiLoai() {
+//        DefaultTableModel model = (DefaultTableModel) this.tblSachBiLoai.getModel();
+//        model.setRowCount(0);
+//        List<Object[]> list = this.thongKeDAO.getSachBiLoai();
+//        for (int i = 0; i < list.size(); i++) {
+//            model.addRow(new Object[]{i + 1, list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4], list.get(i)[5]});
+//        }
+//    }
 
     void fillTableSachTreHan() {
         DefaultTableModel model = (DefaultTableModel) this.tblSachTreHan.getModel();
@@ -326,17 +280,17 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
         }
     }
 
-    void thuHoi() {
-        if (!Helper.Auth.isManager()) {
-            MsgBox.alert_WARNING(this, "Bạn không có quyền cho thao tác này!");
-            return;
-        }
-        for (int row : this.tblSachBiLoai.getSelectedRows()) {
-            Long maSach = (Long) this.tblSachBiLoai.getValueAt(row, 2);
-            this.sachDAO.delete(maSach);
-        }
-        MsgBox.alert_INFORMATION(this, "Thu hồi thành cống!");
-    }
+//    void thuHoi() {
+//        if (!Helper.Auth.isManager()) {
+//            MsgBox.alert_WARNING(this, "Bạn không có quyền cho thao tác này!");
+//            return;
+//        }
+//        for (int row : this.tblSachBiLoai.getSelectedRows()) {
+//            Long maSach = (Long) this.tblSachBiLoai.getValueAt(row, 2);
+//            this.sachDAO.delete(maSach);
+//        }
+//        MsgBox.alert_INFORMATION(this, "Thu hồi thành cống!");
+//    }
 
 //    public static void main(String[] args) {
 //        javax.swing.JFrame frame = new javax.swing.JFrame();
@@ -345,18 +299,14 @@ public final class ThongKe_JPanel extends javax.swing.JPanel {
 //        frame.setVisible(true);
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JPanel pnlBiloai;
     private javax.swing.JPanel pnlConLai;
     private javax.swing.JPanel pnlDaMuon;
     private javax.swing.JPanel pnlTreHan;
-    private javax.swing.JTable tblSachBiLoai;
     private javax.swing.JTable tblSachConLai;
     private javax.swing.JTable tblSachDaMuon;
     private javax.swing.JTable tblSachTreHan;

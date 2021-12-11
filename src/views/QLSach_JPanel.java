@@ -34,25 +34,25 @@ import javax.swing.table.DefaultTableModel;
  * @author Nguyen Hoan
  */
 public class QLSach_JPanel extends javax.swing.JPanel {
-
+    
     private Map<Integer, List<Sach>> listSach;
     private Map<Long, TacGia> listTacGia;
     private Map<Long, TheLoai> listTheLoai;
     private List<NhaXuatBan> listNhaXuatBan;
-
+    
     private Map<Long, Long> theLoaiAdd;
     private Map<Long, Long> tacGiaAdd;
-
+    
     private DefaultTableModel tableModelListSach;
     private DefaultTableModel tableModelListTacGia;
     private DefaultTableModel tableModelListTheLoais;
-
+    
     private DefaultComboBoxModel boxModelTheLoai;
     private DefaultComboBoxModel boxModelNhaXuatBan;
     private DefaultComboBoxModel boxModelKhuVuc;
     private int pageIndex = 0;
     private int total;
-
+    
     private TheLoaiVaSachDao theLoaiVaSachDao;
     private TacGiaVaSachDao tacGiaVaSachDao;
     private TheLoaiDao theLoaiDao;
@@ -67,7 +67,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
     private QLSach_JPanel() {
         initComponents();
         jTabbedPane1.remove(jPanelCapNhat);
-
+        
         theLoaiDao = TheLoaiDao.getInstance();
         nhaXuatBanDao = NhaXuatBanDao.getInstance();
         sachDAO = SachDAO.getInstance();
@@ -75,39 +75,50 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         tacGiaVaSachDao = TacGiaVaSachDao.getInstacne();
         theLoaiVaSachDao = TheLoaiVaSachDao.getInstacne();
         total = sachDAO.getTotal();
-
+        
         theLoaiAdd = new HashMap<Long, Long>();
         tacGiaAdd = new HashMap<Long, Long>();
-
+        
         listTacGia = new HashMap<Long, TacGia>();
         listTheLoai = new HashMap<Long, TheLoai>();
         listNhaXuatBan = nhaXuatBanDao.selectALL();
-
+        
         listSach = new HashMap<Integer, List<Sach>>();
         listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
-
+        
         loadList();
-
+        
         tableModelListSach = (DefaultTableModel) tblSach.getModel();
         tableModelListTacGia = (DefaultTableModel) tblTacGia.getModel();
         tableModelListTheLoais = (DefaultTableModel) tblTheLoai.getModel();
-
+        
         boxModelKhuVuc = (DefaultComboBoxModel) cmbKhuVuc.getModel();
         boxModelNhaXuatBan = (DefaultComboBoxModel) cmbNhaXuatBan.getModel();
         boxModelTheLoai = (DefaultComboBoxModel) cmbTheLoaiFilter.getModel();
-
+        
         fillCmbKhuVuc();
         fillCmbNhaXuatBan();
         fillCmbTheLoai();
         fillTableSach(listSach.get(pageIndex));
     }
-
+    
     public static QLSach_JPanel getInstance() {
         if (instance == null) {
             instance = new QLSach_JPanel();
         }
         return instance;
-
+    }
+    
+    public void addListTacGia() {
+        List<TacGia> list = tacGiaDao.selectALL();
+        list.forEach(tg -> listTacGia.put(tg.getId(), tg));
+    }
+    
+    public void addListTheLoai() {
+        List<TheLoai> tl = theLoaiDao.selectALL();
+        tl.forEach(x -> {
+            listTheLoai.put(x.getId(), x);
+        });
     }
 
     /**
@@ -774,7 +785,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             btnAdd.setText("Lưu");
             activeTabCapNhat();
         }
-
+        
 
     }//GEN-LAST:event_btnDetailsActionPerformed
 
@@ -830,7 +841,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         String itemSelected = cmbTheLoaiFilter.getSelectedItem() == null ? null : cmbTheLoaiFilter.getSelectedItem().toString();
         if (itemSelected != null) {
             Long maTheLoai = Long.valueOf(itemSelected.split("-")[0]);
-
+            
             List<Sach> listSachByTheLoai = sachDAO.selectAllByTheLoai(maTheLoai);
             fillTableSach(listSachByTheLoai);
         }
@@ -897,7 +908,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         if (sach != null) {
             if (sach.getId() == null) {
                 Long id = Long.valueOf(sachDAO.insertOnUpdate(sach));
-
+                
                 if (id <= 0) {
                     JOptionPane.showMessageDialog(this, "Thêm thất bại!");
                 } else {
@@ -922,7 +933,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                     listSach.clear();
                     pageIndex = 0;
                     listSach.put(pageIndex, sachDAO.selectByPage(Long.valueOf(pageIndex)));
-
+                    
                 }
             } else {
                 if (sachDAO.insertOnUpdate(sach) <= 0) {
@@ -942,7 +953,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnAddActionPerformed
-
+    
     public void updateSach(Long id) {
         new Thread() {
             @Override
@@ -1004,7 +1015,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         Home_Frame.getInstance().activePanel("QLNHAPSACH");
     }//GEN-LAST:event_btnNhapSachActionPerformed
-
+    
     void updateTacGia() {
         String tenTg = MsgBox.prompt(this, "Nhập tên nhà xuất bản muốn thêm!");
         if (tenTg == null) {
@@ -1018,7 +1029,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
             return;
         }
-
+        
         NhaXuatBan nxb = new NhaXuatBan(null, tenTg.trim());
         int row = this.nhaXuatBanDao.insert(nxb);
         if (row > 0) {
@@ -1028,7 +1039,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             MsgBox.alert_ERROR(this, "Update thất bại!");
         }
     }
-
+    
     public void activeTabCapNhat() {
         jTabbedPane1.add(jPanelCapNhat, "Cập Nhật");
         jTabbedPane1.setSelectedIndex(1);
@@ -1115,13 +1126,13 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         cmbNhaXuatBan.setSelectedIndex(0);
         lblQr_Code.setIcon(null);
         btnDownload.setVisible(false);
-
+        
         tacGiaAdd.clear();
         theLoaiAdd.clear();
         tableModelListTacGia.setRowCount(0);
         tableModelListTheLoais.setRowCount(0);
     }
-
+    
     private void fillCmbKhuVuc() {
         boxModelKhuVuc.removeAllElements();;
         boxModelKhuVuc.addElement("Khu A");
@@ -1129,9 +1140,9 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         boxModelKhuVuc.addElement("Khu C");
         boxModelKhuVuc.addElement("Khu D");
         boxModelKhuVuc.addElement("Khu E");
-
+        
     }
-
+    
     private void fillCmbNhaXuatBan() {
         boxModelNhaXuatBan.removeAllElements();
         this.listNhaXuatBan = nhaXuatBanDao.selectALL();
@@ -1139,7 +1150,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             listNhaXuatBan.forEach((nxb) -> boxModelNhaXuatBan.addElement(nxb.getId() + "-" + nxb.getTenNhaXuatBan()));
         }
     }
-
+    
     private void fillTableSach(List<Sach> list) {
         tableModelListSach.setRowCount(0);
         if (list != null) {
@@ -1153,15 +1164,15 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             });
         }
     }
-
+    
     private void setForm(Sach sach) {
         txtMaSach.setText(sach.getId().toString());
         txtTenSach.setText(sach.getTenSach());
         cmbKhuVuc.setSelectedItem(sach.getViTri());
-
+        
         tableModelListTacGia.setRowCount(0);
         tableModelListTheLoais.setRowCount(0);
-
+        
         new Thread() {
             @Override
             public void run() {
@@ -1181,13 +1192,13 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 if (theLoaiVaSachs != null) {
                     theLoaiVaSachs.forEach((tl) -> {
                         theLoaiAdd.put(tl.getTheLoai(), tl.getSach());
-
+                        
                         tableModelListTheLoais.addRow(new Object[]{tl.getTheLoai(), listTheLoai.get(tl.getTheLoai()).getTenTheLoai()});
                     });
                 }
             }
         }.start();
-
+        
         for (int i = 0; i < listNhaXuatBan.size(); ++i) {
             NhaXuatBan nxb = listNhaXuatBan.get(i);
             if (sach.getNhaXuatBan() == nxb.getId()) {
@@ -1208,19 +1219,19 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             }
         }
     }
-
+    
     private void loadList() {
         List<TheLoai> listTl = theLoaiDao.selectALL();
         listTl.forEach(tl -> {
             listTheLoai.put(tl.getId(), tl);
         });
-
+        
         List<TacGia> listTg = tacGiaDao.selectALL();
         listTg.forEach(tg -> {
             listTacGia.put(tg.getId(), tg);
         });
     }
-
+    
     private void fillCmbTheLoai() {
         boxModelTheLoai.removeAllElements();
         listTheLoai.forEach((x, y) -> {
@@ -1228,7 +1239,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         });
         cmbTheLoaiFilter.setModel(boxModelTheLoai);
     }
-
+    
     public boolean addTacGia(Long id) {
         if (tacGiaAdd.containsKey(id)) {
             return false;
@@ -1237,7 +1248,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         tableModelListTacGia.addRow(new Object[]{id, listTacGia.get(id).getTenTacGia()});
         return true;
     }
-
+    
     public boolean addTheLoai(Long id) {
         if (theLoaiAdd.containsKey(id)) {
             return false;
@@ -1246,7 +1257,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         tableModelListTheLoais.addRow(new Object[]{id, listTheLoai.get(id).getTenTheLoai()});
         return true;
     }
-
+    
     private Sach getForm() {
         String tenSach = txtTenSach.getText();
         int check = 0;
@@ -1259,9 +1270,9 @@ public class QLSach_JPanel extends javax.swing.JPanel {
             check++;
             lblErrorTenSach.setText(null);
         }
-
+        
         Sach sach = null;
-
+        
         if (check == 1) {
             if (tacGiaAdd.size() == 0) {
                 JOptionPane.showMessageDialog(this, "Hãy chọn tác giả!");
@@ -1272,16 +1283,16 @@ public class QLSach_JPanel extends javax.swing.JPanel {
                 Long maSach = txtMaSach.getText().isEmpty() ? null : Long.valueOf(txtMaSach.getText());
                 String viTri = cmbKhuVuc.getSelectedItem().toString();
                 Long nhaXuatBan = Long.valueOf(cmbNhaXuatBan.getSelectedItem().toString().split("-")[0]);
-
+                
                 Long timeNow = Calendar.getInstance().getTimeInMillis();
-
+                
                 sach.setNguoiTao(Helper.Auth.user.getMaQL());
                 sach.setTrangThai(true);
                 sach.setId(maSach);
                 sach.setViTri(viTri);
                 sach.setTenSach(tenSach);
                 sach.setNhaXuatBan(nhaXuatBan);
-
+                
                 int row = tblSach.getSelectedRow();
                 if (row == -1) {
                     sach.setNgayTao(new Date(timeNow));
@@ -1295,7 +1306,7 @@ public class QLSach_JPanel extends javax.swing.JPanel {
         }
         return sach;
     }
-
+    
     public void showSach(String data) {
         Sach sach = sachDAO.findByQR("sach-".concat(data));
         if (sach != null) {

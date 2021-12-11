@@ -136,7 +136,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         txtMaHoaDonDenBu = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         pnlQrCode = new javax.swing.JPanel();
-        btnDownloadQr = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblQR_CODE = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -426,14 +425,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         pnlQrCode.setPreferredSize(new java.awt.Dimension(200, 200));
         pnlQrCode.setLayout(new java.awt.BorderLayout(0, 10));
 
-        btnDownloadQr.setText("print");
-        btnDownloadQr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDownloadQrActionPerformed(evt);
-            }
-        });
-        pnlQrCode.add(btnDownloadQr, java.awt.BorderLayout.SOUTH);
-
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -476,11 +467,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         jLabel9.setPreferredSize(new java.awt.Dimension(95, 100));
         add(jLabel9, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDownloadQrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadQrActionPerformed
-        // TODO add your handling code here:
-        HoaDonDenBu hoaDonDenBu = hoaDonDenBuDao.selectByID(Long.valueOf(txtMaHoaDonDenBu.getText()));
-    }//GEN-LAST:event_btnDownloadQrActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
@@ -599,6 +585,9 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         } else {
             setForm(listHoaDonDenBu.get(pageIndex).get(row));
             activeTabCapNhat();
+            btnChonSach.setEnabled(false);
+            btnSave.setEnabled(false);
+            btnXoaSach.setEnabled(false);
         }
     }//GEN-LAST:event_btnChiTietActionPerformed
 
@@ -647,7 +636,6 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnChonSach;
-    private javax.swing.JButton btnDownloadQr;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
@@ -769,7 +757,7 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
                 e.printStackTrace();
             }
         }
-        btnDownloadQr.setVisible(true);
+//        btnDownloadQr.setVisible(true);
     }
 
     public boolean addSach(HoaDonDenBuChiTiet hdct, String tenSach) {
@@ -803,8 +791,11 @@ public class QLHoaDonDenBu extends javax.swing.JPanel {
         txtTongTien.setText(null);
         cmbNguoiMuon.setSelectedIndex(0);
         lblQR_CODE.setIcon(null);
-        btnDownloadQr.setVisible(false);
+//        btnDownloadQr.setVisible(false);
         btnSave.setText("Thêm");
+        btnChonSach.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnXoaSach.setEnabled(true);
     }
 
     private void fillCmbHoiVien() {

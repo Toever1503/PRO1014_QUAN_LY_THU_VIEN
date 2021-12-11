@@ -25,6 +25,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
     private final String UPDATE_SQL = "UPDATE sach SET MaQL=?,TenSach=?,ViTri=?,NgayTao=?,NhaXuatBan=?,TrangThai=?,QR_FILE=? WHERE ID=?";
     private final String UPDATE_GIA_SQL = "UPDATE sach SET giaSach=? WHERE ID=?";
     private final String DELETE_SQL = "DELETE FROM sach WHERE ID = ?";
+    private final String DELETE_BY_HDNS_SQL = "DELETE FROM sach WHERE hdctnsct = ?";
 
     private final String INSERT_ON_UPDATE_SQL = "INSERT INTO sach (ID, MaQL, TenSach, ViTri, NgayTao, NhaXuatBan, TrangThai, QR_FILE, hdctnsct, giaSach) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n"
             + "ON DUPLICATE KEY UPDATE MaQL=VALUES(MaQL), TenSach=VALUES(TenSach), ViTri=VALUES(ViTri), NgayTao=VALUES(NgayTao), NhaXuatBan=VALUES(NhaXuatBan), TrangThai=VALUES(TrangThai), QR_FILE=VALUES(QR_FILE)";
@@ -119,6 +120,16 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
         }
         return row;
     }
+    
+    public int deleteByHDNS(Long id) {
+        int row = 0;
+        try {
+            row = Helper.Utility.update(this.DELETE_BY_HDNS_SQL, id);
+        } catch (Exception ex) {
+            Logger.getLogger(SachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
 
     @Override
     public Sach selectByID(Long id) {
@@ -158,7 +169,7 @@ public class SachDAO extends LibrarianDAO<Sach, Long> {
                 s.setNguoiTao(rs.getString("MaQL"));
                 s.setTenSach(rs.getString("TenSach"));
                 s.setViTri(rs.getString("ViTri"));
-                s.setNgayTao(rs.getDate("NgayTao"));
+                s.setNgayTao(rs.getObject("NgayTao", java.sql.Date.class));
                 s.setNhaXuatBan(rs.getLong("NhaXuatBan"));
                 s.setTrangThai(rs.getBoolean("TrangThai"));
                 s.setQr_code(rs.getString("QR_FILE"));

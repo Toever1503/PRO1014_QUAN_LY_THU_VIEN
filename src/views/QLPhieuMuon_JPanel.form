@@ -352,11 +352,6 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelCapNhat">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="C&#x1ead;p Nh&#x1ead;t">
@@ -613,25 +608,6 @@
                             <Property name="verticalGap" type="int" value="5"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="btnDownLoadQR">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="0" id="blue" palette="1" red="0" type="palette"/>
-                                </Property>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Print"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDownLoadQRActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                  <BorderConstraints direction="Last"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
                             <Container class="javax.swing.JPanel" name="jPanel11">
                               <Properties>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -774,7 +750,7 @@
                             <Property name="verticalGap" type="int" value="10"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="jButtonThemSachMuon">
+                            <Component class="javax.swing.JButton" name="btnThemSachMuon">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Th&#xea;m S&#xe1;ch"/>
                               </Properties>
@@ -782,7 +758,7 @@
                                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
                               </AccessibilityProperties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonThemSachMuonActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSachMuonActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="btnScanSach">

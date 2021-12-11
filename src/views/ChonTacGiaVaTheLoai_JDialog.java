@@ -9,6 +9,7 @@ import DAO.TheLoaiDao;
 import Helper.MsgBox;
 import Models.TacGia;
 import Models.TheLoai;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -110,7 +111,7 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
         });
         getContentPane().add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
-        btnUpdate.setText("Update");
+        btnUpdate.setText("Thêm Mới");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
@@ -155,7 +156,7 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
     void updateTacGiaVaTheLoai() {
         int row = 0;
         if (this.actionType.equals("TAC_GIA")) {
-            String tenTg = MsgBox.prompt(this, "Nhập tên tác giả muốn thêm :0");
+            String tenTg = MsgBox.prompt(this, "Nhập tên tác giả muốn thêm :");
             if (tenTg == null) {
                 return;
             }
@@ -164,14 +165,17 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
                 return;
             }
             TacGiaDao tgDao = TacGiaDao.getInstance();
-            if (!tgDao.selectByKeyWorld(tenTg).isEmpty()) {
-                MsgBox.alert_WARNING(this, "Tên tác giả đã tồn tại");
-                return;
-            }
+            
             TacGia tg = new TacGia(null, tenTg.trim());
-            row = tgDao.insert(tg);
+            row = tgDao.insertOnUpdate(tg);
+            List<TacGia> list = tgDao.selectALL();
+            tableModel.setRowCount(0);
+            QLSach_JPanel.getInstance().addListTacGia();
+            list.forEach(tgs -> {
+                tableModel.addRow(new Object[]{tgs.getId(), tgs.getTenTacGia()});
+            });
         } else {
-            String tenTl = MsgBox.prompt(this, "Nhập tên thể loại muốn thêm :0");
+            String tenTl = MsgBox.prompt(this, "Nhập tên thể loại muốn thêm :");
             if (tenTl == null) {
                 return;
             }
@@ -180,16 +184,21 @@ public class ChonTacGiaVaTheLoai_JDialog extends javax.swing.JDialog {
                 return;
             }
             TheLoaiDao tlDao = TheLoaiDao.getInstance();
-            if (!tlDao.selectByKeyWorld(tenTl).isEmpty()) {
+            if (tlDao.selectByKeyWorld(tenTl) != null) {
                 MsgBox.alert_WARNING(this, "Tên thể loại đã tồn tại");
                 return;
             }
             TheLoai tg = new TheLoai(null, tenTl.trim());
-            row = tlDao.insert(tg);
+            row = tlDao.insertOnUpdate(tg);
+            QLSach_JPanel.getInstance().addListTheLoai();
+            List<TheLoai> list = tlDao.selectALL();
+            tableModel.setRowCount(0);
+            list.forEach(tl -> {
+                tableModel.addRow(new Object[]{tl.getId(), tl.getTenTheLoai()});
+            });
         }
         if (row > 0) {
             MsgBox.alert_INFORMATION(this, "Update thành công!");
-            this.dispose();
         } else {
             MsgBox.alert_ERROR(this, "Update thất bại!");
         }
