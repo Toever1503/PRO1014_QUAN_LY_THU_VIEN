@@ -166,21 +166,6 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         btnLast1 = new javax.swing.JButton();
         tabCapNhat = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        btnInsert = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        rdoThuThu = new javax.swing.JRadioButton();
-        rdoQuanLy = new javax.swing.JRadioButton();
-        jPanel5 = new javax.swing.JPanel();
-        rdoHoatDong = new javax.swing.JRadioButton();
-        rdoKhoa = new javax.swing.JRadioButton();
         jPanel18 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -198,6 +183,25 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         txtSoDienThoai = new javax.swing.JTextField();
         jDateChooserNgaySinh = new com.toedter.calendar.JDateChooser();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        rdoThuThu = new javax.swing.JRadioButton();
+        rdoQuanLy = new javax.swing.JRadioButton();
+        jPanel5 = new javax.swing.JPanel();
+        rdoHoatDong = new javax.swing.JRadioButton();
+        rdoKhoa = new javax.swing.JRadioButton();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        btnInsert = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -365,97 +369,60 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
         tabs.addTab("DANH SÁCH", tabDanhSach);
 
         tabCapNhat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tabCapNhat.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(860, 450));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setPreferredSize(new java.awt.Dimension(840, 450));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 10));
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel12.setLayout(new java.awt.BorderLayout());
+        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel18.setPreferredSize(new java.awt.Dimension(760, 200));
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel14.setPreferredSize(new java.awt.Dimension(836, 10));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("Mã thủ thư :");
+        jPanel18.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 27));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 816, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Mật khẩu :");
+        jPanel18.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 90, 27));
 
-        jPanel12.add(jPanel14, java.awt.BorderLayout.PAGE_START);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setText("CCCD :");
+        jPanel18.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 80, 27));
 
-        jPanel15.setPreferredSize(new java.awt.Dimension(836, 10));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Họ tên :");
+        jPanel18.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 80, 27));
+        jPanel18.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 230, 27));
+        jPanel18.add(txtCCCD, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 230, 27));
+        jPanel18.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 230, 27));
+        jPanel18.add(txtMaTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 230, 27));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 816, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("Ngày sinh :");
+        jPanel18.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 100, 27));
 
-        jPanel12.add(jPanel15, java.awt.BorderLayout.PAGE_END);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Số điện thoại :");
+        jPanel18.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 110, 27));
 
-        jPanel16.setPreferredSize(new java.awt.Dimension(100, 10));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("Email :");
+        jPanel18.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 90, 27));
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("Địa chỉ :");
+        jPanel18.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 90, 27));
+        jPanel18.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 230, 27));
+        jPanel18.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 230, 27));
+        jPanel18.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 230, 27));
+        jPanel18.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 230, 27));
 
-        jPanel12.add(jPanel16, java.awt.BorderLayout.LINE_START);
-
-        jPanel17.setPreferredSize(new java.awt.Dimension(100, 10));
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
-
-        jPanel12.add(jPanel17, java.awt.BorderLayout.LINE_END);
-
-        jPanel11.setPreferredSize(new java.awt.Dimension(470, 100));
-        jPanel11.setLayout(new java.awt.GridLayout(1, 0, 20, 10));
-
-        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
-        btnInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertActionPerformed(evt);
-            }
-        });
-        jPanel11.add(btnInsert);
-
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-        jPanel11.add(btnClear);
-
-        jPanel12.add(jPanel11, java.awt.BorderLayout.CENTER);
-
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 820, 70));
+        jPanel1.add(jPanel18);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setPreferredSize(new java.awt.Dimension(760, 84));
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 5));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Vai trò"));
@@ -522,54 +489,156 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
 
         jPanel13.add(jPanel5);
 
-        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 820, 100));
+        jPanel1.add(jPanel13);
 
-        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel12.setPreferredSize(new java.awt.Dimension(760, 70));
+        jPanel12.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Mã thủ thư :");
-        jPanel18.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 27));
+        jPanel14.setPreferredSize(new java.awt.Dimension(836, 10));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Mật khẩu :");
-        jPanel18.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 90, 27));
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 756, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("CCCD :");
-        jPanel18.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 80, 27));
+        jPanel12.add(jPanel14, java.awt.BorderLayout.PAGE_START);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Họ tên :");
-        jPanel18.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 80, 27));
-        jPanel18.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 230, 27));
-        jPanel18.add(txtCCCD, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, 27));
-        jPanel18.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 230, 27));
-        jPanel18.add(txtMaTT, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 230, 27));
+        jPanel15.setPreferredSize(new java.awt.Dimension(836, 10));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Ngày sinh :");
-        jPanel18.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 100, 27));
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 756, Short.MAX_VALUE)
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("Số điện thoại :");
-        jPanel18.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 110, 27));
+        jPanel12.add(jPanel15, java.awt.BorderLayout.PAGE_END);
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("Email :");
-        jPanel18.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 90, 27));
+        jPanel16.setPreferredSize(new java.awt.Dimension(100, 10));
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Địa chỉ :");
-        jPanel18.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 90, 27));
-        jPanel18.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 230, 27));
-        jPanel18.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 230, 27));
-        jPanel18.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 230, 27));
-        jPanel18.add(jDateChooserNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 230, 27));
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 46, Short.MAX_VALUE)
+        );
 
-        jPanel1.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 820, 210));
+        jPanel12.add(jPanel16, java.awt.BorderLayout.LINE_START);
 
-        tabCapNhat.add(jPanel1);
+        jPanel17.setPreferredSize(new java.awt.Dimension(100, 10));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 46, Short.MAX_VALUE)
+        );
+
+        jPanel12.add(jPanel17, java.awt.BorderLayout.LINE_END);
+
+        jPanel11.setPreferredSize(new java.awt.Dimension(470, 100));
+        jPanel11.setLayout(new java.awt.GridLayout(1, 0, 20, 10));
+
+        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/add.png"))); // NOI18N
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btnInsert);
+
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/cleaning.png"))); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+        jPanel11.add(btnClear);
+
+        jPanel12.add(jPanel11, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel12);
+
+        tabCapNhat.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jPanel19.setPreferredSize(new java.awt.Dimension(908, 10));
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1966, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        tabCapNhat.add(jPanel19, java.awt.BorderLayout.PAGE_START);
+
+        jPanel20.setPreferredSize(new java.awt.Dimension(908, 20));
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1966, Short.MAX_VALUE)
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        tabCapNhat.add(jPanel20, java.awt.BorderLayout.PAGE_END);
+
+        jPanel21.setPreferredSize(new java.awt.Dimension(20, 417));
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
+        );
+
+        tabCapNhat.add(jPanel21, java.awt.BorderLayout.LINE_END);
+
+        jPanel22.setPreferredSize(new java.awt.Dimension(20, 337));
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
+        );
+
+        tabCapNhat.add(jPanel22, java.awt.BorderLayout.LINE_START);
 
         tabs.addTab("CẬP NHẬT", tabCapNhat);
 
@@ -823,7 +892,11 @@ public class QLThuThu_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
