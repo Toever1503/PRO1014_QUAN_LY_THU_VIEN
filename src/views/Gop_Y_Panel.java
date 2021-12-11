@@ -62,23 +62,38 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
         jScrollPaneDeXuat = new javax.swing.JScrollPane();
         tblDeXuat = new javax.swing.JTable();
         jPanelPage = new javax.swing.JPanel();
-        btnLast1 = new javax.swing.JButton();
-        btnNext1 = new javax.swing.JButton();
-        btnPrev1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         btnFirst1 = new javax.swing.JButton();
+        btnPrev1 = new javax.swing.JButton();
+        btnNext1 = new javax.swing.JButton();
+        btnLast1 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
         jPanelAction = new javax.swing.JPanel();
-        btnIangDeXuat = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         btnThemMoi = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
-        btnTimKiem = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        btnIangDeXuat = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
         btnInactive = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        btnTimKiem = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new java.awt.BorderLayout(10, 10));
 
-        jPanelMainContent.setLayout(new java.awt.BorderLayout());
+        jPanelMainContent.setLayout(new java.awt.BorderLayout(10, 10));
+
+        jScrollPaneDeXuat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblDeXuat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,26 +110,78 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
 
         jPanelMainContent.add(jScrollPaneDeXuat, java.awt.BorderLayout.CENTER);
 
-        btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/Last_button.png"))); // NOI18N
-        btnLast1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLast1ActionPerformed(evt);
-            }
-        });
+        jPanelPage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelPage.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
-        btnNext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/next_button.png"))); // NOI18N
-        btnNext1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNext1ActionPerformed(evt);
-            }
-        });
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.setPreferredSize(new java.awt.Dimension(700, 80));
+        jPanel4.setLayout(new java.awt.BorderLayout(10, 0));
 
-        btnPrev1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/back_button.png"))); // NOI18N
-        btnPrev1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrev1ActionPerformed(evt);
-            }
-        });
+        jPanel5.setPreferredSize(new java.awt.Dimension(522, 20));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 696, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel5, java.awt.BorderLayout.PAGE_START);
+
+        jPanel6.setPreferredSize(new java.awt.Dimension(522, 20));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 696, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel6, java.awt.BorderLayout.PAGE_END);
+
+        jPanel7.setPreferredSize(new java.awt.Dimension(50, 97));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel7, java.awt.BorderLayout.LINE_START);
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(50, 97));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel8, java.awt.BorderLayout.LINE_END);
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(477, 200));
+        jPanel2.setLayout(new java.awt.BorderLayout(10, 10));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(330, 35));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0, 20, 0));
 
         btnFirst1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/First_button.png"))); // NOI18N
         btnFirst1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,106 +189,163 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
                 btnFirst1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btnFirst1);
+
+        btnPrev1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/back_button.png"))); // NOI18N
+        btnPrev1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrev1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPrev1);
+
+        btnNext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/next_button.png"))); // NOI18N
+        btnNext1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNext1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNext1);
+
+        btnLast1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/Last_button.png"))); // NOI18N
+        btnLast1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLast1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLast1);
+
+        jPanel2.add(jPanel1, java.awt.BorderLayout.LINE_END);
 
         btnLamMoi.setText("Làm Mới");
+        btnLamMoi.setPreferredSize(new java.awt.Dimension(90, 28));
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        jPanel2.add(btnLamMoi, java.awt.BorderLayout.LINE_START);
 
-        javax.swing.GroupLayout jPanelPageLayout = new javax.swing.GroupLayout(jPanelPage);
-        jPanelPage.setLayout(jPanelPageLayout);
-        jPanelPageLayout.setHorizontalGroup(
-            jPanelPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnLamMoi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
-                .addComponent(btnFirst1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrev1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNext1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLast1)
-                .addContainerGap())
+        jPanel9.setMinimumSize(new java.awt.Dimension(100, 35));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
-        jPanelPageLayout.setVerticalGroup(
-            jPanelPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLamMoi)
-                    .addComponent(btnFirst1)
-                    .addComponent(btnPrev1)
-                    .addComponent(btnNext1)
-                    .addComponent(btnLast1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
         );
+
+        jPanel2.add(jPanel9, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanelPage.add(jPanel4);
 
         jPanelMainContent.add(jPanelPage, java.awt.BorderLayout.PAGE_END);
 
-        btnIangDeXuat.setText("Tăng Lượt Góp Ý");
-        btnIangDeXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIangDeXuatActionPerformed(evt);
-            }
-        });
+        jPanelAction.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelAction.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 40, 20));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setPreferredSize(new java.awt.Dimension(350, 73));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
         btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setPreferredSize(new java.awt.Dimension(78, 30));
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
             }
         });
+        jPanel3.add(btnThemMoi, new java.awt.GridBagConstraints());
 
-        txtSearch.setText("Nhập nội dung tìm");
+        jPanel12.setPreferredSize(new java.awt.Dimension(20, 30));
 
-        btnTimKiem.setText("Tìm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel12, new java.awt.GridBagConstraints());
+
+        btnIangDeXuat.setText("Tăng Lượt Góp Ý");
+        btnIangDeXuat.setPreferredSize(new java.awt.Dimension(123, 30));
+        btnIangDeXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
+                btnIangDeXuatActionPerformed(evt);
             }
         });
+        jPanel3.add(btnIangDeXuat, new java.awt.GridBagConstraints());
+
+        jPanel14.setPreferredSize(new java.awt.Dimension(20, 30));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel14, new java.awt.GridBagConstraints());
 
         btnInactive.setText("Inactive");
+        btnInactive.setPreferredSize(new java.awt.Dimension(63, 30));
         btnInactive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInactiveActionPerformed(evt);
             }
         });
+        jPanel3.add(btnInactive, new java.awt.GridBagConstraints());
 
-        javax.swing.GroupLayout jPanelActionLayout = new javax.swing.GroupLayout(jPanelAction);
-        jPanelAction.setLayout(jPanelActionLayout);
-        jPanelActionLayout.setHorizontalGroup(
-            jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelActionLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnThemMoi)
-                .addGap(10, 10, 10)
-                .addComponent(btnIangDeXuat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnInactive)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTimKiem)
-                .addContainerGap())
+        jPanelAction.add(jPanel3);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setPreferredSize(new java.awt.Dimension(300, 73));
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        txtSearch.setText("Nhập nội dung tìm");
+        txtSearch.setPreferredSize(new java.awt.Dimension(149, 30));
+        jPanel10.add(txtSearch, new java.awt.GridBagConstraints());
+
+        jPanel11.setPreferredSize(new java.awt.Dimension(20, 30));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
-        jPanelActionLayout.setVerticalGroup(
-            jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelActionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThemMoi)
-                    .addGroup(jPanelActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnIangDeXuat)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTimKiem)
-                        .addComponent(btnInactive)))
-                .addContainerGap())
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
+
+        jPanel10.add(jPanel11, new java.awt.GridBagConstraints());
+
+        btnTimKiem.setText("Tìm");
+        btnTimKiem.setPreferredSize(new java.awt.Dimension(70, 30));
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+        jPanel10.add(btnTimKiem, new java.awt.GridBagConstraints());
+
+        jPanelAction.add(jPanel10);
 
         jPanelMainContent.add(jPanelAction, java.awt.BorderLayout.PAGE_START);
 
@@ -370,11 +494,23 @@ public class Gop_Y_Panel extends javax.swing.JPanel {
     private javax.swing.JButton btnLast1;
     private javax.swing.JButton btnNext1;
     private javax.swing.JButton btnPrev1;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearch1;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelAction;
     private javax.swing.JPanel jPanelMainContent;
     private javax.swing.JPanel jPanelPage;
