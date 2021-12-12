@@ -53,7 +53,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images_Icon/fpt.jpg"/>
+              <Image iconType="3" name="/Images_Icon/Logo_&#x110;&#x1ea1;i_h&#x1ecd;c_FPT.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
