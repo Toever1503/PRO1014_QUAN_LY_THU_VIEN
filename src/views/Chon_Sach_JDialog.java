@@ -137,6 +137,8 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
         btnQuayLai = new javax.swing.JButton();
         lblErrorAction = new javax.swing.JLabel();
 
+        getContentPane().setLayout(new java.awt.BorderLayout());
+
         jPanel1.setLayout(new java.awt.BorderLayout(10, 15));
 
         txtSearch.setText("Nhập Tên Sách Cần Tìm");
@@ -326,12 +328,12 @@ public class Chon_Sach_JDialog extends javax.swing.JDialog {
             jPanelActionChonSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelActionChonSachLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelActionChonSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblErrorAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelActionChonSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelActionChonSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnQuayLai)
                         .addComponent(btnThem)
-                        .addComponent(btnReset)))
+                        .addComponent(btnReset))
+                    .addComponent(lblErrorAction))
                 .addContainerGap())
         );
 

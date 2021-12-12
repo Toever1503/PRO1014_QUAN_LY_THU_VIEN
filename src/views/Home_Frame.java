@@ -12,12 +12,7 @@ import Helper.XImage;
 import Models.QuanLy;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 /**
  *
@@ -54,19 +49,20 @@ public final class Home_Frame extends javax.swing.JFrame {
         this.setExtendedState(Home_Frame.MAXIMIZED_BOTH);    //cho toàn màn hình 
         this.startClock();
         cardLayoutMainRight = (CardLayout) pnlMainRight.getLayout();
-
     }
 
     public void initPnlQuanLy() {
+        if (Helper.Auth.isManager()) {
+            jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
+        }
         jPanel_ThongKe.add(ThongKe_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlThuThu.add(QLThuThu_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
-//        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
-//
-//        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
-//        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
-//        jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlSach.add(QLSach_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoaDonDenBu.add(QLHoaDonDenBu.getInstance(), BorderLayout.CENTER);
+        jPanel_QlHoiVien.add(QLHoiVien_JPanel.getInstance(), BorderLayout.CENTER);
+
+        jPanel_QlPhieuMuon.add(QLPhieuMuon_JPanel.getInstance(), BorderLayout.CENTER);
+        jPanel_NhapSach.add(QLHoaDonNhapSach.getInstance(), BorderLayout.CENTER);
+        jPanel_GOP_y.add(Gop_Y_Panel.getInstance(), BorderLayout.CENTER);
     }
 
     //Đồng hồ
@@ -546,6 +542,10 @@ public final class Home_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniQLThuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLThuThuActionPerformed
+        if (!Helper.Auth.isManager()) {
+            Helper.MsgBox.alert_WARNING(this, "Bạn không có quyền truy cập chức năng này");
+            return;
+        }
         cardLayoutMainRight.show(pnlMainRight, "card6");
     }//GEN-LAST:event_mniQLThuThuActionPerformed
 
