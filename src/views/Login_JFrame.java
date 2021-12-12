@@ -279,8 +279,8 @@ public class Login_JFrame extends javax.swing.JFrame {
             if (password.equals(user.getMatKhau())) {
                 Helper.Auth.user = user;
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-                new Home_Frame().setVisible(true);
                 this.dispose();
+                Home_Frame.getInstance().setVisible(true);
             } else {
                 lblMess.setText("Tài khoản hoặc mật khẩu không chính xác!");
                 return;

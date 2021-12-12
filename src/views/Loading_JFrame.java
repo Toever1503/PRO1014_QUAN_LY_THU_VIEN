@@ -50,7 +50,7 @@ public class Loading_JFrame extends javax.swing.JFrame {
                 HoaDonDenBuDao.getInstance();
                 HoaDonNhapSachDao.getInstance();
                 
-                Home_Frame.getInstance().setVisible(true);
+                Home_Frame.getInstance();
             }
         }.start();
 
@@ -63,7 +63,7 @@ public class Loading_JFrame extends javax.swing.JFrame {
                     try {
                         i++;
                         jProgressBar1.setValue(i);
-                        Thread.sleep(ran.nextInt(600));
+                        Thread.sleep(ran.nextInt(200));
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Loading_JFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -93,7 +93,7 @@ public class Loading_JFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/fpt.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images_Icon/Logo_Đại_học_FPT.png"))); // NOI18N
         jLabel1.setText(" ");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
