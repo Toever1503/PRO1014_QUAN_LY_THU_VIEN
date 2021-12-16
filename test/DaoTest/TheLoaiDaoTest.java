@@ -5,6 +5,8 @@
 package DaoTest;
 
 import Models.TheLoai;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.sql.SQLException;
 import static junit.framework.Assert.assertNotNull;
 import org.junit.AfterClass;
@@ -23,10 +25,25 @@ public class TheLoaiDaoTest {
     @BeforeClass
     public void createInstance() {
         instance = TheLoaiDao.getInstance();
+        try {
+            instance.insertOnUpdate(new TheLoai(85l, "aks"));
+            instance.insertOnUpdate(new TheLoai(90l, "aks"));
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @AfterClass
     public void close() {
+        try {
+            instance.delete(100l);
+            instance.delete(110l);
+            instance.delete(85l);
+            instance.delete(115l);
+            instance.delete(90l);
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         instance = null;
     }
 

@@ -30,10 +30,25 @@ public class TacGiaDaoTest {
     @BeforeClass
     public void createInstance() {
         instance = TacGiaDao.getInstance();
+        try {
+            instance.insertOnUpdate(new TacGia(85l, "aks"));
+            instance.insertOnUpdate(new TacGia(90l, "aks"));
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @AfterClass
     public void close() {
+        try {
+            instance.delete(100l);
+            instance.delete(110l);
+            instance.delete(85l);
+            instance.delete(115l);
+            instance.delete(90l);
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         instance = null;
     }
 

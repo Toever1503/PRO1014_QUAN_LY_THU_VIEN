@@ -7,26 +7,47 @@ package DaoTest;
 import static DaoTest.TacGiaDao.getInstance;
 import Models.NhaXuatBan;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static junit.framework.Assert.assertNotNull;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 /**
  *
  * @author haunv
  */
 public class NhaXuatBanDaoTest {
-    private NhaXuatBanDao instance;
+
+    private static NhaXuatBanDao instance;
 
     @BeforeClass
-    public void createInstance() {
+    public static void createInstance() {
         instance = NhaXuatBanDao.getInstance();
+        try {
+            instance.insertOnUpdate(new NhaXuatBan(85l, "aks"));
+            instance.insertOnUpdate(new NhaXuatBan(90l, "aks"));
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @AfterClass
-    public void close() {
+    public static void close() {
+        try {
+            instance.delete(100l);
+            instance.delete(110l);
+            instance.delete(85l);
+            instance.delete(115l);
+            instance.delete(90l);
+        } catch (Exception ex) {
+            Logger.getLogger(NhaXuatBanDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         instance = null;
     }
 
@@ -37,7 +58,7 @@ public class NhaXuatBanDaoTest {
 
     @Test
     public void testInsertOnUpDateDuLieuDung() throws Exception {
-        Assert.assertNotEquals(0, instance.insertOnUpdate(new NhaXuatBan(30l, "oris")));
+        Assert.assertNotEquals(0, instance.insertOnUpdate(new NhaXuatBan(100l, "oris")));
     }
 
     @Test
@@ -52,22 +73,22 @@ public class NhaXuatBanDaoTest {
 
     @Test
     public void testInsertOnUpDateDuLieuIdTrung() throws Exception {
-        Assert.assertNotEquals(0, instance.insertOnUpdate(new NhaXuatBan(30l, "oris121")));
+        Assert.assertNotEquals(0, instance.insertOnUpdate(new NhaXuatBan(100l, "oris121")));
     }
 
     @Test
     public void testDelteVoiIdDung() throws Exception {
-        Assert.assertNotEquals(0, instance.delete(30l));
+        Assert.assertNotEquals(0, instance.delete(102l));
     }
 
     @Test(expected = SQLException.class)
     public void testDelteVoiIdKhongTonTai() throws Exception {
-        Assert.assertNotEquals(0, instance.delete(30l));
+        Assert.assertNotEquals(0, instance.delete(105l));
     }
 
     @Test
     public void testInsertVoiNhaXuatBanDung() throws Exception {
-        Assert.assertNotEquals(0, instance.insert(new NhaXuatBan(31l, "kkk")));
+        Assert.assertNotEquals(0, instance.insert(new NhaXuatBan(110l, "kkk")));
     }
 
     @Test
@@ -82,12 +103,12 @@ public class NhaXuatBanDaoTest {
 
     @Test(expected = SQLException.class)
     public void testInsertVoiNhaXuatBanIdTrung() throws Exception {
-        instance.insert(new NhaXuatBan(2l, "llll"));
+        instance.insert(new NhaXuatBan(115l, "llll"));
     }
 
     @Test
     public void testUpdateVoiNhaXuatBanDung() throws Exception {
-        Assert.assertNotEquals(0, instance.update(new NhaXuatBan(10l, "kkkzzz")));
+        Assert.assertNotEquals(0, instance.update(new NhaXuatBan(85l, "kkkzzz")));
     }
 
     @Test(expected = SQLException.class)
@@ -97,7 +118,7 @@ public class NhaXuatBanDaoTest {
 
     @Test(expected = SQLException.class)
     public void testUpdateVoiNhaXuatBanThieuName() throws Exception {
-        instance.update(new NhaXuatBan(2l, null));
+        instance.update(new NhaXuatBan(85l, null));
     }
 
     @Test
@@ -146,15 +167,15 @@ public class NhaXuatBanDaoTest {
     }
 
     public static void main(String[] args) {
-        //        Result result = JUnitCore.runClasses(NhaXuatBanDaoTest.class);
-//        for (Failure failed : result.getFailures()) {
-//            System.out.println(failed.toString());
-//        }
-//        System.out.println("Total tests: " + result.getRunCount());
-//        System.out.println("Failed tests: " + result.getFailureCount());
-//        System.out.println("Ignored tests: " + result.getIgnoreCount());
-//        System.err.println("Time test: " + result.getRunTime());
-//        System.out.println("is Successfull? " + result.wasSuccessful());
+        Result result = JUnitCore.runClasses(NhaXuatBanDaoTest.class);
+        for (Failure failed : result.getFailures()) {
+            System.out.println(failed.toString());
+        }
+        System.out.println("Total tests: " + result.getRunCount());
+        System.out.println("Failed tests: " + result.getFailureCount());
+        System.out.println("Ignored tests: " + result.getIgnoreCount());
+        System.err.println("Time test: " + result.getRunTime());
+        System.out.println("is Successfull? " + result.wasSuccessful());
 
     }
 }
